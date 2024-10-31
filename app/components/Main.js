@@ -100,10 +100,10 @@ const LingerieBrandSite = () => {
   const products = [
     {
       id: 1,
-      name: "코랄 수딩웜 애니웨어 맞주름 원피스",
+      name: "코랄 수딩웜 맞주름 원피스",
       price: "39,900원",
       image: "/Images/SampleN1.jpg",
-      description: "부드러운 아라베스크 패턴과 레트로한 무드의 컬러"
+      description: "아라베스크 패턴과 레트로한 무드의 컬러"
     },
     {
       id: 2,
@@ -114,7 +114,7 @@ const LingerieBrandSite = () => {
     },
     {
       id: 3,
-      name: "베이지 핑크 수딩웜 애니웨어 조거팬츠",
+      name: "베이지 핑크 수딩웜 조거팬츠",
       price: "19,900원",
       image: "/Images/SampleN3.jpg",
       description: "가볍고 포근한 데일리 라운지웨어"
@@ -321,7 +321,7 @@ const LingerieBrandSite = () => {
         </div>
       </section>
       {/* 컬렉션 섹션 */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-10 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-rose-100/50 via-white/50 to-rose-50/50" />
         
         <div className="relative container mx-auto px-4">
@@ -363,7 +363,7 @@ const LingerieBrandSite = () => {
           </div>
 
           {/* 슬라이드 인디케이터 위치 조정 */}
-          <div className="absolute bottom-0 left-0 right-0 flex justify-center space-x-3 pb-4 md:relative md:mt-8">
+          <div className="absolute bottom-0 left-0 right-0 flex justify-center space-x-3 pb-0 md:relative md:mt-8">
             {products.map((_, index) => (
               <button
                 key={index}
