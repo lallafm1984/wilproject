@@ -193,7 +193,7 @@ const LingerieBrandSite = () => {
           
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {newsItems.map((item) => (
-                  <article 
+                  <article
                     key={item.id} 
                     className="group bg-gradient-to-br from-white/90 to-rose-50/90 backdrop-blur-sm rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-rose-100"
                   >
@@ -325,9 +325,9 @@ const LingerieBrandSite = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-rose-100/50 via-white/50 to-rose-50/50" />
         
         <div className="relative container mx-auto px-4">
-          <h3 className="text-3xl md:text-4xl font-serif text-center mb-12 text-rose-900">Best Sellers</h3>
+          <h3 className="text-3xl md:text-4xl font-serif text-center mb-12 text-rose-900">Bset Sellers</h3>
           
-          <div className="relative h-[400px]">
+          <div className="relative h-[500px] md:h-[400px]">
             {products.map((product, index) => (
               <div
                 key={product.id}
@@ -339,7 +339,7 @@ const LingerieBrandSite = () => {
               >
                 <div className="flex flex-col md:flex-row items-center gap-8">
                   <div className="w-full md:w-1/2">
-                    <div className="relative h-[300px] rounded-2xl overflow-hidden shadow-xl">
+                    <div className="relative h-[250px] md:h-[300px] rounded-2xl overflow-hidden shadow-xl">
                       <Image
                         src={product.image}
                         alt={product.name}
@@ -362,8 +362,8 @@ const LingerieBrandSite = () => {
             ))}
           </div>
 
-          {/* 슬라이드 인디케이터 */}
-          <div className="flex justify-center space-x-3 mt-8">
+          {/* 슬라이드 인디케이터 위치 조정 */}
+          <div className="absolute bottom-0 left-0 right-0 flex justify-center space-x-3 pb-4 md:relative md:mt-8">
             {products.map((_, index) => (
               <button
                 key={index}
