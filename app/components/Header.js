@@ -101,29 +101,31 @@ function Header(){
                     onMouseEnter={() => setActiveMenu(idx)}
                     onMouseLeave={() => setActiveMenu(null)}
                   >
-                    <button className="flex items-center space-x-1 py-2 text-base text-rose-800 
-                      hover:text-rose-600 transition-all duration-300">
+                    <button className="flex items-center space-x-1 py-2 px-4 text-base font-medium text-rose-800 
+                      hover:text-rose-600 rounded-full hover:bg-rose-100/50 transition-all duration-300
+                      group-hover:shadow-md">
                       <span className="relative overflow-hidden">
                         {item.title}
-                        <span className="absolute bottom-0 left-0 w-full h-[1px] bg-rose-400 
+                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-rose-400 
                           transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"/>
                       </span>
-                      <ChevronDownIcon className="h-4 w-4 ml-1 group-hover:rotate-180 transition-transform duration-300" />
+                      <ChevronDownIcon className="h-5 w-5 ml-1 group-hover:rotate-180 transition-transform duration-300" />
                     </button>
                     
-                    {/* 데스크톱 서브메뉴 */}
+                    {/* 서브메뉴 스타일도 개선 */}
                     <div 
-                      className={`absolute left-0 mt-2 w-56 bg-white/95 backdrop-blur-lg border border-rose-100
-                        rounded-lg overflow-hidden transition-all duration-300 transform shadow-lg
-                        ${activeMenu === idx ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'}`}
+                      className={`absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-lg 
+                        border border-rose-100 rounded-xl overflow-hidden transition-all duration-300 transform 
+                        shadow-lg ${activeMenu === idx ? 'opacity-100 visible translate-y-0' : 
+                        'opacity-0 invisible -translate-y-4'}`}
                     >
                       <ul className="py-2">
                         {item.subMenu.map((subItem, subIdx) => (
                           <li key={subIdx}>
                             <a 
                               href="#" 
-                              className="block px-6 py-3 text-rose-700 hover:text-rose-600 hover:bg-rose-50
-                                transition-all duration-200"
+                              className="block px-6 py-3 text-rose-700 hover:text-rose-600 
+                                hover:bg-rose-50/80 transition-all duration-200 font-medium"
                             >
                               {subItem}
                             </a>
