@@ -232,7 +232,7 @@ const About = () => {
               <h2 className="text-2xl font-bold text-rose-800 mb-6">Vision</h2>
               <div className="bg-rose-50 p-4 rounded-lg">
                 <p className="text-lg text-rose-900 font-semibold">
-                  "Global Top Loungewear & Lingerie Self Shop lunching"
+                  Global Top Loungewear & Lingerie Self Shop lunching
                 </p>
               </div>
             </motion.div>
@@ -247,12 +247,12 @@ const About = () => {
               <h2 className="text-2xl font-bold text-rose-800 mb-6">Mission</h2>
               <div className="bg-rose-50 p-4 rounded-lg mb-4">
                 <p className="text-lg text-rose-900 font-semibold">
-                  "누구나 입고 싶은 편안한 옷으로, 모든 이의 일상에 존재한다."
+                  누구나 입고 싶은 편안한 옷으로, 모든 이의 일상에 존재한다.
                 </p>
               </div>
               <div className="bg-rose-50 p-4 rounded-lg">
                 <p className="text-lg text-rose-900 font-semibold">
-                  "발전된 무인매장 시스템으로 소비자의 See, Touch, Feel 을 충족시킨다."
+                  발전된 무인매장 시스템으로 소비자의 See, Touch, Feel 을 충족시킨다.
                 </p>
               </div>
             </motion.div>
