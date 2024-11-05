@@ -21,19 +21,38 @@ const laffair = "L\'AFFAIR";
 const menuItems = [
   {
     title: 'W.I.L',
-    subMenu: ['인사말' , '회사 소개', '연혁', '조직도' , '오시는 길']
+    subMenu: [
+      { name: '인사말', path: '/pages/Greeting' },
+      { name: '회사 소개', path: '/pages/About' },
+      { name: '연혁', path: '/history' },
+      { name: '조직도', path: '/organization' },
+      { name: '오시는 길', path: '/location' }
+    ]
   },
   {
     title: `${laffair}`,
-    subMenu: [`${laffair} 소개`, `${laffair} 컨셉` , `${laffair} 기획/생산`, `${laffair} 생산처 현황` , '커머스 사업현황']
+    subMenu: [
+      { name: `${laffair} 소개`, path: '/laffair/intro' },
+      { name: `${laffair} 컨셉`, path: '/laffair/concept' },
+      { name: `${laffair} 기획/생산`, path: '/laffair/production' },
+      { name: `${laffair} 생산처 현황`, path: '/laffair/status' },
+      { name: '커머스 사업현황', path: '/laffair/commerce' }
+    ]
   },
   {
     title: '쇼핑몰',
-    subMenu: [`${laffair}`]
+    subMenu: [
+      { name: `${laffair}`, path: '/shop' }
+    ]
   },
   {
     title: '창업 정보',
-    subMenu: ['가맹점 혜택', '창업 절차', '창업 비용','창업 상담']
+    subMenu: [
+      { name: '가맹점 혜택', path: '/franchise/benefits' },
+      { name: '창업 절차', path: '/franchise/process' },
+      { name: '창업 비용', path: '/franchise/cost' },
+      { name: '창업 상담', path: '/franchise/consulting' }
+    ]
   }
 ];
 
@@ -75,9 +94,11 @@ function Header(){
       <div className="relative bg-gradient-to-r from-rose-100/95 via-white/95 to-rose-100/95 backdrop-blur-lg border-b border-rose-200">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-6">
-            <h1 className="text-4xl font-serif text-rose-800 hover:text-rose-600 transition-all duration-300 cursor-pointer">
-              W.I.L
-            </h1>
+            <Link href="/">
+              <h1 className="text-4xl font-serif text-rose-800 hover:text-rose-600 transition-all duration-300 cursor-pointer">
+                W.I.L
+              </h1>
+            </Link>
             
             {/* 모바일 메뉴 버튼 */}
             <button 
@@ -122,13 +143,13 @@ function Header(){
                       <ul className="py-2">
                         {item.subMenu.map((subItem, subIdx) => (
                           <li key={subIdx}>
-                            <a 
-                              href="#" 
+                            <Link 
+                              href={subItem.path}
                               className="block px-6 py-3 text-rose-700 hover:text-rose-600 
                                 hover:bg-rose-50/80 transition-all duration-200 font-medium"
                             >
-                              {subItem}
-                            </a>
+                              {subItem.name}
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -183,17 +204,14 @@ function Header(){
                       <ul className="bg-rose-50/50 rounded-lg my-1">
                         {item.subMenu.map((subItem, subIdx) => (
                           <li key={subIdx}>
-                            <a
-                              href="#"
+                            <Link
+                              href={subItem.path}
                               className="block py-3 px-8 text-sm text-rose-700 hover:text-rose-900 
                                 hover:bg-rose-100/50 transition-colors duration-200"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                closeMenu();
-                              }}
+                              onClick={closeMenu}
                             >
-                              {subItem}
-                            </a>
+                              {subItem.name}
+                            </Link>
                           </li>
                         ))}
                       </ul>

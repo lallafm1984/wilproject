@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-bg: #F5EFEB;
+  --secondary-bg: #E8DED7;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+}
+
+body {
+  background-color: var(--primary-bg);
+  color: var(--text-primary);
+}
+
+/* 공통 스타일 클래스 */
+@layer components {
+  .section-title {
+    @apply text-2xl font-medium text-gray-900 mb-6;
+  }
+
+  .highlight-box {
+    @apply bg-[#E8DED7] p-4 mb-4;
+  }
+
+  .content-box {
+    @apply bg-white/50 p-6 rounded-lg shadow-sm;
+  }
+} 

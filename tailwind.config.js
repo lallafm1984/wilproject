@@ -7,9 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      animation: {
+        shine: "shine 3s infinite linear",
+      },
+      keyframes: {
+        shine: {
+          "0%": { left: "-100%" },
+          "100%": { left: "200%" },
+        },
       },
     },
   },
