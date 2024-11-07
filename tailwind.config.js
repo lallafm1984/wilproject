@@ -16,6 +16,9 @@ module.exports = {
           "100%": { left: "200%" },
         },
       },
+      fontFamily: {
+        pen: ['Nanum Pen Script', 'cursive']
+      },
     },
   },
   plugins: [],
