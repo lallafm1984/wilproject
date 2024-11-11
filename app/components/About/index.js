@@ -107,16 +107,16 @@ const About = () => {
 
         
           {/* 회사 정보 통합 섹션 */}
-          <div className="grid md:grid-cols-3 gap-8 mb-20 px-4 md:px-0">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-20">
             {/* 설립과 사업정보 */}
             <motion.div 
-              className="bg-white p-4 md:p-8 rounded-xl shadow-md h-full w-full"
+              className="bg-white p-4 md:p-8 rounded-xl shadow-md w-full overflow-hidden"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h2 className="text-xl md:text-2xl font-bold text-rose-800 mb-6">설립과 사업정보</h2>
-              <div className="space-y-4 text-gray-700 text-sm md:text-base">
+              <h2 className="text-lg md:text-2xl font-bold text-rose-800 mb-3 md:mb-4">설립과 사업정보</h2>
+              <div className="space-y-2 md:space-y-4 text-gray-700 text-sm md:text-base">
                 <p><span className="font-semibold">설립자:</span> 조경화</p>
                 <p><span className="font-semibold">설립일:</span> 1998. 5. 15</p>
                 <p><span className="font-semibold">본사:</span> 서울 금천구 벚꽃로 234</p>
@@ -130,13 +130,13 @@ const About = () => {
 
             {/* 연도별 매출현황 */}
             <motion.div 
-              className="bg-white p-4 md:p-8 rounded-xl shadow-md h-full w-full"
+              className="bg-white p-4 md:p-8 rounded-xl shadow-md w-full overflow-hidden"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <h2 className="text-xl md:text-2xl font-bold text-rose-800 mb-6">연도별 매출현황</h2>
-              <div className="h-[200px] md:h-[250px] flex items-center justify-center">
+              <h2 className="text-lg md:text-2xl font-bold text-rose-800 mb-3 md:mb-6">연도별 매출현황</h2>
+              <div className="h-[180px] md:h-[250px] w-full flex items-center justify-center">
                 <SalesChart />
               </div>
               <motion.div 
@@ -159,14 +159,14 @@ const About = () => {
 
             {/* W.I.L 가족 */}
             <motion.div 
-              className="bg-white p-4 md:p-8 rounded-xl shadow-md h-full w-full"
+              className="bg-white p-4 md:p-8 rounded-xl shadow-md w-full overflow-hidden"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7 }}
             >
-              <h2 className="text-xl md:text-2xl font-bold text-rose-800 mb-6">W.I.L 가족</h2>
-              <div className="space-y-4 md:space-y-6">
-                <div className="space-y-4 md:space-y-6">
+              <h2 className="text-lg md:text-2xl font-bold text-rose-800 mb-3 md:mb-6">W.I.L 가족</h2>
+              <div className="space-y-3 md:space-y-6">
+                <div className="space-y-3 md:space-y-6">
                   {/* 한국법인 */}
                   <motion.div
                     initial={{ scale: 0.8 }}
@@ -213,20 +213,20 @@ const About = () => {
         {/* Vision & Mission 섹션 */}
         <motion.div 
           ref={visionRef}
-          className="mt-32 max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-12"
+          className="mt-16 md:mt-32 max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-12"
           initial={{ opacity: 0, y: 50 }}
           animate={isVisionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-rose-900 mb-4">회사 미션 & 비전</h2>
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="text-2xl md:text-4xl font-bold text-rose-900 mb-2 md:mb-4">회사 미션 & 비전</h2>
             <p className="text-xl text-rose-700">W.I.L 이 추구하는 가치와 방향성</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
             {/* Vision */}
             <motion.div 
-              className="bg-rose-50/50 p-10 rounded-xl border border-rose-100"
+              className="bg-rose-50/50 p-4 sm:p-6 md:p-10 rounded-xl border border-rose-100"
               initial={{ opacity: 0, x: -50 }}
               animate={isVisionInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -241,7 +241,7 @@ const About = () => {
 
             {/* Mission */}
             <motion.div 
-              className="bg-rose-50/50 p-10 rounded-xl border border-rose-100"
+              className="bg-rose-50/50 p-4 sm:p-6 md:p-10 rounded-xl border border-rose-100"
               initial={{ opacity: 0, x: 50 }}
               animate={isVisionInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -266,7 +266,7 @@ const About = () => {
         {/* 회사 목표 섹션 */}
         <motion.div 
           ref={goalsRef}
-          className="mt-32 max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-12"
+          className="mt-16 md:mt-32 max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-12"
           initial={{ opacity: 0, y: 50 }}
           animate={isGoalsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
@@ -321,7 +321,7 @@ const About = () => {
 
         {/* 핵심 가치 섹션 */}
         <motion.div 
-          className="mt-32 max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-12 mb-32"
+          className="mt-16 md:mt-32 max-w-7xl mx-auto bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-12 mb-16 md:mb-32"
           initial={{ opacity: 0, y: 50 }}
           animate={isGoalsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -331,28 +331,28 @@ const About = () => {
             <p className="text-xl text-rose-700">W.I.L 의 3가지 핵심 가치</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-12">
-            {/* 내일을 향한 도전 */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+            {/* 각 카드 */}
             <motion.div 
-              className="bg-rose-50/50 p-8 rounded-xl border border-rose-100"
+              className="bg-rose-50/50 p-4 sm:p-6 md:p-8 rounded-xl border border-rose-100"
               initial={{ opacity: 0, y: 30 }}
               animate={isGoalsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <h3 className="text-2xl font-bold text-rose-800 mb-6">내일을 향한 도전</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-rose-800 mb-4 md:mb-6">내일을 향한 도전</h3>
               <ul className="space-y-4">
-                <li className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-start">
+                <li className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm min-h-[120px] flex items-center">
+                  <div className="flex items-start w-full">
                     <span className="w-3 h-3 mt-2 mr-3 bg-rose-400 rounded-full flex-shrink-0"></span>
-                    <p className="text-lg text-gray-800 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed flex-1">
                       관례나 기존의 방식에 얽매이지 않는 발전적인 방향으로 업무에 임한다.
                     </p>
                   </div>
                 </li>
-                <li className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-start">
+                <li className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm min-h-[120px] flex items-center">
+                  <div className="flex items-start w-full">
                     <span className="w-3 h-3 mt-2 mr-3 bg-rose-400 rounded-full flex-shrink-0"></span>
-                    <p className="text-lg text-gray-800 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed flex-1">
                       지속적인 자기계발을 통해 전문 역량 및 업무 스킬을 향상한다.
                     </p>
                   </div>
@@ -362,25 +362,25 @@ const About = () => {
 
             {/* 회피하지 않는 정직 */}
             <motion.div 
-              className="bg-rose-50/50 p-8 rounded-xl border border-rose-100"
+              className="bg-rose-50/50 p-4 sm:p-6 md:p-8 rounded-xl border border-rose-100"
               initial={{ opacity: 0, y: 30 }}
               animate={isGoalsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 1.0 }}
             >
-              <h3 className="text-2xl font-bold text-rose-800 mb-6">회피하지 않는 정직</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-rose-800 mb-4 md:mb-6">회피하지 않는 정직</h3>
               <ul className="space-y-4">
-                <li className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-start">
+                <li className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm min-h-[120px] flex items-center">
+                  <div className="flex items-start w-full">
                     <span className="w-3 h-3 mt-2 mr-3 bg-rose-400 rounded-full flex-shrink-0"></span>
-                    <p className="text-lg text-gray-800 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed flex-1">
                       고객의 니즈를 적극 반영한 소재 및 디자인을 연구하며 개발한다.
                     </p>
                   </div>
                 </li>
-                <li className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-start">
+                <li className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm min-h-[120px] flex items-center">
+                  <div className="flex items-start w-full">
                     <span className="w-3 h-3 mt-2 mr-3 bg-rose-400 rounded-full flex-shrink-0"></span>
-                    <p className="text-lg text-gray-800 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed flex-1">
                       품질을 최우선으로 하는 생산 관리를 통하여 고품질의 제품을 생산한다.
                     </p>
                   </div>
@@ -390,25 +390,25 @@ const About = () => {
 
             {/* 고객만족을 위한 변화 */}
             <motion.div 
-              className="bg-rose-50/50 p-8 rounded-xl border border-rose-100"
+              className="bg-rose-50/50 p-4 sm:p-6 md:p-8 rounded-xl border border-rose-100"
               initial={{ opacity: 0, y: 30 }}
               animate={isGoalsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              <h3 className="text-2xl font-bold text-rose-800 mb-6">고객만족을 위한 변화</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-rose-800 mb-4 md:mb-6">고객만족을 위한 변화</h3>
               <ul className="space-y-4">
-                <li className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-start">
+                <li className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm min-h-[120px] flex items-center">
+                  <div className="flex items-start w-full">
                     <span className="w-3 h-3 mt-2 mr-3 bg-rose-400 rounded-full flex-shrink-0"></span>
-                    <p className="text-lg text-gray-800 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed flex-1">
                       시대와 고객의 변화에 발맞춰 새로운 고객과의 접점을 만든다.
                     </p>
                   </div>
                 </li>
-                <li className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-start">
+                <li className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm min-h-[120px] flex items-center">
+                  <div className="flex items-start w-full">
                     <span className="w-3 h-3 mt-2 mr-3 bg-rose-400 rounded-full flex-shrink-0"></span>
-                    <p className="text-lg text-gray-800 leading-relaxed">
+                    <p className="text-base md:text-lg text-gray-800 leading-relaxed flex-1">
                       고객의 요구사항에 신속히 대응하여 고객의 만족과 감동을 이끌어낸다.
                     </p>
                   </div>

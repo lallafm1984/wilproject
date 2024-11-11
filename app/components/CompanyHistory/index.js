@@ -111,7 +111,7 @@ const DetailedHistory = () => {
             <div className="space-y-8">
               {detailedHistoryData.map((period) => (
                 <div key={period.id} className="relative">
-                  <div className="absolute left-[16px] top-8 z-10">
+                  <div className="absolute left-[17px] top-8 z-10">
                     <div className="w-2.5 h-2.5 bg-rose-500 rounded-full">
                       <div className="absolute w-5 h-5 bg-rose-200 rounded-full -left-[5px] -top-[5px] animate-ping opacity-75"></div>
                     </div>
@@ -261,7 +261,7 @@ const CompanyHistory = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-3xl font-bold text-rose-900 mb-2">
+            <h1 className="text-4xl md:text-5xl font-bold text-rose-900 mb-4">
               브랜드 히스토리
             </h1>
             <p className="text-base text-rose-700">

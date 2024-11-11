@@ -25,7 +25,7 @@ const menuItems = [
       { name: '인사말', path: '/pages/Greeting' },
       { name: '회사 소개', path: '/pages/About' },
       { name: '연혁', path: '/pages/CompanyHistory' },
-      { name: '조직도', path: '/organization' },
+      { name: '조직도', path: '/pages/OrganizationChart' },
       { name: '오시는 길', path: '/location' }
     ]
   },
