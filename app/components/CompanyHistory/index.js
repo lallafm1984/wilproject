@@ -206,19 +206,24 @@ const CompanyHistory = () => {
 
   const historyData = [
     {
-      year: '2005',
-      items: ['UCLA', '월디프리'],
-      images: ['/images/history/ucla1.jpg', '/images/history/ucla2.jpg']
+      year: '2014-2022',
+      items: ["L'AFFAIR", '라페어 라운지웨어 런칭'],
+      images: ['/images/history/laffair.jpg']
     },
     {
-      year: '2006',
-      items: ['INVU'],
-      images: ['/images/history/invu.jpg']
+      year: '2012-2013',
+      items: ['lollipops', "L'AFFAIR", '시니어 브라/탑 개발'],
+      images: ['/images/history/lollipops.jpg']
     },
     {
-      year: '2007',
-      items: ['피델리아','CACHAREL'],
-      images: ['/images/history/cacharel.jpg']
+      year: '2010-2011',
+      items: ['CLARA YOON', 'ROSY', 'lollipops'],
+      images: ['/images/history/clara.jpg']
+    },
+    {
+      year: '2009',
+      items: ['THE GUY', 'lollipops'],
+      images: ['/images/history/theguy.jpg']
     },
     {
       year: '2008',
@@ -230,24 +235,19 @@ const CompanyHistory = () => {
       images: ['/images/history/honlyu.jpg']
     },
     {
-      year: '2009',
-      items: ['THE GUY', 'lollipops'],
-      images: ['/images/history/theguy.jpg']
+      year: '2007',
+      items: ['피델리아','CACHAREL'],
+      images: ['/images/history/cacharel.jpg']
     },
     {
-      year: '2010-2011',
-      items: ['CLARA YOON', 'ROSY', 'lollipops'],
-      images: ['/images/history/clara.jpg']
+      year: '2006',
+      items: ['INVU'],
+      images: ['/images/history/invu.jpg']
     },
     {
-      year: '2012-2013',
-      items: ['lollipops', "L'AFFAIR", '시니어 브라/탑 개발'],
-      images: ['/images/history/lollipops.jpg']
-    },
-    {
-      year: '2014-2022',
-      items: ["L'AFFAIR", '라페어 라운지웨어 런칭'],
-      images: ['/images/history/laffair.jpg']
+      year: '2005',
+      items: ['UCLA', '월디프리'],
+      images: ['/images/history/ucla1.jpg', '/images/history/ucla2.jpg']
     }
   ];
 
