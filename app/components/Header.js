@@ -26,7 +26,7 @@ const menuItems = [
       { name: '회사 소개', path: '/pages/About' },
       { name: '연혁', path: '/pages/CompanyHistory' },
       { name: '조직도', path: '/pages/OrganizationChart' },
-      { name: '오시는 길', path: '/location' }
+      { name: '오시는 길', path: '/pages/Location' }
     ]
   },
   {
