@@ -13,7 +13,7 @@ const Location = () => {
       if (window.kakao && !map) {
         const container = document.getElementById('map');
         const options = {
-          center: new window.kakao.maps.LatLng(37.4704, 126.8881),
+          center: new window.kakao.maps.LatLng(37.476065205134795, 126.88628511060199),
           level: 3
         };
 
@@ -105,7 +105,7 @@ const Location = () => {
               <div className="space-y-3">
                 <div className="flex items-center text-gray-600">
                   <FaPhone className="mr-2" />
-                  <span>02-1234-5678</span>
+                  <span>070-4821-4721</span>
                 </div>
                 <div className="flex items-center text-gray-600">
                   <MdEmail className="mr-2" />
