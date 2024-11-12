@@ -13,11 +13,11 @@ const NewsSection = () => {
         }}/>
       </div>
       
-      <div className="relative bg-gradient-to-b from-rose-50/50 via-white/50 to-rose-50/50 backdrop-blur-sm">
+      <div className="relative bg-gradient-to-b from-brand-light/50 via-white/50 to-brand-light/50 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-4xl font-serif mb-4 text-rose-900">Latest News</h3>
-            <p className="text-rose-700">W.I.L의 최신 소식을 만나보세요</p>
+            <h3 className="text-3xl md:text-4xl font-serif mb-4 text-brand-primary">Latest News</h3>
+            <p className="text-brand-secondary">W.I.L의 최신 소식을 만나보세요</p>
           </div>
       
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

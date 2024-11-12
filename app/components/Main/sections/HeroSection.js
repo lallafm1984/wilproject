@@ -29,18 +29,22 @@ const HeroSection = () => {
               transform: currentSlide === index ? 'scale(1)' : 'scale(1.1)'
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-rose-900/10 via-rose-900/20 to-rose-900/30" />
+          <div className="absolute inset-0 bg-brand-dark/50" />
           
-          <div className="absolute inset-0 flex items-center justify-center text-white text-center">
+          <div className="absolute inset-0 flex items-center justify-center text-center">
             <div className={`space-y-6 transition-all duration-1000 ${
               currentSlide === index 
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-10'
             }`}>
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif drop-shadow-lg">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-brand-light
+                drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] 
+              ">
                 {slide.title}
               </h2>
-              <p className="text-xl md:text-2xl drop-shadow">
+              <p className="text-xl md:text-2xl text-brand-light font-medium
+                drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]
+               ">
                 {slide.subtitle}
               </p>
             </div>
@@ -53,7 +57,9 @@ const HeroSection = () => {
           <button
             key={index}
             className={`h-2 rounded-full transition-all duration-300 ${
-              currentSlide === index ? 'w-8 bg-white' : 'w-2 bg-white/50'
+              currentSlide === index 
+                ? 'w-8 bg-brand-light' 
+                : 'w-2 bg-brand-light/50'
             }`}
             onClick={() => setCurrentSlide(index)}
           />

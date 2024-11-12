@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 
 export default function Home() {
   return (
-    <div className='bg-rose-50/80 min-h-screen'>
+    <div className='bg-brand-light/80 min-h-screen'>
       <Head>
         <title>W.I.L - Luxury Fashion</title>
         <meta name="description" content="Luxury Fashion Brand W.I.L" />

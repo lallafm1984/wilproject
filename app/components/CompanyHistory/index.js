@@ -21,11 +21,11 @@ const TimelineItem = ({ year, items, images, isLeft }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-lg font-bold text-rose-800 mb-2">{year}</h3>
+            <h3 className="text-lg font-bold text-brand-primary mb-2">{year}</h3>
             <ul className="space-y-1">
               {items.map((item, index) => (
                 <li key={index} className="text-gray-700 flex items-start text-sm">
-                  <span className="w-1.5 h-1.5 bg-rose-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
+                  <span className="w-1.5 h-1.5 bg-brand-tertiary rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -59,11 +59,11 @@ const TimelineItem = ({ year, items, images, isLeft }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-lg font-bold text-rose-800 mb-2">{year}</h3>
+            <h3 className="text-lg font-bold text-brand-primary mb-2">{year}</h3>
             <ul className="space-y-1">
               {items.map((item, index) => (
                 <li key={index} className="text-gray-700 flex items-start text-sm">
-                  <span className="w-1.5 h-1.5 bg-rose-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
+                  <span className="w-1.5 h-1.5 bg-brand-tertiary rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -150,7 +150,7 @@ const ScrollButton = ({ onClick, children, className }) => (
     initial={{ opacity: 0, scale: 0.5 }}
     animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, scale: 0.5 }}
-    className={`fixed right-8 z-50 bg-rose-500 text-white rounded-full p-4 shadow-lg hover:bg-rose-600 transition-colors ${className}`}
+    className={`fixed right-8 z-50 bg-brand-primary text-white rounded-full p-4 shadow-lg hover:bg-brand-secondary transition-colors ${className}`}
     onClick={onClick}
   >
     {children}
@@ -253,7 +253,7 @@ const CompanyHistory = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50 pt-[60px]">
+      <div className="min-h-screen bg-gradient-to-b from-brand-light via-white to-brand-light pt-[60px]">
         <div className="container mx-auto px-4 py-20">
           <motion.div 
             className="text-center mb-8"
@@ -261,24 +261,24 @@ const CompanyHistory = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-rose-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-brand-primary mb-4">
               브랜드 히스토리
             </h1>
-            <p className="text-base text-rose-700">
+            <p className="text-base text-brand-secondary">
               W.I.L의 성장과 발자취
             </p>
           </motion.div>
 
           <div className="relative max-w-4xl mx-auto">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-rose-300" />
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-brand-tertiary" />
             
             <div className="relative space-y-12">
               {historyData.map((data, index) => (
                 <div key={data.year} className="relative">
                   {/* 원형 마커 */}
                   <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                    <div className="w-4 h-4 bg-rose-500 rounded-full">
-                      <div className="absolute w-8 h-8 bg-rose-200 rounded-full -left-2 -top-2 animate-ping opacity-75"></div>
+                    <div className="w-4 h-4 bg-brand-primary rounded-full">
+                      <div className="absolute w-8 h-8 bg-brand-light rounded-full -left-2 -top-2 animate-ping opacity-75"></div>
                     </div>
                   </div>
                   

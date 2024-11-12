@@ -36,7 +36,7 @@ const Main = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50">
+    <div className="min-h-screen bg-gradient-to-b from-brand-light via-white to-brand-light">
       <main className="w-full overflow-hidden">
         <HeroSection />
         <NewsSection />

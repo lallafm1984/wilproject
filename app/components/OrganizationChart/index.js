@@ -4,33 +4,32 @@ import { motion } from 'framer-motion';
 
 const OrganizationChart = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 via-white to-rose-50 pt-[100px]">
+    <div className="min-h-screen bg-gradient-to-b from-brand-light via-white to-brand-light pt-[100px]">
       <main className="container mx-auto px-4 py-16">
-      <div className="text-center mb-16">
+        <div className="text-center mb-16">
           <motion.div 
-            className="text-center "
+            className="text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-          <h1 className="text-4xl md:text-5xl font-bold text-rose-900 mb-4">
-          조직도
-          </h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-brand-primary mb-4">
+              조직도
+            </h1>
           </motion.div>
           <motion.div
-            className="text-lg text-rose-700 mb-8"
+            className="text-lg text-brand-secondary mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <p className="text-lg text-rose-700">
+            <p className="text-lg text-brand-secondary">
               W.I.L의 조직 구성을 소개합니다
             </p>
           </motion.div>
         </div>
+
         <div className="max-w-screen-xl mx-auto">
-          {/* 타이틀 섹션 */}
- 
           {/* 조직도 이미지 섹션 */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -54,8 +53,8 @@ const OrganizationChart = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="max-w-3xl mx-auto text-center mb-20"
           >
-            <p className="text-rose-900 leading-relaxed">
-             각 부서는 전문성을 바탕으로 유기적으로 협력하여 최상의 서비스를 제공하고 있습니다.
+            <p className="text-brand-primary leading-relaxed">
+              각 부서는 전문성을 바탕으로 유기적으로 협력하여 최상의 서비스를 제공하고 있습니다.
             </p>
           </motion.div>
         </div>
