@@ -3,7 +3,7 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, EffectCreative, Navigation, Pagination } from 'swiper/modules';
+import { EffectCreative, Navigation, Pagination } from 'swiper/modules';
 
 // Swiper styles
 import 'swiper/css';
@@ -21,21 +21,13 @@ export default function Main() {
   const maxScrollCount = 10;
   const isEventComplete = useRef(false);
   const isScrollingDown = useRef(false);
-  const hasLeftTop = useRef(false);
   const [windowWidth, setWindowWidth] = useState(undefined);
   const [textGap, setTextGap] = useState(0);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(3);
-  const [direction, setDirection] = useState(null);
-  const [skipTransition, setSkipTransition] = useState(false);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
   const swiperRef = useRef(null);
-
   // 초기 위치 계산을 위한 ref
   const initialPositionSet = useRef(false);
+  const isFirstScroll = useRef(true);  // 첫 스크롤 여부 체크용
 
   const secondSectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -84,24 +76,16 @@ export default function Main() {
     { id: 6, image: '/Images/img2.png', title: '릴리 블라썸 벨로아 라운지 셋업', price: '45,900원' },
     { id: 7, image: '/Images/img2.png', title: '네이비 울 코트', price: '89,900원' }
   ];
-
-  const positions = [
-    { translateX: -800, translateY: 100, rotate: -25, scale: 0.85, zIndex: 1 },
-    { translateX: -400, translateY: 50, rotate: -15, scale: 0.9, zIndex: 2 },
-    { translateX: 0, translateY: 0, rotate: 0, scale: 1, zIndex: 3 },
-    { translateX: 400, translateY: 50, rotate: 15, scale: 0.9, zIndex: 2 },
-    { translateX: 800, translateY: 100, rotate: 25, scale: 0.85, zIndex: 1 }
-  ];
-
-  // 버튼 클릭 여부를 추적하기 위한 ref 추가
-  const isButtonClick = useRef(false);
-
+   
   // 현재 활성 슬라이드 인덱스 상태 추가
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // touchStart ref 추가
+  const touchStart = useRef(null);
+
   useEffect(() => {
     const handleResize = () => {
-      setContainerWidth(window.innerWidth);
+      setWindowWidth(window.innerWidth);
     };
     
     handleResize();
@@ -112,160 +96,130 @@ export default function Main() {
     };
   }, []);
 
-  // 반응형 크기 계산
-  const getResponsiveSize = () => {
-    const baseWidth = 320; // 기본 이미지 너비
-    const baseHeight = 420; // 기본 이미지 높이
-    const screenWidth = containerWidth;
-    const ratio = Math.min(screenWidth / 1920, 1); // 최대 크기 제한
-
-    // 768px 미만일 때 더 작은 비율 적용
-    const mobileRatio = screenWidth < 768 ? 0.7 : 1;
-    
-    return {
-      width: baseWidth * ratio * mobileRatio,
-      height: baseHeight * ratio * mobileRatio
-    };
-  };
-
-  // 반응형 위치 계산
-  const getResponsiveX = (baseX) => {
-    const screenWidth = containerWidth;
-    const ratio = Math.min(screenWidth / 1920, 1);
-    const mobileRatio = screenWidth < 768 ? 0.7 : 1;
-    return baseX * ratio * mobileRatio;
-  };
-
-  const getSlideStyles = (index) => {
-    const totalSlides = slides.length;
-    const position = (index - currentIndex + totalSlides) % totalSlides;
-    const size = getResponsiveSize();
-    
-    const baseStyle = {
-      position: 'absolute',
-      left: '50%',
-      top: '50%',
-      width: `${size.width}px`,
-      height: `${size.height}px`,
-      transition: 'all 0.5s ease-in-out',
-      borderRadius: '30px',
-      backgroundColor: '#B4B4B4',
-      transform: 'translate(-50%, -50%)',
-    };
-
-    const visiblePosition = position - Math.floor(totalSlides / 2);
-
-    // 기본 간격 147px의 배수로 계산
-    const gap = 160;
-    const firstGap = gap * 3; // 441px
-    const secondGap = gap * 6; // 588px
-    const thirdGap = gap * 9; // 735px
-
-    switch(visiblePosition) {
-      case -3:
-        return {
-          ...baseStyle,
-          transform: `translate(-50%, -50%) translateX(${getResponsiveX(-thirdGap)}px) translateY(${getResponsiveX(150)}px) rotate(-15deg) scale(1)`,
-          opacity: 0,
-          zIndex: 0,
-        };
-      case -2:
-        return {
-          ...baseStyle,
-          transform: `translate(-50%, -50%) translateX(${getResponsiveX(-secondGap)}px) translateY(${getResponsiveX(90)}px) rotate(-10deg) scale(1)`,
-          opacity: 1,
-          zIndex: 1,
-        };
-      case -1:
-        return {
-          ...baseStyle,
-          transform: `translate(-50%, -50%) translateX(${getResponsiveX(-firstGap)}px) translateY(${getResponsiveX(30)}px) rotate(-5deg) scale(1)`,
-          opacity: 1,
-          zIndex: 2,
-        };
-      case 0:
-        return {
-          ...baseStyle,
-          transform: 'translate(-50%, -50%) translateX(0) translateY(0) rotate(0deg) scale(1)',
-          opacity: 1,
-          zIndex: 3,
-        };
-      case 1:
-        return {
-          ...baseStyle,
-          transform: `translate(-50%, -50%) translateX(${getResponsiveX(firstGap)}px) translateY(${getResponsiveX(30)}px) rotate(5deg) scale(1)`,
-          opacity: 1,
-          zIndex: 2,
-        };
-      case 2:
-        return {
-          ...baseStyle,
-          transform: `translate(-50%, -50%) translateX(${getResponsiveX(secondGap)}px) translateY(${getResponsiveX(90)}px) rotate(10deg) scale(1)`,
-          opacity: 1,
-          zIndex: 1,
-        };
-      case 3:
-        return {
-          ...baseStyle,
-          transform: `translate(-50%, -50%) translateX(${getResponsiveX(thirdGap)}px) translateY(${getResponsiveX(150)}px) rotate(15deg) scale(1)`,
-          opacity: 0,
-          zIndex: 0,
-        };
-      default:
-        return baseStyle;
-    }
-  };
 
   useEffect(() => {
-    const handleWheel = (e) => {
+    const handleScrollEvent = (deltaY) => {
       const currentTime = Date.now();
-      if (currentTime - lastScrollTime.current < 5) return;
+      if (currentTime - lastScrollTime.current < 5) return false;
       
       const heroSection = heroSectionRef.current;
-      if (!heroSection) return;
+      if (!heroSection) return false;
       
       const heroRect = heroSection.getBoundingClientRect();
-      const isAtTop = heroRect.top >= 0 && heroRect.top <= 1;
-      isScrollingDown.current = e.deltaY > 0;
+      isScrollingDown.current = deltaY > 1;
 
-      if (isEventComplete.current && isScrollingDown.current) {
+      // 애니메이션이 완료되었고 maxScrollCount에 도달한 경우 스크롤 허용
+      if (isEventComplete.current && scrollCount.current >= maxScrollCount) {
         setIsAnimating(false);
-        return;
+        return true;  // 스크롤 허용
       }
 
-      if ((scrollCount.current <= 0 && !isScrollingDown.current) || 
-          (scrollCount.current >= maxScrollCount && isScrollingDown.current)) {
-        if (scrollCount.current >= maxScrollCount) {
-          isEventComplete.current = true;
-          setIsAnimating(false);
-        }
-        return;
-      }
-      
       if (!isEventComplete.current) {
-        e.preventDefault();
         const delta = isScrollingDown.current ? 1 : -1;
-        scrollCount.current = Math.max(0, Math.min(maxScrollCount, scrollCount.current + delta));
+        const incrementValue = Math.min(Math.abs(deltaY) / 10, 1);
+        
+        const prevScrollCount = scrollCount.current;
+        
+        scrollCount.current = Math.max(
+          0, 
+          Math.min(
+            maxScrollCount, 
+            scrollCount.current + (delta * incrementValue)
+          )
+        );
 
         const progress = (scrollCount.current / maxScrollCount) * 100;
         setScrollProgress(progress);
-        setIsAnimating(true);
         
-        if (scrollCount.current === maxScrollCount) {
-          isEventComplete.current = true;
-          setIsAnimating(false);
+        if (prevScrollCount !== scrollCount.current) {
+          if (isFirstScroll.current) {
+            isFirstScroll.current = false;
+          }
+          setIsAnimating(true);
         }
+        
+        // maxScrollCount에 도달했을 때의 처리 수정
+        if (scrollCount.current >= maxScrollCount && !isEventComplete.current) {
+          setIsAnimating(true);  // 애니메이션 진행 중 표시
+          setTimeout(() => {
+            isEventComplete.current = true;
+            setIsAnimating(false);
+          }, 100);
+        }
+        return false;
       }
       
+      lastScrollTime.current = currentTime;
+      return true;
+    };
+
+    const handleWheel = (e) => {
+      // 애니메이션이 완료되고 maxScrollCount에 도달한 경우에만 스크롤 허용
+      if (isEventComplete.current && scrollCount.current >= maxScrollCount) {
+        return;  // 기본 스크롤 동작 허용
+      }
+      
+      e.preventDefault();
+      handleScrollEvent(e.deltaY);
+    };
+
+    const handleTouchStart = (e) => {
+      touchStart.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      if (touchStart.current === null) return;
+      
+      const currentTime = Date.now();
+      if(!isEventComplete.current || !scrollCount.current-1 >= maxScrollCount){
+        if (currentTime - lastScrollTime.current < 50) return;
+      }
+      const deltaY = touchStart.current - e.touches[0].clientY;
+      const adjustedDeltaY = deltaY / 3;
+      
+      if (Math.abs(adjustedDeltaY) < 1) return;
+      
+      // 애니메이션이 완료되고 maxScrollCount에 도달한 경우에만 스크롤 허용
+      if (isEventComplete.current && scrollCount.current >= maxScrollCount) {
+        return;  // 기본 스크롤 동작 허용
+      }
+      
+      e.preventDefault();
+      handleScrollEvent(adjustedDeltaY);
+      
+      touchStart.current = e.touches[0].clientY;
       lastScrollTime.current = currentTime;
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
     
     return () => {
       window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []);
+  }, [isAnimating]);
+
+  // heroSection의 터치 이벤트 리스너 수정
+  useEffect(() => {
+    const heroSection = heroSectionRef.current;
+    if (!heroSection) return;
+
+    const preventScroll = (e) => {
+      // 애니메이션이 완료되고 maxScrollCount에 도달한 경우에만 스크롤 허용
+      if (!isEventComplete.current || scrollCount.current < maxScrollCount) {
+        e.preventDefault();
+      }
+    };
+
+    heroSection.addEventListener('touchmove', preventScroll, { passive: false });
+    
+    return () => {
+      heroSection.removeEventListener('touchmove', preventScroll);
+    };
+  }, [isAnimating]);
 
   useEffect(() => {
     // 초기 윈도우 너비를 한 번만 설정
@@ -300,20 +254,7 @@ export default function Main() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleNext = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev + 1) % slides.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
-  const handlePrev = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  };
-
+ 
   const calculateScale = progress => {
     const p = progress / 100;
     return 0.2+ (0.8 * p);
@@ -325,230 +266,12 @@ export default function Main() {
   const leftTransform = windowWidth === undefined ? 0 : -windowWidth/5 + (isInitialLoad ? 0 : textGap);
   const rightTransform = windowWidth === undefined ? 0 : windowWidth/5 - (isInitialLoad ? 0 : textGap);
 
-  const calculatePosition = (index) => {
-    const totalSlides = slides.length;
-    const position = (index - currentIndex + totalSlides) % totalSlides;
-    
-    // 정확한 기준값 설정
-    const baseX = 202.75; // X축 기본 간격
-    const centerX = 231.625; // 중앙 기준점
-    const startX = -173.875; // 시작 X 위치
-    const baseRotation = 5.8242; // 기본 회전각
-    const baseY = 20.5393; // 기본 Y축 상승값
-    const farY = 81.7474; // 바깥쪽 Y축 값
-    
-    let translateX = 0;
-    let translateY = 0;
-    let rotation = 0;
-    let scale = 1;
-    let opacity = 1;
-    let zIndex = 5;
-
-    // X축 위치 계산
-    translateX = startX + (position * baseX) + centerX;
-
-    // 위치별 스타일 계산
-    if (position === 0) { // 중앙
-      translateY = 0;
-      rotation = 0;
-      scale = 1;
-    } else if (Math.abs(position) === 1) { // 양옆
-      translateY = baseY;
-      rotation = position * baseRotation;
-      scale = 0.95;
-      zIndex = 4;
-    } else if (Math.abs(position) === 2) { // 두 번째 양옆
-      translateY = farY;
-      rotation = position * baseRotation * 2;
-      scale = 0.9;
-      zIndex = 3;
-    } else { // 나머지
-      translateY = farY;
-      rotation = position * baseRotation * 2;
-      scale = 0.85;
-      opacity = 0;
-      zIndex = 2;
+  // 반응형 폰트 사이즈 조정
+  const getFontSize = () => {
+    if (windowWidth < 768) {
+      return 'clamp(1rem, 8vw, 2.25rem)';
     }
-
-    // 드래그 효과
-    if (isDragging) {
-      const dragInfluence = dragOffset * 0.2;
-      translateX += dragInfluence;
-      rotation += (dragInfluence / baseX) * baseRotation;
-    }
-
-    return {
-      transform: `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotation}deg) scale(${scale})`,
-      opacity,
-      zIndex,
-      transition: isDragging ? 'none' : 'all 0.3s ease-out'
-    };
-  };
-
-  const handleDragStart = (e) => {
-    setIsDragging(true);
-    setStartX(e.clientX);
-  };
-
-  const handleDragMove = (e) => {
-    if (!isDragging) return;
-    
-    const currentX = e.clientX;
-    const difference = currentX - startX;
-    setDragOffset(difference);
-  };
-
-  const handleDragEnd = () => {
-    if (!isDragging) return;
-    
-    if (Math.abs(dragOffset) > getResponsiveX(50)) {
-      if (dragOffset > 0) {
-        setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
-      } else {
-        setCurrentIndex((prev) => (prev + 1) % slides.length);
-      }
-    }
-
-    setIsDragging(false);
-    setDragOffset(0);
-  };
-
-  const updateSlidesOnDrag = (swiper, isMoving = false, isButtonClick = false) => {
-    if (!swiper || !swiper.slides || !swiper.el || swiper.slides.length === 0) {
-      return;
-    }
-
-    const slides = swiper.slides;
-    const swiperEl = swiper.el;
-    
-    try {
-      const swiperRect = swiperEl.getBoundingClientRect();
-      const swiperCenter = swiperRect.left + (swiperRect.width / 2);
-      
-      slides.forEach((slide) => {
-        if (!slide) return;
-        
-        const rect = slide.getBoundingClientRect();
-        const slideCenter = rect.left + (rect.width / 2);
-        const distanceFromCenter = slideCenter - swiperCenter;
-        
-        // 기준값 설정
-        const baseY = 50; // 첫 번째 Y축 상승값
-        const midY = 420; // 두 번째 Y축 상승값
-        const farY = 450; // 세 번째 Y축 상승값
-        const baseRotation = 20; // 기본 회전각
-        
-        // 거리에 따른 단계 구분
-        const normalizedDistance = Math.abs(distanceFromCenter / (rect.width * 1));
-        let translateY, rotate;
-        let opacity = 1;
-        if (normalizedDistance <= 1) { // 중앙 및 첫 번째 양옆
-          translateY = baseY * normalizedDistance;
-          rotate = (distanceFromCenter > 0 ? 1 : -1) * baseRotation * normalizedDistance;
-        } else if (normalizedDistance <= 2) { // 두 번째 양옆
-          translateY = baseY + ((midY - baseY) * (normalizedDistance - 1));
-          rotate = (distanceFromCenter > 0 ? 1 : -1) * (baseRotation + (baseRotation * (normalizedDistance - 1)));
-        } else if (normalizedDistance <= 3) { // 세 번째 양옆
-          translateY = midY + ((farY - midY) * (normalizedDistance - 2));
-          rotate = (distanceFromCenter > 0 ? 1 : -1) * (baseRotation * 2) ;
-          opacity = 1 - (normalizedDistance - 2);
-        } else { // 나머지
-          translateY = farY;
-          rotate = (distanceFromCenter > 0 ? 1 : -1) * (baseRotation * 3);
-          opacity = 0;
-        }
-        
-        // z-index 계산
-        const zIndex = 5 - Math.floor(normalizedDistance);
-        
-        // 버튼 클릭 시에만 트랜지션 적용
-        slide.style.transition = isButtonClick ? 'all 300ms ease' : 'none';
-        slide.style.transform = `translateY(${translateY}px) rotate(${rotate}deg)`;
-        slide.style.zIndex = Math.max(2, zIndex);
-        slide.style.opacity = opacity;
-      });
-    } catch (error) {
-      console.error('슬라이드 업데이트 중 오류 발생:', error);
-    }
-  };
-
-  const updateSlidesWithRAF = (swiper, isMoving, isButtonClick) => {
-    requestAnimationFrame(() => {
-      updateSlidesOnDrag(swiper, isMoving, isButtonClick);
-    });
-  };
-
-  // 가장 가까운 중앙 슬라이드 인덱스 찾기
-  const findClosestCenterIndex = (swiper) => {
-    const swiperSlides = swiper.slides;
-    const swiperRect = swiper.el.getBoundingClientRect();
-    const centerX = swiperRect.left + (swiperRect.width / 2);
-    
-    let closestIndex = 0;
-    let minDistance = Infinity;
-    
-    Array.from(swiperSlides).forEach((slide, index) => {
-      const rect = slide.getBoundingClientRect();
-      const slideCenter = rect.left + (rect.width / 2);
-      const distance = Math.abs(slideCenter - centerX);
-      
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = index;
-      }
-    });
-    
-    return closestIndex;
-  };
-
-  // 슬라이드 위치에 따른 변형 값 계산
-  const calculateSlideTransform = (index, closestIndex) => {
-    const distanceFromCenter = Math.abs(index - closestIndex);
-    const rotateDirection = index < closestIndex ? -1 : 1;
-    
-    // calculateSlideTransform에서도 동일한 값 사용
-    const baseY = 50;
-    const midY = 420;
-    const farY = 450;
-    const baseRotation = 20;
-
-    let transform = {
-      translateY: 0,
-      scale: 1,
-      rotate: 0
-    };
-    
-    switch(distanceFromCenter) {
-      case 0: // 중앙
-        transform = { translateY: 0, scale: 1, rotate: 0 };
-        break;
-      case 1: // 첫 번째 양옆
-        transform = { translateY: baseY, scale: 1, rotate: rotateDirection * baseRotation };
-        break;
-      case 2: // 두 번째 양옆
-        transform = { translateY: midY, scale: 1, rotate: rotateDirection * (baseRotation * 1.5) };
-        break;
-      case 3: // 세 번째 양옆
-        transform = { translateY: farY, scale: 1, rotate: rotateDirection * (baseRotation * 2) };
-        break;
-      default: // 나머지
-        transform = { translateY: farY, scale: 1, rotate: rotateDirection * (baseRotation * 2), opacity: 0 };
-    }
-    
-    return transform;
-  };
-
-  // 슬라이드 변형 적용
-  const applySlideTransforms = (swiper) => {
-    setIsDragging(false);
-    const closestIndex = findClosestCenterIndex(swiper);
-    
-    swiper.slides.forEach((slide, index) => {
-      const { translateY, scale, rotate } = calculateSlideTransform(index, closestIndex);
-      slide.style.transition = 'all 0ms ease';
-      slide.style.transform = `translateY(${translateY}px) scale(${1}) rotate(${rotate}deg)`;
-      slide.style.zIndex = index === closestIndex ? 5 : 4 - Math.abs(index - closestIndex);
-    });
+    return 'clamp(2.25rem, 5vw, 12rem)';
   };
 
   // 초기 로딩 중에는 텍스트를 숨김
@@ -560,7 +283,7 @@ export default function Main() {
     <div className="w-full mx-auto relative [overflow:hidden] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <div 
         ref={heroSectionRef}
-        className="relative w-full h-screen bg-[#2F2E2B] overflow-hidden"
+        className="relative w-full h-screen bg-[#2F2E2B] overflow-hidden "
         style={{ 
           position: 'sticky',
           top: 0,
@@ -587,26 +310,26 @@ export default function Main() {
         <div className="relative h-full flex flex-col2 items-center justify-center px-4 mt-0 gap-8">
           <div className="text-center">
             <p 
-              className="text-4xl md:text-6xl font-semibold text-white"
+              className="font-semibold text-white"
               style={{
-                fontSize: `clamp(2.25rem, 5vw, 12rem)`,
+                fontSize: getFontSize(),
                 transform: `translateX(${leftTransform}px)`,
                 transition: 'transform 800ms cubic-bezier(0.23, 1, 0.32, 1)'
               }}
             >
-              언제 어디서나
+              언제<br className="block sm:hidden" /> 어디서나
             </p>
           </div>
           <div className="text-center">
             <p 
-              className="text-4xl md:text-6xl font-semibold text-white"
+              className="font-semibold text-white"
               style={{
-                fontSize: `clamp(2.25rem, 5vw, 12rem)`,
+                fontSize: getFontSize(),
                 transform: `translateX(${rightTransform}px)`,
                 transition: 'transform 800ms cubic-bezier(0.23, 1, 0.32, 1)'
               }}
             >
-              골라입는 재미
+              골라입는<br className="block sm:hidden" /> 재미
             </p>
           </div>
           <div 
@@ -679,17 +402,17 @@ export default function Main() {
             viewport={{ once: true }}
             className="w-full px-4 md:px-8 xl:px-0"
           >
-            <div className="w-full flex flex-col xl:flex-row justify-center items-center xl:items-start gap-8 xl:gap-0">
+            <div className="w-full flex flex-col md:flex-row justify-center items-center xl:items-start gap-8 xl:gap-0">
               {/* 이미지 영역 */}
               <motion.div 
                 variants={itemVariants}
-                className="w-full max-w-[400px] xl:max-w-none xl:w-[402px] h-[300px] md:h-[400px] xl:h-[520px] bg-[#B4B4B4] order-2 xl:order-1"
+                className="xl:w-[402px] md:w-[322px] w-[281px] xl:h-[520px] md:h-[416px] h-[364px] bg-[#B4B4B4] order-2 md:order-1"
               >
                 {/* 이미지 영역 */}
               </motion.div>
               
               {/* 텍스트 영역 */}
-              <div className="w-full xl:w-[660px] xl:pt-[309px] xl:pl-[68px] order-1 xl:order-2 text-center xl:text-left">
+              <div className="w-[450px] xl:w-[660px] xl:pt-[99px] xl:pl-[68px] order-1 xl:order-2 text-center xl:text-left pt-[30px] md:pt-[0px]">
                 <motion.div variants={itemVariants}>
                   <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.3]">
                     똑똑한 <span>AI</span> 키오스크
@@ -704,11 +427,11 @@ export default function Main() {
                 >
                   <p className="text-base md:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] px-4 xl:px-0">
                     많은 제품들 중에 내 취향 아이템 고르기 힘들어요.
-                    <br className="hidden xl:block" />
+                    <br className="hidden md:block" />
                     혼자 다양하게 살펴보면서 고민해보고 싶은데 눈치도 보이죠.
-                    <br className="hidden xl:block" />
+                    <br className="hidden md:block" />
                     MBTI 유형별 언더웨어 추천까지 해주는 똑똑한 AI 키오스크와 함께
-                    <br className="hidden xl:block" />
+                    <br className="hidden md:block" />
                     자유롭게 무인 쇼핑 시스템으로 나만의 취향을 고르세요.
                   </p>
                 </motion.div>
@@ -721,12 +444,12 @@ export default function Main() {
 
       {/* 제품 소개 섹션 */}
       <div className="w-full bg-[#F8F8F2]">
-        <div className="w-full max-w-[1920px] h-[1372px] relative mx-auto px-4 xl:px-0">
-          <div className="w-full h-[800px] text-center absolute left-1/2 -translate-x-1/2 top-[199.5px]">
-            <p className="text-3xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] mb-8">
+        <div className="w-full max-w-[1920px] md:h-[1372px] h-[1250px] relative mx-auto px-4 xl:px-0 ">
+          <div className="w-full h-[800px] text-center absolute left-1/2 -translate-x-1/2  top-[120px] md:top-[199.5px]">
+            <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] mb-8">
               일상을 더욱 특별하게 만들어줄
             </p>
-            <p className="text-3xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] mb-8">
+            <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] mb-8">
               다양한 라페어 라운지 상품을 만나보세요
             </p>
             
@@ -895,7 +618,7 @@ export default function Main() {
               </div>
               
               {/* 텍스트 섹션과 버튼 위치 조정 */}
-              <div className="absolute w-full text-center" style={{ top: 'calc(50% + 200px)' }}>
+              <div className="absolute w-full text-center" style={{ top: 'calc(50% + 190px)' }}>
                 <p className="text-lg xl:text-[22px] font-regular text-[#323232]">
                   라페어 라운지는 일상의 모든 순간에 함께합니다.
                 </p>
