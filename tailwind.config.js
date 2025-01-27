@@ -9,14 +9,31 @@ module.exports = {
     extend: {
       animation: {
         shine: "shine 3s infinite linear",
+        'scrollDown': 'scrollDown 1.5s ease-in-out infinite',
+        fadeInUp: 'fadeInUp 0.8s ease-out forwards',
       },
       keyframes: {
         shine: {
           "0%": { left: "-100%" },
           "100%": { left: "200%" },
         },
+        scrollDown: {
+          '0%': { transform: 'translateY(0%)', opacity: 1 },
+          '100%': { transform: 'translateY(100%)', opacity: 0 },
+        },
+        fadeInUp: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(20px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
       },
       fontFamily: {
+        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
         pen: ['Nanum Pen Script', 'cursive']
       },
       colors: {
