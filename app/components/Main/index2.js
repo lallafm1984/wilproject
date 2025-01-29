@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCreative, Navigation, Pagination } from 'swiper/modules';
+import { default as NextImage } from 'next/image';
+
+import mainBgImage from '../../../public/Images/main1.png';
 
 // Swiper styles
 import 'swiper/css';
@@ -291,7 +294,7 @@ export default function Main() {
         }}
       >
         <div
-          className="absolute inset-0 w-full h-full"
+          className="inset-0 w-full h-full absolute"
           style={{
             transform: `scale(${imageScale})`,
             transition: isScrollingDown.current ? 
@@ -299,10 +302,15 @@ export default function Main() {
               'transform 800ms cubic-bezier(0.32, 1, 0.23, 1)'
           }}
         >
-          <img
-            src="/Images/main1.png"
+          <NextImage
+            src={mainBgImage}
             alt="메인 배경"
-            className="object-cover w-full h-full"
+            fill
+            priority
+            quality={85}
+            className="object-cover"
+            sizes="100vw"
+            placeholder="blur"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
@@ -459,7 +467,7 @@ export default function Main() {
                 <div className="absolute w-full h-[800px] flex items-center justify-center">
                   {/* 이전 버튼 */}
                   <button 
-                    className="absolute left-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center  cursor-pointer"
+                    className="absolute left-[calc(50%-180px)] sm:left-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center  cursor-pointer"
                     style={{
                       top: '30%',
                     }}
@@ -521,7 +529,7 @@ export default function Main() {
                     }}
                     breakpoints={{
                       // 480px 이상일 때
-                      480: {
+                      300: {
                         slidesPerView: 1,
                       },
                       // 768px 이상일 때
@@ -565,14 +573,15 @@ export default function Main() {
                           <img
                             src={slide.image}
                             alt={slide.title}
-                            style={{
-                              width: '295px',
-                              height: '380px',
-                              objectFit: 'cover',
-                              borderRadius: '40px',
-                              backfaceVisibility: 'hidden',
-                              display: 'block'
-                            }}
+                            className="
+                              w-[177px] sm:w-[200px] md:w-[250px] xl:w-[295px]
+                              h-[228px] sm:h-[260px] md:h-[320px] xl:h-[380px]
+                              object-cover
+                              rounded-[30px] sm:rounded-[40px] md:rounded-[40px] xl:rounded-[40px]
+                              backface-hidden
+                              block
+                              transition-all duration-300
+                            "
                           />
                           <p 
                             className="text-center text-lg transition-opacity duration-300"
@@ -593,7 +602,7 @@ export default function Main() {
 
                   {/* 다음 버튼 */}
                   <button 
-                    className="absolute right-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center cursor-pointer"
+                    className="absolute  right-[calc(50%-180px)] sm:right-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center cursor-pointer"
                     style={{
                       top: '30%',
                     }}
