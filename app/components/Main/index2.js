@@ -102,8 +102,8 @@ export default function Main() {
 
   useEffect(() => {
     const handleScrollEvent = (deltaY) => {
-      const currentTime = Date.now();
-      if (currentTime - lastScrollTime.current < 5) return false;
+      // const currentTime = Date.now();
+      // if (currentTime - lastScrollTime.current < 5) return false;
       
       const heroSection = heroSectionRef.current;
       if (!heroSection) return false;
@@ -127,7 +127,7 @@ export default function Main() {
           0, 
           Math.min(
             maxScrollCount, 
-            scrollCount.current + (delta * incrementValue)
+            scrollCount.current + (delta * 1)
           )
         );
 
@@ -144,10 +144,10 @@ export default function Main() {
         // maxScrollCount에 도달했을 때의 처리 수정
         if (scrollCount.current >= maxScrollCount && !isEventComplete.current) {
           setIsAnimating(true);  // 애니메이션 진행 중 표시
-          setTimeout(() => {
-            isEventComplete.current = true;
-            setIsAnimating(false);
-          }, 100);
+          // setTimeout(() => {
+          //   isEventComplete.current = true;
+          //   setIsAnimating(false);
+          // }, 10);
         }
         return false;
       }
@@ -157,11 +157,32 @@ export default function Main() {
     };
 
     const handleWheel = (e) => {
+      const heroSection = heroSectionRef.current;
+      if (!heroSection) return;
+      
+      const heroRect = heroSection.getBoundingClientRect();
+      
+      // 상단으로 스크롤이 돌아왔을 때 초기화
+      if (heroRect.top >= 0 && e.wheelDeltaY > 0 && scrollCount.current == maxScrollCount) {
+        isEventComplete.current = false;
+        scrollCount.current = 9;
+        //setScrollProgress(0);
+        setIsAnimating(false);
+        e.preventDefault();
+        return;
+      }
       // 애니메이션이 완료되고 maxScrollCount에 도달한 경우에만 스크롤 허용
-      if (isEventComplete.current && scrollCount.current >= maxScrollCount) {
+      if (scrollCount.current >= maxScrollCount) {
         return;  // 기본 스크롤 동작 허용
       }
+
+     
+     
       
+      if(heroRect.top < 0){
+        return;
+      }
+
       e.preventDefault();
       handleScrollEvent(e.deltaY);
     };
