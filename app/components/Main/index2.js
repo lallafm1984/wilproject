@@ -86,6 +86,9 @@ export default function Main() {
   // touchStart ref 추가
   const touchStart = useRef(null);
 
+  // 이벤트 리스너 등록 상태를 추적하는 ref
+  const isEventListenerAttached = useRef(false);
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -103,8 +106,8 @@ export default function Main() {
   useEffect(() => {
     const handleScrollEvent = (deltaY) => {
       const currentTime = Date.now();
-      if (currentTime - lastScrollTime.current < 5) return false;
-      
+      if (currentTime - lastScrollTime.current < 15) return false;
+      lastScrollTime.current = currentTime;
       const heroSection = heroSectionRef.current;
       if (!heroSection) return false;
       
@@ -135,29 +138,25 @@ export default function Main() {
         setScrollProgress(progress);
         
         if (prevScrollCount !== scrollCount.current) {
-          setIsAnimating(true);
+          //setIsAnimating(true);
         }
         
         // maxScrollCount에 도달했을 때의 처리 수정
         if (scrollCount.current >= maxScrollCount && !isEventComplete.current) {
-          setIsAnimating(true);  // 애니메이션 진행 중 표시
-          setTimeout(() => {
-            isEventComplete.current = true;
-            setIsAnimating(false);
-          }, 20);
+          isEventComplete.current = true;
+          setIsAnimating(false);
         }
         return false;
       }
       
-      lastScrollTime.current = currentTime;
+      
       return true;
     };
 
     const handleWheel = (e) => {
       const heroSection = heroSectionRef.current;
-      if (!heroSection) return false;
-      
       const heroRect = heroSection.getBoundingClientRect();
+
       if(isEventComplete.current && scrollCount.current >= maxScrollCount && e.deltaY < 0 && heroRect.top === 0){
         isEventComplete.current = false;
         scrollCount.current = 9;
@@ -170,7 +169,14 @@ export default function Main() {
       if (isEventComplete.current && scrollCount.current >= maxScrollCount) {
         return;  // 기본 스크롤 동작 허용
       }
-      
+
+      if(!isEventComplete.current && scrollCount.current < maxScrollCount && heroRect.top !== 0){
+        isEventComplete.current = true;
+        scrollCount.current = 10;
+        setScrollProgress(100);
+        setIsAnimating(false);
+        return;
+      }
       e.preventDefault();
       handleScrollEvent(e.deltaY);
     };
@@ -218,16 +224,25 @@ export default function Main() {
       lastScrollTime.current = currentTime;
     };
 
+    // 이미 이벤트 리스너가 등록되어 있다면 리턴
+    if (isEventListenerAttached.current) return;
+
+    // 이벤트 리스너 등록
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     
+    // 이벤트 리스너 등록 상태를 true로 설정
+    isEventListenerAttached.current = true;
+
+    // cleanup 함수
     return () => {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
+      isEventListenerAttached.current = false;
     };
-  }, [isAnimating]);
+  }, []); // 빈 의존성 배열로 마운트 시 한 번만 실행
 
   // heroSection의 터치 이벤트 리스너 수정
   useEffect(() => {
