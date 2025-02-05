@@ -229,7 +229,7 @@ export default function Main() {
 
     // 이벤트 리스너 등록
     window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     
     // 이벤트 리스너 등록 상태를 true로 설정
@@ -325,9 +325,9 @@ export default function Main() {
     <div className="w-full mx-auto relative [overflow:hidden] z-1">
       <div 
         ref={heroSectionRef}
-        className="relative w-full h-[calc(100vh-132px)] bg-[#2F2E2B] overflow-hidden inline-flex mt-[132px]">
+        className="relative w-full sm:h-[calc(100vh-80px)] md:h-[calc(100vh-100px)] xl:h-[calc(100vh-132px)] bg-[#2F2E2B] overflow-hidden inline-flex sm:mt-[80px] md:mt-[100px] xl:mt-[132px]">
         <div
-          className="relative w-full bt-[132px]"
+          className="relative w-full sm:bt-[132px] md:bt-[100px] xl:bt-[132px]"
 
           style={{
             transform: `scale(${imageScale})`,
