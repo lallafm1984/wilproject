@@ -45,25 +45,35 @@ const menuItems = [
 
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
     <header className="fixed w-full top-0 z-50 bg-[#91000A]">
-      <div className="max-w-[1920px]  h-[132px] flex items-center">
-        {/* 로고 영역 수정 */}
+      <div className="max-w-[1920px] mx-auto h-[80px] md:h-[100px] lg:h-[132px] flex items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* 로고 영역 */}
         <Link 
           href="/" 
-          className="relative pl-[204px] mt-[51px] mb-[50px] pr-[180px]"
+          className="relative flex items-center"
         >
           <img 
             src="/Images/logo.png" 
             alt="L'AFFAIR LOUNGE" 
-            width={327} 
-            height={31}
-            className="object-contain"
+            className="w-[180px] md:w-[250px] lg:w-[327px] h-auto object-contain"
           />
         </Link>
 
-        <div className="w-[1004px] h-[63px] bg-white rounded-full mt-[28px] mb-[41px] flex items-center justify-between px-2">
+        {/* 모바일 메뉴 버튼 */}
+        <button 
+          className="lg:hidden p-2"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        {/* 데스크톱 네비게이션 */}
+        <div className="hidden lg:flex w-[1004px] h-[63px] bg-white rounded-full items-center justify-between px-2">
           <nav className="flex items-center ml-5">
             <ul className="flex space-x-14">
               {menuItems.map((item, idx) => (
@@ -80,12 +90,12 @@ const Header = () => {
                     ${activeMenu === idx ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                     onMouseLeave={() => setActiveMenu(null)}
                   >
-                    <ul className="">
+                    <ul>
                       {item.subMenu.map((subItem, subIdx) => (
                         <li key={subIdx}>
                           <Link 
                             href={subItem.path} 
-                            className="block px-4 py-0.5 font-regular text-[14px] text-left pl-[30px] hover:font-medium hover:text-[#92000A] "
+                            className="block px-4 py-0.5 font-regular text-[14px] text-left pl-[30px] hover:font-medium hover:text-[#92000A]"
                           >
                             {subItem.name}
                           </Link>
@@ -99,18 +109,45 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center space-x-1">
-            <button className="">
-               <img src="/Images/icon_S.png" alt="검색" width="50px" height="50px" />
-             
+            <button>
+              <img src="/Images/icon_S.png" alt="검색" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px]" />
             </button>
             <button className="ml-[20px]">
-              <img src="/Images/icon_L.png" alt="로그인" width="50px" height="50px" />
+              <img src="/Images/icon_L.png" alt="로그인" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px]" />
             </button>
-
-
-            <button className="bg-[#2F2E2B] font-regular text-white text-[15px] w-[177px] h-[50px]   py-2 rounded-full hover:bg-[#92000A]">
+            <button className="bg-[#2F2E2B] font-regular text-white text-[13px] lg:text-[15px] w-[140px] lg:w-[177px] h-[40px] lg:h-[50px] rounded-full hover:bg-[#92000A] ml-4">
               지금 상담신청 하세요!
             </button>
+          </div>
+        </div>
+
+        {/* 모바일 메뉴 */}
+        <div className={`lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+          <div className={`fixed right-0 top-0 h-full w-[280px] bg-white transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            <div className="p-4 flex justify-between items-center border-b">
+              <span className="text-lg font-medium">메뉴</span>
+              <button onClick={() => setIsMobileMenuOpen(false)}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <nav className="p-4">
+              {menuItems.map((item, idx) => (
+                <div key={idx} className="mb-4">
+                  <button className="text-lg font-medium mb-2">{item.title}</button>
+                  <ul className="ml-4">
+                    {item.subMenu.map((subItem, subIdx) => (
+                      <li key={subIdx} className="mb-2">
+                        <Link href={subItem.path} className="text-gray-600 hover:text-[#92000A]">
+                          {subItem.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </nav>
           </div>
         </div>
       </div>
