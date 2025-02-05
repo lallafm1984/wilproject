@@ -54,13 +54,11 @@ const Header = () => {
           href="/" 
           className="relative pl-[204px] mt-[51px] mb-[50px] pr-[180px]"
         >
-          <Image
-            src="/images/logo.png"
-            alt="L'AFFAIR LOUNGE"
-            width={327}
+          <img 
+            src="/Images/logo.png" 
+            alt="L'AFFAIR LOUNGE" 
+            width={327} 
             height={31}
-
-
             className="object-contain"
           />
         </Link>
