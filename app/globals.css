@@ -4,6 +4,15 @@
 
 @font-face {
   font-family: 'Pretendard';
+  src: url('/fonts/woff2-subset/Pretendard-ExtraLight.subset.woff2') format('woff2'),
+       url('/fonts/woff-subset/Pretendard-ExtraLight.subset.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
   src: url('/fonts/woff2-subset/Pretendard-Regular.subset.woff2') format('woff2'),
        url('/fonts/woff-subset/Pretendard-Regular.subset.woff') format('woff');
   font-weight: 400;
@@ -13,17 +22,31 @@
 
 @font-face {
   font-family: 'Pretendard';
-  src: url('/fonts/woff2/Pretendard-Regular.woff2') format('woff2'),
-       url('/fonts/woff/Pretendard-Regular.woff') format('woff');
+  src: url('/fonts/woff2-subset/Pretendard-Medium.subset.woff2') format('woff2'),
+       url('/fonts/woff-subset/Pretendard-Medium.subset.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/fonts/woff2/Pretendard-Bold.woff2') format('woff2'),
+       url('/fonts/woff/Pretendard-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
-  --primary-bg: #F5EFEB;
+  /*--primary-bg: #F5EFEB;*/
   --secondary-bg: #E8DED7;
   --text-primary: #333333;
   --text-secondary: #666666;

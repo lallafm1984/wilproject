@@ -1,230 +1,123 @@
 'use client'
 
-import { useState , useEffect} from 'react'
- 
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
-
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+import { useState } from 'react'
 import Link from 'next/link'
-
- 
-const laffair = "L\'AFFAIR";
+import Image from 'next/image'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const menuItems = [
   {
-    title: 'W.I.L',
+    title: '라페어 라운지',
     subMenu: [
-      { name: '인사말', path: '/pages/Greeting' },
-      { name: '회사 소개', path: '/pages/About' },
-      { name: '연혁', path: '/pages/CompanyHistory' },
-      { name: '조직도', path: '/pages/OrganizationChart' },
-      { name: '오시는 길', path: '/pages/Location' }
+      { name: '라페어라운지', path: '' },
+      { name: '입점상품소개', path: '' },
     ]
   },
   {
-    title: `${laffair}`,
+    title: '라페어',
     subMenu: [
-      { name: `브랜드 소개`, path: '/laffair/intro' },
-      { name: `커머스 현황`, path: '/laffair/concept' },
-      { name: `공식몰`, path: '/laffair/production' }
+      { name: '브랜드스토리', path: '' },
+      { name: '라페어공식몰', path: '' },
     ]
   },
   {
-    title: `${laffair} LOUNGE`,
+    title: '더블유아이엘',
     subMenu: [
-      { name: `상품 A`, path: '/shop' },
-      { name: `상품 B`, path: '/shop' },
-      { name: `상품 C`, path: '/shop' }
+      { name: 'CEO 인사말', path: '' },
+      { name: '더블유아이엘', path: '' },
+      { name: '연혁', path: '' },
+      { name: '오시는길', path: '' }
     ]
   },
   {
-    title: '창업 정보',
+    title: '창업정보',
     subMenu: [
-      { name: '가맹점 혜택', path: '/franchise/benefits' },
-      { name: '창업 절차', path: '/franchise/process' },
-      { name: '창업 비용', path: '/franchise/cost' },
-      { name: '창업 문의', path: '/franchise/consulting' },
-      { name: 'F&Q', path: '/franchise/consulting' },
-      { name: '매장 찾기', path: '/franchise/consulting' }
+      { name: '가맹점혜택', path: '' },
+      { name: '창업절차', path: '' },
+      { name: '창업비용', path: '' },
+      { name: '창업문의', path: '' },
+      { name: 'F&A', path: '' },
+      { name: '매장찾기', path: '' },
+      { name: '라페어라운지소식', path: '' }
     ]
   }
-];
+]
 
-// 모바일 메뉴가 열렸을 때 스크롤 방지
+const Header = () => {
+  const [activeMenu, setActiveMenu] = useState(null)
+
+  return (
+    <header className="fixed w-full top-0 z-50 bg-[#91000A]">
+      <div className="max-w-[1920px]  h-[132px] flex items-center">
+        {/* 로고 영역 수정 */}
+        <Link 
+          href="/" 
+          className="relative pl-[204px] mt-[51px] mb-[50px] pr-[180px]"
+        >
+          <Image
+            src="/images/logo.png"
+            alt="L'AFFAIR LOUNGE"
+            width={327}
+            height={31}
 
 
+            className="object-contain"
+          />
+        </Link>
 
-
-function Header(){
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState(null);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    if (!isMenuOpen) {
-      setActiveMenu(null);
-    }
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-    setActiveMenu(null);
-  };
-  
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMenuOpen]);
-  
-
-  return(
-    <header className="fixed w-full top-0 z-50">
-      <div className="relative bg-gradient-to-r from-brand-light/95 via-white/95 to-brand-light/95 backdrop-blur-lg border-b border-brand-tertiary">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-6">
-            <Link href="/">
-              <h1 className="text-4xl font-serif text-brand-primary hover:text-brand-secondary transition-all duration-300 cursor-pointer">
-                W.I.L
-              </h1>
-            </Link>
-            
-            {/* 모바일 메뉴 버튼 */}
-            <button 
-              className="block lg:hidden p-2 text-brand-primary hover:text-brand-secondary transition-colors duration-300"
-              onClick={toggleMenu}
-              aria-label="메뉴 열기/닫기"
-            >
-              {isMenuOpen ? 
-                <XMarkIcon className="h-7 w-7" /> : 
-                <Bars3Icon className="h-7 w-7" />
-              }
-            </button>
-
-            {/* 데스크톱 메뉴 */}
-            <nav className="hidden lg:block">
-              <ul className="flex space-x-12">
-                {menuItems.map((item, idx) => (
-                  <li 
-                    key={idx}
-                    className="relative group"
-                    onMouseEnter={() => setActiveMenu(idx)}
+        <div className="w-[1004px] h-[63px] bg-white rounded-full mt-[28px] mb-[41px] flex items-center justify-between px-2">
+          <nav className="flex items-center ml-5">
+            <ul className="flex space-x-14">
+              {menuItems.map((item, idx) => (
+                <li 
+                  key={idx}
+                  className="relative group"
+                  onMouseEnter={() => setActiveMenu(idx)}
+                >
+                  <button className="text-[17px] font-regular flex items-center space-x-1 py-2">
+                    <span>{item.title}</span>
+                  </button>
+                  
+                  <div className={`absolute left-1/2 -translate-x-1/2 mt-5 bg-white shadow-lg rounded-2xl overflow-hidden ${idx === 3 ? 'w-[148px]' : 'w-[135px]'} pt-[29px] pb-[29px]
+                    ${activeMenu === idx ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                     onMouseLeave={() => setActiveMenu(null)}
                   >
-                    <button className="flex items-center space-x-1 py-2 px-4 text-base font-medium text-brand-primary 
-                      hover:text-brand-secondary rounded-full hover:bg-brand-light/50 transition-all duration-300
-                      group-hover:shadow-md">
-                      <span className="relative overflow-hidden">
-                        {item.title}
-                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-brand-tertiary 
-                          transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"/>
-                      </span>
-                      <ChevronDownIcon className="h-5 w-5 ml-1 group-hover:rotate-180 transition-transform duration-300" />
-                    </button>
-                    
-                    {/* 서브메뉴 */}
-                    <div 
-                      className={`absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-white/95 backdrop-blur-lg 
-                        border border-brand-tertiary rounded-xl overflow-hidden transition-all duration-300 transform 
-                        shadow-lg ${activeMenu === idx ? 'opacity-100 visible translate-y-0' : 
-                        'opacity-0 invisible -translate-y-4'}`}
-                    >
-                      <ul className="py-2">
-                        {item.subMenu.map((subItem, subIdx) => (
-                          <li key={subIdx}>
-                            <Link 
-                              href={subItem.path}
-                              className="block px-6 py-3 text-brand-primary hover:text-brand-secondary 
-                                hover:bg-brand-light/80 transition-all duration-200 font-medium"
-                            >
-                              {subItem.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        </div>
+                    <ul className="">
+                      {item.subMenu.map((subItem, subIdx) => (
+                        <li key={subIdx}>
+                          <Link 
+                            href={subItem.path} 
+                            className="block px-4 py-0.5 font-regular text-[14px] text-left pl-[30px] hover:font-medium hover:text-[#92000A] "
+                          >
+                            {subItem.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        {/* 모바일 메뉴 */}
-        <div 
-          className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
-            isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-          }`}
-          style={{ top: '76px' }}
-        >
-          <div 
-            className="absolute inset-0 bg-brand-dark/20 backdrop-blur-sm"
-            onClick={closeMenu}
-          />
-          
-          <div
-            className={`absolute top-0 left-0 w-full sm:w-80 h-[calc(100vh-76px)] bg-white/95 shadow-lg 
-              transform transition-transform duration-300 ease-out ${
-              isMenuOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}
-          >
-            <nav className="h-full overflow-y-auto">
-              <ul className="p-4 space-y-2">
-                {menuItems.map((item, idx) => (
-                  <li key={idx} className="border-b border-brand-tertiary last:border-0">
-                    <button
-                      className="flex items-center justify-between w-full py-4 px-2 text-base font-medium text-brand-primary
-                        hover:text-brand-secondary transition-colors duration-200"
-                      onClick={() => setActiveMenu(activeMenu === idx ? null : idx)}
-                    >
-                      <span>{item.title}</span>
-                      <ChevronDownIcon 
-                        className={`h-5 w-5 transition-transform duration-200 
-                          ${activeMenu === idx ? 'rotate-180 text-brand-secondary' : 'text-brand-primary'}`}
-                      />
-                    </button>
-                    
-                    <div 
-                      className={`overflow-hidden transition-all duration-300 ease-in-out
-                        ${activeMenu === idx ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
-                    >
-                      <ul className="bg-brand-light/50 rounded-lg my-1">
-                        {item.subMenu.map((subItem, subIdx) => (
-                          <li key={subIdx}>
-                            <Link
-                              href={subItem.path}
-                              className="block py-3 px-8 text-sm text-brand-primary hover:text-brand-secondary 
-                                hover:bg-brand-light/50 transition-colors duration-200"
-                              onClick={closeMenu}
-                            >
-                              {subItem.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          <div className="flex items-center space-x-1">
+            <button className="">
+               <img src="/Images/icon_S.png" alt="검색" width="50px" height="50px" />
+             
+            </button>
+            <button className="ml-[20px]">
+              <img src="/Images/icon_L.png" alt="로그인" width="50px" height="50px" />
+            </button>
+
+
+            <button className="bg-[#2F2E2B] font-regular text-white text-[15px] w-[177px] h-[50px]   py-2 rounded-full hover:bg-[#92000A]">
+              지금 상담신청 하세요!
+            </button>
           </div>
         </div>
       </div>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header 

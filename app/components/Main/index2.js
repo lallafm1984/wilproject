@@ -157,7 +157,7 @@ export default function Main() {
       const heroSection = heroSectionRef.current;
       const heroRect = heroSection.getBoundingClientRect();
 
-      if(isEventComplete.current && scrollCount.current >= maxScrollCount && e.deltaY < 0 && heroRect.top === 0){
+      if(isEventComplete.current && scrollCount.current >= maxScrollCount && e.deltaY < 0 && heroRect.top ===132){
         isEventComplete.current = false;
         scrollCount.current = 9;
         setScrollProgress(90);
@@ -170,7 +170,7 @@ export default function Main() {
         return;  // 기본 스크롤 동작 허용
       }
 
-      if(!isEventComplete.current && scrollCount.current < maxScrollCount && heroRect.top !== 0){
+      if(!isEventComplete.current && scrollCount.current < maxScrollCount && heroRect.top !== 132){
         isEventComplete.current = true;
         scrollCount.current = 10;
         setScrollProgress(100);
@@ -201,7 +201,7 @@ export default function Main() {
       if (!heroSection) return false;
       
       const heroRect = heroSection.getBoundingClientRect();
-      if(isEventComplete.current && scrollCount.current >= maxScrollCount && adjustedDeltaY < 0 && heroRect.top === 0){
+      if(isEventComplete.current && scrollCount.current >= maxScrollCount && adjustedDeltaY < 0 && heroRect.top === 132){
         isEventComplete.current = false;
         scrollCount.current = 9;
         setScrollProgress(90);
@@ -322,18 +322,13 @@ export default function Main() {
   }
 
   return (
-    <div className="w-full mx-auto relative [overflow:hidden] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="w-full mx-auto relative [overflow:hidden] z-1">
       <div 
         ref={heroSectionRef}
-        className="relative w-full h-screen bg-[#2F2E2B] overflow-hidden "
-        style={{ 
-          position: 'sticky',
-          top: 0,
-          zIndex: 50
-        }}
-      >
+        className="relative w-full h-[calc(100vh-132px)] bg-[#2F2E2B] overflow-hidden inline-flex mt-[132px]">
         <div
-          className="inset-0 w-full h-full absolute"
+          className="relative w-full bt-[132px]"
+
           style={{
             transform: `scale(${imageScale})`,
             transition: isScrollingDown.current ? 
@@ -351,13 +346,13 @@ export default function Main() {
             sizes="100vw"
             placeholder="blur"
           />
-          <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="relative h-full flex flex-col2 items-center justify-center px-4 mt-0 gap-8">
+        <div className="absolute w-full h-full flex flex-col2 items-center justify-center px-4  gap-8">
           <div className="text-center">
             <p 
               className="font-semibold text-white"
+
               style={{
                 fontSize: getFontSize(),
                 transform: `translateX(${leftTransform}px)`,
@@ -379,15 +374,7 @@ export default function Main() {
               골라입는<br className="block sm:hidden" /> 재미
             </p>
           </div>
-          <div 
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-            style={{
-              opacity: 1 - (scrollProgress / 20),
-              transition: 'opacity 800ms cubic-bezier(0.23, 1, 0.32, 1)'
-            }}
-          >
-         
-          </div>
+
         </div>
       </div>
       <div className="w-full bg-white pt-[200px] pb-[200px]">
