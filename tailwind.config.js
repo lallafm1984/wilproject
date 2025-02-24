@@ -11,6 +11,8 @@ module.exports = {
         shine: "shine 3s infinite linear",
         'scrollDown': 'scrollDown 1.5s ease-in-out infinite',
         fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+        'marquee-left': 'marquee-left 30s linear infinite',
+        'marquee-right': 'marquee-right 30s linear infinite',
       },
       keyframes: {
         shine: {
@@ -30,6 +32,14 @@ module.exports = {
             opacity: '1',
             transform: 'translateY(0)',
           },
+        },
+        'marquee-left': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        'marquee-right': {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' },
         },
       },
       fontFamily: {
