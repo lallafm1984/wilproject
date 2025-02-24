@@ -48,10 +48,10 @@
 
 :root {
   /*--primary-bg: #F5EFEB;*/
-  --secondary-bg: #E8DED7;
+  --secondary-bg: #ff0000;
   --text-primary: #333333;
   --text-secondary: #666666;
-  --background: #ffffff;
+  --background: #ff0000;
   --foreground: #171717;
   --color-primary: #A32136;
   --color-secondary: #B55A52;
@@ -63,7 +63,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ff0000;
   }
 }
 
@@ -109,7 +109,7 @@
   }
 
   .highlight-box {
-    @apply bg-[#E8DED7] p-4 mb-4;
+    @apply bg-[#ff2323] p-4 mb-4;
   }
 
   .content-box {

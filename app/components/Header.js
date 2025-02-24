@@ -16,7 +16,7 @@ const menuItems = [
   {
     title: '입점브랜드',
     subMenu: [
-      { name: '브랜드스토리', path: '/pages/BrandStory' },
+      { name: '라페어', path: '/pages/BrandStory' },
       { name: '선데이라운지', path: '' },
     ]
   },

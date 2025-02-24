@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ReactLenis } from '@studio-freight/react-lenis';
 import Lenis from '@studio-freight/lenis';
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 const Company = () => {
   const containerRef = useRef(null);
@@ -20,6 +21,9 @@ const Company = () => {
   // 현재 선택된 탭을 관리하는 state 추가
   const [selectedTab, setSelectedTab] = useState('headquarters');
   
+  // 탭 순서 배열 추가
+  const tabOrder = ['headquarters', 'logistics', 'vietnam', 'shinsegae'];
+
   // 각 위치의 정보를 객체로 관리
   const locations = {
     headquarters: {
@@ -38,7 +42,7 @@ const Company = () => {
       title: '더블유아이엘 베트남법인',
       address: '서울특별시 금천구 벚꽃로 234, 1703호 (가산동, 에이스하이엔드타워6차)',
       phone: '+84-28-3559-2293',
-      coordinates: { lat: 10.8231, lng: 106.6297 }
+      coordinates: {lat: 37.4784, lng: 126.8821  }
     },
     shinsegae: {
       title: '신세계백화점 김해점',
@@ -226,6 +230,22 @@ const Company = () => {
         maps.companyMap.getLevel(3);
       }
     }
+  };
+
+  // 이전/다음 탭으로 이동하는 함수 추가
+  const handleArrowClick = (direction) => {
+    const currentIndex = tabOrder.indexOf(selectedTab);
+    let nextIndex;
+    
+    if (direction === 'prev') {
+      nextIndex = currentIndex - 1;
+      if (nextIndex < 0) nextIndex = tabOrder.length - 1;
+    } else {
+      nextIndex = currentIndex + 1;
+      if (nextIndex >= tabOrder.length) nextIndex = 0;
+    }
+    
+    handleTabChange(tabOrder[nextIndex]);
   };
 
   return (
@@ -762,7 +782,7 @@ const Company = () => {
                   <div className="relative w-full h-auto mt-[60px] md:mt-[80px] lg:mt-[90px] xl:mt-[100px] flex flex-col items-center justify-center gap-[40px] md:gap-[60px] lg:gap-[60px] xl:gap-[60px] px-5 md:px-8 lg:px-[60px] xl:px-[117px]">
                     {/* 신사역점 */}
                     <div className="relative w-full flex flex-col lg:flex-row xl:flex-row items-center justify-center gap-[20px] lg:gap-[40px] xl:gap-[54px]">
-                      <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[180px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center justify-center bg-[#323232] rounded-[20px] md:rounded-[30px] lg:rounded-[35px] xl:rounded-[40px]">
+                      <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[180px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center justify-center bg-[#323232] ">
                         <div className="relative w-auto h-auto flex-col items-start justify-start px-[20px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
                           <p className="text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px] font-semibold text-left text-[#ffffff]">신사역점</p>
                           <p className="mt-[12px] md:mt-[16px] lg:mt-[19px] xl:mt-[22px] text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-normal text-left text-[#ffffff] tracking-[-0.4px] leading-[24px] md:leading-[28px] lg:leading-[32px] xl:leading-[36px]">
@@ -770,13 +790,13 @@ const Company = () => {
                           </p>
                         </div>
                       </div>
-                      <div id="sinsa-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px] rounded-[20px] md:rounded-[30px] lg:rounded-[35px] xl:rounded-[40px] overflow-hidden"></div>
+                      <div id="sinsa-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]  overflow-hidden"></div>
                     </div>
 
                     {/* 신논현역점 */}
                     <div className="relative w-full flex flex-col-reverse lg:flex-row xl:flex-row items-center justify-center gap-[20px] lg:gap-[40px] xl:gap-[54px]">
-                      <div id="sinnonhyeon-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px] rounded-[20px] md:rounded-[30px] lg:rounded-[35px] xl:rounded-[40px] overflow-hidden"></div>
-                      <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[180px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center justify-center bg-[#323232] rounded-[20px] md:rounded-[30px] lg:rounded-[35px] xl:rounded-[40px]">
+                      <div id="sinnonhyeon-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]   overflow-hidden"></div>
+                      <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[180px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center justify-center bg-[#323232]  ">
                         <div className="relative w-auto h-auto flex-col items-start justify-start px-[20px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
                           <p className="text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px] font-semibold text-left text-[#ffffff]">신논현역점</p>
                           <p className="mt-[12px] md:mt-[16px] lg:mt-[19px] xl:mt-[22px] text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-normal text-left text-[#ffffff] tracking-[-0.4px] leading-[24px] md:leading-[28px] lg:leading-[32px] xl:leading-[36px]">
@@ -788,7 +808,7 @@ const Company = () => {
 
                     {/* 논현역점 */}
                     <div className="relative w-full flex flex-col lg:flex-row xl:flex-row items-center justify-center gap-[20px] lg:gap-[40px] xl:gap-[54px]">
-                      <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[180px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center justify-center bg-[#323232] rounded-[20px] md:rounded-[30px] lg:rounded-[35px] xl:rounded-[40px]">
+                      <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[180px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center justify-center bg-[#323232]  ">
                         <div className="relative w-auto h-auto flex-col items-start justify-start px-[20px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
                           <p className="text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px] font-semibold text-left text-[#ffffff]">논현역점</p>
                           <p className="mt-[12px] md:mt-[16px] lg:mt-[19px] xl:mt-[22px] text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-normal text-left text-[#ffffff] tracking-[-0.4px] leading-[24px] md:leading-[28px] lg:leading-[32px] xl:leading-[36px]">
@@ -796,7 +816,7 @@ const Company = () => {
                           </p>
                         </div>
                       </div>
-                      <div id="nonhyeon-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px] rounded-[20px] md:rounded-[30px] lg:rounded-[35px] xl:rounded-[40px] overflow-hidden"></div>
+                      <div id="nonhyeon-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]   overflow-hidden"></div>
                     </div>
                   </div>
                 </div>
@@ -848,27 +868,41 @@ const Company = () => {
                         신세계백화점 김해점
                       </button>
                     </div>
-                    <div id="company-map" className="relative mt-[20px] md:mt-[24px] xl:mt-[32px] w-full md:w-[700px] xl:w-[1250px] h-[300px] md:h-[400px] xl:h-[516px]"></div>
-
-                    <div className="relative mt-[40px] md:mt-[50px] xl:mt-[60px] w-full md:w-[700px] xl:w-[1250px] h-auto flex flex-col md:flex-row items-start md:items-center justify-between">
+                    <div className="relative">
+                      <button 
+                        onClick={() => handleArrowClick('prev')} 
+                        className="absolute -left-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"
+                      >
+                        <SlArrowLeft className="w-6 h-6 text-gray-600" />
+                      </button>
+                      <div id="company-map" className="relative mt-[20px] md:mt-[24px] xl:mt-[32px] w-full md:w-[700px] xl:w-[1250px] h-[300px] md:h-[400px] xl:h-[516px]"></div>
+                      <button 
+                        onClick={() => handleArrowClick('next')}
+                        className="absolute -right-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"
+                      >
+                        <SlArrowRight className="w-6 h-6 text-gray-600" />
+                      </button>
+                    </div>
+                    <div className="relative mt-[40px] md:mt-[50px] xl:mt-[60px] w-full md:w-[700px] xl:w-[1250px] h-auto flex flex-col md:flex-row items-start ">
                       <p className="text-[28px] md:text-[32px] xl:text-[40px] font-bold text-left text-[#2f2e2c] tracking-[-0.7px] md:tracking-[-0.8px] xl:tracking-[-1.04px]">
                         {locations[selectedTab].title}
                       </p>
-                      <div className="flex-col items-start justify-start mt-[20px] md:mt-0 md:mr-[40px] xl:mr-[67px]">
-                        <div className="flex items-start justify-start">
-                          <p className="text-[16px] md:text-[18px] xl:text-[22px] font-bold text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] w-[50px] md:w-[55px] xl:w-[60px]">주소</p>
-                          <p className="ml-[12px] md:ml-[15px] xl:ml-[17px] text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] break-keep">
-                            {locations[selectedTab].address}
-                          </p>
-                        </div>
-                        <div className="flex items-start justify-start mt-[8px] md:mt-[10px] xl:mt-[12px]">
-                          <p className="text-[16px] md:text-[18px] xl:text-[22px] font-bold text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] w-[50px] md:w-[55px] xl:w-[60px]">전화</p>
-                          <p className="ml-[12px] md:ml-[15px] xl:ml-[17px] text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px]">
-                            {locations[selectedTab].phone}
-                          </p>
-                        </div>
+                      <div className="flex-col items-start justify-start mt-[20px] md:mt-0 xl:absolute xl:left-[40%]">
+                      <div className="flex items-start justify-start">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-bold text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] w-[50px] md:w-[55px] xl:w-[60px]">주소</p>
+                        <p className="ml-[12px] md:ml-[15px] xl:ml-[17px] text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] break-before-auto">
+                          {locations[selectedTab].address}
+                        </p>
+                      </div>
+                      <div className="flex items-start justify-start mt-[8px] md:mt-[10px] xl:mt-[12px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-bold text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] w-[50px] md:w-[55px] xl:w-[60px]">전화</p>
+                        <p className="ml-[12px] md:ml-[15px] xl:ml-[17px] text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px]">
+                          {locations[selectedTab].phone}
+                        </p>
                       </div>
                     </div>
+                    </div>
+                    
                   </div>
                 </div>
               </div>

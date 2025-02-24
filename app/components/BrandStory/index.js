@@ -88,7 +88,7 @@ const BrandStory = () => {
         ].map((item, index) => (
           <div 
             key={index} 
-            className={`group relative flex items-center h-[140px] hover:bg-[#f8f8f8] transition-colors
+            className={`group relative flex items-center h-[140px] 
               ${index === 0 ? 'border-t-[2px]' : ''} 
               ${index === 1 ? 'border-t-[2px] border-b-[2px]' : ''} 
               ${index === 2 ? 'border-b-[2px]' : ''} 
@@ -103,7 +103,7 @@ const BrandStory = () => {
               </p>
             </div>
             
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[280px] h-[280px] opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[280px] h-[280px] opacity-0 group-hover:opacity-100 transition-opacity z-10">
               <Image
                 src={item.image}
                 alt={item.title}
