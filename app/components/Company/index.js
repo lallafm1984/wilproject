@@ -43,7 +43,7 @@ const Company = () => {
       title: '더블유아이엘 베트남법인',
       address: '서울특별시 금천구 벚꽃로 234, 1703호 (가산동, 에이스하이엔드타워6차)',
       phone: '+84-28-3559-2293',
-      coordinates: {lat: 37.4784, lng: 126.8821  }
+      coordinates: {lat: 10.6549298280632, lng: 106.59041829623274  }
     },
     shinsegae: {
       title: '신세계백화점 김해점',
@@ -415,7 +415,16 @@ const Company = () => {
                     </motion.p>
                     
                     {/* 조직도 컨테이너 */}
-                    <div className="relative w-full aspect-[1920/1254] mt-[185px]">
+                    <div className="relative w-full aspect-[1920/1254] mt-[185px] flex justify-center">
+                    
+                      {/* 배경 이미지 추가 */}
+                      <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[995px] h-[1067px]">
+                        <img 
+                          src="/Images/company/grid_bg.webp" 
+                          alt="grid background" 
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
                       {/* 중앙 W.I.L 로고 */}
                       <motion.div 
                         initial={{ opacity: 0, scale: 0 }}
@@ -425,6 +434,7 @@ const Company = () => {
                         className="absolute top-[22.5%] left-[38.2%] w-[23.125%] aspect-square bg-[#92000a] rounded-full flex items-center justify-center"
                       >
                         <p className="text-[5.208vw] font-poppins font-semibold text-white">W.I.L</p>
+                       
                       </motion.div>
 
                       {/* 왼쪽 그룹 */}
@@ -621,9 +631,9 @@ const Company = () => {
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
                       <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
-                        2023
+                        2022
                       </p>
                       <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
                         <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
@@ -631,6 +641,39 @@ const Company = () => {
                         </p>
                         <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           선데이라운지 카카오메이커스 런칭
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2021
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        베트남 호치민에 ㈜더블유아이엘 법인 생산 공장 설립
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        라페어 언더웨어 쿠팡 입점
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        선데이라운지 카카오톡 선물하기 입점
+                        </p>
+                        
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto ">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2019
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        신세계TV쇼핑 패션카테고리 판매 1위
+
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        SK스토아 L&apos;AFFAIR 런칭
                         </p>
                       </div>
                     </div>

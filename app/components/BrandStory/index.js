@@ -45,7 +45,7 @@ const BrandStory = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="w-auto mx-auto mt-[100px] space-y-[100px] mb-[60px]"
+          className="w-auto mx-auto mt-[100px] space-y-[24px] mb-[60px]"
         >
           <p className="text-[30px] text-[#92000a]  font-semibold">
             진정한 아름다움은 편안함에서 시작됩니다.
