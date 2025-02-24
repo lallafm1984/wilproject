@@ -30,13 +30,14 @@ const Company = () => {
       title: '더블유아이엘 본사',
       address: '서울특별시 금천구 벚꽃로 234, 1703호 (가산동, 에이스하이엔드타워6차)',
       phone: '02-6925-0733',
-      coordinates: { lat: 37.4784, lng: 126.8821 }
+      coordinates: { lat: 37.476065205134795, lng: 126.88628511060199 }
+ 
     },
     logistics: {
       title: '더블유아이엘 물류센터',
-      address: '경기도 군포시 번영로 82 한국복합물류터미널(유) F동 지하1층',
+      address: '인천시 서구 봉수대로 206, 포레스코 1층',
       phone: '031-460-2200',
-      coordinates: { lat: 37.3519, lng: 126.9485 }
+      coordinates: { lat: 37.4933158418763, lng: 126.661442401082 }
     },
     vietnam: {
       title: '더블유아이엘 베트남법인',
@@ -48,7 +49,7 @@ const Company = () => {
       title: '신세계백화점 김해점',
       address: '경상남도 김해시 김해대로 2232',
       phone: '055-272-1234',
-      coordinates: { lat: 35.2282, lng: 128.8836 }
+      coordinates: { lat: 35.2293396295983, lng: 128.872242572055 }
     }
   };
 
