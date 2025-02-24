@@ -26,7 +26,7 @@ const BrandStory = () => {
           transition={{ duration: 0.8 }}
           className="text-5xl text-[63px] font-serif mb-8"
         >
-          L'AFFAIR
+          L&apos;AFFAIR
         </motion.h1>
         
         <motion.div

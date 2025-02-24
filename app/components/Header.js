@@ -96,7 +96,7 @@ const Header = () => {
           >
             <img 
               src="/Images/logo.png" 
-              alt="L'AFFAIR LOUNGE" 
+              alt="L&apos;AFFAIR LOUNGE" 
               className="w-[180px] md:w-[250px] lg:w-[338px] h-auto object-contain pl-[18px]"
             />
           </Link>

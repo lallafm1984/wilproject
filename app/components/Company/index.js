@@ -152,7 +152,6 @@ const Company = () => {
 
       kakaoMapScript.onload = () => {
         window.kakao.maps.load(() => {
-          // 모든 지도 초기화
           initializeAllMaps();
         });
       };
@@ -197,7 +196,6 @@ const Company = () => {
       });
     };
 
-    // 카카오맵 스크립트가 이미 로드되어 있는지 확인
     if (window.kakao && window.kakao.maps) {
       initializeAllMaps();
     } else {
@@ -209,7 +207,7 @@ const Company = () => {
         document.head.removeChild(kakaoMapScript);
       }
     };
-  }, [selectedTab]); // selectedTab이 변경될 때마다 지도 다시 초기화
+  }, [selectedTab, locations]);
 
   // 탭 변경 핸들러
   const handleTabChange = (tab) => {
@@ -265,12 +263,12 @@ const Company = () => {
                     &nbsp;더블유아이엘을 찾아주신 고객여러분, 진심으로 감사드립니다.<br/> 
                       <br/> &nbsp;더블유아이엘은 하루의 시작과 끝, 평범한 일상을 함께 할 수 있는 데일리 라이프웨어 브랜드를 꿈꾸며 시작했습니다. 라페어는 더블유아이엘의
                       <br className="hidden xl:block"/>
-                    언더웨어&라운지웨어 대표 브랜드입니다. 언더웨어에서 인견 팬티를 런칭하고 지난 7년 동안 누적 "800만장" 이상을 판매하며 꾸준히 사랑받고<br className="hidden xl:block"/>
-                    있으며, 매 시즌 새로운 소재와 디자인을 개발하고 있습니다. 라운지웨어는 "프린트맛집" 이란 별명을 가지고 퀄리티 높은 프린트원단을 개발하여<br className="hidden xl:block"/>
+                    언더웨어&라운지웨어 대표 브랜드입니다. 언더웨어에서 인견 팬티를 런칭하고 지난 7년 동안 누적 &quot;800만장&quot; 이상을 판매하며 꾸준히 사랑받고<br className="hidden xl:block"/>
+                    있으며, 매 시즌 새로운 소재와 디자인을 개발하고 있습니다. 라운지웨어는 &quot;프린트맛집&quot; 이란 별명을 가지고 퀄리티 높은 프린트원단을 개발하여<br className="hidden xl:block"/>
                     홈웨어부터 데일리웨어까지 다양한 스타일의 제품을 선보이고 있습니다. <br/>
                     <br/>
-                    &nbsp;라페어는 대표 슬로건 "언제, 어디서나" "아침부터 저녁까지" 함께 할 수 있는 브랜드로 한번 더 성장하려 합니다. 온라인 시장을 넘어 라페어<br className="hidden xl:block"/>
-                    상품을 직접 만져보고 쇼핑을 즐길 수 있도록  "라페어라운지" 무인매장을 시작합니다. 라페어라운지 무인매장은 첨단 기술과 고객의 편의성을 결합<br className="hidden xl:block"/>
+                    &nbsp;라페어는 대표 슬로건 &quot;언제, 어디서나&quot; &quot;아침부터 저녁까지&quot; 함께 할 수 있는 브랜드로 한번 더 성장하려 합니다. 온라인 시장을 넘어 라페어<br className="hidden xl:block"/>
+                    상품을 직접 만져보고 쇼핑을 즐길 수 있도록  &quot;라페어라운지&quot; 무인매장을 시작합니다. 라페어라운지 무인매장은 첨단 기술과 고객의 편의성을 결합<br className="hidden xl:block"/>
                     하여 언제든지 방문할 수 있고, 자유롭게 쇼핑할 수 있는 공간이 되기 위해 최선을 다할 것입니다. <br/>
                     <br/>
                     &nbsp;&nbsp;감사합니다.</motion.p>
@@ -574,7 +572,7 @@ const Company = () => {
                       </p>
                       <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
                         <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
-                          라페어 인견팬티 "800만장"돌파
+                          라페어 인견팬티 &quot;800만장&quot;돌파
                         </p>
                         <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           코스트코 판매채널 확장
@@ -594,7 +592,7 @@ const Company = () => {
                       </p>
                       <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
                         <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
-                          GS홈쇼핑 L'AFFAIR 채널 확장
+                          GS홈쇼핑 L&apos;AFFAIR 채널 확장
                         </p>
                         <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           마켓컬리 입점
