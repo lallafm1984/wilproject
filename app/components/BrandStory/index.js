@@ -11,7 +11,7 @@ const BrandStory = () => {
       {/* 히어로 섹션 */}
       <div className="relative w-full h-[936px] bg-[#979797]">
         <Image
-          src="/images/brand-hero.jpg"
+          src="/Images/brand-hero.jpg"
           alt="Brand Hero"
           fill
           className="object-cover"
@@ -61,17 +61,17 @@ const BrandStory = () => {
           {
             title: 'STORY ART',
             description: '기본웨어도 스토리있는 라페어만의 아트워크를 담아 디자인합니다.',
-            image: '/images/img1.png'
+            image: '/Images/img1.png'
           },
           {
             title: 'SKIN FLOW',
             description: '입지 않은 듯, 피부를 자연스럽게 감싸는 촉감을 위해 원료에서 가공까지 직접 연구하고 생산합니다.',
-            image: '/images/img1.png'
+            image: '/Images/img1.png'
           },
           {
             title: 'FLEX FIT',
             description: '자유로운 활동성을 위해 패턴, 봉제, 사이즈까지 철저한 테스트로 완성합니다.',
-            image: '/images/img1.png'
+            image: '/Images/img1.png'
           }
         ].map((item, index) => (
           <div 
@@ -130,7 +130,7 @@ const BrandStory = () => {
                 `}
               >
                 <Image
-                  src={`/images/img1.png`}
+                  src={`/Images/img1.png`}
                   alt={`Gallery image ${item}`}
                   fill
                   className="object-cover"
@@ -151,7 +151,7 @@ const BrandStory = () => {
                 `}
               >
                 <Image
-                  src={`/images/img1.png`}
+                  src={`/Images/img1.png`}
                   alt={`Gallery image ${item}`}
                   fill
                   className="object-cover"

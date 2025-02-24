@@ -91,7 +91,7 @@ const Header = () => {
         <div className="w-full max-w-[1920px] h-[80px] md:h-[100px] lg:h-[132px] flex items-center justify-evenly">
           {/* 로고 영역 */}
           <Link 
-            href="http://localhost:3000/pages/Main2" 
+            href="/pages/Main2" 
             className="relative flex items-center"
           >
             <img 

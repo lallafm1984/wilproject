@@ -315,7 +315,7 @@ const Company = () => {
                       className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
                     >
                       <div className="w-full md:w-[320px] xl:w-[488px] h-[200px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
-                        <img src="/images/company/icon/icon_1.webp" className="w-auto h-[120px] md:h-[150px] xl:h-auto"/>
+                        <img src="/Images/company/icon/icon_1.webp" className="w-auto h-[120px] md:h-[150px] xl:h-auto"/>
                       </div>
                       <div className="w-full md:w-[320px] xl:w-[488px] h-[120px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                         <p className="pt-[24px] md:pt-[28px] xl:pt-[32px] text-[24px] md:text-[26px] xl:text-[30px] h-[45px] md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
@@ -335,7 +335,7 @@ const Company = () => {
                       className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
                     >
                       <div className="w-full md:w-[320px] xl:w-[488px] h-[200px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
-                        <img src="/images/company/icon/icon_2.webp" className="w-auto h-[120px] md:h-[150px] xl:h-auto"/>
+                        <img src="/Images/company/icon/icon_2.webp" className="w-auto h-[120px] md:h-[150px] xl:h-auto"/>
                       </div>
                       <div className="w-full md:w-[320px] xl:w-[488px] h-[120px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                         <p className="pt-[24px] md:pt-[28px] xl:pt-[32px] text-[24px] md:text-[26px] xl:text-[30px] h-[45px] md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
@@ -355,7 +355,7 @@ const Company = () => {
                       className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
                     >
                       <div className="w-full md:w-[320px] xl:w-[488px] h-[200px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
-                        <img src="/images/company/icon/icon_1.webp" className="w-auto h-[120px] md:h-[150px] xl:h-auto"/>
+                        <img src="/Images/company/icon/icon_1.webp" className="w-auto h-[120px] md:h-[150px] xl:h-auto"/>
                       </div>
                       <div className="w-full md:w-[320px] xl:w-[488px] h-[120px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                         <p className="pt-[24px] md:pt-[28px] xl:pt-[32px] text-[24px] md:text-[26px] xl:text-[30px] h-[45px] md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
@@ -654,13 +654,13 @@ const Company = () => {
                         className="flex items-center justify-center h-[40px] md:h-[56px] xl:h-[73px] shrink-0"
                       >
                         <div className="flex items-center gap-[40px] md:gap-[70px] xl:gap-[100px] pr-[40px] md:pr-[70px] xl:pr-[100px]">
-                          <img src="/images/company/etc/m.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/29-cm.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/w.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/ssg.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/h.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/s.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/ss.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/m.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/29-cm.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/w.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/ssg.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/h.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/s.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/ss.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
                         </div>
                       </motion.div>
                       <motion.div 
@@ -675,13 +675,13 @@ const Company = () => {
                         className="flex items-center justify-center h-[40px] md:h-[56px] xl:h-[73px] shrink-0"
                       >
                         <div className="flex items-center gap-[40px] md:gap-[70px] xl:gap-[100px] pr-[40px] md:pr-[70px] xl:pr-[100px]">
-                          <img src="/images/company/etc/m.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/29-cm.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/w.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/ssg.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/h.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/s.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/ss.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/m.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/29-cm.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/w.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/ssg.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/h.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/s.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/ss.webp" className="h-[20px] md:h-[28px] xl:h-auto w-auto"/>
                         </div>
                       </motion.div>
                     </div>
@@ -700,13 +700,13 @@ const Company = () => {
                         className="flex items-center justify-center h-[50px] md:h-[70px] xl:h-[90px] shrink-0"
                       >
                         <div className="flex items-center justify-center gap-[40px] md:gap-[70px] xl:gap-[100px] pr-[40px] md:pr-[70px] xl:pr-[100px]">
-                          <img src="/images/company/etc/sk.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/l.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/ns.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/kt.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/gs.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/hs.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/hh.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/sk.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/l.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/ns.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/kt.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/gs.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/hs.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/hh.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
                         </div>
                       </motion.div>
                       <motion.div 
@@ -721,13 +721,13 @@ const Company = () => {
                         className="flex items-center justify-center h-[50px] md:h-[70px] xl:h-[90px] shrink-0"
                       >
                         <div className="flex items-center justify-center gap-[40px] md:gap-[70px] xl:gap-[100px] pr-[40px] md:pr-[70px] xl:pr-[100px]">
-                          <img src="/images/company/etc/sk.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/l.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/ns.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/kt.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/gs.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/hs.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
-                          <img src="/images/company/etc/hh.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/sk.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/l.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/ns.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/kt.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/gs.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/hs.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
+                          <img src="/Images/company/etc/hh.webp" className="h-[25px] md:h-[35px] xl:h-auto w-auto"/>
                         </div>
                       </motion.div>
                     </div>
