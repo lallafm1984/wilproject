@@ -207,7 +207,7 @@ const Company = () => {
         document.head.removeChild(kakaoMapScript);
       }
     };
-  }, [selectedTab, locations]);
+  }, [selectedTab]);
 
   // 탭 변경 핸들러
   const handleTabChange = (tab) => {
