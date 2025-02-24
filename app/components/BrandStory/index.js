@@ -3,10 +3,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { ReactLenis } from '@studio-freight/react-lenis';
 
 const BrandStory = () => {
  
+  const lenisOptions = {
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    smoothTouch: false,
+    touchMultiplier: 2,
+  };
+
   return (
+    <ReactLenis root options={lenisOptions}>
     <div className="min-h-screen bg-white">
       {/* 히어로 섹션 */}
       <div className="relative w-full h-[936px] bg-[#979797]">
@@ -162,6 +174,7 @@ const BrandStory = () => {
         </motion.div>
       </div>
     </div>
+    </ReactLenis>
   );
 };
 

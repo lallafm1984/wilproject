@@ -17,7 +17,7 @@ const Footer = () => {
         transition: 'opacity 0.3s ease-in-out',
       }}
     >
-      <div className="relative w-full mx-auto h-auto min-h-[280px] md:min-h-[300px] lg:min-h-[310px] xl:min-h-[323px]
+      <div className="relative w-full mx-auto h-auto min-h-[280px] md:min-h-[300px] lg:min-h-[310px] xl:h-[324px]
         flex justify-center
         px-5 sm:px-6 md:px-8 lg:px-[60px] xl:px-[120px] 2xl:px-[339px] 
         py-8 md:py-10 lg:py-[100px] xl:py-[118px]">
