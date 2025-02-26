@@ -1307,12 +1307,12 @@ const Company = () => {
                       </button>
                     </div>
                     <div className="relative">
-                      <button 
+                      {/* <button 
                         onClick={() => handleArrowClick('prev')} 
                         className="absolute -left-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"
                       >
                         <SlArrowLeft className="w-6 h-6 text-gray-600" />
-                      </button>
+                      </button> */}
                       <div className="relative w-full mt-[32px] h-[400px] md:h-[500px] xl:h-[516px] bg-[#f8f8f2]"> {/* 지도 컨테이너 wrapper */}
                         <div 
                           id="kakao-map-container" 
@@ -1329,12 +1329,12 @@ const Company = () => {
                           }}
                         />
                       </div>
-                      <button 
+                      {/* <button 
                         onClick={() => handleArrowClick('next')}
                         className="absolute -right-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"
                       >
                         <SlArrowRight className="w-6 h-6 text-gray-600" />
-                      </button>
+                      </button> */}
                     </div>
                     <div className="relative mt-[40px] md:mt-[50px] xl:mt-[60px] w-full md:w-[700px] xl:w-[1250px] h-auto flex flex-col md:flex-row items-start ">
                       <p className="text-[28px] md:text-[32px] xl:text-[40px] font-bold text-left text-[#2f2e2c] tracking-[-0.7px] md:tracking-[-0.8px] xl:tracking-[-1.04px]">
