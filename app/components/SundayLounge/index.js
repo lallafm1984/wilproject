@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ReactLenis } from '@studio-freight/react-lenis';
 
-const BrandStory = () => {
+const SundayLounge = () => {
  
   const lenisOptions = {
     duration: 1.2,
@@ -36,8 +36,8 @@ const BrandStory = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          src="/Images/brandstory/logo-l-affair-wh.webp"
-          className="w-[384px] h-[84px] "
+          src="/Images/sundaylounge/sl-logo-web-orange.webp"
+          className="w-[927px] h-[84px] "
         >
         </motion.img>
         
@@ -48,12 +48,13 @@ const BrandStory = () => {
           className="w-auto mx-auto mt-[100px] space-y-[24px] mb-[60px]"
         >
           <p className="text-[30px] text-[#92000a]  font-semibold">
-            진정한 아름다움은 편안함에서 시작됩니다.
+          난 지금 잠의 세계로 들어갈 준비가 되어 있어. 언제든 찾아와
           </p>
           <p className="text-[22px] text-center font-normal tracking-[-0.35px] leading-[38px] text-[#323232] ">
-            라페어는 일상의 편안함을 추구하는 라이프웨어 브랜드로 모든 분들의 고객의 아름다움과 개성을 존중하여 만듭니다.
+          조금만 예민해져도 불면이 찾아오는사소하지만 소중한 일상을 함께 하겠습니다.
+          
             <br />
-            피부에 닿는 부드러움과 하루 종일 함께하는 편안함을 통해, 자신감을 주는 옷을 제공합니다.
+            일요일의 편안함을 담은 선데이라운지입니다.
           </p>
         </motion.div>
 
@@ -63,7 +64,7 @@ const BrandStory = () => {
           transition={{ delay: 0.5 }}
           className="bg-[#333] w-[327px] h-[72px] text-[30px] font-nomal text-center tracking-[-0.78px] leading-[36px] text-[#ffffff] rounded-full hover:bg-[#92000a] transition-colors"
         >
-          라페어 바로가기
+          선데이라운지 바로가기
         </motion.button>
       </div>
 
@@ -71,18 +72,18 @@ const BrandStory = () => {
       <div className="container mx-auto px-4 pb-[200px]">
         {[
           {
-            title: 'STORY ART',
-            description: '기본웨어도 스토리있는 라페어만의 아트워크를 담아 디자인합니다.',
+            title: 'PATTERN',
+            description: '일요일의 편안함을 담기 위해 매 시즌 몸의 변화를 패턴에 반영합니다.',
             image: '/Images/img1.png'
           },
           {
-            title: 'SKIN FLOW',
-            description: '입지 않은 듯, 피부를 자연스럽게 감싸는 촉감을 위해 원료에서 가공까지 직접 연구하고 생산합니다.',
+            title: 'EASY',
+            description: '특별하지 않을 수 있지만 어디에나 있고, 없으면 찾게 되는 잠옷&라운지웨어 쉽게 스며드는 컬러와 디자인으로 함께 할게요.',
             image: '/Images/img1.png'
           },
           {
-            title: 'FLEX FIT',
-            description: '자유로운 활동성을 위해 패턴, 봉제, 사이즈까지 철저한 테스트로 완성합니다.',
+            title: 'FABRIC',
+            description: '일요일은 가장 달콤한 휴일의 대명사이자 아쉬움입니다. 선데이라운지를 입은 순간, 휴식이 될 수 있길 바랍니다.',
             image: '/Images/img1.png'
           }
         ].map((item, index) => (
@@ -95,10 +96,10 @@ const BrandStory = () => {
               border-[#97979740]`}
           >
             <div className="flex items-center">
-              <h3 className="text-[56px] font-poppins font-bold tracking-[-0.55px] leading-[72px] text-[#323232] group-hover:text-[#92000a]">
+              <h3 className="text-[56px] font-poppins font-bold leading-[72px] text-[#323232] group-hover:text-[#92000a]">
                 {item.title}
               </h3>
-              <p className="text-[22px] ml-[32px] font-normal text-[#323232] group-hover:text-[#92000a]">
+              <p className="text-[22px] ml-[32px] font-normal tracking-[-0.55px] leading-[38px] text-[#323232] group-hover:text-[#92000a]">
                 {item.description}
               </p>
             </div>
@@ -178,4 +179,4 @@ const BrandStory = () => {
   );
 };
 
-export default BrandStory;
+export default SundayLounge;

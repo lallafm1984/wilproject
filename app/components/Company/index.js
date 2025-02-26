@@ -12,10 +12,12 @@ const Company = () => {
   const historyContainerRef = useRef(null);
   const partnersTitleRef = useRef(null);
   const [maps, setMaps] = useState({
-    sinsa: null,
-    sinnonhyeon: null,
-    nonhyeon: null,
-    companyMap: null
+    kakaoMap: null,
+    googleMap: null,
+    sinsaMap: null,
+    sinnonhyeonMap: null,
+    nonhyeonMap: null,
+    currentMarker: null  // 현재 활성화된 마커를 저장
   });
 
   // 현재 선택된 탭을 관리하는 state 추가
@@ -31,7 +33,6 @@ const Company = () => {
       address: '서울특별시 금천구 벚꽃로 234, 1703호 (가산동, 에이스하이엔드타워6차)',
       phone: '02-6925-0733',
       coordinates: { lat: 37.476065205134795, lng: 126.88628511060199 }
- 
     },
     logistics: {
       title: '더블유아이엘 물류센터',
@@ -41,9 +42,9 @@ const Company = () => {
     },
     vietnam: {
       title: '더블유아이엘 베트남법인',
-      address: '서울특별시 금천구 벚꽃로 234, 1703호 (가산동, 에이스하이엔드타워6차)',
-      phone: '+84-28-3559-2293',
-      coordinates: {lat: 10.6549298280632, lng: 106.59041829623274  }
+      address: '8/34A Kenh T14, Ap 4, xa Tan Quy Tay, H.binh Chanh',
+      phone: '+84-70-4070-7161',
+      coordinates: {lat: 10.6549298280632, lng: 106.59041829623274 }
     },
     shinsegae: {
       title: '신세계백화점 김해점',
@@ -52,6 +53,9 @@ const Company = () => {
       coordinates: { lat: 35.2293396295983, lng: 128.872242572055 }
     }
   };
+
+  
+  
 
   useEffect(() => {
     const updateActiveItems = () => {
@@ -149,30 +153,18 @@ const Company = () => {
 
   useEffect(() => {
     let kakaoMapScript = null;
+    let googleMapScript = null;
 
-    const loadKakaoMap = () => {
-      kakaoMapScript = document.createElement('script');
-      kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=b17a7dbb6f34a703cfdfce78a318870a&autoload=false`;
-      kakaoMapScript.async = true;
-
-      kakaoMapScript.onload = () => {
-        window.kakao.maps.load(() => {
-          initializeAllMaps();
-        });
-      };
-
-      document.head.appendChild(kakaoMapScript);
-    };
-
-    const initializeAllMaps = () => {
-      const mapConfigs = {
+    // 카카오맵 초기화 함수 수정
+    const initializeKakaoMaps = () => {
+      // 무인매장 지도 초기화
+      const storeLocations = {
         'sinsa-map': { lat: 37.5276, lng: 127.0388 },
         'sinnonhyeon-map': { lat: 37.5044, lng: 127.0252 },
-        'nonhyeon-map': { lat: 37.5073, lng: 127.0228 },
-        'company-map': locations[selectedTab].coordinates
+        'nonhyeon-map': { lat: 37.5073, lng: 127.0228 }
       };
 
-      Object.entries(mapConfigs).forEach(([mapId, coords]) => {
+      Object.entries(storeLocations).forEach(([mapId, coords]) => {
         const container = document.getElementById(mapId);
         if (!container) return;
 
@@ -185,50 +177,171 @@ const Company = () => {
           disableDoubleClickZoom: true
         };
 
-        const newMap = new window.kakao.maps.Map(container, options);
-        newMap.setZoomable(false);
+        const map = new window.kakao.maps.Map(container, options);
+        map.setZoomable(false);
 
         const markerPosition = new window.kakao.maps.LatLng(coords.lat, coords.lng);
         const marker = new window.kakao.maps.Marker({
           position: markerPosition
         });
-        marker.setMap(newMap);
+        marker.setMap(map);
 
         setMaps(prev => ({
           ...prev,
-          [mapId]: newMap
+          [mapId.replace('-map', '')]: map
         }));
       });
-    };
 
-    if (window.kakao && window.kakao.maps) {
-      initializeAllMaps();
-    } else {
-      loadKakaoMap();
-    }
+      // 본사 지도 초기화
+      const companyContainer = document.getElementById('kakao-map-container');
+      if (companyContainer) {
+        const { coordinates } = locations.headquarters;
+        const options = {
+          center: new window.kakao.maps.LatLng(coordinates.lat, coordinates.lng),
+          level: 3,
+          draggable: false,
+          scrollwheel: false,
+          disableDoubleClick: true,
+          disableDoubleClickZoom: true
+        };
 
-    return () => {
-      if (kakaoMapScript) {
-        document.head.removeChild(kakaoMapScript);
+        const map = new window.kakao.maps.Map(companyContainer, options);
+        map.setZoomable(false);
+
+        const markerPosition = new window.kakao.maps.LatLng(coordinates.lat, coordinates.lng);
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition
+        });
+        marker.setMap(map);
+
+        setMaps(prev => ({ 
+          ...prev, 
+          kakaoMap: map,
+          currentMarker: marker
+        }));
       }
     };
-  }, [selectedTab]);
 
-  // 탭 변경 핸들러
+    // 구글맵 초기화 함수
+    const initializeGoogleMap = () => {
+      const container = document.getElementById('google-map-container');
+      if (!container) return;
+
+      const { coordinates } = locations.vietnam;
+      const map = new window.google.maps.Map(container, {
+        center: { lat: coordinates.lat, lng: coordinates.lng },
+        zoom: 15,
+        disableDefaultUI: true,
+        gestureHandling: 'none'
+      });
+
+      new window.google.maps.Marker({
+        position: { lat: coordinates.lat, lng: coordinates.lng },
+        map: map
+      });
+
+      setMaps(prev => ({ ...prev, googleMap: map }));
+    };
+
+    // 스크립트 로드 및 지도 초기화
+    const loadMaps = async () => {
+      // 카카오맵 로드
+      if (!window.kakao?.maps) {
+        kakaoMapScript = document.createElement('script');
+        kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=b17a7dbb6f34a703cfdfce78a318870a&autoload=false`;
+        kakaoMapScript.async = true;
+        document.head.appendChild(kakaoMapScript);
+
+        await new Promise(resolve => {
+          kakaoMapScript.onload = () => {
+            window.kakao.maps.load(() => {
+              initializeKakaoMaps();
+              resolve();
+            });
+          };
+        });
+      } else {
+        initializeKakaoMaps();
+      }
+
+      // 구글맵 로드
+      if (!window.google?.maps) {
+        const googleApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+        if (!googleApiKey) {
+          console.error('Google Maps API key is not defined');
+          return;
+        }
+
+        googleMapScript = document.createElement('script');
+        googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}`;
+        googleMapScript.async = true;
+        document.head.appendChild(googleMapScript);
+
+        await new Promise(resolve => {
+          googleMapScript.onload = () => {
+            initializeGoogleMap();
+            resolve();
+          };
+        });
+      } else {
+        initializeGoogleMap();
+      }
+    };
+
+    loadMaps();
+
+    return () => {
+      if (kakaoMapScript) document.head.removeChild(kakaoMapScript);
+      if (googleMapScript) document.head.removeChild(googleMapScript);
+    };
+  }, []);
+
+  // 탭 변경 핸들러 수정
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
     
-    // 탭 변경 시 해당 지도 업데이트
-    if (window.kakao && window.kakao.maps) {
-      const container = document.getElementById('company-map');
-      if (!container) return;
-
-      const { coordinates } = locations[tab];
-      const newCenter = new window.kakao.maps.LatLng(coordinates.lat, coordinates.lng);
+    // 지도 컨테이너 표시/숨김 처리
+    const kakaoContainer = document.getElementById('kakao-map-container');
+    const googleContainer = document.getElementById('google-map-container');
+    
+    if (tab === 'vietnam') {
+      if (kakaoContainer) kakaoContainer.style.display = 'none';
+      if (googleContainer) googleContainer.style.display = 'block';
       
-      if (maps.companyMap) {
-        maps.companyMap.setCenter(newCenter);
-        maps.companyMap.getLevel(3);
+      // 구글맵 리사이즈 처리
+      if (maps.googleMap) {
+        maps.googleMap.setCenter(locations.vietnam.coordinates);
+        window.google.maps.event.trigger(maps.googleMap, 'resize');
+      }
+    } else {
+      if (kakaoContainer) kakaoContainer.style.display = 'block';
+      if (googleContainer) googleContainer.style.display = 'none';
+      
+      // 카카오맵 업데이트
+      if (maps.kakaoMap) {
+        const { coordinates } = locations[tab];
+        const newCenter = new window.kakao.maps.LatLng(coordinates.lat, coordinates.lng);
+        
+        // 기존 마커가 있다면 제거
+        if (maps.currentMarker) {
+          maps.currentMarker.setMap(null);
+        }
+        
+        // 새로운 마커 생성 및 설정
+        const marker = new window.kakao.maps.Marker({
+          position: newCenter
+        });
+        marker.setMap(maps.kakaoMap);
+        
+        // 현재 마커 저장
+        setMaps(prev => ({
+          ...prev,
+          currentMarker: marker
+        }));
+        
+        // 지도 중심 이동
+        maps.kakaoMap.setCenter(newCenter);
+        maps.kakaoMap.relayout();
       }
     }
   };
@@ -418,13 +531,13 @@ const Company = () => {
                     <div className="relative w-full aspect-[1920/1254] mt-[185px] flex justify-center">
                     
                       {/* 배경 이미지 추가 */}
-                      <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[995px] h-[1067px]">
+                      {/* <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[995px] h-[1067px]">
                         <img 
                           src="/Images/company/grid_bg.webp" 
                           alt="grid background" 
                           className="w-full h-full object-contain"
                         />
-                      </div>
+                      </div> */}
                       {/* 중앙 W.I.L 로고 */}
                       <motion.div 
                         initial={{ opacity: 0, scale: 0 }}
@@ -575,7 +688,7 @@ const Company = () => {
                 </div>
                 {/* 조직도 컨테이너 끝 */}
                 {/* 히스토리 */}
-                <div className="relative w-full  h-fit  flex items-start justify-center bg-white overflow-visible">
+                <div className="relative w-full  h-fit  flex items-start justify-evenly  bg-white overflow-visible">
                   <div className="sticky right-[64%] top-[200px] md:top-[250px] xl:top-[300px] h-fit z-10 sticky-title px-5 md:px-8 xl:px-0">
                     <motion.p 
                       initial={{ opacity: 0, y: 50 }}
@@ -596,7 +709,7 @@ const Company = () => {
                       가치를 만들어 온 여정
                     </motion.p>
                   </div>
-                  <div ref={historyContainerRef} className="relative w-fit mt-[50px] px-5 md:px-8 xl:px-0">
+                  <div ref={historyContainerRef} className="relative w-fit mt-[50px]   px-5 md:px-8 xl:px-0">
                     <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
                       <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2024
@@ -663,7 +776,7 @@ const Company = () => {
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto ">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
                       <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2019
                       </p>
@@ -674,6 +787,284 @@ const Company = () => {
                         </p>
                         <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         SK스토아 L&apos;AFFAIR 런칭
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2018
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        쇼핑엔티 라페어 런칭/ 신세계TV쇼핑 신세계백화점 PB브랜드 ELLACONIC 런칭
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        현대백화점 판교점 / 신세계백화점 하남 스타필드점 / 현대시티아울렛 가든파이브 /
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        인천공항 제 2청사 트레블메이트 입점 / 라페어 청담 SSG 입점
+                        </p>
+                        
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2017
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        선데이라운지 29CM, MUSINSA(무신사) / ETC.SEOUL 가로수길점 입점
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2016
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        신세계 백화점 대구, 김해, 센텀시티, 강남, 인천점 / 갤러리아 타임월드점(대전) 입점
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        스타필드 하남 WONDER A MARKET / 메세나 폴리스 REST AND GOODS / 10x10 입점
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2015
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        현대 백화점 판교점 라운징샵 입점
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        L&apos;AFFAIR 신세계 백화점 경기점 런칭 / L&apos;AFFAIR 라운지웨어 라인 전개
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        선데이라운지 런칭
+                        </p>
+                        
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2014
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        중국 스촨 매장 오픈
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2013
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        대만 타이중 L&apos;AFFAIR 매장 오픈
+
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        자사몰 L&apos;AFFAIR 리뉴얼 오픈
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2011
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        프랑스 란제리 라이선스 브랜드 ROSY 롯데/현대홈쇼핑 런칭
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2010
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        사명 주식회사 더싸인 (THE SIGN) 으로 개명
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        CACHAREL 300억 돌파
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        CACHAREL 갤러리아 백화점 압구정점 / 신세계 백화점 인천점 / 런칭
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        프랑스 란제리 브랜드 ROSY 라이선스 계약 체결
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        CLARA YOON 현대홈쇼핑 런칭
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        평양 봉화 제 2공장 생산라인 설비투자
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        프랑스 란제리 브랜드 CACHAREL 라이선스 계약체결
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2009
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        CLARA YOON 라이선스 계약체결
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        CJ O쇼핑 PB브랜드 THE GUY 생산, 납품
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        lollipops 신세계 백화점 본점 / 강남점 입점
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        프랑스 언더웨어 브랜드 lollipops 라이선스, 직수입 계약체결
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        (주)형지어패럴 크로커다일 레이디 언더웨어 디자인, 생산, 납품
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        CACHAREL 100억 돌파(신세계백화점 강남점 입점)
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2008
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        현대홈쇼핑 PB브랜드 H.only U 생산, 납품
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        ㈜트라이브랜즈 & STYLE 디자인, 생산, 납품
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2007
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        CJ홈쇼핑 PB브랜드 피델리아 생산, 납품
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        CACHAREL 현대홈쇼핑 / INVU CJ홈쇼핑 런칭
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        자체 쇼핑몰 www.lebody.co.kr 구축
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        프랑스 명품 브랜드 CACHAREL(까샤렐) 라이센스 계약 체결
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        NEAT SOUL 선우용녀 연예인 실버타겟 니트브랜드 CJ홈쇼핑 방송런칭
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        엘리프리 블랙라벨 판매 100억 돌파
+                        </p>
+                        
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2006
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        평양 봉화 제 2공장 생산라인 구축
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        아씨우리옷 아동한복 우리홈쇼핑, CJ홈쇼핑 방송런칭
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        INVU underwear 라이센스 계약, 기획, 온라인 런칭
+                        </p>
+                        
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2005
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        현대홈쇼핑 독점 황신혜 브랜드
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        엘리프리 블랙라벨(ELYPRY BLACK LABEL) 런칭
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        UCLA 언더웨어 현대홈쇼핑 방송 런칭
+                        </p>
+                        
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2004
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        글로벌 브랜드 제휴를 통한 홈쇼핑 상품개발 - 이랜드, 디즈니, UCLA
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2002
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        GS홈쇼핑,우리홈쇼핑,농수산홈쇼핑,현대홈쇼핑 홈쇼핑 사업 전개
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        2001
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        ㈜THE SIGN ENTERPRISE 법인 설립
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="history-item relative w-auto h-auto">
+                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                        1998
+                      </p>
+                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        장은 카드, 외환카드, 삼성카드 등 카드사 통신 판매
+
+                        </p>
+                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        THE SIGN 설립
                         </p>
                       </div>
                     </div>
@@ -691,7 +1082,7 @@ const Company = () => {
                       viewport={{ once: true }}
                       className="text-[24px] md:text-[26px] xl:text-[30px] font-poppins font-semibold text-center text-[#1b1b1b]"
                     >
-                      Partners
+                      cooperative company
                     </motion.p>
                     <motion.p 
                       initial={{ opacity: 0, y: 50 }}
@@ -830,7 +1221,8 @@ const Company = () => {
                         <div className="relative w-auto h-auto flex-col items-start justify-start px-[20px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
                           <p className="text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px] font-semibold text-left text-[#ffffff]">신사역점</p>
                           <p className="mt-[12px] md:mt-[16px] lg:mt-[19px] xl:mt-[22px] text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-normal text-left text-[#ffffff] tracking-[-0.4px] leading-[24px] md:leading-[28px] lg:leading-[32px] xl:leading-[36px]">
-                            서울 강남구 압구정로 165<br/>압구정역 라페어라운지
+                          서울 강남구 도산대로 102
+                          <br/>신분당선 신사역
                           </p>
                         </div>
                       </div>
@@ -844,7 +1236,8 @@ const Company = () => {
                         <div className="relative w-auto h-auto flex-col items-start justify-start px-[20px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
                           <p className="text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px] font-semibold text-left text-[#ffffff]">신논현역점</p>
                           <p className="mt-[12px] md:mt-[16px] lg:mt-[19px] xl:mt-[22px] text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-normal text-left text-[#ffffff] tracking-[-0.4px] leading-[24px] md:leading-[28px] lg:leading-[32px] xl:leading-[36px]">
-                            서울 강남구 압구정로 165<br/>압구정역 라페어라운지
+                          서울 강남구 봉은사로 102
+                          <br/>신분당선 신논현역
                           </p>
                         </div>
                       </div>
@@ -856,7 +1249,8 @@ const Company = () => {
                         <div className="relative w-auto h-auto flex-col items-start justify-start px-[20px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
                           <p className="text-[24px] md:text-[26px] lg:text-[28px] xl:text-[30px] font-semibold text-left text-[#ffffff]">논현역점</p>
                           <p className="mt-[12px] md:mt-[16px] lg:mt-[19px] xl:mt-[22px] text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] font-normal text-left text-[#ffffff] tracking-[-0.4px] leading-[24px] md:leading-[28px] lg:leading-[32px] xl:leading-[36px]">
-                            서울 강남구 압구정로 165<br/>압구정역 라페어라운지
+                          서울 강남구 학동로 102
+                          <br/>신분당선 논현역
                           </p>
                         </div>
                       </div>
@@ -919,7 +1313,22 @@ const Company = () => {
                       >
                         <SlArrowLeft className="w-6 h-6 text-gray-600" />
                       </button>
-                      <div id="company-map" className="relative mt-[20px] md:mt-[24px] xl:mt-[32px] w-full md:w-[700px] xl:w-[1250px] h-[300px] md:h-[400px] xl:h-[516px]"></div>
+                      <div className="relative w-full mt-[32px] h-[400px] md:h-[500px] xl:h-[516px] bg-[#f8f8f2]"> {/* 지도 컨테이너 wrapper */}
+                        <div 
+                          id="kakao-map-container" 
+                          className="absolute top-0 left-0 w-full h-full"
+                          style={{ 
+                            display: selectedTab === 'vietnam' ? 'none' : 'block'
+                          }}
+                        />
+                        <div 
+                          id="google-map-container" 
+                          className="absolute top-0 left-0 w-full h-full"
+                          style={{ 
+                            display: selectedTab === 'vietnam' ? 'block' : 'none'
+                          }}
+                        />
+                      </div>
                       <button 
                         onClick={() => handleArrowClick('next')}
                         className="absolute -right-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"

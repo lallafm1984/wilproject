@@ -17,7 +17,7 @@ const menuItems = [
     title: '입점브랜드',
     subMenu: [
       { name: '라페어', path: '/pages/BrandStory' },
-      { name: '선데이라운지', path: '' },
+      { name: '선데이라운지', path: '/pages/SundayLounge' },
     ]
   },
   {
@@ -46,6 +46,7 @@ const menuItems = [
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeMobileMenu, setActiveMobileMenu] = useState(null)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -83,8 +84,12 @@ const Header = () => {
     }
   };
 
+  const toggleMobileSubmenu = (idx) => {
+    setActiveMobileMenu(activeMobileMenu === idx ? null : idx);
+  };
+
   return (
-    <header className="fixed w-full top-0 z-50 bg-[#91000A]"
+    <header className="fixed w-full max-w-full overflow-hidden top-0 z-50 bg-[#91000A]"
       onMouseLeave={() => setActiveMenu(null)}
     >
       <div className="w-full flex justify-center">
@@ -160,37 +165,65 @@ const Header = () => {
             </div>
           </div>
 
-          {/* 모바일 메뉴 */}
-          <div className={`lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
-            <div className={`fixed right-0 top-0 h-full w-[280px] bg-white transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-              <div className="p-4 flex justify-between items-center border-b">
-                <span className="text-lg font-medium">메뉴</span>
-                <button onClick={() => setIsMobileMenuOpen(false)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+          {/* 모바일 메뉴 수정 */}
+ 
+            <div className={`fixed top-0 left-0 w-full h-full bg-[#91000A] transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+            <div className="absolute right-[calc(29/360*100vw)] top-[30px] ">
+                <button onClick={() => setIsMobileMenuOpen(false)} className="text-white ">
+                  <img src="/Images/m_menu\icon.webp" alt="닫기" className="w-[38px] h-[38px]" />
                 </button>
               </div>
-              <nav className="p-4">
+
+              <nav className="absolute left-[calc(29/360*100vw)] w-full top-[93px] flex flex-col align-top gap-[18px]">
+              
+
                 {menuItems.map((item, idx) => (
-                  <div key={idx} className="mb-4">
-                    <button className="text-lg font-medium mb-2">{item.title}</button>
-                    <ul className="ml-4">
-                      {item.subMenu.map((subItem, subIdx) => (
-                        <li key={subIdx} className="mb-2">
-                          <Link href={subItem.path} onClick={(e) => handleSmoothScroll(e, subItem.path)} className="text-gray-600 hover:text-[#92000A]">
-                            {subItem.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                  <div key={idx} className="mb-[0px]">
+                    <button 
+                      className="w-fit mb-[0px] text-white text-[24px] tracking-[-2.4px] text-left flex justify-start items-center  transition-colors"
+                      onClick={() => toggleMobileSubmenu(idx)}
+                      onMouseEnter={() => setActiveMobileMenu(idx)}
+                    >
+                      <span>{item.title}</span>
+                      <ChevronDownIcon 
+                        className={`w-5 h-5 ml-[12px] transition-transform ${activeMobileMenu === idx ? 'rotate-180' : ''}`} 
+                      />
+                    </button>
+                    <div className={`overflow-hidden transition-all duration-300 ${activeMobileMenu === idx ? 'max-h-96' : 'max-h-0'}`}>
+                      <ul className="py-2">
+                        {item.subMenu.map((subItem, subIdx) => (
+                          <li key={subIdx} className="">
+                            <Link 
+                              href={subItem.path} 
+                              onClick={(e) => {
+                                handleSmoothScroll(e, subItem.path);
+                                setIsMobileMenuOpen(false);
+                              }} 
+                              className="block w-fit py-[3px] text-white/80"
+                            >
+                              {subItem.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 ))}
+                <div className="border-t-[1px] w-[calc(100vw-58/360*100vw)] mt-[60px] border-[#ffffff]">
+                <div className="flex justify-between mt-[15px]">
+                  <img src="/Images/m_menu/icon2.webp" alt="로그인" className="w-[39px] h-[39px]" />
+                  <div className=" bg-[#2f2e2b] w-[140px] h-[38px] rounded-full flex items-center justify-center">
+                  <p className="text-white text-[12px]   tracking-[-0.62px]">지금 상담신청 하세요!</p>
+                  </div>
+                </div>
+
+
+                </div>
               </nav>
             </div>
           </div>
         </div>
-      </div>
+ 
     </header>
   )
 }
