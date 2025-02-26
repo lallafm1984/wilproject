@@ -349,7 +349,7 @@ export default function Main() {
           />
         </div>
 
-        <div className="absolute w-full h-full flex flex-col items-center justify-center px-4  md:gap-8">
+        <div className="absolute w-full h-full flex flex-col sm:flex-row items-center justify-center px-4  md:gap-8">
           <div className="text-center">
             <p 
               className="font-semibold text-white ml-[12px] md:ml-[0px]"
