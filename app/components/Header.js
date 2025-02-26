@@ -89,11 +89,11 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full max-w-full overflow-hidden top-0 z-50 bg-[#91000A]"
+    <header className="fixed w-full max-w-full  top-0 z-50 bg-[#91000A]"
       onMouseLeave={() => setActiveMenu(null)}
     >
       <div className="w-full flex justify-center">
-        <div className="w-full max-w-[1920px] h-[80px] md:h-[100px] lg:h-[132px] flex items-center justify-evenly">
+        <div className="w-full max-w-[1920px] h-[54px] md:h-[100px] lg:h-[132px] flex items-center justify-between  lg:justify-evenly ">
           {/* 로고 영역 */}
           <Link 
             href="/pages/Main2" 
@@ -102,13 +102,13 @@ const Header = () => {
             <img 
               src="/Images/logo.png" 
               alt="L&apos;AFFAIR LOUNGE" 
-              className="w-[180px] md:w-[250px] lg:w-[338px] h-auto object-contain pl-[18px]"
+              className="w-[180px] md:w-[250px] lg:w-[338px] h-auto object-contain ml-[30px]"
             />
           </Link>
 
           {/* 모바일 메뉴 버튼 */}
           <button 
-            className="lg:hidden p-2"
+            className="lg:hidden mr-[26px]"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -130,7 +130,7 @@ const Header = () => {
                       <span className="h-[21px] tracking-[-0.47px]">{item.title}</span>
                     </button>
                     
-                    <div className={`absolute left-1/2 -translate-x-1/2 mt-7 bg-white shadow-lg rounded-2xl overflow-hidden ${idx === 3 ? 'w-[148px]' : 'w-[116px]'} pt-[24px] pb-[24px]
+                    <div className={`absolute left-1/2 -translate-x-1/2 mt-7 bg-white shadow-lg rounded-2xl overflow-hidden z-50 ${idx === 3 ? 'w-[148px]' : 'w-[116px]'} pt-[24px] pb-[24px]
                       ${activeMenu === idx ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                       onMouseLeave={() => setActiveMenu(null)}
                     >

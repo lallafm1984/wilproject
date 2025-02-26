@@ -258,7 +258,7 @@ export default function Main() {
     } else if (window.innerWidth >= 768) { // md breakpoint
       return 100;
     }
-    return 80; // default
+    return 54; // default
   };
 
   useEffect(() => {
@@ -324,11 +324,11 @@ export default function Main() {
       {/* <div className="absolute -inset-1 bg-slate-50 rounded-md blur-md  z-30"></div> */}
       <div 
         ref={heroSectionRef}
-        className="relative w-full h-[calc(100vh-80px)] md:h-[calc(100vh-100px)] xl:h-[calc(100vh-132px)] bg-[#2F2E2B] overflow-hidden inline-flex mt-[80px] md:mt-[100px] xl:mt-[132px] backdrop-blur-[20px] z-20">
+        className="relative w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] xl:h-[calc(100vh-132px)] bg-[#2F2E2B] overflow-hidden inline-flex mt-[54px] md:mt-[100px] xl:mt-[132px] backdrop-blur-[20px] z-20">
         <div className="absolute w-full h-[2px] bg-gray-500 blur-[5px]"></div>
         <div className="absolute w-full inset-y-full h-[20px] bg-white blur-[20px]"></div>
         <div
-          className="relative w-full bt-[80px] md:bt-[100px] xl:bt-[132px]"
+          className="relative w-full bt-[54px] md:bt-[100px] xl:bt-[132px]"
 
           style={{
             transform: `scale(${imageScale})`,
@@ -349,30 +349,30 @@ export default function Main() {
           />
         </div>
 
-        <div className="absolute w-full h-full flex flex-col2 items-center justify-center px-4  gap-8">
+        <div className="absolute w-full h-full flex flex-col items-center justify-center px-4  md:gap-8">
           <div className="text-center">
             <p 
-              className="font-semibold text-white"
+              className="font-semibold text-white ml-[12px] md:ml-[0px]"
 
               style={{
-                fontSize: getFontSize(),
+                fontSize: windowWidth < 768 ? '42px' : getFontSize(),
                 transform: `translateX(${leftTransform}px)`,
                 transition: 'transform 800ms cubic-bezier(0.23, 1, 0.32, 1)'
               }}
             >
-              언제<br className="block sm:hidden" /> 어디서나
+              언제 어디서나
             </p>
           </div>
           <div className="text-center">
             <p 
-              className="font-semibold text-white"
+              className="font-semibold text-white mr-[12px] md:mr-[0px]"
               style={{
-                fontSize: getFontSize(),
+                fontSize: windowWidth < 768 ? '42px' : getFontSize(),
                 transform: `translateX(${rightTransform}px)`,
                 transition: 'transform 800ms cubic-bezier(0.23, 1, 0.32, 1)'
               }}
             >
-              골라입는<br className="block sm:hidden" /> 재미
+              골라입는 재미
             </p>
           </div>
 

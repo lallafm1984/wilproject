@@ -19,7 +19,7 @@ const SundayLounge = () => {
 
   return (
     <ReactLenis root options={lenisOptions}>
-    <div className="min-h-screen bg-white  mt-[80px] md:mt-[100px] xl:mt-[132px]">
+    <div className="min-h-screen bg-white  mt-[54px] md:mt-[100px] xl:mt-[132px]">
       {/* 히어로 섹션 */}
       <div className="relative w-full h-[936px] bg-[#979797]">
         <Image

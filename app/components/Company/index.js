@@ -365,7 +365,7 @@ const Company = () => {
   return (
     <ReactLenis root options={lenisOptions}>
       <div data-scroll-container ref={containerRef}>
-        <div className="mx-auto z-1 mt-[80px] md:mt-[100px] xl:mt-[132px] bg-white min-h-screen">
+        <div className="mx-auto z-1 mt-[54px] md:mt-[100px] xl:mt-[132px] bg-white min-h-screen">
           <div className="w-full mx-auto">
             <main className="relative w-full">
               <div className="relative h-fit flex flex-col items-center justify-start">
