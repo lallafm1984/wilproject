@@ -314,6 +314,44 @@ export default function Main() {
     return 'clamp(2.25rem, 5vw, 12rem)';
   };
 
+  // 해상도별 슬라이드 변형 설정
+  const getCreativeEffectSettings = (windowWidth) => {
+    if (windowWidth < 640) { // 모바일
+      return {
+        prev: {
+          translate: ['-47%', '3.5%', 0],
+          rotate: [0, 0, -3.2],
+        },
+        next: {
+          translate: ['47%', '3.5%', 0],
+          rotate: [0, 0, 3.2],
+        }
+      };
+    } else if (windowWidth < 1024) { // 태블릿
+      return {
+        prev: {
+          translate: ['-40%', '7%', 0],
+          rotate: [0, 0, -4],
+        },
+        next: {
+          translate: ['40%', '7%', 0],
+          rotate: [0, 0, 4],
+        }
+      };
+    } else { // 데스크톱
+      return {
+        prev: {
+          translate: ['-50%', '7%', 0],
+          rotate: [0, 0, -5],
+        },
+        next: {
+          translate: ['50%', '7%', 0],
+          rotate: [0, 5, 5],
+        }
+      };
+    }
+  };
+
   // 초기 로딩 중에는 텍스트를 숨김
   if (windowWidth === undefined) {
     return null;
@@ -384,7 +422,7 @@ export default function Main() {
         root 
         options={lenisOptions}
       >
-      <div className="w-full bg-white pt-[200px] pb-[200px]">
+      <div className="w-full bg-white pt-[90px] pb-[90px] sm:pt-[200px] sm:pb-[200px]">
       <motion.div 
         ref={secondSectionRef}
         style={{
@@ -400,30 +438,36 @@ export default function Main() {
             viewport={{ once: true }}
             className="w-full px-4"
           >
-            <div className="w-full flex flex-col md:flex-row justify-center items-center xl:items-start">
+            <div className="w-full flex flex-col sm:flex-row justify-center items-center xl:items-start">
               {/* 텍스트 영역 */}
-              <div className="w-[450px] xl:w-[610px] xl:pt-[99px] px-4 xl:px-0 text-center xl:text-left">
-                <motion.div variants={itemVariants} className="xl:h-[141px] flex flex-col justify-center">
-                  <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.32] xl:w-[606px]   tracking-[-2.8px]">
-                    언더웨어부터 액티브웨어까지
+              <div className="w-[360px] sm:w-[450px] xl:w-[610px] xl:pt-[99px] px-7 xl:px-0 text-center xl:text-left">
+                <motion.div variants={itemVariants} className="xl:h-[141px] flex flex-col  items-start xl:items-start justify-center">
+                  <p className="w-full text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.32] xl:w-[606px] tracking-[-2.8px] text-left ">
+                    언더웨어부터 액티브
+                    <br className=" sm:hidden" />웨어까지
+                     <span className="sm:hidden text-[#92000a]">&nbsp;온</span>
+                     <span className="sm:hidden text-[#92000a] text-2xl font-medium">ㆍ</span>
+                     <span className="sm:hidden text-[#92000a] font-medium">오프라인</span> 
+                     <br className=" sm:hidden" />
+                     <span className="sm:hidden text-[#92000a] font-medium">동시에 만나요</span> 
                   </p>
-                  <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#92000a] mt-4 xl:mt-10 leading-[1.32] tracking-[-2.8px]">
+                  <p className="hidden sm:block text-2xl sm:text-4xl xl:text-[56px] font-medium text-[#92000a] mt-4 xl:mt-10 leading-[1.32] tracking-[-2.8px]">
                     <span className="text-[#92000a] tracking-[-10.76px]">온</span>
-                    <span className="text-[#92000a] tracking-[-16.74px] text-2xl md:text-4xl xl:text-[50px] font-medium">ㆍ</span>
-                    <span className="text-[#92000a] text-2xl md:text-4xl xl:text-[56px] font-medium">오프라인</span> 동시에 만나요
+                    <span className="text-[#92000a] tracking-[-16.74px] text-2xl sm:text-4xl xl:text-[50px] font-medium">ㆍ</span>
+                    <span className="text-[#92000a] text-2xl sm:text-4xl xl:text-[56px] font-medium">오프라인</span> 동시에 만나요
                   </p>
                   
                 </motion.div>
                 <motion.div 
                   variants={itemVariants}
-                  className="mt-8 xl:mt-[60px]"
+                  className="mt-[22px] xl:mt-[60px]"
                 >
-                  <p className="text-base md:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] px-4 xl:px-0 tracking-[-0.35px]">
-                    더블유아이엘은 언더웨어부터 홈웨어,리조트웨어
-                    <br/>
-                    액티브웨어까지 다양한 라이프웨어를 온라인 쇼핑몰과
-                    <br/>
-                    오프라인 매장에서 구매할 수 있는 라이프웨어 브랜드샵입니다.
+                  <p className="text-base sm:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] xl:px-0 tracking-[-0.78px] sm:tracking-[-0.35px] text-left ">
+                    더블유아이엘은 언더웨어부터 홈웨어,<br className="sm:hidden"/>리조트웨어
+                    <br className="hidden sm:block"/>
+                    {windowWidth < 640 ? ` ` : ``}액티브웨어까지 다양한 라이프웨어를 <br className="sm:hidden"/>온라인 쇼핑몰과
+                    <br className="hidden sm:block"/>
+                    {windowWidth < 640 ? ` ` : ``}오프라인 매장에서 구매할 수 있는 <br className="sm:hidden"/>라이프웨어 브랜드샵입니다.
                   </p>
                 </motion.div>
               </div>
@@ -431,7 +475,7 @@ export default function Main() {
               {/* 이미지 영역 */}
               <motion.div 
                 variants={itemVariants}
-                className="xl:w-[540px] md:w-[400px] w-[300px] xl:h-[540px] md:h-[400px] h-[300px]  bg-[#B4B4B4] mt-8 xl:mt-0 md:ml-[20px] xl:ml-[96px]"
+                className="xl:w-[540px] sm:w-[400px] w-[300px] xl:h-[540px] sm:h-[400px] h-[300px]  bg-[#B4B4B4] mt-8 xl:mt-0 sm:ml-[20px] xl:ml-[96px]"
               >
                 {/* 이미지 영역 */}
               </motion.div>
@@ -444,39 +488,39 @@ export default function Main() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="w-full px-4 md:px-8 xl:px-0"
+            className="w-full px-4 sm:px-8 xl:px-0"
           >
-            <div className="w-full flex flex-col md:flex-row justify-center items-center xl:items-start gap-8 xl:gap-0 mt-[100px] xl:pl-[100px]">
+            <div className="w-full flex flex-col sm:flex-row justify-center items-center xl:items-start gap-8 xl:gap-0 mt-[70px] sm:mt-[100px] xl:pl-[100px]">
               {/* 이미지 영역 */}
               <motion.div 
                 variants={itemVariants}
-                className="xl:w-[402px] md:w-[322px] w-[281px] xl:h-[520px] md:h-[416px] h-[364px] bg-[#B4B4B4] order-2 md:order-1"
+                className="xl:w-[402px] sm:w-[322px] w-[281px] xl:h-[520px] sm:h-[416px] h-[364px] bg-[#B4B4B4] order-2 sm:order-1"
               >
                 {/* 이미지 영역 */}
               </motion.div>
               
               {/* 텍스트 영역 */}
-              <div className="w-[450px] xl:w-[650px] xl:pt-[296px] xl:pl-[68px] order-1 xl:order-2 text-center xl:text-left pt-[30px] md:pt-[0px]">
+              <div className="w-[360px] xl:w-[650px] xl:pt-[296px] xl:pl-[68px] order-1 xl:order-2 text-left xl:text-left  px-7 sm:pt-[0px]">
                 <motion.div variants={itemVariants}>
-                  <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.3] tracking-[-2.8px]">
+                  <p className="w-full text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.3] tracking-[-2.8px]">
                     똑똑한 <span>AI</span> 키오스크
                   </p>
-                  <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#91000a] mt-4 xl:mt-8 leading-[1.3] tracking-[-2.8px] xl:w-[540px]">
+                  <p className="text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#91000a] xl:mt-8 leading-[1.3] tracking-[-2.8px] xl:w-[540px]">
                     자유로운 무인 쇼핑 시스템
                   </p>
                 </motion.div>
                 <motion.div 
                   variants={itemVariants}
-                  className="mt-8 xl:mt-[77.5px]"
+                  className="mt-[21px] xl:mt-[77.5px]"
                 >
-                  <p className="text-base md:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] px-4 xl:px-0 tracking-[-0.35px]">
-                    많은 제품들 중에 내 취향 아이템 고르기 힘들어요.
-                    <br className="hidden md:block" />
-                    혼자 다양하게 살펴보면서 고민해보고 싶은데 눈치도 보이죠.
-                    <br className="hidden md:block" />
-                    MBTI 유형별 언더웨어 추천까지 해주는 똑똑한 AI 키오스크와 함께
-                    <br className="hidden md:block" />
-                    자유롭게 무인 쇼핑 시스템으로 나만의 취향을 고르세요.
+                  <p className="text-base sm:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] xl:px-0 tracking-[-0.35px]">
+                    많은 제품들 중에 내 취향 아이템 고르기<br className="sm:hidden"/>힘들어요.
+                    <br className="hidden sm:block" />
+                    {windowWidth < 640 ? ` ` : ``}혼자 다양하게 살펴보면서 고민해보고 싶은데 눈치도 보이죠.
+                    <br/>
+                    MBTI 유형별 언더웨어 추천까지 해주는<br className="block sm:hidden" />똑똑한 AI 키오스크와 함께
+                    <br className="hidden sm:block" />
+                    자유롭게<br className="block sm:hidden" /> 무인 쇼핑 시스템으로 나만의 취향을 고르세요.
                   </p>
                 </motion.div>
               </div>
@@ -486,25 +530,23 @@ export default function Main() {
       </motion.div>
       </div>
       <div className="w-full bg-[#F8F8F2]">
-        <div className="w-full max-w-[1920px] md:h-[1402px] h-[1250px] relative mx-auto px-4 xl:px-0 ">
-          <div className="w-full h-[800px] text-center absolute left-1/2 -translate-x-1/2  top-[120px] md:top-[199.5px]">
-            <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] mb-8 tracking-[-2.8px]">
-              일상을 더욱 특별하게 
+        <div className="w-full max-w-[1920px] md:h-[1402px] h-[830px] relative mx-auto px-4 xl:px-0 ">
+          <div className="w-full h-[800px] text-center absolute left-1/2 -translate-x-1/2  top-[90px] sm:top-[199.5px]">
+            <p className="text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] mb-8 tracking-[-2.8px]">
+              일상을 더욱<br className="sm:hidden"/> 특별하게<span className="sm:hidden">만들어 줄<br/>다양한 상품을 만나보세요</span>
             </p>
-            <p className="text-2xl md:text-4xl xl:text-[56px] font-medium text-[#1b1b1b]  tracking-[-2.8px]">
+            <p className="hidden sm:block text-2xl sm:text-4xl xl:text-[56px] font-medium text-[#1b1b1b]  tracking-[-2.8px]">
             만들어줄 다양한 상품을 만나보세요
             </p>
             
             {/* 이미지 슬라이드 영역 */}
-            <div className="relative w-full h-[900px] mx-auto overflow-hidden select-none ">
+            <div className="relative w-full h-[770px] sm:h-[900px] mx-auto overflow-visible select-none ">
               <div className="absolute w-full h-full flex items-center justify-center">
                 <div className="absolute w-full h-[800px] flex items-center justify-center">
                   {/* 이전 버튼 */}
                   <button 
-                    className="absolute left-[calc(50%-180px)] sm:left-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center  cursor-pointer"
-                    style={{
-                      top: '30%',
-                    }}
+                    className="absolute top-[12%] sm:top-[30%] left-[calc(50%-110px)] sm:left-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center  cursor-pointer"
+                    
                     onClick={() => {
                       if (swiperRef.current) {
                         swiperRef.current.slidePrev();
@@ -544,17 +586,7 @@ export default function Main() {
                       progressMultiplier:2,
                       perspective: false,
                       shadowPerProgress: false,
- 
-                      prev: {
-                        // 이전 슬라이드의 변형
-                        translate: ['-50%', '7%', 0],
-                        rotate: [0, 0, -5],
-                      },
-                      next: {
-                        // 다음 슬라이드의 변형
-                        translate: ['50%', '7%', 0],
-                        rotate: [0, 5, 5],
-                      },
+                      ...getCreativeEffectSettings(windowWidth)
                     }}
                     style={{
                       width: '100%',
@@ -564,10 +596,10 @@ export default function Main() {
                     breakpoints={{
                       // 480px 이상일 때
                       300: {
-                        slidesPerView: 1,
+                        slidesPerView: 2,
                       },
                       // 768px 이상일 때
-                      768: {
+                      640: {
                         slidesPerView: 2,
                       },
                       // 1024px 이상일 때
@@ -585,7 +617,7 @@ export default function Main() {
                         key={slide.id}
                         style={{
                           width: 'auto',
-                          height: '750px',
+                          height: windowWidth < 640 ? '500px' : '750px',
                           transition: 'all 800ms ease',
                           position: 'relative'
                         }}
@@ -608,17 +640,17 @@ export default function Main() {
                             src={slide.image}
                             alt={slide.title}
                             className="
-                              w-[177px] sm:w-[200px] md:w-[250px] xl:w-[295px]
-                              h-[228px] sm:h-[260px] md:h-[320px] xl:h-[380px]
+                              w-[128px] sm:w-[200px] md:w-[250px] xl:w-[295px]
+                              h-[188px] sm:h-[260px] md:h-[320px] xl:h-[380px]
                               object-cover
-                              rounded-[30px] sm:rounded-[40px] md:rounded-[40px] xl:rounded-[40px]
+                              rounded-[20px] sm:rounded-[40px] md:rounded-[40px] xl:rounded-[40px]
                               backface-hidden
                               block
                               transition-all duration-300
                             "
                           />
                           <p 
-                            className="text-center text-lg transition-opacity tracking-[-0.29px] duration-300"
+                            className="text-center text-[12px] sm:text-[16px] xl:text-[20px] transition-opacity tracking-[-0.29px] duration-300"
                             style={{
                               opacity: activeIndex === index ? 1 : 0,
                               transition: 'opacity 0.3s ease',
@@ -636,10 +668,8 @@ export default function Main() {
 
                   {/* 다음 버튼 */}
                   <button 
-                    className="absolute  right-[calc(50%-180px)] sm:right-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center cursor-pointer"
-                    style={{
-                      top: '30%',
-                    }}
+                    className="absolute  top-[12%] sm:top-[30%] right-[calc(50%-110px)] sm:right-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center cursor-pointer"
+                     
                     onClick={() => {
                       if (swiperRef.current) {
                         swiperRef.current.slideNext();
@@ -661,18 +691,20 @@ export default function Main() {
               </div>
               
               {/* 텍스트 섹션과 버튼 위치 조정 */}
-              <div className="absolute w-full text-center" style={{ top: 'calc(50% + 190px)' }}>
-                <p className="text-lg xl:text-[22px] font-regular text-[#323232] tracking-[-0.35px]">
+              <div className="absolute w-full text-center top-[calc(35%)] sm:top-[calc(50%+190px)]">
+                <p className="text-[16px] xl:text-[22px] font-regular text-[#323232] tracking-[-0.78px] sm:tracking-[-0.35px]">
                   더블유아이엘은 일상의 모든 순간에 함께합니다.
                 </p>
-                <p className="text-lg xl:text-[22px] font-regular text-[#323232] mt-2 tracking-[-0.35px]">
-                  눈을 뜨는 순간부터 잠자리에 드는 시간까지, 하루를 더 특별하게 만들어줄 편안함과 스타일을
+                <p className="text-[16px] xl:text-[22px] font-regular text-[#323232] sm:mt-2 tracking-[-0.78px] sm:tracking-[-0.35px]">
+                  눈을 뜨는 순간부터 잠자리에 드는 시간까지,<br className="sm:hidden"/> 
+                  하루를 더 특별하게 만들어줄 편안함과 스타일을
+                  <span className="sm:hidden"> 동시에 <br/>갖춘 상품들로 일상을 채워드립니다.<br/> 바쁜 일상 속에서도 특별함을 느껴보세요.</span>
                 </p>
-                <p className="text-lg xl:text-[22px] font-regular text-[#323232] mt-2 tracking-[-0.35px]">
+                <p className="hidden sm:block text-[15px] xl:text-[22px] font-regular text-[#323232] mt-2 tracking-[-0.35px]">
                   동시에 갖춘 상품들로 일상을 채워드립니다. 바쁜 일상 속에서도 특별함을 느껴보세요.
                 </p>
-                <button className="mt-8 xl:mt-[80px] bg-[#2F2E2B] text-white w-full xl:w-[326.92px] h-[70.56px] text-[28px] hover:bg-[#92000A] transition-colors rounded-[40px]  relative z-50">
-                  상품보러가기
+                <button className="mt-[36px] sm:mt-8 xl:mt-[80px] bg-[#2F2E2B] text-white w-[193px] xl:w-[326.92px] h-[43px] sm:h-[70.56px] text-[28px] hover:bg-[#92000A] transition-colors rounded-[40px]  relative z-50">
+                  <p className="text-[18px] sm:text-[28px]">상품보러가기</p>
                 </button>
               </div>
             </div>
