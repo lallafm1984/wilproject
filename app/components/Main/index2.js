@@ -327,6 +327,17 @@ export default function Main() {
           rotate: [0, 0, 3.2],
         }
       };
+    } else if (windowWidth < 768) { // 태블릿
+      return {
+        prev: {
+          translate: ['-45%', '4%', 0],
+          rotate: [0, 0, -4],
+        },
+        next: {
+          translate: ['45%', '4%', 0],
+          rotate: [0, 0, 4],
+        }
+      };
     } else if (windowWidth < 1024) { // 태블릿
       return {
         prev: {
@@ -442,16 +453,16 @@ export default function Main() {
               {/* 텍스트 영역 */}
               <div className="w-[360px] sm:w-[450px] xl:w-[610px] xl:pt-[99px] px-7 xl:px-0 text-center xl:text-left">
                 <motion.div variants={itemVariants} className="xl:h-[141px] flex flex-col  items-start xl:items-start justify-center">
-                  <p className="w-full text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.32] xl:w-[606px] tracking-[-2.8px] text-left ">
+                  <p className="w-full text-[32px] sm:text-[34px] xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.32] xl:w-[606px] tracking-[-2.8px] text-left ">
                     언더웨어부터 액티브
-                    <br className=" sm:hidden" />웨어까지
-                     <span className="sm:hidden text-[#92000a]">&nbsp;온</span>
-                     <span className="sm:hidden text-[#92000a] text-2xl font-medium">ㆍ</span>
-                     <span className="sm:hidden text-[#92000a] font-medium">오프라인</span> 
-                     <br className=" sm:hidden" />
-                     <span className="sm:hidden text-[#92000a] font-medium">동시에 만나요</span> 
+                    <br className=" lg:hidden" />웨어까지
+                     <span className="lg:hidden text-[#92000a]">&nbsp;온</span>
+                     <span className="lg:hidden text-[#92000a] text-2xl font-medium">ㆍ</span>
+                     <span className="lg:hidden text-[#92000a] font-medium">오프라인</span> 
+                     <br className=" lg:hidden" />
+                     <span className="lg:hidden text-[#92000a] font-medium">동시에 만나요</span> 
                   </p>
-                  <p className="hidden sm:block text-2xl sm:text-4xl xl:text-[56px] font-medium text-[#92000a] mt-4 xl:mt-10 leading-[1.32] tracking-[-2.8px]">
+                  <p className="hidden lg:block text-2xl sm:text-4xl xl:text-[56px] font-medium text-[#92000a] mt-4 xl:mt-10 leading-[1.32] tracking-[-2.8px]">
                     <span className="text-[#92000a] tracking-[-10.76px]">온</span>
                     <span className="text-[#92000a] tracking-[-16.74px] text-2xl sm:text-4xl xl:text-[50px] font-medium">ㆍ</span>
                     <span className="text-[#92000a] text-2xl sm:text-4xl xl:text-[56px] font-medium">오프라인</span> 동시에 만나요
@@ -462,12 +473,12 @@ export default function Main() {
                   variants={itemVariants}
                   className="mt-[22px] xl:mt-[60px]"
                 >
-                  <p className="text-base sm:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] xl:px-0 tracking-[-0.78px] sm:tracking-[-0.35px] text-left ">
+                  <p className="text-base sm:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] xl:px-0 tracking-[-0.78px] sm:tracking-[-0.35px] text-left break-keep">
                     더블유아이엘은 언더웨어부터 홈웨어,<br className="sm:hidden"/>리조트웨어
-                    <br className="hidden sm:block"/>
-                    {windowWidth < 640 ? ` ` : ``}액티브웨어까지 다양한 라이프웨어를 <br className="sm:hidden"/>온라인 쇼핑몰과
-                    <br className="hidden sm:block"/>
-                    {windowWidth < 640 ? ` ` : ``}오프라인 매장에서 구매할 수 있는 <br className="sm:hidden"/>라이프웨어 브랜드샵입니다.
+                    <br className="hidden lg:block"/>
+                    {windowWidth < 640 ? ` ` : ``} 액티브웨어까지 다양한 라이프웨어를 <br className="sm:hidden"/>온라인 쇼핑몰과
+                    <br className="hidden xl:block"/>
+                    {windowWidth < 1280 ? ` ` : ``} 오프라인 매장에서 구매할 수 있는 <br className="sm:hidden"/>라이프웨어 브랜드샵 입니다.
                   </p>
                 </motion.div>
               </div>
@@ -502,10 +513,10 @@ export default function Main() {
               {/* 텍스트 영역 */}
               <div className="w-[360px] xl:w-[650px] xl:pt-[296px] xl:pl-[68px] order-1 xl:order-2 text-left xl:text-left  px-7 sm:pt-[0px]">
                 <motion.div variants={itemVariants}>
-                  <p className="w-full text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.3] tracking-[-2.8px]">
+                  <p className="w-full text-[32px] sm:text-[34px] xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.3] tracking-[-2.8px]">
                     똑똑한 <span>AI</span> 키오스크
                   </p>
-                  <p className="text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#91000a] xl:mt-8 leading-[1.3] tracking-[-2.8px] xl:w-[540px]">
+                  <p className="text-[32px] sm:text-[34px] xl:text-[56px] font-medium text-[#91000a] xl:mt-8 leading-[1.3] tracking-[-2.8px] xl:w-[540px] break-keep">
                     자유로운 무인 쇼핑 시스템
                   </p>
                 </motion.div>
@@ -513,7 +524,7 @@ export default function Main() {
                   variants={itemVariants}
                   className="mt-[21px] xl:mt-[77.5px]"
                 >
-                  <p className="text-base sm:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] xl:px-0 tracking-[-0.35px]">
+                  <p className="text-base sm:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] xl:px-0 tracking-[-0.35px] break-keep">
                     많은 제품들 중에 내 취향 아이템 고르기<br className="sm:hidden"/>힘들어요.
                     <br className="hidden sm:block" />
                     {windowWidth < 640 ? ` ` : ``}혼자 다양하게 살펴보면서 고민해보고 싶은데 눈치도 보이죠.
@@ -570,6 +581,18 @@ export default function Main() {
                     onSwiper={(swiper) => {
                       swiperRef.current = swiper;
                     }}
+                    onBreakpoint={(swiper) => {
+                      // 브레이크포인트가 변경될 때마다 실행
+                      // 현재 활성 슬라이드 인덱스 저장
+                      const currentIndex = swiper.activeIndex;
+                      
+                      // Swiper 업데이트
+                      swiper.updateSlides();
+                      
+                      // 이전 활성 슬라이드로 이동
+                      swiper.slideTo(currentIndex, 0, false);
+                    }}
+
                     modules={[Navigation, Pagination, EffectCreative]}
                     navigation={{
                       nextEl: '.swiper-button-next',
@@ -599,7 +622,7 @@ export default function Main() {
                         slidesPerView: 2,
                       },
                       // 768px 이상일 때
-                      640: {
+                      768: {
                         slidesPerView: 4,
                       },
                       // 1024px 이상일 때

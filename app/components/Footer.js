@@ -18,7 +18,7 @@ const Footer = () => {
       }}
     >
       <div className="relative w-full mx-auto h-[355px] min-h-[280px] md:min-h-[300px] lg:min-h-[310px] xl:h-[324px]
-        flex justify-center
+        flex justify-start sm:justify-center
         
         sm:py-[50px] md:py-[80px] lg:py-[70px] xl:py-[118px] overflow-hidden">
         
