@@ -38,14 +38,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
-  font-weight: 600;
-  font-weight: normal;
-  font-style: normal;
-}
-
 :root {
   /*--primary-bg: #F5EFEB;*/
   --secondary-bg: #ff0000;
@@ -72,7 +64,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    font-family: 'Pretendard', var(--font-poppins), -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
   }
 
   *::-webkit-scrollbar {
@@ -99,7 +91,7 @@
   body {
     background-color: var(--primary-bg);
     color: var(--text-primary);
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    font-family: 'Pretendard', var(--font-poppins), -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
   }
 }
 

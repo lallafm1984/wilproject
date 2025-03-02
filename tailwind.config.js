@@ -44,7 +44,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
-        pen: ['Nanum Pen Script', 'cursive']
+        pen: ['Nanum Pen Script', 'cursive'],
+        poppins: ['var(--font-poppins)', 'sans-serif']
       },
       colors: {
         primary: {
