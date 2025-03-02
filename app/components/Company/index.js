@@ -124,7 +124,7 @@ const Company = () => {
 
         if (isSmallScreen) {
           // 모바일에서는 타이틀 아래의 첫 번째 아이템만 검정색
-          if (itemRect.top > titleBottom && !foundFirstVisible) {
+          if (itemRect.bottom - 60 > titleBottom && !foundFirstVisible) {
             item.querySelectorAll('p').forEach(p => {
               p.style.color = '#1b1b1b';
             });
@@ -578,7 +578,7 @@ const Company = () => {
                     onMouseMove={handleMouseMove}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseLeave}
-                    className="relative w-full sm:w-full mt-[36px] sm:mt-[60px] md:mt-[80px] xl:mt-[100px] flex flex-row overflow-y-hidden overflow-x-auto sm:overflow-x-auto md:flex-row items-center justify-start gap-[15px] sm:gap-[20px] md:gap-[20px] cursor-grab active:cursor-grabbing"
+                    className="relative w-full sm:w-full mt-[36px] sm:mt-[60px] md:mt-[80px] xl:mt-[100px] flex flex-row overflow-y-hidden overflow-x-auto sm:overflow-x-auto md:flex-row items-center justify-start lg:justify-center gap-[15px] sm:gap-[20px] md:gap-[20px] lg:gap-[20px] lg:mx-auto xl:gap-[20px] cursor-grab active:cursor-grabbing"
                     style={{
                       userSelect: 'none',
                       scrollBehavior: isDragging ? 'auto' : 'smooth'
@@ -590,10 +590,10 @@ const Company = () => {
                       viewport={{ once: true }}
                       className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
                     >
-                      <div className="w-[214px] max-md:ml-[30px] md:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
+                      <div className="w-[214px] max-md:ml-[30px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
                         <img src="/Images/company/icon/icon_1.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
                       </div>
-                      <div className="w-[214px]  max-md:ml-[30px]  md:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
+                      <div className="w-[214px]  max-md:ml-[30px]  md:w-[320px] lg:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                         <p className="pt-[19px] md:pt-[28px] xl:pt-[32px] text-[15px] md:text-[26px] xl:text-[30px] h-auto md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
                           <span className='text-[#92000a]'>W</span>ORTH
                         </p>
@@ -609,10 +609,10 @@ const Company = () => {
                       viewport={{ once: true }}
                       className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
                     >
-                      <div className="w-[214px] md:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
+                      <div className="w-[214px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
                         <img src="/Images/company/icon/icon_2.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
                       </div>
-                      <div className="w-[214px] md:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
+                      <div className="w-[214px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                         <p className="pt-[19px] md:pt-[28px] xl:pt-[32px] text-[15px] md:text-[26px] xl:text-[30px] h-auto md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
                           <span className='text-[#92000a]'>I</span>DENTITY
                         </p>
@@ -628,10 +628,10 @@ const Company = () => {
                       viewport={{ once: true }}
                       className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
                     >
-                      <div className="w-[214px] max-md:mr-[30px] md:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
+                      <div className="w-[214px] max-md:mr-[30px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
                         <img src="/Images/company/icon/icon_3.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
                       </div>
-                      <div className="w-[214px] md:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
+                      <div className="w-[214px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                         <p className="pt-[19px] md:pt-[28px] xl:pt-[32px] text-[15px] md:text-[26px] xl:text-[30px] h-auto md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
                           <span className='text-[#92000a]'>L</span>IFE STYLE
                         </p>
@@ -645,7 +645,7 @@ const Company = () => {
                 
                 {/* 조직도 */}
                 <div id="organization" className="relative w-full max-w-[1920px] mx-auto pt-[90px] md:pt-[150px] lg:pt-[180px] xl:pt-[200px] bg-white">
-                  <div className="relative w-full aspect-[1920/1254]">
+                  <div className="relative w-full">
                     <motion.p 
                       initial={{ opacity: 0, y: 50 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -677,8 +677,8 @@ const Company = () => {
                       }}
                     >
                       {/* 조직도 컨테이너 */}
-                      <div ref={childRef_Org} className="relative w-full md:w-full h-[520px] md:h-full mt-[36px] md:mt-[0px] ">
-                        <div className="absolute w-[810px] md:w-full h-[520px]  md:h-full top-[2%] md:top-[10%]   ">
+                      <div ref={childRef_Org} className="relative w-full md:w-full h-[520px] md:h-full mt-[36px] md:mt-[-10px]  ">
+                        <div className="absolute w-[810px] md:w-full h-[520px]  md:h-full top-[10%] md:top-[20%] xl:top-[18%]  ">
                           
                           {/* 배경 이미지 추가 */}
                           <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2   h-auto">
@@ -840,8 +840,9 @@ const Company = () => {
                 </div>
                 {/* 조직도 컨테이너 끝 */}
                 {/* 히스토리 */}
-                <div className="relative w-full  h-fit mt-[50px] md:mt-[150px] xl:mt-[200px] flex flex-col sm:flex-row items-start justify-evenly  bg-white overflow-visible">
-                  <div className="sticky sm:right-[64%] top-[0px] pt-[100px] sm:top-[200px] w-full sm:w-fit md:top-[250px] xl:top-[300px] h-fit z-10 sticky-title px-5 md:px-8 xl:px-[0px] bg-white">
+                <div className="relative w-full  h-fit mt-[20px] md:mt-[100px] xl:mt-[200px] flex flex-col sm:flex-row items-start justify-evenly  bg-white overflow-visible">
+                  <div className="sticky sm:right-[64%] top-[50px] pt-[30px]  w-full sm:w-fit md:top-[250px] xl:top-[300px] h-fit z-10 sticky-title px-5 md:px-8 xl:px-[0px] bg-white
+                  max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center">
                     
                     <motion.p 
                       initial={{ opacity: 0, y: 50 }}
@@ -857,366 +858,366 @@ const Company = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
                       viewport={{ once: true }}
-                      className="pt-[12px] md:pt-[20px] xl:pt-[24px] text-[32px] sm:text-[36px] md:text-[46px] xl:text-[56px] font-medium text-center sm:text-start text-[#92000a] tracking-[-1.8px] md:tracking-[-2.3px] xl:tracking-[-2.8px] leading-[48px] md:leading-[62px] xl:leading-[74px] z-50"
+                      className="pt-[12px] md:pt-[20px] xl:pt-[24px] text-[32px] sm:text-[36px] md:text-[42px] 2xl:text-[56px] font-medium text-center sm:text-start text-[#92000a] tracking-[-1.8px] md:tracking-[-2.3px] xl:tracking-[-2.8px] leading-[48px] md:leading-[62px] xl:leading-[74px] z-50"
                     >
                       가치를 만들어 온 여정
                     </motion.p>
                   </div>
-                  <div ref={historyContainerRef} className="relative w-fit mt-[150px] px-5 md:px-8 xl:px-0 z-0">
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                  <div ref={historyContainerRef} className="relative w-full sm:w-[50%] xl:w-[30%]  mt-[50px]  sm:px-5 md:px-8 xl:px-0 z-0 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center ">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2024
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           라페어 인견팬티 &quot;800만장&quot;돌파
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           코스트코 판매채널 확장
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           이마트입점
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           몽골 이마트 라페어 언더웨어 제품 수출
                         </p>
                       </div>
                     </div>
                     
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2023
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           GS홈쇼핑 L&apos;AFFAIR 채널 확장
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           마켓컬리 입점
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2022
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           브라런닝 자체 개발 
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                           선데이라운지 카카오메이커스 런칭
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2021
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         베트남 호치민에 ㈜더블유아이엘 법인 생산 공장 설립
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         라페어 언더웨어 쿠팡 입점
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         선데이라운지 카카오톡 선물하기 입점
                         </p>
                         
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2019
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         신세계TV쇼핑 패션카테고리 판매 1위
 
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         SK스토아 L&apos;AFFAIR 런칭
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2018
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         쇼핑엔티 라페어 런칭/ 신세계TV쇼핑 신세계백화점 PB브랜드 ELLACONIC 런칭
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         현대백화점 판교점 / 신세계백화점 하남 스타필드점 / 현대시티아울렛 가든파이브 /
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         인천공항 제 2청사 트레블메이트 입점 / 라페어 청담 SSG 입점
                         </p>
                         
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2017
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         선데이라운지 29CM, MUSINSA(무신사) / ETC.SEOUL 가로수길점 입점
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2016
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         신세계 백화점 대구, 김해, 센텀시티, 강남, 인천점 / 갤러리아 타임월드점(대전) 입점
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         스타필드 하남 WONDER A MARKET / 메세나 폴리스 REST AND GOODS / 10x10 입점
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2015
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         현대 백화점 판교점 라운징샵 입점
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         L&apos;AFFAIR 신세계 백화점 경기점 런칭 / L&apos;AFFAIR 라운지웨어 라인 전개
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         선데이라운지 런칭
                         </p>
                         
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2014
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         중국 스촨 매장 오픈
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2013
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         대만 타이중 L&apos;AFFAIR 매장 오픈
 
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         자사몰 L&apos;AFFAIR 리뉴얼 오픈
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2011
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         프랑스 란제리 라이선스 브랜드 ROSY 롯데/현대홈쇼핑 런칭
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2010
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         사명 주식회사 더싸인 (THE SIGN) 으로 개명
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         CACHAREL 300억 돌파
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         CACHAREL 갤러리아 백화점 압구정점 / 신세계 백화점 인천점 / 런칭
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         프랑스 란제리 브랜드 ROSY 라이선스 계약 체결
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         CLARA YOON 현대홈쇼핑 런칭
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         평양 봉화 제 2공장 생산라인 설비투자
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         프랑스 란제리 브랜드 CACHAREL 라이선스 계약체결
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2009
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         CLARA YOON 라이선스 계약체결
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         CJ O쇼핑 PB브랜드 THE GUY 생산, 납품
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         lollipops 신세계 백화점 본점 / 강남점 입점
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         프랑스 언더웨어 브랜드 lollipops 라이선스, 직수입 계약체결
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         (주)형지어패럴 크로커다일 레이디 언더웨어 디자인, 생산, 납품
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         CACHAREL 100억 돌파(신세계백화점 강남점 입점)
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2008
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         현대홈쇼핑 PB브랜드 H.only U 생산, 납품
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         ㈜트라이브랜즈 & STYLE 디자인, 생산, 납품
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2007
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         CJ홈쇼핑 PB브랜드 피델리아 생산, 납품
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         CACHAREL 현대홈쇼핑 / INVU CJ홈쇼핑 런칭
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         자체 쇼핑몰 www.lebody.co.kr 구축
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         프랑스 명품 브랜드 CACHAREL(까샤렐) 라이센스 계약 체결
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         NEAT SOUL 선우용녀 연예인 실버타겟 니트브랜드 CJ홈쇼핑 방송런칭
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         엘리프리 블랙라벨 판매 100억 돌파
                         </p>
                         
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2006
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         평양 봉화 제 2공장 생산라인 구축
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         아씨우리옷 아동한복 우리홈쇼핑, CJ홈쇼핑 방송런칭
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         INVU underwear 라이센스 계약, 기획, 온라인 런칭
                         </p>
                         
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2005
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         현대홈쇼핑 독점 황신혜 브랜드
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         엘리프리 블랙라벨(ELYPRY BLACK LABEL) 런칭
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         UCLA 언더웨어 현대홈쇼핑 방송 런칭
                         </p>
                         
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2004
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         글로벌 브랜드 제휴를 통한 홈쇼핑 상품개발 - 이랜드, 디즈니, UCLA
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2002
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         GS홈쇼핑,우리홈쇼핑,농수산홈쇼핑,현대홈쇼핑 홈쇼핑 사업 전개
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px]">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2001
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         ㈜THE SIGN ENTERPRISE 법인 설립
                         </p>
                       </div>
                     </div>
 
-                    <div className="history-item relative w-auto h-auto">
-                      <p className="relative text-[56px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
+                    <div className="history-item relative w-auto h-auto max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
+                      <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         1998
                       </p>
-                      <div className="w-auto h-auto mt-[40px] md:mt-[50px] xl:mt-[60px]">
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                      <div className="w-fit max-sm:w-[calc(130px+15vw)] h-auto mt-[20px] md:mt-[50px] xl:mt-[60px]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         장은 카드, 외환카드, 삼성카드 등 카드사 통신 판매
 
                         </p>
-                        <p className="text-[16px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
+                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-normal text-left tracking-[-0.25px] md:tracking-[-0.3px] xl:tracking-[-0.35px] text-[#979797]">
                         THE SIGN 설립
                         </p>
                       </div>
@@ -1379,13 +1380,21 @@ const Company = () => {
                           </p>
                         </div>
                       </div>
-                      <div id="sinsa-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]  overflow-hidden"></div>
+                      <div className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]  overflow-hidden">
+                        <div id="sinsa-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]  overflow-hidden"></div>
+                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-10">
+                        </div>
+                      </div>
                     </div>
 
                     {/* 신논현역점 */}
                     <div className="relative w-full flex flex-col-reverse lg:flex-row xl:flex-row items-center justify-center lg:gap-[40px] xl:gap-[54px]">
-                      <div id="sinnonhyeon-map"
-                      className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]   overflow-hidden"></div>
+                      <div className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]  overflow-hidden">
+                        <div id="sinnonhyeon-map"
+                        className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]   overflow-hidden"></div>
+                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-10">
+                        </div>
+                      </div>
                       <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[144px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center justify-start sm:justify-center bg-[#323232]  ">
                         <div className="relative w-auto h-auto flex-col items-start justify-start pl-[37px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
                           <p className="text-[17px] md:text-[26px] lg:text-[28px] xl:text-[30px] font-semibold text-left text-[#ffffff]">신논현역점</p>
@@ -1408,7 +1417,11 @@ const Company = () => {
                           </p>
                         </div>
                       </div>
-                      <div id="nonhyeon-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]   overflow-hidden"></div>
+                      <div className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]  overflow-hidden">
+                        <div id="nonhyeon-map" className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]   overflow-hidden"></div>
+                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-10">
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1461,12 +1474,12 @@ const Company = () => {
                       </button>
                     </div>
                     <div className="relative">
-                      {/* <button 
+                      <button 
                         onClick={() => handleArrowClick('prev')} 
-                        className="absolute -left-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"
+                        className="hidden 2xl:block absolute -left-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"
                       >
                         <SlArrowLeft className="w-6 h-6 text-gray-600" />
-                      </button> */}
+                      </button>
                       <div className="relative w-full mt-[16px] sm:mt-[32px] h-[258px] sm:h-[400px] md:h-[500px] xl:h-[516px] bg-[#f8f8f2]"> {/* 지도 컨테이너 wrapper */}
                         <div 
                           id="kakao-map-container" 
@@ -1482,13 +1495,14 @@ const Company = () => {
                             display: selectedTab === 'vietnam' ? 'block' : 'none'
                           }}
                         />
+                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center z-10"></div>
                       </div>
-                      {/* <button 
+                        <button 
                         onClick={() => handleArrowClick('next')}
-                        className="absolute -right-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"
+                        className="hidden 2xl:block absolute -right-[60px] top-[50%] z-10 hover:opacity-70 transition-opacity"
                       >
                         <SlArrowRight className="w-6 h-6 text-gray-600" />
-                      </button> */}
+                      </button>  
                     </div>
                     <div className="relative pl-[28px] sm:pl-[0px] mt-[20px] md:mt-[50px] xl:mt-[60px] w-full md:w-[700px] xl:w-[1250px] h-auto flex flext-row sm:flex-col md:flex-row items-start">
                       <p className="text-[20px] w-[40%] pr-[20px] sm:pr-[0px] md:text-[32px] xl:text-[40px] font-bold text-left text-[#2f2e2c] tracking-[-0.7px] md:tracking-[-0.8px] xl:tracking-[-1.04px] break-keep">

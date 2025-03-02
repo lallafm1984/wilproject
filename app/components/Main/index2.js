@@ -330,11 +330,11 @@ export default function Main() {
     } else if (windowWidth < 1024) { // 태블릿
       return {
         prev: {
-          translate: ['-40%', '7%', 0],
+          translate: ['-65%', '4%', 0],
           rotate: [0, 0, -4],
         },
         next: {
-          translate: ['40%', '7%', 0],
+          translate: ['65%', '4%', 0],
           rotate: [0, 0, 4],
         }
       };
@@ -530,7 +530,7 @@ export default function Main() {
       </motion.div>
       </div>
       <div className="w-full bg-[#F8F8F2]">
-        <div className="w-full max-w-[1920px] md:h-[1402px] h-[830px] relative mx-auto px-4 xl:px-0 ">
+        <div className="w-full max-w-[1920px] sm:h-[1402px] h-[830px] relative mx-auto px-4 xl:px-0 ">
           <div className="w-full h-[800px] text-center absolute left-1/2 -translate-x-1/2  top-[90px] sm:top-[199.5px]">
             <p className="text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] mb-8 tracking-[-2.8px]">
               일상을 더욱<br className="sm:hidden"/> 특별하게<span className="sm:hidden">만들어 줄<br/>다양한 상품을 만나보세요</span>
@@ -545,7 +545,7 @@ export default function Main() {
                 <div className="absolute w-full h-[800px] flex items-center justify-center">
                   {/* 이전 버튼 */}
                   <button 
-                    className="absolute top-[12%] sm:top-[30%] left-[calc(50%-110px)] sm:left-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center  cursor-pointer"
+                    className="absolute top-[12%] sm:top-[30%] left-[calc(50%-110px)] sm:left-[calc(50%-140px)] md:left-[calc(50%-160px)] lg:left-[calc(50%-170px)] xl:left-[calc(50%-200px)] 2xl:left-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center  cursor-pointer"
                     
                     onClick={() => {
                       if (swiperRef.current) {
@@ -600,7 +600,7 @@ export default function Main() {
                       },
                       // 768px 이상일 때
                       640: {
-                        slidesPerView: 2,
+                        slidesPerView: 4,
                       },
                       // 1024px 이상일 때
                       1024: {
@@ -640,8 +640,8 @@ export default function Main() {
                             src={slide.image}
                             alt={slide.title}
                             className="
-                              w-[128px] sm:w-[200px] md:w-[250px] xl:w-[295px]
-                              h-[188px] sm:h-[260px] md:h-[320px] xl:h-[380px]
+                              w-[128px] sm:w-[160px] lg:w-[210px] xl:w-[250px] 2xl:w-[295px]
+                              h-[188px] sm:h-[220px] lg:h-[280px] xl:h-[320px] 2xl:h-[380px]
                               object-cover
                               rounded-[20px] sm:rounded-[40px] md:rounded-[40px] xl:rounded-[40px]
                               backface-hidden
@@ -668,7 +668,7 @@ export default function Main() {
 
                   {/* 다음 버튼 */}
                   <button 
-                    className="absolute  top-[12%] sm:top-[30%] right-[calc(50%-110px)] sm:right-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center cursor-pointer"
+                    className="absolute  top-[12%] sm:top-[30%] right-[calc(50%-110px)] sm:right-[calc(50%-140px)] md:right-[calc(50%-160px)] lg:right-[calc(50%-170px)] xl:right-[calc(50%-200px)] 2xl:right-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center cursor-pointer"
                      
                     onClick={() => {
                       if (swiperRef.current) {

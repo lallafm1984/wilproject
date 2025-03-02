@@ -102,7 +102,7 @@ const Header = () => {
             <img 
               src="/Images/logo.png" 
               alt="L&apos;AFFAIR LOUNGE" 
-              className="w-[180px] md:w-[250px] lg:w-[338px] h-auto object-contain ml-[30px]"
+              className="w-[180px] md:w-[250px] xl:w-[338px] h-auto object-contain ml-[30px]"
             />
           </Link>
 
@@ -117,16 +117,16 @@ const Header = () => {
           </button>
 
           {/* 데스크톱 네비게이션 */}
-          <div className="hidden lg:flex w-[1005px] h-[64px] bg-white rounded-full items-center justify-between ml-[8px]">
+          <div className="hidden lg:flex xl:w-[700px] 2xl:w-[1005px] h-[64px] bg-white rounded-full items-center justify-between ml-[8px]">
             <nav className="flex items-center ml-[32px]">
-              <ul className="flex space-x-[58px]">
+              <ul className="flex space-x-[30px] 2xl:space-x-[58px]">
                 {menuItems.map((item, idx) => (
                   <li 
                     key={idx}
                     className="relative group"
                     onMouseEnter={() => setActiveMenu(idx)}
                   >
-                    <button className="text-[18px] font-regular ">
+                    <button className="text-[16px] 2xl:text-[18px] font-regular ">
                       <span className="h-[21px] tracking-[-0.47px]">{item.title}</span>
                     </button>
                     
