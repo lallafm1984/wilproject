@@ -22,7 +22,7 @@ const SundayLounge = () => {
       {/* 히어로 섹션 */}
       <div className="relative w-[100vw] lg:w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] lg:h-[936px] bg-[#979797]">
         <Image
-          src="/Images/brand-hero.jpg"
+          src="/Images/img1.png"
           alt="Brand Hero"
           fill
           className="object-cover"
@@ -35,15 +35,29 @@ const SundayLounge = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-[200px] h-[44px] lg:w-[927px] lg:h-[84px] relative"
+          className="w-[188px] h-[72px] lg:w-[927px] lg:h-[84px] relative"
         >
-          <Image
-            src="/Images/sundaylounge/sl-logo-web-orange.webp"
-            alt="Sunday Lounge Logo"
-            fill
-            className="object-contain"
-            priority
-          />
+          {/* 모바일 로고 */}
+          <div className="block lg:hidden relative w-full h-full">
+            <Image
+              src="/Images/sundaylounge/sm-logo-mo-orange.webp"
+              alt="Sunday Lounge Logo Mobile"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          
+          {/* 데스크톱 로고 */}
+          <div className="hidden lg:block relative w-full h-full">
+            <Image
+              src="/Images/sundaylounge/sl-logo-web-orange.webp"
+              alt="Sunday Lounge Logo Desktop"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
         </motion.div>
         
         <motion.div
