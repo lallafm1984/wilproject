@@ -78,7 +78,7 @@ const SundayLounge = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="bg-[#333] w-[193px] lg:w-[327px] h-[43px] lg:h-[72px] text-[18px] lg:text-[30px] font-nomal text-center tracking-[-0.78px] leading-[36px] text-[#ffffff] rounded-full hover:bg-[#92000a] transition-colors"
+          className="bg-[#333] w-[238px] lg:w-[327px] h-[43px] lg:h-[72px] text-[18px] lg:text-[30px] font-nomal text-center tracking-[-0.78px] leading-[36px] text-[#ffffff] rounded-full hover:bg-[#92000a] transition-colors"
         >
           선데이라운지 바로가기
         </motion.button>
