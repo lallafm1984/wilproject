@@ -31,11 +31,11 @@ const BrandStory = () => {
       </div>
 
       {/* 브랜드 소개 섹션 */}
-      <div className="container mx-auto px-4 pt-[90px] pb-[125px] lg:pt-[200px] lg:pb-[200px] text-center justify-items-center">
+      <div className="mx-auto px-4 pt-[90px] pb-[125px] lg:pt-[200px] lg:pb-[200px] text-center justify-items-center">
         <motion.img 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8 , delay: 0.3}}
           src="/Images/brandstory/logo-l-affair-wh.webp"
           className="w-[200px] h-[44px] lg:w-[384px] lg:h-[84px] "
         >
@@ -44,7 +44,7 @@ const BrandStory = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          transition={{ duration: 0.8 , delay: 0.5  }}
           className="w-auto mx-auto mt-[70px] lg:mt-[100px] space-y-[12px] lg:space-y-[24px] mb-[36px] lg:mb-[60px]"
         >
           <p className="text-[17px] lg:text-[30px] text-[#92000a]  font-semibold">
