@@ -63,7 +63,8 @@ const SundayLounge = () => {
           className="w-auto mx-auto mt-[70px] lg:mt-[100px] space-y-[12px] lg:space-y-[24px] mb-[36px] lg:mb-[60px]"
         >
           <p className="text-[17px] lg:text-[30px] text-[#92000a] font-semibold break-keep">
-            난 지금 잠의 세계로 들어갈 준비가 되어 있어. 언제든 찾아와
+            난 지금 잠의 세계로 들어갈 준비가 되어 있어. <br className='sm:hidden' />
+            언제든 찾아와
           </p>
           <p className="text-[15px] lg:text-[22px] text-center font-normal tracking-[-0.39px] lg:tracking-[-0.35px] leading-[23px] lg:leading-[38px] text-[#323232]">
             조금만 예민해져도 불면이 찾아오는<br className='lg:hidden' />
