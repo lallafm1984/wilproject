@@ -32,14 +32,20 @@ const BrandStory = () => {
 
       {/* 브랜드 소개 섹션 */}
       <div className="mx-auto px-4 pt-[90px] pb-[125px] lg:pt-[200px] lg:pb-[200px] text-center justify-items-center">
-        <motion.img 
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 , delay: 0.3}}
-          src="/Images/brandstory/logo-l-affair-wh.webp"
-          className="w-[200px] h-[44px] lg:w-[384px] lg:h-[84px] "
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="w-[200px] h-[44px] lg:w-[384px] lg:h-[84px] relative"
         >
-        </motion.img>
+          <Image
+            src="/Images/brandstory/logo-l-affair-wh.webp"
+            alt="L'AFFAIR Logo"
+            fill
+            className="object-contain"
+            priority
+          />
+        </motion.div>
         
         <motion.div
           initial={{ opacity: 0 }}
