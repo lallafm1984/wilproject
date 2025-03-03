@@ -30,32 +30,28 @@ const SundayLounge = () => {
       </div>
 
       {/* 브랜드 소개 섹션 */}
-      <div className="mx-auto px-4 pt-[90px] pb-[125px] lg:pt-[200px] lg:pb-[200px] text-center justify-items-center">
+      <div className="mx-auto px-4 pt-[90px] pb-[125px] lg:pt-[200px] lg:pb-[200px] text-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-[188px] h-[72px] lg:w-[927px] lg:h-[84px] relative"
+          className="flex justify-center items-center"
         >
           {/* 모바일 로고 */}
-          <div className="block lg:hidden relative w-full h-full">
-            <Image
+          <div className="block lg:hidden w-[188px] h-[72px]">
+            <img
               src="/Images/sundaylounge/sm-logo-mo-orange.webp"
               alt="Sunday Lounge Logo Mobile"
-              fill
-              className="object-contain"
-              priority
+              className="w-full h-full"
             />
           </div>
           
           {/* 데스크톱 로고 */}
-          <div className="hidden lg:block relative w-full h-full">
-            <Image
+          <div className="hidden lg:block w-[927px] h-[84px]">
+            <img
               src="/Images/sundaylounge/sl-logo-web-orange.webp"
               alt="Sunday Lounge Logo Desktop"
-              fill
-              className="object-contain"
-              priority
+              className="w-full h-full"
             />
           </div>
         </motion.div>
@@ -66,11 +62,12 @@ const SundayLounge = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="w-auto mx-auto mt-[70px] lg:mt-[100px] space-y-[12px] lg:space-y-[24px] mb-[36px] lg:mb-[60px]"
         >
-          <p className="text-[17px] lg:text-[30px] text-[#92000a] font-semibold">
+          <p className="text-[17px] lg:text-[30px] text-[#92000a] font-semibold break-keep">
             난 지금 잠의 세계로 들어갈 준비가 되어 있어. 언제든 찾아와
           </p>
           <p className="text-[15px] lg:text-[22px] text-center font-normal tracking-[-0.39px] lg:tracking-[-0.35px] leading-[23px] lg:leading-[38px] text-[#323232]">
-            조금만 예민해져도 불면이 찾아오는 사소하지만 소중한 일상을 함께 하겠습니다.
+            조금만 예민해져도 불면이 찾아오는<br className='lg:hidden' />
+            사소하지만 소중한 일상을 함께 하겠습니다.
             <br />
             일요일의 편안함을 담은 선데이라운지입니다.
           </p>
@@ -107,7 +104,7 @@ const SundayLounge = () => {
         ].map((item, index) => (
           <div 
             key={index} 
-            className={`group relative flex items-center h-[177px] lg:h-[140px] 
+            className={`group relative flex items-center h-[198px] lg:h-[140px] 
               ${index === 0 ? 'border-t-[2px]' : ''} 
               ${index === 1 ? 'border-t-[2px] border-b-[2px]' : ''} 
               ${index === 2 ? 'border-b-[2px]' : ''} 
@@ -125,7 +122,7 @@ const SundayLounge = () => {
             
             {/* 모바일 버전 */}
             <div className="flex lg:hidden flex-row items-start justify-start">
-              <div className="relative w-[96px] h-[105px] flex-shrink-0">
+              <div className="relative w-[96px] h-[126px] flex-shrink-0">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -137,7 +134,7 @@ const SundayLounge = () => {
                 <h3 className="w-full text-[32px] lg:text-[56px] font-poppins font-bold tracking-[-0.55px] leading-[24px] text-[#323232] group-hover:text-[#92000a]">
                   {item.title}
                 </h3>
-                <p className="w-full text-[15px] lg:text-[22px] mt-[14px] font-normal text-[#323232] group-hover:text-[#92000a] break-before-auto tracking-[-0.49px]">
+                <p className="w-full text-[15px] lg:text-[22px] mt-[14px] font-normal text-[#323232] group-hover:text-[#92000a] break-before-auto tracking-[-0.49px] break-keep">
                   {item.description}
                 </p>
               </div>
