@@ -842,7 +842,7 @@ const Company = () => {
                 {/* 히스토리 */}
                 <div className="relative w-full  h-fit mt-[20px] md:mt-[100px] xl:mt-[200px] flex flex-col sm:flex-row items-start justify-evenly  bg-white overflow-visible">
                   <div className="sticky sm:right-[64%] top-[50px] pt-[30px]  w-full sm:w-fit md:top-[250px] xl:top-[300px] h-fit z-10 sticky-title px-5 md:px-8 xl:px-[0px] bg-white
-                  max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center">
+                  max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center flex-shrink-0">
                     
                     <motion.p 
                       initial={{ opacity: 0, y: 50 }}
@@ -863,7 +863,7 @@ const Company = () => {
                       가치를 만들어 온 여정
                     </motion.p>
                   </div>
-                  <div ref={historyContainerRef} className="relative w-full sm:w-[50%] xl:w-[30%]  mt-[50px]  sm:px-5 md:px-8 xl:px-0 z-0 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center ">
+                  <div ref={historyContainerRef} className="relative w-full sm:w-[50%] xl:w-[30%] 2xl:w-[50%] mt-[50px]  sm:px-5 md:px-8 xl:px-0  2xl:left-[10%] z-0 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center  flex-shrink-0">
                     <div className="history-item relative w-auto h-auto pb-[60px] md:pb-[80px] xl:pb-[100px] max-sm:flex max-sm:flex-row max-sm:items-center max-sm:justify-start max-sm:gap-[25px]">
                       <p className="relative text-[47px] md:text-[82px] xl:text-[102px] font-poppins font-semibold flex items-end leading-none max-sm:w-[120px] h-[60px] md:h-[86px] xl:h-[107px] text-[#979797]">
                         2024
