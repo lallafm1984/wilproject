@@ -21,7 +21,7 @@ const BrandStory = () => {
     <ReactLenis root options={lenisOptions}>
     <div className="min-h-screen bg-white  mt-[54px] md:mt-[100px] xl:mt-[132px]">
       {/* 히어로 섹션 */}
-      <div className="relative w-[100vw] lg:w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] lg:h-[936px] bg-[#979797]">
+      <div className="relative w-[100%] lg:w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] lg:h-[936px] bg-[#979797]">
         <Image
           src="/Images/img1.png"
           alt="Brand Hero"
