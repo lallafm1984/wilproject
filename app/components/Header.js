@@ -102,7 +102,7 @@ const Header = () => {
         handleSmoothScroll(e, path);
       }
       setIsMobileMenuOpen(false);
-    }, 50);
+    }, 500);
   };
 
   return (
