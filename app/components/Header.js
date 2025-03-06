@@ -47,6 +47,7 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeMobileMenu, setActiveMobileMenu] = useState(null)
+  const [clickedItemIndex, setClickedItemIndex] = useState(null)
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -62,6 +63,8 @@ const Header = () => {
   }, []);
 
   const handleSmoothScroll = (e, path) => {
+    if (!path) return;
+
     if (path.includes('#')) {
       e.preventDefault();
       const [pagePath, sectionId] = path.split('#');
@@ -81,11 +84,25 @@ const Header = () => {
       } else {
         window.location.href = path;
       }
+    } else {
+      window.location.href = path;
     }
   };
 
   const toggleMobileSubmenu = (idx) => {
     setActiveMobileMenu(activeMobileMenu === idx ? null : idx);
+  };
+
+  const handleMobileItemClick = (e, path, subIdx) => {
+    e.preventDefault();
+    setClickedItemIndex(subIdx);
+    
+    setTimeout(() => {
+      if (path) {
+        handleSmoothScroll(e, path);
+      }
+      setIsMobileMenuOpen(false);
+    }, 50);
   };
 
   return (
@@ -156,7 +173,7 @@ const Header = () => {
             </nav>
 
             <div className="flex items-center space-x-1  mr-[10px] ">
-              <button className="ml-[20px]">
+              <button className="ml-[20px] mr-[9px]">
                 <img src="/Images/icon_L.png" alt="로그인" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px]" />
               </button>
               <button className="bg-[#2F2E2B] font-regular text-white text-[13px] lg:text-[16px] tracking-[-0.47px] w-[140px] lg:w-[177px] h-[40px] lg:h-[50px] rounded-full hover:bg-[#92000A] ">
@@ -180,7 +197,8 @@ const Header = () => {
                 {menuItems.map((item, idx) => (
                   <div key={idx} className="mb-[0px]">
                     <button 
-                      className="w-fit mb-[0px] text-white text-[24px] tracking-[-2.4px] text-left flex justify-start items-center  transition-colors"
+                      className={`w-fit mb-[0px] text-[24px] tracking-[-2.4px] text-left flex justify-start items-center transition-colors
+                        ${activeMobileMenu === idx ? 'text-[#ffa1a7]' : 'text-white'}`}
                       onClick={() => toggleMobileSubmenu(idx)}
                       onMouseEnter={() => setActiveMobileMenu(idx)}
                     >
@@ -195,11 +213,9 @@ const Header = () => {
                           <li key={subIdx} className="">
                             <Link 
                               href={subItem.path} 
-                              onClick={(e) => {
-                                handleSmoothScroll(e, subItem.path);
-                                setIsMobileMenuOpen(false);
-                              }} 
-                              className="block w-fit py-[3px] text-white/80"
+                              onClick={(e) => handleMobileItemClick(e, subItem.path, subIdx)}
+                              className={`block w-fit py-[3px] text-[#ffa1a7] hover:text-[#ffffff] transition-colors duration-300
+                                ${clickedItemIndex === subIdx ? 'text-[#ffffff]' : ''}`}
                             >
                               {subItem.name}
                             </Link>

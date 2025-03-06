@@ -449,7 +449,7 @@ export default function Main() {
             viewport={{ once: true }}
             className="w-full px-4"
           >
-            <div className="w-full flex flex-col sm:flex-row justify-center items-center xl:items-start">
+            <div className="w-full flex flex-col md:flex-row justify-center items-center xl:items-start">
               {/* 텍스트 영역 */}
               <div className="w-[360px] sm:w-[450px] xl:w-[610px] xl:pt-[99px] px-7 xl:px-0 text-center xl:text-left">
                 <motion.div variants={itemVariants} className="xl:h-[141px] flex flex-col  items-start xl:items-start justify-center">
@@ -462,7 +462,7 @@ export default function Main() {
                      <br className=" lg:hidden" />
                      <span className="lg:hidden text-[#92000a] font-medium">동시에 만나요</span> 
                   </p>
-                  <p className="hidden lg:block text-2xl sm:text-4xl xl:text-[56px] font-medium text-[#92000a] mt-4 xl:mt-10 leading-[1.32] tracking-[-2.8px]">
+                  <p className="hidden lg:block text-2xl sm:text-4xl xl:text-[56px] font-medium text-[#92000a] mt-4   leading-[1.32] tracking-[-2.8px]">
                     <span className="text-[#92000a] tracking-[-10.76px]">온</span>
                     <span className="text-[#92000a] tracking-[-16.74px] text-2xl sm:text-4xl xl:text-[50px] font-medium">ㆍ</span>
                     <span className="text-[#92000a] text-2xl sm:text-4xl xl:text-[56px] font-medium">오프라인</span> 동시에 만나요
@@ -486,7 +486,7 @@ export default function Main() {
               {/* 이미지 영역 */}
               <motion.div 
                 variants={itemVariants}
-                className="xl:w-[540px] sm:w-[400px] w-[300px] xl:h-[540px] sm:h-[400px] h-[300px]  bg-[#B4B4B4] mt-8 xl:mt-0 sm:ml-[20px] xl:ml-[96px]"
+                className="xl:w-[540px]   w-[302px] xl:h-[540px]   h-[373px]  bg-[#B4B4B4] mt-8 xl:mt-0 sm:ml-[20px] xl:ml-[96px] flex-shrink-0"
               >
                 {/* 이미지 영역 */}
               </motion.div>
@@ -501,28 +501,28 @@ export default function Main() {
             viewport={{ once: true }}
             className="w-full px-4 sm:px-8 xl:px-0"
           >
-            <div className="w-full flex flex-col sm:flex-row justify-center items-center xl:items-start gap-8 xl:gap-0 mt-[70px] sm:mt-[100px] xl:pl-[100px]">
+            <div className="w-full flex flex-col md:flex-row justify-center items-center xl:items-start gap-8 xl:gap-0 mt-[70px] sm:mt-[100px] xl:pl-[100px]">
               {/* 이미지 영역 */}
               <motion.div 
                 variants={itemVariants}
-                className="xl:w-[402px] sm:w-[322px] w-[281px] xl:h-[520px] sm:h-[416px] h-[364px] bg-[#B4B4B4] order-2 sm:order-1"
+                className="xl:w-[402px]   w-[302px] xl:h-[520px]   h-[376px] bg-[#B4B4B4] order-2 md:order-1 flex-shrink-0"
               >
                 {/* 이미지 영역 */}
               </motion.div>
               
               {/* 텍스트 영역 */}
-              <div className="w-[360px] xl:w-[650px] xl:pt-[296px] xl:pl-[68px] order-1 xl:order-2 text-left xl:text-left  px-7 sm:pt-[0px]">
+              <div className="w-[360px] sm:w-[450px] xl:w-[650px] xl:pt-[296px] xl:pl-[68px] order-1 xl:order-2 text-left xl:text-left  px-7 sm:pt-[0px]">
                 <motion.div variants={itemVariants}>
                   <p className="w-full text-[32px] sm:text-[34px] xl:text-[56px] font-medium text-[#1b1b1b] leading-[1.3] tracking-[-2.8px]">
                     똑똑한 <span>AI</span> 키오스크
                   </p>
-                  <p className="text-[32px] sm:text-[34px] xl:text-[56px] font-medium text-[#91000a] xl:mt-8 leading-[1.3] tracking-[-2.8px] xl:w-[540px] break-keep">
+                  <p className="text-[32px] sm:text-[34px] xl:text-[56px] font-medium text-[#91000a] leading-[1.3] tracking-[-2.8px] xl:w-[540px] break-keep">
                     자유로운 무인 쇼핑 시스템
                   </p>
                 </motion.div>
                 <motion.div 
                   variants={itemVariants}
-                  className="mt-[21px] xl:mt-[77.5px]"
+                  className="mt-[21px] xl:mt-[50px]"
                 >
                   <p className="text-base sm:text-lg xl:text-[22px] font-regular text-[#323232] leading-[1.6] xl:leading-[1.8] xl:px-0 tracking-[-0.35px] break-keep">
                     많은 제품들 중에 내 취향 아이템 고르기<br className="sm:hidden"/>힘들어요.

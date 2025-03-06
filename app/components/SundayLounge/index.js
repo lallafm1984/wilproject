@@ -122,7 +122,7 @@ const SundayLounge = () => {
             </div>
             
             {/* 모바일 버전 */}
-            <div className="flex lg:hidden flex-row items-start justify-start">
+            <div className="flex lg:hidden flex-row items-center justify-start">
               <div className="relative w-[96px] h-[126px] flex-shrink-0">
                 <Image
                   src={item.image}
@@ -131,11 +131,11 @@ const SundayLounge = () => {
                   className="object-cover"
                 />
               </div>
-              <div className="relative flex flex-col justify-start w-full md:w-fit ml-[10px]">
-                <h3 className="w-full text-[32px] lg:text-[56px] font-poppins font-bold tracking-[-0.55px] leading-[24px] text-[#323232] group-hover:text-[#92000a]">
+              <div className="relative flex flex-col items-start justify-start w-full md:w-fit ml-[10px] flex-1 min-h-0">
+                <h3 className="w-full text-[32px] lg:text-[56px] font-poppins font-bold tracking-[-0.55px] leading-[34px] text-[#323232] group-hover:text-[#92000a]">
                   {item.title}
                 </h3>
-                <p className="w-full text-[15px] lg:text-[22px] mt-[14px] font-normal text-[#323232] group-hover:text-[#92000a] break-before-auto tracking-[-0.49px] break-keep">
+                <p className="w-full text-[15px] lg:text-[22px] mt-[11px] font-normal text-[#323232] group-hover:text-[#92000a] break-before-auto tracking-[-0.49px] break-keep leading-[23px]">
                   {item.description}
                 </p>
               </div>
@@ -162,7 +162,7 @@ const SundayLounge = () => {
           }}
           transition={{
             x: {
-              duration: 25,
+              duration: 50,
               repeat: Infinity,
               ease: "linear",
             },

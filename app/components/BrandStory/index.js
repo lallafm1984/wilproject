@@ -111,7 +111,7 @@ const BrandStory = () => {
             </div>
             
             {/* 모바일 버전 */}
-            <div className="flex lg:hidden flex-row items-start justify-start">
+            <div className="flex lg:hidden flex-row items-center justify-start">
               <div className="relative w-[96px] h-[105px]  flex-shrink-0">
                 <Image
                   src={item.image}
@@ -120,11 +120,11 @@ const BrandStory = () => {
                   className="object-cover"
                 />
               </div>
-              <div className="relative flex flex-col justify-start w-full md:w-fit ml-[10px]">
-                <h3 className="w-full text-[32px] lg:text-[56px] font-poppins font-bold tracking-[-0.55px] leading-[24px] text-[#323232] group-hover:text-[#92000a]  ">
+              <div className="relative flex flex-col items-start justify-start w-full md:w-fit ml-[10px]">
+                <h3 className="w-full text-[32px] lg:text-[56px] font-poppins font-bold tracking-[-0.55px] leading-[40px] text-[#323232] group-hover:text-[#92000a] flex-shrink-0 ">
                   {item.title}
                 </h3>
-                <p className="w-full text-[15px] lg:text-[22px] mt-[14px] font-normal text-[#323232] group-hover:text-[#92000a] break-before-auto tracking-[-0.49px]">
+                <p className="w-full text-[15px] lg:text-[22px] mt-[8px] font-normal text-[#323232] group-hover:text-[#92000a] tracking-[-0.49px] leading-[24px]  flex-1 min-h-0 ">
                   {item.description}
                 </p>
               </div>
@@ -152,7 +152,7 @@ const BrandStory = () => {
           }}
           transition={{
             x: {
-              duration: 25,
+              duration: 50,
               repeat: Infinity,
               ease: "linear",
             },
