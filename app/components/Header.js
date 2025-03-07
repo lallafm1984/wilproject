@@ -124,8 +124,11 @@ const Header = () => {
       if (path) {
         handleSmoothScroll(e, path);
       }
+    }, 100);
+
+    setTimeout(() => {
       setIsMobileMenuOpen(false);
-    }, 500);
+    }, 250);
   };
 
   return (
@@ -207,7 +210,7 @@ const Header = () => {
 
           {/* 모바일 메뉴 수정 */}
  
-            <div className={`fixed top-0 left-0 w-full h-full bg-[#91000A] transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+            <div className={`fixed top-0 left-0 w-full h-full bg-[#91000A] transform transition-transform duration-300 z-50 ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="absolute right-[calc(29/360*100vw)] top-[30px] ">
                 <button onClick={() => setIsMobileMenuOpen(false)} className="text-white ">
                   <img src="/Images/m_menu\icon.webp" alt="닫기" className="w-[38px] h-[38px]" />
