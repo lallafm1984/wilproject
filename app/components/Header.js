@@ -122,7 +122,7 @@ const Header = () => {
 
     setTimeout(() => {
       setIsMobileMenuOpen(false);
-    }, 250);
+    }, 400);
   };
 
   // 모바일 메뉴 토글 시 body 스크롤 제어
