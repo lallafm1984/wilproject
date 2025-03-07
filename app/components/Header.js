@@ -116,9 +116,33 @@ const Header = () => {
     
     setTimeout(() => {
       if (path) {
-        handleSmoothScroll(e, path);
+        if (path.includes('#')) {
+          const [pagePath, sectionId] = path.split('#');
+          
+          if (window.location.pathname === pagePath) {
+            // 같은 페이지 내 이동
+            const element = document.getElementById(sectionId);
+            if (element) {
+              const headerHeight = 0;
+              const elementPosition = element.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+              });
+            }
+          } else {
+            // 다른 페이지로 이동
+            window.location.href = pagePath;
+            sessionStorage.setItem('scrollToSection', sectionId);
+          }
+        } else {
+          // 일반 페이지 이동
+          window.location.href = path;
+        }
       }
-    }, 0);
+    }, 400);
 
     setTimeout(() => {
       setIsMobileMenuOpen(false);
