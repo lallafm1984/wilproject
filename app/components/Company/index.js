@@ -442,10 +442,8 @@ const Company = () => {
     // 스크롤 이벤트 리스너 추가
     const handleScroll = () => {
       if (container) {
-        console.log('Current scrollLeft:', container.scrollLeft);
         // 스크롤 위치의 퍼센트 계산 (0% ~ 100%)
         const scrollPercentage = (container.scrollLeft / (container.scrollWidth - container.clientWidth)) * 100;
-        console.log('Scroll percentage:', scrollPercentage.toFixed(2) + '%');
       }
     };
     
@@ -776,7 +774,7 @@ const Company = () => {
                       onMouseMove={handleOrgMouseMove}
                       onMouseUp={handleOrgMouseUp}
                       onMouseLeave={handleOrgMouseLeave}
-                      className="relative mt-[20px]  md:aspect-[1920/1280] overflow-y-visible overflow-x-auto justify-items-center cursor-grab active:cursor-grabbing"
+                      className="relative mt-[20px]  md:aspect-[1920/1280] overflow-y-hidden overflow-x-auto justify-items-center cursor-grab active:cursor-grabbing"
                       style={{
                         userSelect: 'none',
                         scrollBehavior: isOrgDragging ? 'auto' : 'smooth'
