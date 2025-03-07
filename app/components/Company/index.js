@@ -764,7 +764,7 @@ const Company = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
                       viewport={{ once: true }}
-                      className="h-[68px] mt-[12px] md:mt-[20px] lg:mt-[22px] xl:mt-[24px] text-[32px] md:text-[46px] lg:text-[50px] xl:text-[56px] font-medium text-center text-[#92000a] tracking-[-1.6px] md:tracking-[-2.8px] leading-[40px] md:leading-[74px]"
+                      className="h-[38px] lg:h-[68px] mt-[12px] md:mt-[20px] lg:mt-[22px] xl:mt-[24px] text-[32px] md:text-[46px] lg:text-[50px] xl:text-[56px] font-medium text-center text-[#92000a] tracking-[-1.6px] md:tracking-[-2.8px] leading-[40px] md:leading-[74px]"
                     >
                       조직도
                     </motion.p>
@@ -781,7 +781,7 @@ const Company = () => {
                       }}
                     >
                       {/* 조직도 컨테이너 */}
-                      <div ref={childRef_Org} className="relative w-full md:w-full h-[530px] md:h-full mt-[36px] md:mt-[-30px]  ">
+                      <div ref={childRef_Org} className="relative w-full md:w-full h-[530px] md:h-full mt-[0px] md:mt-[-30px]  ">
                         <div className="absolute w-[810px] md:w-full h-[530px]  md:h-full top-[10%] md:top-[20%] xl:top-[18%]  ">
                           
                           {/* 배경 이미지 추가 */}
@@ -812,7 +812,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[3.6%] left-[26.3%] w-[13.5%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[32px] text-normal text-center tracking-[-0.35px] text-[#ffffff]"><span className="font-poppins font-normal">R&D</span>본부</p>
+                            <p className="text-[13px] md:text-[2vw] 2xl:text-[32px] text-normal text-center tracking-[-0.35px] text-[#ffffff]"><span className="font-poppins font-normal">R&D</span>본부</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
@@ -821,7 +821,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[-7.5%] left-[26.5%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">언더웨어</p>
+                            <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">언더웨어</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
@@ -830,7 +830,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[-2%] left-[20%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">라운지웨어</p>
+                            <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">라운지웨어</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
@@ -839,7 +839,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[-6.8%] left-[34.2%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">텍스타일</p>
+                            <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">텍스타일</p>
                           </motion.div>
                          
                           <motion.div 
@@ -849,7 +849,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[9.3%] left-[18.6%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">콘텐츠기획</p>
+                            <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">콘텐츠기획</p>
                           </motion.div>
 
                           {/* 오른쪽 그룹 */}
@@ -860,7 +860,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[3.8%] right-[42.2%] w-[7.292%] aspect-square bg-[#f2999f] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[8px] md:text-[0.833vw] 2xl:text-[20px] text-normal text-center tracking-[-0.32px] text-[#ffffff]">기획생산팀</p>
+                            <p className="text-[8px] md:text-[1vw] 2xl:text-[20px] text-normal text-center tracking-[-0.32px] text-[#ffffff]">기획생산팀</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
@@ -869,7 +869,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[16.4%] right-[21.5%] w-[13.5%] aspect-square bg-[#d5525b] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[14px] md:text-[1.521vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">물류센터</p>
+                            <p className="text-[13px] md:text-[2vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">물류센터</p>
                           </motion.div>
                           {/* <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
@@ -900,8 +900,19 @@ const Company = () => {
                             className="absolute top-[40%] left-[20%] w-[13.5%]
                              aspect-square bg-[#ce5f66] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[14px] md:text-[1.521vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">베트남생산법인</p>
+                            <p className="text-[13px] md:text-[2vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">베트남생산법인</p>
                           </motion.div>
+
+                          <motion.div 
+                            initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
+                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.7 }}
+                            viewport={{ once: true }}
+                            className="absolute top-[64.5%] left-[41%] w-[7.292%] aspect-square bg-[#df9398] rounded-full flex items-center justify-center"
+                          >
+                            <p className="text-[8px] md:text-[1vw] 2xl:text-[20px] text-normal text-center tracking-[-0.32px] text-[#ffffff]">경영지원팀</p>
+                          </motion.div>
+
                           {/* <motion.div 
                             initial={{ opacity: 0, scale: 0, x: 100, y: -100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
@@ -938,7 +949,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[52.6%] right-[25%] w-[13.5%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[14px] md:text-[1.521vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">유통본부</p>
+                            <p className="text-[13px] md:text-[2vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">유통본부</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
@@ -947,7 +958,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[58%] right-[17.2%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[7px] md:text-[0.833vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">OFF-</span>커머스</p>
+                            <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">OFF-</span>커머스</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
@@ -956,7 +967,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[69%] right-[18.7%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[7px] md:text-[0.833vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]">무인매장</p>
+                            <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]">무인매장</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
@@ -965,7 +976,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[75%] right-[25.2%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[7px] md:text-[0.833vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">E</span>-커머스</p>
+                            <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">E</span>-커머스</p>
                           </motion.div>
 
                           <motion.div 
@@ -975,7 +986,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[74%] right-[32.8%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[7px] md:text-[0.833vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">T</span>-커머스</p>
+                            <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">T</span>-커머스</p>
                           </motion.div>
                         </div>
                       </div>
