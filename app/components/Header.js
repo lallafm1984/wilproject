@@ -82,12 +82,35 @@ const Header = () => {
           });
         }
       } else {
-        window.location.href = path;
+        const targetUrl = path;
+        window.location.href = pagePath;
+        
+        sessionStorage.setItem('scrollToSection', sectionId);
       }
     } else {
       window.location.href = path;
     }
   };
+
+  useEffect(() => {
+    const sectionId = sessionStorage.getItem('scrollToSection');
+    if (sectionId) {
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const headerHeight = 0;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+        sessionStorage.removeItem('scrollToSection');
+      }, 250);
+    }
+  }, []);
 
   const toggleMobileSubmenu = (idx) => {
     setActiveMobileMenu(activeMobileMenu === idx ? null : idx);
