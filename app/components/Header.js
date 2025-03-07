@@ -131,6 +131,23 @@ const Header = () => {
     }, 250);
   };
 
+  // 모바일 메뉴 토글 시 body 스크롤 제어
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = 'unset';
+      document.body.style.touchAction = 'auto';
+    }
+
+    // 컴포넌트 언마운트 시 스타일 초기화
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.body.style.touchAction = 'auto';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <header className="fixed w-full max-w-full  top-0 z-50 bg-[#91000A]"
       onMouseLeave={() => setActiveMenu(null)}
