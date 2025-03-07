@@ -815,7 +815,7 @@ const Company = () => {
                             <p className="text-[13px] md:text-[2vw] 2xl:text-[32px] text-normal text-center tracking-[-0.35px] text-[#ffffff]"><span className="font-poppins font-normal">R&D</span>본부</p>
                           </motion.div>
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
+                            initial={{ opacity: 0, scale: 0, x: 50, y: 50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
                             viewport={{ once: true }}
@@ -824,7 +824,7 @@ const Company = () => {
                             <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">언더웨어</p>
                           </motion.div>
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
+                            initial={{ opacity: 0, scale: 0, x: 50, y: 50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
                             viewport={{ once: true }}
@@ -833,9 +833,9 @@ const Company = () => {
                             <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">라운지웨어</p>
                           </motion.div>
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
+                            initial={{ opacity: 0, scale: 0, x: 50, y: 50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
                             viewport={{ once: true }}
                             className="absolute top-[-6.8%] left-[34.2%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
                           >
@@ -843,9 +843,9 @@ const Company = () => {
                           </motion.div>
                          
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
+                            initial={{ opacity: 0, scale: 0, x: 50, y: 50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
+                            transition={{ duration: 0.6, delay: 0.5 }}
                             viewport={{ once: true }}
                             className="absolute top-[9.3%] left-[18.6%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
                           >
@@ -854,18 +854,18 @@ const Company = () => {
 
                           {/* 오른쪽 그룹 */}
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
+                            initial={{ opacity: 0, scale: 0, x: -20, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
+                            transition={{ duration: 0.6, delay: 0.5 }}
                             viewport={{ once: true }}
                             className="absolute top-[3.8%] right-[42.2%] w-[7.292%] aspect-square bg-[#f2999f] rounded-full flex items-center justify-center"
                           >
                             <p className="text-[8px] md:text-[1vw] 2xl:text-[20px] text-normal text-center tracking-[-0.32px] text-[#ffffff]">기획생산팀</p>
                           </motion.div>
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
+                            initial={{ opacity: 0, scale: 0, x: -100, y: 50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
                             viewport={{ once: true }}
                             className="absolute top-[16.4%] right-[21.5%] w-[13.5%] aspect-square bg-[#d5525b] rounded-full flex items-center justify-center"
                           >
@@ -893,7 +893,7 @@ const Company = () => {
                           
                           {/* 왼쪽 아래 그룹 */}
                            <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
+                            initial={{ opacity: 0, scale: 0, x: 150, y: -50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
                             viewport={{ once: true }}
@@ -904,9 +904,9 @@ const Company = () => {
                           </motion.div>
 
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
+                            initial={{ opacity: 0, scale: 0, x: 50, y: -50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
+                            transition={{ duration: 0.6, delay: 0.5 }}
                             viewport={{ once: true }}
                             className="absolute top-[64.5%] left-[41%] w-[7.292%] aspect-square bg-[#df9398] rounded-full flex items-center justify-center"
                           >
@@ -947,32 +947,32 @@ const Company = () => {
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
                             viewport={{ once: true }}
-                            className="absolute top-[52.6%] right-[25%] w-[13.5%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
+                            className="absolute top-[52.6%] right-[25%] w-[13.5%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center z-10"
                           >
                             <p className="text-[13px] md:text-[2vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">유통본부</p>
                           </motion.div>
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
+                            initial={{ opacity: 0, scale: 0, x: -50, y: -50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.6 }}
+                            transition={{ duration: 0.6, delay: 0.5 }}
                             viewport={{ once: true }}
                             className="absolute top-[58%] right-[17.2%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
                             <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">OFF-</span>커머스</p>
                           </motion.div>
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
+                            initial={{ opacity: 0, scale: 0, x: -50, y: -50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.8 }}
+                            transition={{ duration: 0.6, delay: 0.6}}
                             viewport={{ once: true }}
                             className="absolute top-[69%] right-[18.7%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
                             <p className="text-[7px] md:text-[1vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]">무인매장</p>
                           </motion.div>
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
+                            initial={{ opacity: 0, scale: 0, x: -50, y: -50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 1.0 }}
+                            transition={{ duration: 0.6, delay: 0.7 }}
                             viewport={{ once: true }}
                             className="absolute top-[75%] right-[25.2%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
@@ -980,9 +980,9 @@ const Company = () => {
                           </motion.div>
 
                           <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
+                            initial={{ opacity: 0, scale: 0, x: -50, y: -50 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 1.0 }}
+                            transition={{ duration: 0.6, delay: 0.8 }}
                             viewport={{ once: true }}
                             className="absolute top-[74%] right-[32.8%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
