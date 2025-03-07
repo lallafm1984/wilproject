@@ -1682,14 +1682,14 @@ const Company = () => {
                       </p>
                       <div className="flex-col items-start justify-start w-[55%] mt-[0px] md:mt-0 xl:absolute xl:left-[40%]">
                       <div className="flex items-start justify-start">
-                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-bold text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] w-[32px] md:w-[55px] xl:w-[60px]">주소</p>
-                        <p className="ml-[12px] md:ml-[15px] xl:ml-[17px] text-[12px] md:text-[18px] xl:text-[22px] w-full font-normal text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] break-keep">
+                        <p className="text-[11px] md:text-[18px] xl:text-[22px] font-bold text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] w-[32px] md:w-[55px] xl:w-[60px]">주소</p>
+                        <p className="ml-[12px] md:ml-[15px] xl:ml-[17px] text-[11px] md:text-[18px] xl:text-[22px] w-full font-normal text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] break-keep">
                           {locations[selectedTab].address}
                         </p>
                       </div>
                       <div className="flex items-start justify-start mt-[8px] md:mt-[10px] xl:mt-[12px]">
-                        <p className="text-[12px] md:text-[18px] xl:text-[22px] font-bold text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] w-[32px] md:w-[55px] xl:w-[60px]">전화</p>
-                        <p className="ml-[12px] md:ml-[15px] xl:ml-[17px] text-[12px] md:text-[18px] xl:text-[22px] w-full font-normal text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px]">
+                        <p className="text-[11px] md:text-[18px] xl:text-[22px] font-bold text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px] w-[32px] md:w-[55px] xl:w-[60px]">전화</p>
+                        <p className="ml-[12px] md:ml-[15px] xl:ml-[17px] text-[11px] md:text-[18px] xl:text-[22px] w-full font-normal text-left text-[#2f2e2c] tracking-[-0.4px] md:tracking-[-0.45px] xl:tracking-[-0.57px]">
                           {locations[selectedTab].phone}
                         </p>
                       </div>
