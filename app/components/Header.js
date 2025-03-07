@@ -72,14 +72,8 @@ const Header = () => {
       if (window.location.pathname === pagePath) {
         const element = document.getElementById(sectionId);
         if (element) {
-          const headerHeight = 0;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
+          // PC에서는 바로 해당 섹션으로 이동
+          element.scrollIntoView();
         }
       } else {
         const targetUrl = path;
@@ -108,7 +102,7 @@ const Header = () => {
           });
         }
         sessionStorage.removeItem('scrollToSection');
-      }, 250);
+      }, 0);
     }
   }, []);
 
@@ -124,7 +118,7 @@ const Header = () => {
       if (path) {
         handleSmoothScroll(e, path);
       }
-    }, 100);
+    }, 0);
 
     setTimeout(() => {
       setIsMobileMenuOpen(false);
