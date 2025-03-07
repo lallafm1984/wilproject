@@ -694,7 +694,7 @@ const Company = () => {
                       {...motionSettings1}
                       initial={{ opacity: 0, x: -100 }}
                       viewport={{ once: true }}
-                      className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
+                      className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[fit]'
                     >
                       <div className="w-[214px] max-md:ml-[30px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
                         <img src="/Images/company/icon/icon_1.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
@@ -713,7 +713,7 @@ const Company = () => {
                      {...motionSettings2}
                      initial={{ opacity: 0, x: -100 }}
                       viewport={{ once: true }}
-                      className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
+                      className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[fit]'
                     >
                       <div className="w-[214px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
                         <img src="/Images/company/icon/icon_2.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
@@ -732,7 +732,7 @@ const Company = () => {
                       {...motionSettings3}
                       initial={{ opacity: 0, x: -100 }}
                       viewport={{ once: true }}
-                      className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[482px]'
+                      className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[fit]'
                     >
                       <div className="w-[214px] max-md:mr-[30px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
                         <img src="/Images/company/icon/icon_3.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
@@ -766,7 +766,7 @@ const Company = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
                       viewport={{ once: true }}
-                      className="h-[38px] pt-[12px] md:pt-[20px] lg:pt-[22px] xl:pt-[24px] text-[32px] md:text-[46px] lg:text-[50px] xl:text-[56px] font-medium text-center text-[#92000a] tracking-[-1.6px] md:tracking-[-2.8px] leading-[40px] md:leading-[74px]"
+                      className="h-[68px] mt-[12px] md:mt-[20px] lg:mt-[22px] xl:mt-[24px] text-[32px] md:text-[46px] lg:text-[50px] xl:text-[56px] font-medium text-center text-[#92000a] tracking-[-1.6px] md:tracking-[-2.8px] leading-[40px] md:leading-[74px]"
                     >
                       조직도
                     </motion.p>
@@ -776,15 +776,15 @@ const Company = () => {
                       onMouseMove={handleOrgMouseMove}
                       onMouseUp={handleOrgMouseUp}
                       onMouseLeave={handleOrgMouseLeave}
-                      className="relative top-[10%] md:aspect-[1920/1254] overflow-y-hidden overflow-x-auto justify-items-center cursor-grab active:cursor-grabbing"
+                      className="relative mt-[20px]  md:aspect-[1920/1280] overflow-y-visible overflow-x-auto justify-items-center cursor-grab active:cursor-grabbing"
                       style={{
                         userSelect: 'none',
                         scrollBehavior: isOrgDragging ? 'auto' : 'smooth'
                       }}
                     >
                       {/* 조직도 컨테이너 */}
-                      <div ref={childRef_Org} className="relative w-full md:w-full h-[520px] md:h-full mt-[36px] md:mt-[-10px]  ">
-                        <div className="absolute w-[810px] md:w-full h-[520px]  md:h-full top-[10%] md:top-[20%] xl:top-[18%]  ">
+                      <div ref={childRef_Org} className="relative w-full md:w-full h-[530px] md:h-full mt-[36px] md:mt-[-30px]  ">
+                        <div className="absolute w-[810px] md:w-full h-[530px]  md:h-full top-[10%] md:top-[20%] xl:top-[18%]  ">
                           
                           {/* 배경 이미지 추가 */}
                           <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2   h-auto">
@@ -802,7 +802,7 @@ const Company = () => {
                             viewport={{ once: true }}
                             className="absolute top-[22.5%] left-[38.2%] w-[23.125%] aspect-square bg-[#92000a] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[45px] md:text-[5.208vw] font-poppins font-semibold text-white">W.I.L</p>
+                            <p className="text-[45px] md:text-[5.208vw] 2xl:text-[100px] font-poppins font-semibold text-white">W.I.L</p>
                           
                           </motion.div>
 
@@ -812,40 +812,68 @@ const Company = () => {
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 }}
                             viewport={{ once: true }}
-                            className="absolute top-[-2.9%] left-[24.3%] w-[9.375%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
+                            className="absolute top-[3.6%] left-[26.3%] w-[13.5%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[10px] md:text-[1.146vw] text-normal text-center tracking-[-0.35px]">텍스타일<br/>디자인팀</p>
+                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[32px] text-normal text-center tracking-[-0.35px] text-[#ffffff]"><span className="font-poppins font-normal">R&D</span>본부</p>
+                          </motion.div>
+                          <motion.div 
+                            initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
+                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            viewport={{ once: true }}
+                            className="absolute top-[-7.5%] left-[26.5%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
+                          >
+                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">언더웨어</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
                             viewport={{ once: true }}
-                            className="absolute top-[9.4%] left-[17%] w-[9.375%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
+                            className="absolute top-[-2%] left-[20%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[10px] md:text-[1.146vw] text-normal text-center tracking-[-0.35px]">라운지웨어<br/>디자인팀</p>
+                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">라운지웨어</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.6 }}
                             viewport={{ once: true }}
-                            className="absolute top-[12.9%] left-[27.8%] w-[9.375%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
+                            className="absolute top-[-6.8%] left-[34.2%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[10px] md:text-[1.146vw] text-normal text-center tracking-[-0.35px]">언더웨어<br/>디자인팀</p>
+                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">텍스타일</p>
+                          </motion.div>
+                         
+                          <motion.div 
+                            initial={{ opacity: 0, scale: 0, x: 100, y: 100 }}
+                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.6 }}
+                            viewport={{ once: true }}
+                            className="absolute top-[9.3%] left-[18.6%] w-[6.25%] aspect-square bg-[#FFD7D7] rounded-full flex items-center justify-center"
+                          >
+                            <p className="text-[10px] md:text-[1.146vw] 2xl:text-[16px] text-normal text-center tracking-[-0.35px]">콘텐츠기획</p>
                           </motion.div>
 
                           {/* 오른쪽 그룹 */}
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
+                            transition={{ duration: 0.6, delay: 0.7 }}
                             viewport={{ once: true }}
-                            className="absolute top-[-8.4%] right-[23.9%] w-[13.021%] aspect-square bg-[#E15B5B] rounded-full flex items-center justify-center"
+                            className="absolute top-[3.8%] right-[42.2%] w-[7.292%] aspect-square bg-[#f2999f] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[14px] md:text-[1.521vw] text-normal text-center tracking-[-0.51px] text-[#ffffff]">물류센터</p>
+                            <p className="text-[8px] md:text-[0.833vw] 2xl:text-[20px] text-normal text-center tracking-[-0.32px] text-[#ffffff]">기획생산팀</p>
                           </motion.div>
                           <motion.div 
+                            initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
+                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            viewport={{ once: true }}
+                            className="absolute top-[16.4%] right-[21.5%] w-[13.5%] aspect-square bg-[#d5525b] rounded-full flex items-center justify-center"
+                          >
+                            <p className="text-[14px] md:text-[1.521vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">물류센터</p>
+                          </motion.div>
+                          {/* <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.5 }}
@@ -853,17 +881,9 @@ const Company = () => {
                             className="absolute top-[4.5%] right-[40.2%] w-[7.292%] aspect-square bg-[#f2999f] rounded-full flex items-center justify-center"
                           >
                             <p className="text-[8px] md:text-[0.833vw] text-normal text-center tracking-[-0.32px] text-[#ffffff]">경영지원팀</p>
-                          </motion.div>
-                          <motion.div 
-                            initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
-                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.7 }}
-                            viewport={{ once: true }}
-                            className="absolute top-[15.5%] right-[30.1%] w-[7.292%] aspect-square bg-[#df9398] rounded-full flex items-center justify-center"
-                          >
-                            <p className="text-[8px] md:text-[0.833vw] text-normal text-center tracking-[-0.32px] text-[#ffffff]">기획생산팀</p>
-                          </motion.div>
-                          <motion.div 
+                          </motion.div> */}
+                          
+                          {/* <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
@@ -871,10 +891,20 @@ const Company = () => {
                             className="absolute top-[11%] right-[14%] w-[13.021%] aspect-square bg-[#ce5f66] rounded-full flex items-center justify-center"
                           >
                             <p className="text-[14px] md:text-[1.521vw] text-normal text-center tracking-[-0.51px] text-[#ffffff]">베트남<br/>제조법인</p>
-                          </motion.div>
+                          </motion.div> */}
                           
                           {/* 왼쪽 아래 그룹 */}
-                          <motion.div 
+                           <motion.div 
+                            initial={{ opacity: 0, scale: 0, x: -100, y: 100 }}
+                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            viewport={{ once: true }}
+                            className="absolute top-[40%] left-[20%] w-[13.5%]
+                             aspect-square bg-[#ce5f66] rounded-full flex items-center justify-center"
+                          >
+                            <p className="text-[14px] md:text-[1.521vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">베트남생산법인</p>
+                          </motion.div>
+                          {/* <motion.div 
                             initial={{ opacity: 0, scale: 0, x: 100, y: -100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.6 }}
@@ -900,7 +930,7 @@ const Company = () => {
                             className="absolute top-[67%] left-[30%] w-[9.375%] aspect-square bg-[#f2bbbf] rounded-full flex items-center justify-center"
                           >
                             <p className="text-[10px] md:text-[1.146vw] text-normal text-center tracking-[-0.35px] text-[#1b1b1b]">오프라인<br/>커머스팀</p>
-                          </motion.div>
+                          </motion.div> */}
 
                           {/* 오른쪽 아래 그룹 */}
                           <motion.div 
@@ -908,36 +938,46 @@ const Company = () => {
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
                             viewport={{ once: true }}
-                            className="absolute top-[50%] right-[24.7%] w-[13.021%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
+                            className="absolute top-[52.6%] right-[25%] w-[13.5%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[14px] md:text-[1.521vw] text-normal text-center tracking-[-0.51px] text-[#ffffff]">신규사업본부</p>
+                            <p className="text-[14px] md:text-[1.521vw] 2xl:text-[32px] text-normal text-center tracking-[-0.51px] text-[#ffffff]">유통본부</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.6 }}
                             viewport={{ once: true }}
-                            className="absolute top-[56%] right-[17.2%] w-[6.25%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
+                            className="absolute top-[58%] right-[17.2%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[7px] md:text-[0.833vw] text-normal text-center tracking-[-0.26px] text-[#ffffff]">라페어라운지<br/>(신논현)</p>
+                            <p className="text-[7px] md:text-[0.833vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">OFF-</span>커머스</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.8 }}
                             viewport={{ once: true }}
-                            className="absolute top-[67%] right-[18.7%] w-[6.25%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
+                            className="absolute top-[69%] right-[18.7%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[7px] md:text-[0.833vw] text-normal text-center tracking-[-0.26px] text-[#ffffff]">라페어라운지<br/>(논현)</p>
+                            <p className="text-[7px] md:text-[0.833vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]">무인매장</p>
                           </motion.div>
                           <motion.div 
                             initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
                             whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
                             transition={{ duration: 0.6, delay: 1.0 }}
                             viewport={{ once: true }}
-                            className="absolute top-[71.5%] right-[25.2%] w-[6.25%] aspect-square bg-[#e6646c] rounded-full flex items-center justify-center"
+                            className="absolute top-[75%] right-[25.2%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
                           >
-                            <p className="text-[7px] md:text-[0.833vw] text-normal text-center tracking-[-0.26px] text-[#ffffff]">라페어라운지<br/>(신사)</p>
+                            <p className="text-[7px] md:text-[0.833vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">E</span>-커머스</p>
+                          </motion.div>
+
+                          <motion.div 
+                            initial={{ opacity: 0, scale: 0, x: -100, y: -100 }}
+                            whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+                            transition={{ duration: 0.6, delay: 1.0 }}
+                            viewport={{ once: true }}
+                            className="absolute top-[74%] right-[32.8%] w-[6.25%] aspect-square bg-[#fbdadc] rounded-full flex items-center justify-center"
+                          >
+                            <p className="text-[7px] md:text-[0.833vw] 2xl:text-[16px] text-normal text-center tracking-[-0.26px] text-[#1b1b1b]"><span className="font-poppins font-normal">T</span>-커머스</p>
                           </motion.div>
                         </div>
                       </div>
