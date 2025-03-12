@@ -377,8 +377,7 @@ export default function Main() {
         <div className="absolute w-full h-[2px] bg-gray-500 blur-[5px]"></div>
         <div className="absolute w-full inset-y-full h-[20px] bg-white blur-[20px]"></div>
         <div
-          className="relative w-full bt-[54px] md:bt-[100px] xl:bt-[132px]"
-
+          className="relative w-full bt-[54px] md:bt-[100px] xl:bt-[132px] bg-[#2F2E2B]"
           style={{
             transform: `scale(${imageScale})`,
             transition: isScrollingDown.current ? 
@@ -392,9 +391,12 @@ export default function Main() {
             fill
             priority
             quality={100}
-            className="object-cover"
+            className="object-contain"
             sizes="100vw"
             placeholder="blur"
+            style={{
+              objectPosition: 'center'
+            }}
           />
         </div>
 
