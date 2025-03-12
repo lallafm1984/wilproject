@@ -27,7 +27,7 @@ export default function Main() {
   const heroSectionRef = useRef(null);
   const lastScrollTime = useRef(Date.now());
   const scrollCount = useRef(0);
-  const maxScrollCount = 10;
+  const maxScrollCount = useRef(10);
   const isEventComplete = useRef(false);
   const isScrollingDown = useRef(false);
   const swiperRef = useRef(null);
@@ -112,7 +112,7 @@ export default function Main() {
     isScrollingDown.current = deltaY > 1;
 
     // Lenis 스크롤 제어
-    if (!isEventComplete.current || scrollCount.current < maxScrollCount) {
+    if (!isEventComplete.current || scrollCount.current < maxScrollCount.current) {
       if (lenisRef.current?.lenis) {
         lenisRef.current.lenis.stop();
       }
@@ -126,19 +126,19 @@ export default function Main() {
       scrollCount.current = Math.max(
         0, 
         Math.min(
-          maxScrollCount, 
+          maxScrollCount.current, 
           scrollCount.current + (delta * incrementValue)
         )
       );
 
-      const progress = (scrollCount.current / maxScrollCount) * 100;
+      const progress = (scrollCount.current / maxScrollCount.current) * 100;
       setScrollProgress(progress);
       
       if (prevScrollCount !== scrollCount.current) {
         setIsAnimating(true);
       }
       
-      if (scrollCount.current >= maxScrollCount && !isEventComplete.current) {
+      if (scrollCount.current >= maxScrollCount.current && !isEventComplete.current) {
         isEventComplete.current = true;
         setIsAnimating(false);
         if (lenisRef.current?.lenis) {
@@ -149,7 +149,7 @@ export default function Main() {
     }
     
     // 히어로 섹션 애니메이션이 완료되면 일반 스크롤 허용
-    if (isEventComplete.current && scrollCount.current >= maxScrollCount) {
+    if (isEventComplete.current && scrollCount.current >= maxScrollCount.current) {
       if (lenisRef.current?.lenis) {
         lenisRef.current.lenis.start();
       }
@@ -167,10 +167,10 @@ export default function Main() {
       
       const topOffset = getTopOffset();
 
-      if(isEventComplete.current && scrollCount.current >= maxScrollCount && e.deltaY < 0 && heroRect.top === topOffset){
+      if(isEventComplete.current && scrollCount.current >= maxScrollCount.current && e.deltaY < 0 && heroRect.top === topOffset){
         isEventComplete.current = false;
-        scrollCount.current = 9;
-        setScrollProgress(90);
+        scrollCount.current = maxScrollCount.current-1;
+        setScrollProgress((scrollCount.current / maxScrollCount.current) * 100);
         setIsAnimating(true);
         if (lenisRef.current?.lenis) {
           lenisRef.current.lenis.stop();
@@ -179,7 +179,7 @@ export default function Main() {
         return;
       }
 
-      if (isEventComplete.current && scrollCount.current >= maxScrollCount) {
+      if (isEventComplete.current && scrollCount.current >= maxScrollCount.current) {
         return;
       }
 
@@ -201,10 +201,10 @@ export default function Main() {
       
       const topOffset = getTopOffset();
 
-      if(isEventComplete.current && scrollCount.current >= maxScrollCount && deltaY < 0 && heroRect.top === topOffset){
+      if(isEventComplete.current && scrollCount.current >= maxScrollCount.current && deltaY < 0 && heroRect.top === topOffset){
         isEventComplete.current = false;
-        scrollCount.current = 9;
-        setScrollProgress(90);
+        scrollCount.current = maxScrollCount.current-1;
+        setScrollProgress((scrollCount.current / maxScrollCount.current) * 100);
         setIsAnimating(true);
         if (lenisRef.current?.lenis) {
           lenisRef.current.lenis.stop();
@@ -213,7 +213,7 @@ export default function Main() {
         return;
       }
 
-      if (!isEventComplete.current || scrollCount.current < maxScrollCount) {
+      if (!isEventComplete.current || scrollCount.current < maxScrollCount.current) {
         e.preventDefault();
         handleScrollEvent(deltaY);
       }
@@ -240,7 +240,31 @@ export default function Main() {
 
   useEffect(() => {
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+      const newWidth = window.innerWidth;
+      setWindowWidth(newWidth);
+      
+      // 모바일 환경(768px 미만)에서는 2, 그 외에는 10으로 설정
+      const newMaxCount = newWidth < 768 ? 2 : 10;
+      
+      // maxScrollCount가 변경될 때 현재 스크롤 상태도 조정
+      if (maxScrollCount.current !== newMaxCount) {
+        maxScrollCount.current = newMaxCount;
+        
+        // 현재 스크롤 진행도를 새로운 maxScrollCount에 맞게 조정
+        if (scrollCount.current > 0) {
+          const currentProgress = (scrollCount.current / maxScrollCount.current) * 100;
+          scrollCount.current = Math.min(scrollCount.current, maxScrollCount.current);
+          setScrollProgress(currentProgress);
+        }
+
+        // 애니메이션 완료 상태 재설정
+        if (scrollCount.current >= maxScrollCount.current) {
+          isEventComplete.current = true;
+          setIsAnimating(false);
+        } else {
+          isEventComplete.current = false;
+        }
+      }
     };
     
     handleResize();
@@ -294,10 +318,42 @@ export default function Main() {
     return () => clearTimeout(timer);
   }, []);
 
- 
+  const calculateInitialSize = (windowWidth) => {
+    if (windowWidth < 768) {
+      return { width: 154, height: 230 }; // 모바일 크기는 고정
+    }
+    
+    // 1920px 기준 970x616 비율 계산
+    const ratio = 970 / 1920; // 약 0.505
+    const heightRatio = 616 / 970; // 약 0.635
+    
+    const width = Math.round(windowWidth * ratio);
+    const height = Math.round(width * heightRatio);
+    
+    return { width, height };
+  };
+
+  // calculateScale 함수 수정
   const calculateScale = progress => {
+    // 서버 사이드 렌더링 중이거나 windowWidth가 undefined일 때
+    if (typeof window === 'undefined' || !windowWidth) {
+      return { scaleX: 1, scaleY: 1 };
+    }
+
     const p = progress / 100;
-    return 0.2+ (0.8 * p);
+    
+    // 초기 크기 계산
+    const initialSize = calculateInitialSize(windowWidth);
+    
+    // 가로/세로 최종 스케일을 따로 계산
+    const finalScaleX = windowWidth / initialSize.width;
+    const finalScaleY = (window.innerHeight - getTopOffset()) / initialSize.height;
+    
+    // 각각의 스케일을 부드럽게 변화
+    const scaleX = 1 + ((finalScaleX - 1) * p);
+    const scaleY = 1 + ((finalScaleY - 1) * p);
+    
+    return { scaleX, scaleY };
   };
 
   const imageScale = calculateScale(scrollProgress);
@@ -377,25 +433,33 @@ export default function Main() {
         <div className="absolute w-full h-[2px] bg-gray-500 blur-[5px]"></div>
         <div className="absolute w-full inset-y-full h-[20px] bg-white blur-[20px]"></div>
         <div
-          className="relative w-full bt-[54px] md:bt-[100px] xl:bt-[132px]"
-
+          className="relative w-full bt-[54px] md:bt-[100px] xl:bt-[132px] flex justify-center items-center overflow-hidden"
           style={{
-            transform: `scale(${imageScale})`,
+            transform: `scale(${imageScale.scaleX}, ${imageScale.scaleY})`,
+            transformOrigin: 'center center',
             transition: isScrollingDown.current ? 
               'transform 800ms cubic-bezier(0.23, 1, 0.32, 1)' : 
               'transform 800ms cubic-bezier(0.32, 1, 0.23, 1)'
           }}
         >
-          <NextImage
-            src={mainBgImage}
-            alt="메인 배경"
-            fill
-            priority
-            quality={100}
-            className="object-cover"
-            sizes="100vw"
-            placeholder="blur"
-          />
+          <div 
+            className="relative"
+            style={{
+              width: windowWidth < 768 ? '154px' : `${calculateInitialSize(windowWidth).width}px`,
+              height: windowWidth < 768 ? '230px' : `${calculateInitialSize(windowWidth).height}px`
+            }}
+          >
+            <NextImage
+              src={mainBgImage}
+              alt="메인 배경"
+              fill
+              priority
+              quality={100}
+              className="object-cover"
+              sizes="100vw"
+              placeholder="blur"
+            />
+          </div>
         </div>
 
         <div className="absolute w-full h-full flex flex-col sm:flex-row items-center justify-center px-4  md:gap-8">

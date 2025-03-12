@@ -526,15 +526,26 @@ const Company = () => {
         smoothScroll = null;
       }
 
-      if (historyContainer && window.innerWidth <= 640) {
-        smoothScroll = new SmoothScroll({
-          element: historyContainer,
-          strength: 5,
-          acceleration: 1.3,
-          deceleration: 0.96,
-        });
+      if (historyContainer  ) {
+        if(window.innerWidth <= 640){
+          smoothScroll = new SmoothScroll({
+            element: historyContainer,
+            strength: 5,
+            acceleration: 1.3,
+            deceleration: 0.96,
+         });
+         historyContainer.addEventListener('wheel', smoothScroll.handleWheel, { passive: false });
+        }else{
+          smoothScroll = new SmoothScroll({
+            element: historyContainer,
+            strength: 10,
+            acceleration: 1.3,
+            deceleration: 0.96,
+          });
+          historyContainer.addEventListener('wheel', smoothScroll.handleWheel, { passive: false });
+        }
 
-        historyContainer.addEventListener('wheel', smoothScroll.handleWheel, { passive: false });
+        
       }
     };
 
@@ -997,7 +1008,7 @@ const Company = () => {
                 {/* 히스토리 */}
                 <ReactLenis root options={lenisOptions}>
                 <div className="relative w-full  h-fit mt-[20px] md:mt-[100px] xl:mt-[200px] flex flex-col sm:flex-row items-start justify-evenly  bg-white overflow-visible">
-                  <div className="sm:sticky sm:right-[64%] top-[50px] pt-[30px]  w-full sm:w-fit md:top-[250px] xl:top-[300px] h-fit z-10 sticky-title px-5 md:px-8 xl:px-[0px] bg-white
+                  <div className="  sm:right-[64%] top-[50px] pt-[30px]  w-full sm:w-fit md:top-[250px] xl:top-[300px] h-fit z-10 sticky-title px-5 md:px-8 xl:px-[0px] bg-white
                   max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center flex-shrink-0">
                     
                     <motion.p 
@@ -1021,7 +1032,7 @@ const Company = () => {
                   </div>
                   <div 
                     ref={historyContainerRef} 
-                    className="relative w-full sm:w-[50%] xl:w-[30%] 2xl:w-[50%] mt-[40px] sm:mt-[50px] sm:px-5 md:px-8 xl:px-0 2xl:left-[10%] z-0 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-start flex-shrink-0 max-sm:h-[250px] max-sm:overflow-y-auto"
+                    className="relative w-full sm:w-[50%] xl:w-[30%] 2xl:w-[50%] mt-[40px] sm:mt-[50px] sm:px-5 md:px-8 xl:px-0 2xl:left-[10%] z-0  flex  flex-col  items-center  justify-start flex-shrink-0  h-[250px] sm:h-[700px] overflow-y-auto"
                     style={{ 
                       scrollBehavior: 'smooth',
                       WebkitOverflowScrolling: 'touch' // iOS 스크롤 부드럽게
@@ -1389,7 +1400,7 @@ const Company = () => {
                         </div>
                       </div>
 
-                      <div className="hidden max-sm:block history-item relative w-auto h-[150px] mt-[25px]">
+                      <div className="block history-item relative w-auto h-[150px] sm:h-[500px] md:h-[380px] lg:h-[400px] xl:h-[300px] 2xl:h-[300px] mt-[25px]">
                        
                       </div>
                     </ReactLenis>
