@@ -22,12 +22,12 @@ export default function Main() {
   const [textGap, setTextGap] = useState(0);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [maxScrollCount, setMaxScrollCount] = useState(10);
 
   // 모든 ref 선언
   const heroSectionRef = useRef(null);
   const lastScrollTime = useRef(Date.now());
   const scrollCount = useRef(0);
-  const maxScrollCount = 10;
   const isEventComplete = useRef(false);
   const isScrollingDown = useRef(false);
   const swiperRef = useRef(null);
@@ -157,7 +157,7 @@ export default function Main() {
     }
 
     return false;
-  }, []);
+  }, [maxScrollCount]);
 
   // 이벤트 리스너 설정
   useEffect(() => {
@@ -169,8 +169,8 @@ export default function Main() {
 
       if(isEventComplete.current && scrollCount.current >= maxScrollCount && e.deltaY < 0 && heroRect.top === topOffset){
         isEventComplete.current = false;
-        scrollCount.current = 9;
-        setScrollProgress(90);
+        scrollCount.current = maxScrollCount-1;
+        setScrollProgress((scrollCount.current / maxScrollCount) * 100);
         setIsAnimating(true);
         if (lenisRef.current?.lenis) {
           lenisRef.current.lenis.stop();
@@ -203,8 +203,8 @@ export default function Main() {
 
       if(isEventComplete.current && scrollCount.current >= maxScrollCount && deltaY < 0 && heroRect.top === topOffset){
         isEventComplete.current = false;
-        scrollCount.current = 9;
-        setScrollProgress(90);
+        scrollCount.current = maxScrollCount-1;
+        setScrollProgress((scrollCount.current / maxScrollCount) * 100);
         setIsAnimating(true);
         if (lenisRef.current?.lenis) {
           lenisRef.current.lenis.stop();
@@ -241,6 +241,7 @@ export default function Main() {
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
+      setMaxScrollCount(window.innerWidth < 768 ? 2 : 10);
     };
     
     handleResize();
@@ -297,7 +298,7 @@ export default function Main() {
  
   const calculateScale = progress => {
     const p = progress / 100;
-    return 0.5+ (0.5 * p);
+    return 0.4+ (0.6 * p);
   };
 
   const imageScale = calculateScale(scrollProgress);

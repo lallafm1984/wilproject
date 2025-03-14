@@ -31,7 +31,7 @@ const BrandStory = () => {
       </div>
 
       {/* 브랜드 소개 섹션 */}
-      <div className="mx-auto px-4 pt-[90px] pb-[125px] lg:pt-[200px] lg:pb-[200px] text-center">
+      <div className="mx-auto px-4 pt-[90px] pb-[90px] lg:pt-[200px] lg:pb-[200px] text-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ const BrandStory = () => {
       </div>
 
       {/* 특징 섹션 */}
-      <div className="container mx-auto px-[30px] lg:px-4  pb-[90px] lg:pb-[200px]">
+      <div className="container mx-auto px-[30px] lg:px-4  pb-[89.45px] lg:pb-[200px]">
         {[
           {
             title: 'Story Art',
