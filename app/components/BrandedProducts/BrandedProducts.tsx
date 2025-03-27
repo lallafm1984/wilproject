@@ -48,49 +48,49 @@ const BrandedProducts = () => {
     {
       id: 1,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/sample_1.png',
+      image: '/images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 2,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/sample_1.png',
+      image: '/images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 3,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/sample_1.png',
+      image: '/images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 4,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/sample_1.png',
+      image: '/images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 5,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/sample_1.png',
+      image: '/images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 6,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/sample_1.png',
+      image: '/images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 7,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/sample_1.png',
+      image: '/images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 8,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/sample_1.png',
+      image: '/images/Sample_1.png',
       category: 'loungewear'
     },
     // 추가 상품 데이터...
