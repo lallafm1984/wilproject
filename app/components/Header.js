@@ -9,8 +9,8 @@ const menuItems = [
   {
     title: '라페어 라운지',
     subMenu: [
-      { name: '라페어라운지', path: '' },
-      { name: '입점상품소개', path: '/pages/branded-products' },
+      { name: '라페어라운지', path: '/pages/branded-products?section=top' },
+      { name: '입점상품소개', path: '/pages/branded-products?section=category' },
     ]
   },
   {
@@ -165,6 +165,27 @@ const Header = () => {
       document.body.style.touchAction = 'auto';
     };
   }, [isMobileMenuOpen]);
+
+  // 라페어 라운지로 이동할 때
+  const handleLafairClick = () => {
+    document.getElementById('lafair-lounge')?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+
+  // 입점상품소개로 이동할 때
+  const handleProductClick = () => {
+    const element = document.getElementById('product-category');
+    if (element) {
+      const yOffset = -200; // 헤더 높이만큼 오프셋
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <header className="fixed w-full max-w-full  top-0 z-50 bg-[#91000A]"

@@ -1,11 +1,24 @@
 'use client'
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiChevronUp } from "react-icons/hi2";
+import { ReactLenis, useLenis } from '@studio-freight/react-lenis';
+import { useRouter, usePathname } from 'next/navigation';
 
-const BrandedProducts = () => {
+// 스크롤 함수를 외부로 내보내기
+export let scrollToSection: ((section: 'top' | 'category') => void) | null = null;
+
+interface BrandedProductsProps {
+  initialSection?: 'top' | 'category';
+}
+
+const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
+  const categoryRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
+  const router = useRouter();
+  const pathname = usePathname();
   const categories = [
     { id: 'underwear', name: '언더웨어' },
     { id: 'pajama', name: '파자마' },
@@ -20,25 +33,25 @@ const BrandedProducts = () => {
   const navigation = [
     {
       title: 'Branded Products',
-      image: '/images/SampleBg_1.png',
+      image: '/Images/SampleBg_1.png',
       heading: '여러 브랜드 상품을 직접 확인하세요',
       description: '라페어 라운지에서 취급하는 다양한 브랜드의 제품들을 만나보세요.\n고객님의 라이프스타일에 맞는 최적의 제품을 제안해드립니다.'
     },
     {
       title: 'Kiosk',
-      image: '/images/SampleBg_2.png',
+      image: '/Images/SampleBg_2.png',
       heading: '키오스크로 편리하게 주문하세요',
       description: '터치 한 번으로 쉽고 빠르게 주문할 수 있는 키오스크 시스템을 도입했습니다.\n대기 시간을 줄이고 효율적인 주문이 가능합니다.'
     },
     {
       title: 'Necessary thing',
-      image: '/images/SampleBg_3.png',
+      image: '/Images/SampleBg_3.png',
       heading: '필요한 모든 것이 준비되어 있습니다',
       description: '고객님의 편안한 휴식을 위한 모든 필수품이 구비되어 있습니다.\n세심한 서비스로 최상의 경험을 제공합니다.'
     },
     {
       title: 'Special event',
-      image: '/images/SampleBg_1.png',
+      image: '/Images/SampleBg_1.png',
       heading: '특별한 이벤트와 함께하세요',
       description: '라페어 라운지에서 진행되는 다양한 이벤트에 참여해보세요.\n고객님을 위한 특별한 혜택이 준비되어 있습니다.'
     }
@@ -48,49 +61,49 @@ const BrandedProducts = () => {
     {
       id: 1,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/Sample_1.png',
+      image: '/Images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 2,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/Sample_1.png',
+      image: '/Images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 3,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/Sample_1.png',
+      image: '/Images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 4,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/Sample_1.png',
+      image: '/Images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 5,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/Sample_1.png',
+      image: '/Images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 6,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/Sample_1.png',
+      image: '/Images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 7,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/Sample_1.png',
+      image: '/Images/Sample_1.png',
       category: 'loungewear'
     },
     {
       id: 8,
       title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/images/Sample_1.png',
+      image: '/Images/Sample_1.png',
       category: 'loungewear'
     },
     // 추가 상품 데이터...
@@ -119,12 +132,70 @@ const BrandedProducts = () => {
     return () => clearInterval(interval);
   }, [selectedNav, navigation]);
 
+  useEffect(() => {
+    if (initialSection === 'category' && lenis) {
+      const element = document.getElementById('product-category');
+      if (element) {
+        const yOffset = -200;
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        lenis.scrollTo(y, {
+          immediate: true
+        });
+      }
+    }
+  }, [initialSection, lenis]);
+
+  // 페이지 최상단으로 스크롤하는 함수
+  const scrollToTop = () => {
+    if (!lenis) return;
+    
+    lenis.scrollTo(0, {
+      duration: 1.5,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+  };
+
+  // 스크롤 함수를 전역 변수에 할당
+  useEffect(() => {
+    scrollToSection = (section: 'top' | 'category') => {
+      if (section === 'category') {
+        scrollToTop();
+      } else {
+        scrollToTop();
+      }
+    };
+
+    return () => {
+      scrollToSection = null;
+    };
+  }, [lenis]);
+
+  // 페이지 내 이동 처리 함수
+  const handleNavigation = (path: string, section: 'top' | 'category') => {
+    // 현재 경로와 이동하려는 경로가 같은 경우
+    if (pathname === path) {
+      if (section === 'category') {
+        scrollToTop();
+      } else {
+        scrollToTop();
+      }
+    } else {
+      // 다른 페이지로 이동하는 경우
+      router.push(`${path}?section=${section}`);
+    }
+  };
+
   return (
-    <div className="w-full relative">
-      <div className="">
+    <ReactLenis root options={{ 
+      lerp: 0.1,
+      duration: 1.5,
+      smoothWheel: true,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    }}>
+      <div className="w-full relative">
         <div className="flex flex-col">
           {/* 상단 이미지 섹션 */}
-          <div className="relative flex justify-between bg-[#f8f8f2] w-full">
+          <div id="lafair-lounge" className="relative flex justify-between bg-[#f8f8f2] w-full min-h-screen">
             {/* 좌측 네비게이션 */}
             <div className="ml-[10.8%] mt-[336px]">
               <ul className="space-y-4">
@@ -132,7 +203,7 @@ const BrandedProducts = () => {
                   <li 
                     key={item.title}
                     className={`font-poppins font-medium text-[30px] leading-[58px] cursor-pointer transition-colors duration-300 ${
-                      selectedNav === item.title ? 'text-[#92000a]' : 'text-[#323232]'
+                      selectedNav === item.title ? 'text-[#92000a]' : 'text-[#323232] hover:text-[#92000a]'
                     }`}
                     onClick={() => setSelectedNav(item.title)}
                   >
@@ -187,7 +258,7 @@ const BrandedProducts = () => {
           </div>
 
           {/* 카테고리 필터 */}
-          <div className="flex justify-center gap-[30px] mt-[200px] mb-[60px]">
+          <div id="product-category" className="flex justify-center gap-[30px] mt-[200px] mb-[60px]">
             {categories.map((category) => (
               <button
                 key={category.id}
@@ -233,23 +304,23 @@ const BrandedProducts = () => {
             </button>
           </div>
         </div>
-      </div>
 
-      {/* 앱쇼핑몰 바로가기 버튼 */}
-      <div className={`fixed bottom-[120px] right-[60px] z-50 flex flex-col items-center transition-opacity duration-300 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        <button 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="w-[100px] h-[100px] bg-white rounded-full shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] mb-[18px] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors duration-300"
-        >
-          <div className="w-[50px] h-[15px] flex items-center justify-center">
-            <HiChevronUp size={50} strokeWidth={0.2} />
-          </div>
-        </button>
-        <button className="w-[100px] h-[100px] bg-[#92000A] rounded-full text-white text-center flex flex-col items-center justify-center">
-          <span className="text-[16px] leading-[24px] font-semibold whitespace-pre-wrap">앱쇼핑몰{'\n'}바로가기</span>
-        </button>
+        {/* 앱쇼핑몰 바로가기 버튼 */}
+        <div className={`fixed bottom-[120px] right-[60px] z-50 flex flex-col items-center transition-opacity duration-300 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          <button 
+            onClick={scrollToTop}
+            className="w-[100px] h-[100px] bg-white rounded-full shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] mb-[18px] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors duration-300"
+          >
+            <div className="w-[50px] h-[15px] flex items-center justify-center">
+              <HiChevronUp size={50} strokeWidth={0.2} />
+            </div>
+          </button>
+          <button className="w-[100px] h-[100px] bg-[#92000A] rounded-full text-white text-center flex flex-col items-center justify-center">
+            <span className="text-[16px] leading-[24px] font-semibold whitespace-pre-wrap">앱쇼핑몰{'\n'}바로가기</span>
+          </button>
+        </div>
       </div>
-    </div>
+    </ReactLenis>
   );
 };
 
