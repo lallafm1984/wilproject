@@ -33,25 +33,25 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const navigation = [
     {
       title: 'Branded Products',
-      image: '/Images/SampleBg_1.png',
+      image: '/Images/SampleBg_w_1.webp',
       heading: '여러 브랜드 상품을 직접 확인하세요',
       description: '라페어 라운지에서 취급하는 다양한 브랜드의 제품들을 만나보세요.\n고객님의 라이프스타일에 맞는 최적의 제품을 제안해드립니다.'
     },
     {
       title: 'Kiosk',
-      image: '/Images/SampleBg_2.png',
+      image: '/Images/SampleBg_w_2.webp',
       heading: '키오스크로 편리하게 주문하세요',
       description: '터치 한 번으로 쉽고 빠르게 주문할 수 있는 키오스크 시스템을 도입했습니다.\n대기 시간을 줄이고 효율적인 주문이 가능합니다.'
     },
     {
       title: 'Necessary thing',
-      image: '/Images/SampleBg_3.png',
+      image: '/Images/SampleBg_w_3.webp',
       heading: '필요한 모든 것이 준비되어 있습니다',
       description: '고객님의 편안한 휴식을 위한 모든 필수품이 구비되어 있습니다.\n세심한 서비스로 최상의 경험을 제공합니다.'
     },
     {
       title: 'Special event',
-      image: '/Images/SampleBg_1.png',
+      image: '/Images/SampleBg_w_1.webp',
       heading: '특별한 이벤트와 함께하세요',
       description: '라페어 라운지에서 진행되는 다양한 이벤트에 참여해보세요.\n고객님을 위한 특별한 혜택이 준비되어 있습니다.'
     }
