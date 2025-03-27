@@ -10,7 +10,7 @@ const menuItems = [
     title: '라페어 라운지',
     subMenu: [
       { name: '라페어라운지', path: '' },
-      { name: '입점상품소개', path: '' },
+      { name: '입점상품소개', path: '/pages/branded-products' },
     ]
   },
   {
