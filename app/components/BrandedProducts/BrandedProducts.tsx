@@ -19,6 +19,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const lenis = useLenis();
   const router = useRouter();
   const pathname = usePathname();
+  const [imageLoaded, setImageLoaded] = useState(false);
   const categories = [
     { id: 'underwear', name: '언더웨어' },
     { id: 'pajama', name: '파자마' },
@@ -145,6 +146,20 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
     }
   }, [initialSection, lenis]);
 
+  useEffect(() => {
+    setImageLoaded(false);
+    const img = new window.Image();
+    img.src = navigation.find(item => item.title === selectedNav)?.image || '';
+    img.onload = () => setImageLoaded(true);
+  }, [selectedNav, navigation]);
+
+  useEffect(() => {
+    // 다음 이미지 프리로딩
+    const nextIndex = (navigation.findIndex(item => item.title === selectedNav) + 1) % navigation.length;
+    const nextImage = new window.Image();
+    nextImage.src = navigation[nextIndex].image;
+  }, [selectedNav, navigation]);
+
   // 페이지 최상단으로 스크롤하는 함수
   const scrollToTop = () => {
     if (!lenis) return;
@@ -195,14 +210,14 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
       <div className="w-full relative">
         <div className="flex flex-col">
           {/* 상단 이미지 섹션 */}
-          <div id="lafair-lounge" className="relative flex justify-between bg-[#f8f8f2] w-full min-h-screen">
+          <div id="lafair-lounge" className="relative flex flex-col lg:flex-row justify-between bg-[#f8f8f2] w-full min-h-screen">
             {/* 좌측 네비게이션 */}
-            <div className="ml-[10.8%] mt-[336px]">
+            <div className="px-6 mt-20 lg:ml-[10.8%] lg:mt-[336px]">
               <ul className="space-y-4">
                 {navigation.map((item) => (
                   <li 
                     key={item.title}
-                    className={`font-poppins font-medium text-[30px] leading-[58px] cursor-pointer transition-colors duration-300 ${
+                    className={`font-poppins font-medium text-[24px] lg:text-[30px] leading-[42px] lg:leading-[58px] cursor-pointer transition-colors duration-300 ${
                       selectedNav === item.title ? 'text-[#92000a]' : 'text-[#323232] hover:text-[#92000a]'
                     }`}
                     onClick={() => setSelectedNav(item.title)}
@@ -213,18 +228,18 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
               </ul>
             </div>
 
-            <div className="flex flex-col mt-[200px] mr-[10.8%]">
+            <div className="flex flex-col mt-10 px-6 lg:mt-[200px] lg:mr-[10.8%] lg:px-0">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selectedNav}
                   initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0 }}
-                  animate={{ clipPath: 'inset(0 0% 0 0)', opacity: 1 }}
+                  animate={imageLoaded ? { clipPath: 'inset(0 0% 0 0)', opacity: 1 } : { clipPath: 'inset(0 100% 0 0)', opacity: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ 
                     clipPath: { duration: 0.7, ease: 'easeInOut' },
                     opacity: { duration: 0.2 }
                   }}
-                  className="w-[996px] h-[540px] relative"
+                  className="w-full h-[300px] md:h-[400px] lg:w-[996px] lg:h-[540px] relative"
                 >
                   <Image
                     src={navigation.find(item => item.title === selectedNav)?.image || ''}
@@ -233,6 +248,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                     objectFit="cover"
                     className=""
                     priority
+                    onLoadingComplete={() => setImageLoaded(true)}
                   />
                 </motion.div>
               </AnimatePresence>
@@ -245,12 +261,12 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                   duration: 0.7,
                   delay: 0.2
                 }}
-                className="relative top-[-40px] pl-[105px] mb-[160px]"
+                className="relative lg:top-[-40px] px-4 lg:pl-[105px] mt-8 lg:mt-0 lg:mb-[160px]"
               >
-                <h2 className="text-[56px] leading-[74px] tracking-[-2.8px] text-start text-[#1b1b1b]">
+                <h2 className="text-[36px] lg:text-[56px] leading-[48px] lg:leading-[74px] tracking-[-1.8px] lg:tracking-[-2.8px] text-start text-[#1b1b1b]">
                   {navigation.find(item => item.title === selectedNav)?.heading}
                 </h2>
-                <p className="text-[22px] leading-[36px] tracking-[-0.35px] text-start mt-[32px] text-gray-600 whitespace-pre-line">
+                <p className="text-[18px] lg:text-[22px] leading-[28px] lg:leading-[36px] tracking-[-0.28px] lg:tracking-[-0.35px] text-start mt-[20px] lg:mt-[32px] text-gray-600 whitespace-pre-line">
                   {navigation.find(item => item.title === selectedNav)?.description}
                 </p>
               </motion.div>
@@ -258,14 +274,14 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           </div>
 
           {/* 카테고리 필터 */}
-          <div id="product-category" className="flex justify-center gap-[30px] mt-[200px] mb-[60px]">
+          <div id="product-category" className="flex flex-wrap justify-center gap-[15px] lg:gap-[30px] mt-[100px] lg:mt-[200px] mb-[30px] lg:mb-[60px] px-4 lg:px-0">
             {categories.map((category) => (
               <button
                 key={category.id}
-                className={`pl-[28px] pr-[27px] py-[13px] rounded-full text-[24px] leading-[36px] tracking-[-0.62px] transition-colors duration-300   ${
+                className={`pl-[20px] pr-[19px] lg:pl-[28px] lg:pr-[27px] py-[10px] lg:py-[13px] rounded-full text-[18px] lg:text-[24px] leading-[28px] lg:leading-[36px] tracking-[-0.45px] lg:tracking-[-0.62px] transition-colors duration-300 ${
                   selectedCategory === category.name
                     ? 'bg-[#92000a] text-white border border-[#92000a]'
-                    : 'bg-white text-[#1b1b1b] border border-[#1b1b1b] '
+                    : 'bg-white text-[#1b1b1b] border border-[#1b1b1b]'
                 }`}
                 onClick={() => setSelectedCategory(category.name)}
               >
@@ -275,20 +291,20 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           </div>
 
           {/* 상품 그리드 */}
-          <div className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[20px]">
+          <div className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[10px] lg:gap-[20px] px-4 lg:px-0">
             {products.map((product) => (
               <div key={product.id} className="group relative overflow-hidden">
-                <div className="w-[361px] h-[503px] relative">
+                <div className="w-[calc(50vw-20px)] h-[350px] md:w-[300px] md:h-[420px] lg:w-[361px] lg:h-[503px] relative">
                   <Image
                     src={product.image}
                     alt={product.title}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-3xl transition-all duration-300 group-hover:blur-sm"
+                    className="rounded-2xl lg:rounded-3xl transition-all duration-300 group-hover:blur-sm"
                   />
                   {/* 호버 시 나타나는 텍스트 */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-center text-[#1b1b1b] font-semibold text-[30px] leading-[42px] whitespace-pre-wrap">
+                    <p className="text-center text-[#1b1b1b] font-semibold text-[20px] md:text-[24px] lg:text-[30px] leading-[32px] md:leading-[36px] lg:leading-[42px] whitespace-pre-wrap px-4">
                       {product.title}
                     </p>
                   </div>
@@ -298,25 +314,26 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           </div>
 
           {/* 더보기 버튼 */}
-          <div className="text-center mt-[100px] mb-[200px] ">
-            <button className="bg-[#323232] w-[310px] h-[72px] text-white rounded-full text-[30px] leading-[36px] tracking-[-0.78px]">
+          <div className="text-center mt-[50px] lg:mt-[100px] mb-[100px] lg:mb-[200px]">
+            <button className="bg-[#323232] w-[280px] lg:w-[310px] h-[60px] lg:h-[72px] text-white rounded-full text-[24px] lg:text-[30px] leading-[32px] lg:leading-[36px] tracking-[-0.6px] lg:tracking-[-0.78px]">
               더보기
             </button>
           </div>
         </div>
 
         {/* 앱쇼핑몰 바로가기 버튼 */}
-        <div className={`fixed bottom-[120px] right-[60px] z-50 flex flex-col items-center transition-opacity duration-300 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className={`fixed bottom-[80px] lg:bottom-[120px] right-[20px] lg:right-[60px] z-50 flex flex-col items-center transition-opacity duration-300 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <button 
             onClick={scrollToTop}
-            className="w-[100px] h-[100px] bg-white rounded-full shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] mb-[18px] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors duration-300"
+            className="w-[80px] h-[80px] lg:w-[100px] lg:h-[100px] bg-white rounded-full shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] mb-[12px] lg:mb-[18px] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors duration-300"
           >
-            <div className="w-[50px] h-[15px] flex items-center justify-center">
-              <HiChevronUp size={50} strokeWidth={0.2} />
+            <div className="w-[40px] lg:w-[50px] h-[12px] lg:h-[15px] flex items-center justify-center">
+              <HiChevronUp size={40} className="lg:hidden" strokeWidth={0.2} />
+              <HiChevronUp size={50} className="hidden lg:block" strokeWidth={0.2} />
             </div>
           </button>
-          <button className="w-[100px] h-[100px] bg-[#92000A] rounded-full text-white text-center flex flex-col items-center justify-center">
-            <span className="text-[16px] leading-[24px] font-semibold whitespace-pre-wrap">앱쇼핑몰{'\n'}바로가기</span>
+          <button className="w-[80px] h-[80px] lg:w-[100px] lg:h-[100px] bg-[#92000A] rounded-full text-white text-center flex flex-col items-center justify-center">
+            <span className="text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] font-semibold whitespace-pre-wrap">앱쇼핑몰{'\n'}바로가기</span>
           </button>
         </div>
       </div>
