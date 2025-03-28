@@ -36,7 +36,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
       title: 'Branded Products',
       image: '/Images/SampleBg_w_1.webp',
       heading: '여러 브랜드 상품을 직접 확인하세요',
-      description: '라페어 라운지에서 취급하는 다양한 브랜드의 제품들을 만나보세요.\n고객님의 라이프스타일에 맞는 최적의 제품을 제안해드립니다.'
+      description: '여러 브래드 상품을 직접 확인하세요 여러 브래드 상품을 직접 확인하세요 여러 브래드 상품을\n 직접 확인하세요 여러 브래드 상품을 직접 확인하세요 여러 브래드 상품을 직접 확인하세요'
     },
     {
       title: 'Kiosk',
@@ -162,11 +162,9 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
   // 페이지 최상단으로 스크롤하는 함수
   const scrollToTop = () => {
-    if (!lenis) return;
-    
     lenis.scrollTo(0, {
-      duration: 1.5,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+      duration: 0,
+      immediate: true
     });
   };
 
@@ -210,25 +208,25 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
       <div className="w-full relative">
         <div className="flex flex-col">
           {/* 상단 이미지 섹션 */}
-          <div id="lafair-lounge" className="relative flex flex-col lg:flex-row justify-between bg-[#f8f8f2] w-full min-h-screen">
+          <div id="lafair-lounge" className="relative flex flex-col-reverse xl:flex-row justify-between bg-[#f8f8f2] w-full  xl:px-[calc((100%-1504px)/2)] max-w-[1920px] mx-auto">
             {/* 좌측 네비게이션 */}
-            <div className="px-6 mt-20 lg:ml-[10.8%] lg:mt-[336px]">
+            <div className="px-6 mb-10 xl:mb-0  xl:mt-[336px]">
               <ul className="space-y-4">
                 {navigation.map((item) => (
                   <li 
                     key={item.title}
-                    className={`font-poppins font-medium text-[24px] lg:text-[30px] leading-[42px] lg:leading-[58px] cursor-pointer transition-colors duration-300 ${
+                    className={`font-poppins font-medium text-[20px] lg:text-[30px] leading-[24px] lg:leading-[58px] cursor-pointer transition-colors duration-300  ${
                       selectedNav === item.title ? 'text-[#92000a]' : 'text-[#323232] hover:text-[#92000a]'
                     }`}
                     onClick={() => setSelectedNav(item.title)}
                   >
-                    {item.title}
+                    <span className="break-words">{item.title}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="flex flex-col mt-10 px-6 lg:mt-[200px] lg:mr-[10.8%] lg:px-0">
+            <div className="flex flex-col mt-10 px-6 xl:mt-[200px] items-center xl:items-start xl:px-0">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selectedNav}
@@ -261,12 +259,12 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                   duration: 0.7,
                   delay: 0.2
                 }}
-                className="relative lg:top-[-40px] px-4 lg:pl-[105px] mt-8 lg:mt-0 lg:mb-[160px]"
+                className="relative top-[-45px] lg:top-[-40px] px-4 lg:pl-[105px] mt-8 lg:mt-0 xl:mb-[160px]"
               >
-                <h2 className="text-[36px] lg:text-[56px] leading-[48px] lg:leading-[74px] tracking-[-1.8px] lg:tracking-[-2.8px] text-start text-[#1b1b1b]">
+                <h2 className="text-[24px] lg:text-[56px] leading-[32px] lg:leading-[74px] tracking-[-1.8px] lg:tracking-[-2.8px] text-start text-[#1b1b1b] break-keep">
                   {navigation.find(item => item.title === selectedNav)?.heading}
                 </h2>
-                <p className="text-[18px] lg:text-[22px] leading-[28px] lg:leading-[36px] tracking-[-0.28px] lg:tracking-[-0.35px] text-start mt-[20px] lg:mt-[32px] text-gray-600 whitespace-pre-line">
+                <p className="text-[16px] lg:text-[22px] leading-[24px] lg:leading-[36px] tracking-[-0.28px] lg:tracking-[-0.35px] text-start mt-[20px] lg:mt-[32px] text-gray-600 whitespace-pre-line break-keep">
                   {navigation.find(item => item.title === selectedNav)?.description}
                 </p>
               </motion.div>
@@ -274,11 +272,11 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           </div>
 
           {/* 카테고리 필터 */}
-          <div id="product-category" className="flex flex-wrap justify-center gap-[15px] lg:gap-[30px] mt-[100px] lg:mt-[200px] mb-[30px] lg:mb-[60px] px-4 lg:px-0">
+          <div id="product-category" className="flex flex-wrap justify-center gap-[15px] xl:gap-[30px] mt-[100px] xl:mt-[200px] mb-[30px] xl:mb-[60px] px-0 xl:px-0">
             {categories.map((category) => (
               <button
                 key={category.id}
-                className={`pl-[20px] pr-[19px] lg:pl-[28px] lg:pr-[27px] py-[10px] lg:py-[13px] rounded-full text-[18px] lg:text-[24px] leading-[28px] lg:leading-[36px] tracking-[-0.45px] lg:tracking-[-0.62px] transition-colors duration-300 ${
+                className={`pl-[10px] pr-[10px] lg:pl-[28px] lg:pr-[27px] py-[5px] lg:py-[13px] rounded-full text-[14px] lg:text-[24px] leading-[28px] lg:leading-[36px] tracking-[-0.45px] lg:tracking-[-0.62px] transition-colors duration-300 ${
                   selectedCategory === category.name
                     ? 'bg-[#92000a] text-white border border-[#92000a]'
                     : 'bg-white text-[#1b1b1b] border border-[#1b1b1b]'
@@ -291,20 +289,20 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           </div>
 
           {/* 상품 그리드 */}
-          <div className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[10px] lg:gap-[20px] px-4 lg:px-0">
+          <div className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[10px] xl:gap-[20px] px-4 xl:px-0">
             {products.map((product) => (
               <div key={product.id} className="group relative overflow-hidden">
-                <div className="w-[calc(50vw-20px)] h-[350px] md:w-[300px] md:h-[420px] lg:w-[361px] lg:h-[503px] relative">
+                <div className="w-[150px] h-[202px] md:w-[300px] md:h-[420px] xl:w-[361px] xl:h-[503px] relative">
                   <Image
                     src={product.image}
                     alt={product.title}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-2xl lg:rounded-3xl transition-all duration-300 group-hover:blur-sm"
+                    className="rounded-2xl xl:rounded-3xl transition-all duration-300 group-hover:blur-sm"
                   />
                   {/* 호버 시 나타나는 텍스트 */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-center text-[#1b1b1b] font-semibold text-[20px] md:text-[24px] lg:text-[30px] leading-[32px] md:leading-[36px] lg:leading-[42px] whitespace-pre-wrap px-4">
+                    <p className="text-center text-[#1b1b1b] font-semibold text-[14px] md:text-[24px] xl:text-[30px] leading-[32px] md:leading-[36px] xl:leading-[42px] whitespace-pre-wrap px-4 break-keep">
                       {product.title}
                     </p>
                   </div>
