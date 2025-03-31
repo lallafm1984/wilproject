@@ -225,7 +225,15 @@ const Header = () => {
                     className="relative group"
                     onMouseEnter={() => setActiveMenu(idx)}
                   >
-                    <button className="text-[16px] 2xl:text-[18px] font-regular ">
+                    <button 
+                      className="text-[16px] 2xl:text-[18px] font-regular"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (item.subMenu && item.subMenu.length > 0) {
+                          handleSmoothScroll(e, item.subMenu[0].path);
+                        }
+                      }}
+                    >
                       <span className="h-[21px] tracking-[-0.47px]">{item.title}</span>
                     </button>
                     

@@ -401,13 +401,13 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           <div className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0">
             {products.map((product) => (
               <div key={product.id} className="group relative overflow-hidden">
-                <div className="w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative">
+                <div className="w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-3xl overflow-hidden">
                   <Image
                     src={product.image}
                     alt={product.title}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-2xl xl:rounded-3xl xl:transition-all xl:duration-300 xl:group-hover:blur-sm"
+                    className="xl:transition-all xl:duration-300 xl:group-hover:blur-sm"
                   />
                   {/* 데스크톱 호버 시 나타나는 텍스트 */}
                   <div className="hidden xl:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
