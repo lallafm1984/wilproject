@@ -435,7 +435,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
         </div>
 
         {/* 앱쇼핑몰 바로가기 버튼 */}
-        <div className={`fixed bottom-[80px] lg:bottom-[120px] right-[17px] lg:right-[78px] z-50 flex flex-col items-center transition-opacity duration-300 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className={`fixed bottom-[40px] lg:bottom-[60px] right-[17px] lg:right-[78px] z-50 flex flex-col items-center transition-opacity duration-300 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <button 
             onClick={scrollToTop}
             className="w-[50px] h-[50px] lg:w-[86px] lg:h-[86px] bg-white rounded-full shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] mb-[10px] lg:mb-[14px] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors duration-300"
