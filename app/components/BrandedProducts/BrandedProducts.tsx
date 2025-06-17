@@ -36,83 +36,326 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
   const [selectedNav, setSelectedNav] = useState('Branded Products');
   const [showButton, setShowButton] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(8);
+  const isExpanded = visibleCount === 12;
   
   const navigation = [
     {
       title: 'Branded Products',
-      image: '/Images/SampleBg_w_1.webp',
+      image: '/Images/rounge/1.webp',
       heading: '여러 브랜드 상품을 직접 확인하세요',
-      description: '여러 브래드 상품을 직접 확인하세요 여러 브래드 상품을 직접 확인하세요 여러 브래드 상품을\n 직접 확인하세요 여러 브래드 상품을 직접 확인하세요 여러 브래드 상품을 직접 확인하세요'
+      description: '라페어의 베스트 셀러와, 라페어가 직접 엄선한 라이프 웨어 브랜드 제품들을 만나보세요'
     },
     {
       title: 'Kiosk',
-      image: '/Images/SampleBg_w_2.webp',
+      image: '/Images/rounge/2.webp',
       heading: '키오스크로 편리하게 주문하세요',
-      description: '터치 한 번으로 쉽고 빠르게 주문할 수 있는 키오스크 시스템을 도입했습니다.\n대기 시간을 줄이고 효율적인 주문이 가능합니다.'
+      description: '누구의 시선도 없이, 나만의 속도로\n 편안하게 고르고, 키오스크로 간편하게 주문하세요'
     },
     {
       title: 'Necessary thing',
-      image: '/Images/SampleBg_w_3.webp',
+      image: '/Images/rounge/3.webp',
       heading: '필요한 모든 것이 준비되어 있습니다',
-      description: '고객님의 편안한 휴식을 위한 모든 필수품이 구비되어 있습니다.\n세심한 서비스로 최상의 경험을 제공합니다.'
+      description: '편안한 하루를 만드는 데 필요한 것들이 준비되어 있습니다.\n지금, 가장 기본부터 제대로 갖춰보세요'
     },
     {
       title: 'Special event',
-      image: '/Images/SampleBg_w_1.webp',
+      image: '/Images/rounge/4.webp',
       heading: '특별한 이벤트와 함께하세요',
-      description: '라페어 라운지에서 진행되는 다양한 이벤트에 참여해보세요.\n고객님을 위한 특별한 혜택이 준비되어 있습니다.'
+      description: '라페어 라운지에서만 경험할 수 있는 이벤트.\n특별한 혜택을 만나보세요'
     }
   ];
-
+  
   const products = [
     {
       id: 1,
-      title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/Images/Sample_1.png',
-      category: 'loungewear'
+      title: '숲 속의 산책\n나염 인견 팬티',
+      image: '/Images/rounge/product_underwear/1.webp',
+      category: 'underwear'
     },
     {
       id: 2,
-      title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/Images/Sample_1.png',
-      category: 'loungewear'
+      title: '별 헤는 밤\n나염 인견 팬티',
+      image: '/Images/rounge/product_underwear/2.webp',
+      category: 'underwear'
     },
     {
       id: 3,
-      title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/Images/Sample_1.png',
-      category: 'loungewear'
+      title: '바로크\n나염 팬티',
+      image: '/Images/rounge/product_underwear/3.webp',
+      category: 'underwear'
     },
     {
       id: 4,
-      title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/Images/Sample_1.png',
-      category: 'loungewear'
+      title: '바로크\n솔리드 팬티',
+      image: '/Images/rounge/product_underwear/4.webp',
+      category: 'underwear'
     },
     {
       id: 5,
-      title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/Images/Sample_1.png',
-      category: 'loungewear'
+      title: '레트로레이디 팜므\n나염 인견 팬티',
+      image: '/Images/rounge/product_underwear/5.webp',
+      category: 'underwear'
     },
     {
       id: 6,
-      title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/Images/Sample_1.png',
-      category: 'loungewear'
+      title: '집 앞에 그린\n인견 나염 팬티',
+      image: '/Images/rounge/product_underwear/6.webp',
+      category: 'underwear'
     },
     {
       id: 7,
-      title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/Images/Sample_1.png',
-      category: 'loungewear'
+      title: '레트로레이디 무드\n솔리드 인견 팬티',
+      image: '/Images/rounge/product_underwear/7.webp',
+      category: 'underwear'
     },
     {
       id: 8,
-      title: '선셋 아일랜드\n그리너리 노카라 블라우스',
-      image: '/Images/Sample_1.png',
+      title: '알사탕\n인견 솔리드 팬티',
+      image: '/Images/rounge/product_underwear/8.webp',
+      category: 'underwear'
+    },
+    {
+      id: 9,
+      title: '여우의 꿈 나염\n인견 팬티',
+      image: '/Images/rounge/product_underwear/9.webp',
+      category: 'underwear'
+    },
+    {
+      id: 10,
+      title: '지붕 위의 와인\n인견 나염 팬티',
+      image: '/Images/rounge/product_underwear/10.webp',
+      category: 'underwear'
+    },
+    {
+      id: 11,
+      title: '집주인 취향 블루\n인견 나염 팬티',
+      image: '/Images/rounge/product_underwear/11.webp',
+      category: 'underwear'
+    },
+    {
+      id: 12,
+      title: '마카롱 인견\n솔리드 팬티',
+      image: '/Images/rounge/product_underwear/12.webp',
+      category: 'underwear'
+    },
+    {
+      id: 13,
+      title: '포피레드 미모사\n민소매 프릴 파자마 셋업',
+      image: '/Images/rounge/product_pajama/1.webp',
+      category: 'pajama'
+    },
+    {
+      id: 14,
+      title: '스노우블루 모히토\n파자마 셋업',
+      image: '/Images/rounge/product_pajama/2.webp',
+      category: 'pajama'
+    },
+    {
+      id: 15,
+      title: '리치블랙 레이디콕\n파자마 셋업',
+      image: '/Images/rounge/product_pajama/3.webp',
+      category: 'pajama'
+    },
+    {
+      id: 16,
+      title: '베이비 블루\n인견 파자마 라운지 웨어',
+      image: '/Images/rounge/product_pajama/4.webp',
+      category: 'pajama'
+    },
+    {
+      id: 17,
+      title: '블러썸 핑크\n인견 파자마 라운지 웨어',
+      image: '/Images/rounge/product_pajama/5.webp',
+      category: 'pajama'
+    },
+    {
+      id: 18,
+      title: '가든 그린\n인견 파마자 라운지 웨어',
+      image: '/Images/rounge/product_pajama/6.webp',
+      category: 'pajama'
+    },
+    {
+      id: 19,
+      title: '블룸 로즈 그린 플라워\n인견 파자마 세트',
+      image: '/Images/rounge/product_pajama/7.webp',
+      category: 'pajama'
+    },
+    {
+      id: 20,
+      title: '라임오렌지 플라워\n인견 파자마 세트',
+      image: '/Images/rounge/product_pajama/8.webp',
+      category: 'pajama'
+    },
+    {
+      id: 21,
+      title: '아르페지오 블랙핑크\n민소매 파자마 셋업',
+      image: '/Images/rounge/product_pajama/9.webp',
+      category: 'pajama'
+    },
+    {
+      id: 22,
+      title: '칸타빌레 핑크블루\n민소매 파자마 셋업',
+      image: '/Images/rounge/product_pajama/10.webp',
+      category: 'pajama'
+    },
+    {
+      id: 23,
+      title: '앙상블 옐로우피치\n돌먼 파자마 셋업',
+      image: '/Images/rounge/product_pajama/11.webp',
+      category: 'pajama'
+    },
+    {
+      id: 24,
+      title: '팜므 네이비\n파자마 세트',
+      image: '/Images/rounge/product_pajama/12.webp',
+      category: 'pajama'
+    },
+    {
+      id: 25,
+      title: '클래식 볼드 블랙\n핀턱 셋업',
+      image: '/Images/rounge/product_loungewear/1.webp',
       category: 'loungewear'
     },
+    {
+      id: 26,
+      title: '빈티지 스트라이프\n핀턱 셋업',
+      image: '/Images/rounge/product_loungewear/2.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 27,
+      title: '디아나 핑크네이비\n아사면 셋업',
+      image: '/Images/rounge/product_loungewear/3.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 28,
+      title: '아이리스 블루\n인견 썸머 라운지웨어',
+      image: '/Images/rounge/product_loungewear/4.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 29,
+      title: '레나 로즈\n인견 썸머 라운지웨어',
+      image: '/Images/rounge/product_loungewear/5.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 30,
+      title: '플로럴 블랙\n인견 라운지웨어',
+      image: '/Images/rounge/product_loungewear/6.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 31,
+      title: '카라멜 블랙\n민소매 핀턱 셋업',
+      image: '/Images/rounge/product_loungewear/7.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 32,
+      title: '샤르망 블랙\n인견 썸머 라운지웨어',
+      image: '/Images/rounge/product_loungewear/8.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 33,
+      title: '버건디 홀릭\n썸머팬츠',
+      image: '/Images/rounge/product_loungewear/9.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 34,
+      title: '블룸 블루\n썸머팬츠',
+      image: '/Images/rounge/product_loungewear/10.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 35,
+      title: '크루셜 퍼플\n썸머팬츠',
+      image: '/Images/rounge/product_loungewear/11.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 36,
+      title: '남여공용 베이지\n5부 썸머 팬츠',
+      image: '/Images/rounge/product_loungewear/12.webp',
+      category: 'loungewear'
+    },
+    {
+      id: 37,
+      title: '에메랄드 웨이브\n남성 홈슈즈',
+      image: '/Images/rounge/product_etc/1.webp',
+      category: 'etc'
+    },
+    {
+      id: 38,
+      title: '블랙와인\n홈슈즈',
+      image: '/Images/rounge/product_etc/2.webp',
+      category: 'etc'
+    },
+    {
+      id: 39,
+      title: '그린\n홈슈즈',
+      image: '/Images/rounge/product_etc/3.webp',
+      category: 'etc'
+    },
+    {
+      id: 40,
+      title: '베이비 핑크\n홈슈즈',
+      image: '/Images/rounge/product_etc/4.webp',
+      category: 'etc'
+    },
+    {
+      id: 41,
+      title: '베이직 양말\n화이트 롱',
+      image: '/Images/rounge/product_etc/5.webp',
+      category: 'etc'
+    },
+    {
+      id: 42,
+      title: '베이직 양말\n화이트',
+      image: '/Images/rounge/product_etc/6.webp',
+      category: 'etc'
+    },
+    {
+      id: 43,
+      title: '패턴 양말',
+      image: '/Images/rounge/product_etc/7.webp',
+      category: 'etc'
+    },
+    {
+      id: 44,
+      title: '베이직 양말\n베이지',
+      image: '/Images/rounge/product_etc/8.webp',
+      category: 'etc'
+    },
+    {
+      id: 45,
+      title: '듀이 네이비\n홈슈즈',
+      image: '/Images/rounge/product_etc/9.webp',
+      category: 'etc'
+    },
+    {
+      id: 46,
+      title: '베이비 핑크\n홈슈즈',
+      image: '/Images/rounge/product_etc/10.webp',
+      category: 'etc'
+    },
+    {
+      id: 47,
+      title: '캬라멜 블랙\n홈슈즈',
+      image: '/Images/rounge/product_etc/11.webp',
+      category: 'etc'
+    },
+    {
+      id: 48,
+      title: '에메랄드 웨이브\n홈슈즈',
+      image: '/Images/rounge/product_etc/12.webp',
+      category: 'etc'
+    },
+    
     // 추가 상품 데이터...
   ];
 
@@ -132,7 +375,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const interval = setInterval(() => {
       const currentIndex = navigation.findIndex(item => item.title === selectedNav);
       const nextIndex = (currentIndex + 1) % navigation.length;
@@ -141,7 +384,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
     return () => clearInterval(interval);
   }, [selectedNav, navigation]);
-
+*/
   useEffect(() => {
     if (initialSection === 'category' && lenis) {
       const element = document.getElementById('product-category');
@@ -253,6 +496,17 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
     setIsCategoryDragging(false);
   };
 
+  // 카테고리명과 products의 category 필드 매핑
+  const categoryMap: Record<string, string> = {
+    '언더웨어': 'underwear',
+    '파자마': 'pajama',
+    '라운지웨어': 'loungewear',
+    'ETC': 'etc',
+  };
+  const filteredProducts = products.filter(
+    (product) => product.category === categoryMap[selectedCategory]
+  );
+
   return (
     <ReactLenis root options={{ 
       lerp: 0.1,
@@ -273,6 +527,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                     className={`font-poppins font-medium text-[20px] lg:text-[30px] leading-[24px] lg:leading-[58px] cursor-pointer transition-colors duration-300  ${
                       selectedNav === item.title ? 'text-[#92000a]' : 'text-[#323232] hover:text-[#92000a]'
                     }`}
+                    onMouseOver={() => setSelectedNav(item.title)}
                     onClick={() => setSelectedNav(item.title)}
                   >
                     <span className="break-words">{item.title}</span>
@@ -302,6 +557,14 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                     className=""
                     priority
                     onLoadingComplete={() => setImageLoaded(true)}
+                    quality={100}
+                    unoptimized
+                  />
+                  <div
+                    className="pointer-events-none absolute left-0 bottom-0 w-full h-[181px] z-10"
+                    style={{
+                      background: 'linear-gradient(to bottom, rgba(255,255,255,0) 7%, #fff 100%)'
+                    }}
                   />
                 </motion.div>
               </AnimatePresence>
@@ -316,12 +579,14 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                 }}
                 className="relative top-[-45px] lg:top-[-40px] px-4 lg:pl-[105px] mt-8 lg:mt-0 xl:mb-[160px]"
               >
+             
                 <h2 className="text-[24px] lg:text-[56px] leading-[32px] lg:leading-[74px] tracking-[-1.8px] lg:tracking-[-2.8px] text-start text-[#1b1b1b] break-keep">
                   {navigation.find(item => item.title === selectedNav)?.heading}
                 </h2>
                 <p className="text-[16px] lg:text-[22px] leading-[24px] lg:leading-[36px] tracking-[-0.28px] lg:tracking-[-0.35px] text-start mt-[20px] lg:mt-[32px] text-gray-600 whitespace-pre-line break-keep">
                   {navigation.find(item => item.title === selectedNav)?.description}
                 </p>
+             
               </motion.div>
             </div>
 
@@ -350,6 +615,8 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                           className=""
                           priority
                           draggable="false"
+                          quality={100}
+                          unoptimized
                         />
                       </div>
                       <h3 className="mt-[21px] w-[267.5px] text-[32px] leading-[40px] tracking-[-1.6px] font-medium text-[#1b1b1b] break-keep whitespace-pre-line">
@@ -399,7 +666,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
           {/* 상품 그리드 */}
           <div className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0">
-            {products.map((product) => (
+            {filteredProducts.slice(0, visibleCount).map((product) => (
               <div key={product.id} className="group relative overflow-hidden">
                 <div className="w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-3xl overflow-hidden">
                   <Image
@@ -408,10 +675,14 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                     layout="fill"
                     objectFit="cover"
                     className="xl:transition-all xl:duration-300 xl:group-hover:blur-sm"
+                    quality={100}
+                    unoptimized
                   />
                   {/* 데스크톱 호버 시 나타나는 텍스트 */}
                   <div className="hidden xl:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-center text-[#1b1b1b] font-normal text-[22px] leading-[34px] whitespace-pre-wrap px-4 break-keep">
+                    {/* 딤드 배경 */}
+                    <div className="absolute inset-0 bg-[#ffffff26] z-0" />
+                    <p className="relative z-10 text-center text-[#1b1b1b] font-normal text-[22px] leading-[34px] whitespace-pre-wrap px-4 break-keep">
                       {product.title}
                     </p>
                   </div>
@@ -427,11 +698,16 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           </div>
 
           {/* 더보기 버튼 */}
-          <div className="text-center mt-[70px] lg:mt-[100px] mb-[100px] lg:mb-[200px]">
-            <button className="bg-[#323232] w-[148px] lg:w-[310px] h-[43px] lg:h-[72px] text-white rounded-full text-[18px] lg:text-[30px] leading-[18px] lg:leading-[36px] tracking-[-0.47px] lg:tracking-[-0.78px]">
-              더보기
-            </button>
-          </div>
+          {filteredProducts.length > 8 && (
+            <div className="text-center mt-[70px] lg:mt-[100px] mb-[100px] lg:mb-[200px]">
+              <button
+                className="bg-[#323232] w-[148px] lg:w-[310px] h-[43px] lg:h-[72px] text-white rounded-full text-[18px] lg:text-[30px] leading-[18px] lg:leading-[36px] tracking-[-0.47px] lg:tracking-[-0.78px]"
+                onClick={() => setVisibleCount(isExpanded ? 8 : 12)}
+              >
+                {isExpanded ? '간단히 보기' : '더보기'}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* 앱쇼핑몰 바로가기 버튼 */}

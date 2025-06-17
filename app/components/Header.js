@@ -28,7 +28,8 @@ const menuItems = [
       { name: '조직도', path: '/pages/Company#organization' },
       { name: '오시는 길', path: '/pages/Company#location' }
     ]
-  },
+  }
+  ,
   {
     title: '창업정보',
     subMenu: [
@@ -225,15 +226,7 @@ const Header = () => {
                     className="relative group"
                     onMouseEnter={() => setActiveMenu(idx)}
                   >
-                    <button 
-                      className="text-[16px] 2xl:text-[18px] font-regular"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (item.subMenu && item.subMenu.length > 0) {
-                          handleSmoothScroll(e, item.subMenu[0].path);
-                        }
-                      }}
-                    >
+                    <button className="text-[16px] 2xl:text-[18px] font-regular ">
                       <span className="h-[21px] tracking-[-0.47px]">{item.title}</span>
                     </button>
                     

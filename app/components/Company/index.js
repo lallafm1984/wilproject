@@ -1531,7 +1531,7 @@ const Company = () => {
             </div>
 
             {/* 오시는 길 섹션 */}
-            <div id="location" className="relative w-full h-auto bg-white">
+            {/*<div id="location" className="relative w-full h-auto bg-white">
               <div className="relative w-auto h-auto mt-[90px] md:mt-[150px] lg:mt-[180px] xl:mt-[200px] px-5 md:px-8 lg:px-[60px] xl:px-0 flex flex-col items-center justify-center">
                 <motion.p 
                   initial={{ opacity: 0, y: 50 }}
@@ -1553,9 +1553,9 @@ const Company = () => {
                 </motion.p>
               </div>
 
-              {/* 매장 위치 정보 컨테이너 */}
+              {// 매장 위치 정보 컨테이너 //}
               <div className="relative w-full h-auto mt-[30px] sm:mt-[60px] md:mt-[80px] lg:mt-[90px] xl:mt-[100px] flex flex-col items-center justify-center gap-[22px] md:gap-[60px] lg:gap-[60px] xl:gap-[60px] px-[30px] md:px-8 lg:px-[60px] xl:px-[117px]">
-                {/* 신사역점 */}
+                {// 신사역점 //}
                 <div className="relative w-full flex flex-col lg:flex-row xl:flex-row items-center justify-center  lg:gap-[40px] xl:gap-[54px]">
                   <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[144px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center justify-start sm:justify-center bg-[#323232] ">
                     <div className="relative w-auto h-auto flex-col items-start justify-start px-[37px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
@@ -1573,7 +1573,7 @@ const Company = () => {
                   </div>
                 </div>
 
-                {/* 신논현역점 */}
+                {// 신논현역점 //}
                 <div className="relative w-full flex flex-col-reverse lg:flex-row xl:flex-row items-center justify-center lg:gap-[40px] xl:gap-[54px]">
                   <div className="relative w-full md:w-[700px] lg:w-[644px] xl:w-[1069px] h-[280px] md:h-[400px] lg:h-[380px] xl:h-[446px]  overflow-hidden">
                     <div id="sinnonhyeon-map"
@@ -1592,7 +1592,7 @@ const Company = () => {
                   </div>
                 </div>
 
-                {/* 논현역점 */}
+                {// 논현역점 //}
                 <div className="relative w-full flex flex-col lg:flex-row xl:flex-row items-center justify-center  lg:gap-[40px] xl:gap-[54px]">
                   <div className="relative w-full md:w-[700px] lg:w-[320px] xl:w-[380px] h-[144px] md:h-[220px] lg:h-[380px] xl:h-[446px] flex items-center sm:justify-center justify-start bg-[#323232]  ">
                     <div className="relative w-auto h-auto flex-col items-start justify-start pl-[37px] md:px-[30px] lg:px-[35px] xl:px-[40px]">
@@ -1610,7 +1610,7 @@ const Company = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>*/}
 
             {/* 본사 위치 섹션 */}
             <div className="relative w-full mt-[90px] sm:mt-[200px] mb-[100px] sm:mb-[200px] h-fit bg-[#ffffff] flex flex-col items-center justify-start">

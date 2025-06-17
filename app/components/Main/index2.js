@@ -5,7 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCreative, Navigation, Pagination } from 'swiper/modules';
 import { default as NextImage } from 'next/image';
 import { ReactLenis } from '@studio-freight/react-lenis';
-import mainBgImage from '../../../public/Images/main1.png';
+import mainBgImage from '../../../public/Images/main_img/title.webp';
+import mainSectionImage from '../../../public/Images/main_img/main_1.webp';
+import mainSectionImage2 from '../../../public/Images/main_img/main_2.webp';
 
 // Swiper styles
 import 'swiper/css';
@@ -91,13 +93,15 @@ export default function Main() {
 
   // 7개의 슬라이드
   const slides = [
-    { id: 1, image: '/Images/img2.png', title: '코랄 수딩웜 맞주름 원피스', price: '39,900원' },
-    { id: 2, image: '/Images/img2.png', title: '골드가든 네이비 팬츠', price: '19,900원' },
-    { id: 3, image: '/Images/img2.png', title: '베이지 핑크 수딩웜 조거팬츠', price: '19,900원' },
-    { id: 4, image: '/Images/img2.png', title: '블랙 슬림핏 레깅스', price: '29,900원' },
-    { id: 5, image: '/Images/img2.png', title: '화이트 캐시미어 니트', price: '49,900원' },
-    { id: 6, image: '/Images/img2.png', title: '릴리 블라썸 벨로아 라운지 셋업', price: '45,900원' },
-    { id: 7, image: '/Images/img2.png', title: '네이비 울 코트', price: '89,900원' }
+    { id: 1, image: '/Images/main_img/item1.webp', title: '다이퍼 민트 8부 인견 셔링 팬츠'},
+    { id: 2, image: '/Images/main_img/item2.webp', title: '홀리데이 아카펠라 아사 핀턱 원피스'},
+    { id: 3, image: '/Images/main_img/item3.webp', title: '달콤 인견 솔리드 팬티'},
+    { id: 4, image: '/Images/main_img/item4.webp', title: '앞에 그린 인견 나염 팬티'},
+    { id: 5, image: '/Images/main_img/item5.webp', title: '칸탄도 블루헤븐 민소매 원피스'},
+    { id: 6, image: '/Images/main_img/item6.webp', title: '바로크 나염 팬티'},
+    { id: 7, image: '/Images/main_img/item7.webp', title: '핑크오렌지 반소매 파자마세트'},
+    { id: 8, image: '/Images/main_img/item8.webp', title: '라일락블루 체크 루즈핏 숏세트'},
+    { id: 9, image: '/Images/main_img/item9.webp', title: '쿨 네이비 테리 셔츠 리조트 셋업'},
   ];
    
   // 스크롤 이벤트 핸들러
@@ -375,8 +379,23 @@ export default function Main() {
       <div 
         ref={heroSectionRef}
         className="relative w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] xl:h-[calc(100vh-132px)] bg-[#2F2E2B] overflow-hidden inline-flex mt-[54px] md:mt-[100px] xl:mt-[132px] backdrop-blur-[20px] z-20">
-        <div className="absolute w-full h-[2px] bg-gray-500 blur-[5px]"></div>
-        <div className="absolute w-full inset-y-full h-[20px] bg-white blur-[20px]"></div>
+           <NextImage
+            src={mainBgImage}
+            alt="메인 배경"
+            fill
+            priority
+            quality={100}
+            className="object-cover"
+            sizes="100vw"
+            placeholder="blur"
+            style={{
+              WebkitFilter: 'blur(9px)',
+              filter: 'blur(9px)',
+            }}
+          />
+        
+        {/* <div className="absolute w-full h-[2px] bg-gray-500 blur-[5px]"></div>
+        <div className="absolute w-full inset-y-full h-[20px] bg-white blur-[20px]"></div> */}
         <div
           className="relative w-full bt-[54px] md:bt-[100px] xl:bt-[132px]"
 
@@ -398,7 +417,8 @@ export default function Main() {
             placeholder="blur"
           />
         </div>
-
+        {/* 딤드 오버레이 */}
+        <div className="absolute inset-0 z-0" style={{ background: '#00000033' }} />
         <div className="absolute w-full h-full flex flex-col sm:flex-row items-center justify-center px-4  md:gap-8">
           <div className="text-center">
             <p 
@@ -487,8 +507,17 @@ export default function Main() {
               {/* 이미지 영역 */}
               <motion.div 
                 variants={itemVariants}
-                className="xl:w-[540px]   w-[302px] xl:h-[540px]   h-[373px]  bg-[#B4B4B4] mt-8 xl:mt-0 sm:ml-[20px] xl:ml-[96px] flex-shrink-0"
+                className="xl:w-[540px] w-[302px] xl:h-[540px] h-[373px] bg-[#B4B4B4] mt-8 xl:mt-0 sm:ml-[20px] xl:ml-[96px] flex-shrink-0 relative overflow-hidden"
               >
+                <NextImage
+                  src={mainSectionImage}
+                  alt="메인 섹션 대표 이미지"
+                  placeholder="blur"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  className="object-cover"
+                  priority
+                />
                 {/* 이미지 영역 */}
               </motion.div>
             </div>
@@ -506,8 +535,17 @@ export default function Main() {
               {/* 이미지 영역 */}
               <motion.div 
                 variants={itemVariants}
-                className="xl:w-[402px]   w-[302px] xl:h-[520px]   h-[376px] bg-[#B4B4B4] order-2 md:order-1 flex-shrink-0"
+                className="xl:w-[402px] w-[302px] xl:h-[520px] h-[376px] bg-[#B4B4B4] order-2 md:order-1 flex-shrink-0 relative overflow-hidden"
               >
+                <NextImage
+                  src={mainSectionImage2}
+                  alt="AI 키오스크 대표 이미지"
+                  placeholder="blur"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  className="object-cover"
+                  priority
+                />
                 {/* 이미지 영역 */}
               </motion.div>
               
@@ -727,9 +765,16 @@ export default function Main() {
                 <p className="hidden sm:block text-[15px] xl:text-[22px] font-regular text-[#323232] mt-2 tracking-[-0.35px]">
                   동시에 갖춘 상품들로 일상을 채워드립니다. 바쁜 일상 속에서도 특별함을 느껴보세요.
                 </p>
-                <button className="mt-[36px] sm:mt-8 xl:mt-[80px] bg-[#2F2E2B] text-white w-[193px] xl:w-[326.92px] h-[43px] sm:h-[70.56px] text-[28px] hover:bg-[#92000A] transition-colors rounded-[40px]  relative z-50">
-                  <p className="text-[18px] sm:text-[28px]">상품보러가기</p>
-                </button>
+                <a
+                  href="https://laffair.kr/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-[36px] sm:mt-8 xl:mt-[80px] w-[193px] xl:w-[326.92px] h-[43px] sm:h-[70.56px] rounded-[40px] relative z-50"
+                >
+                  <button className="bg-[#2F2E2B] text-white w-full h-full text-[28px] hover:bg-[#92000A] transition-colors rounded-[40px]">
+                    <p className="text-[18px] sm:text-[28px]">상품보러가기</p>
+                  </button>
+                </a>
               </div>
             </div>
           </div>

@@ -23,13 +23,13 @@ const BrandStory = () => {
       {/* 히어로 섹션 */}
       <div className="relative w-[100%] lg:w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] lg:h-[936px] bg-[#979797]">
         <Image
-          src="/Images/img1.png"
+          src="/Images/brandstory/main.webp"
           alt="Brand Hero"
           fill
           className="object-cover"
         />
       </div>
-
+      
       {/* 브랜드 소개 섹션 */}
       <div className="mx-auto px-4 pt-[90px] pb-[90px] lg:pt-[200px] lg:pb-[200px] text-center">
         <motion.div 
@@ -54,22 +54,32 @@ const BrandStory = () => {
           className="w-auto mx-auto mt-[70px] lg:mt-[100px] space-y-[12px] lg:space-y-[24px] mb-[36px] lg:mb-[60px]"
         >
           <p className="text-[17px] lg:text-[30px] text-[#92000a]  font-semibold">
-            진정한 아름다움은 편안함에서 시작됩니다.
+            편안함을 그리다
           </p>
           <p className="text-[15px] lg:text-[22px] text-center font-normal tracking-[-0.39px] lg:tracking-[-0.35px] leading-[23px] lg:leading-[38px] text-[#323232] ">
-            라페어는 일상의 편안함을 중시하는 라이프웨어 <br className="lg:hidden"/> 브랜드로 모든 분들의 고유한 아름다움과<br className="lg:hidden"/> 개성을 존중하여 연구합니다.
+            매일 입는 것, 매일 닿는 것부터 시작되는 특별함
             <br />
-            피부에 닿는 부드러움과 하루 종일 함께하는 <br className="lg:hidden"/>편안함을 통해, 자신감을 주는 옷을 제공합니다.
+            라페어는 일상을 아름답게 만드는 편안함을 섬세하게 그려갑니다.
           </p>
         </motion.div>
-
+        
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           className="bg-[#333] w-[193px] lg:w-[327px] h-[43px] lg:h-[72px] text-[18px] lg:text-[30px] font-nomal text-center tracking-[-0.78px] leading-[36px] text-[#ffffff] rounded-full hover:bg-[#92000a] transition-colors"
+          href="https://laffair.kr/"
+          target="_blank"
+          rel="noopener noreferrer"
         >
+           <a
+                  href="https://laffair.kr/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full h-full flex items-center justify-center"
+          >
           라페어 바로가기
+          </a>
         </motion.button>
       </div>
 
@@ -79,17 +89,17 @@ const BrandStory = () => {
           {
             title: 'Story Art',
             description: '기분좋은 스토리의 라페어만의 아트웍을 담아 디자인합니다.',
-            image: '/Images/img1.png'
+            image: '/Images/brandstory/1.webp'
           },
           {
             title: 'Skin Flow',
             description: '입지 않는 듯,피부를 자연스럽게 감싸는 촉감을 위해 원료에서 가공까지 직접 연구하고 생산합니다.',
-            image: '/Images/img1.png'
+            image: '/Images/brandstory/2.webp'
           },
           {
             title: 'Flex Fit',
             description: '자유로운 활동성을 위해 패턴, 봉제, 사이즈까지 철저한 테스트로 완성합니다.',
-            image: '/Images/img1.png'
+            image: '/Images/brandstory/3.webp'
           }
         ].map((item, index) => (
           <div 
@@ -118,6 +128,7 @@ const BrandStory = () => {
                   alt={item.title}
                   fill
                   className="object-cover"
+                  quality={100}
                 />
               </div>
               <div className="relative flex flex-col items-start justify-start w-full md:w-fit ml-[10px]">
@@ -160,20 +171,21 @@ const BrandStory = () => {
         >
           {/* 첫 번째 세트 */}
           <div className="flex">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            {[...Array(20)].map((_, idx) => (
               <div
-                key={item}
+                key={idx + 1}
                 className={`
                   w-[193px] h-[290px] lg:w-[365px] lg:h-[580px] relative
-                  ${item % 2 === 0 ? 'mt-[60px]' : ''}
-                  ${item !== 1 ? 'ml-[40px]' : ''}
+                  ${(idx + 1) % 2 === 0 ? 'mt-[60px]' : ''}
+                  ${idx !== 0 ? 'ml-[40px]' : ''}
                 `}
               >
                 <Image
-                  src={`/Images/img1.png`}
-                  alt={`Gallery image ${item}`}
+                  src={`/Images/brandstory/itemlist/${idx + 1}.webp`}
+                  alt={`Gallery image ${idx + 1}`}
                   fill
                   className="object-cover"
+                  quality={100}
                 />
               </div>
             ))}
@@ -181,20 +193,21 @@ const BrandStory = () => {
           
           {/* 두 번째 세트 (무한 스크롤을 위한 복제) */}
           <div className="flex ml-[40px]">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            {[...Array(20)].map((_, idx) => (
               <div
-                key={`clone-${item}`}
+                key={`clone-${idx + 1}`}
                 className={`
                   w-[193px] h-[290px] lg:w-[365px] lg:h-[580px] relative
-                  ${item % 2 === 0 ? 'mt-[60px]' : ''}
-                  ${item !== 1 ? 'ml-[40px]' : ''}
+                  ${(idx + 1) % 2 === 0 ? 'mt-[60px]' : ''}
+                  ${idx !== 0 ? 'ml-[40px]' : ''}
                 `}
               >
                 <Image
-                  src={`/Images/img1.png`}
-                  alt={`Gallery image ${item}`}
+                  src={`/Images/brandstory/itemlist/${idx + 1}.webp`}
+                  alt={`Gallery image ${idx + 1}`}
                   fill
                   className="object-cover"
+                  quality={100}
                 />
               </div>
             ))}

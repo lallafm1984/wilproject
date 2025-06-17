@@ -22,13 +22,12 @@ const SundayLounge = () => {
       {/* 히어로 섹션 */}
       <div className="relative w-[100%] lg:w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] lg:h-[936px] bg-[#979797]">
         <Image
-          src="/Images/img1.png"
+          src="/Images/sundaylounge/main.webp"
           alt="Brand Hero"
           fill
-          className="object-cover"
+          className="object-cover object-[center_30%]"
         />
       </div>
-
       {/* 브랜드 소개 섹션 */}
       <div className="mx-auto px-4 pt-[90px] pb-[90px] lg:pt-[200px] lg:pb-[200px] text-center">
         <motion.div 
@@ -80,7 +79,14 @@ const SundayLounge = () => {
           transition={{ delay: 0.5 }}
           className="bg-[#333] w-[238px] lg:w-[403px] h-[43px] lg:h-[72px] text-[18px] lg:text-[30px] font-nomal text-center tracking-[-0.78px] leading-[36px] text-[#ffffff] rounded-full hover:bg-[#92000a] transition-colors"
         >
+          <a
+            href="https://laffair.kr/product/list.html?cate_no=246"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full h-full flex items-center justify-center"
+          >
           선데이라운지 바로가기
+          </a>
         </motion.button>
       </div>
 
@@ -90,17 +96,17 @@ const SundayLounge = () => {
           {
             title: 'Pattern',
             description: '일요일의 편안함을 담기 위해 매 시즌 몸의 변화를 패턴에 반영합니다.',
-            image: '/Images/img1.png'
+            image: '/Images/sundaylounge/1.webp'
           },
           {
             title: 'Easy',
             description: '특별하지 않을 수 있지만 어디에나 있고, 없으면 찾게 되는 잠옷&라운지웨어 쉽게 스며드는 컬러와 디자인으로 함께 할게요.',
-            image: '/Images/img1.png'
+            image: '/Images/sundaylounge/2.webp'
           },
           {
             title: 'Fabric',
             description: '일요일은 가장 달콤한 휴일의 대명사이자 아쉬움입니다. 선데이라운지를 입은 순간, 휴식이 될 수 있길 바랍니다.',
-            image: '/Images/img1.png'
+            image: '/Images/sundaylounge/3.webp'
           }
         ].map((item, index) => (
           <div 
@@ -170,18 +176,18 @@ const SundayLounge = () => {
         >
           {/* 첫 번째 세트 */}
           <div className="flex">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            {[...Array(20)].map((_, idx) => (
               <div
-                key={item}
+                key={idx + 1}
                 className={`
                   w-[193px] h-[290px] lg:w-[365px] lg:h-[580px] relative
-                  ${item % 2 === 0 ? 'mt-[60px]' : ''}
-                  ${item !== 1 ? 'ml-[40px]' : ''}
+                  ${(idx + 1) % 2 === 0 ? 'mt-[60px]' : ''}
+                  ${idx !== 0 ? 'ml-[40px]' : ''}
                 `}
               >
                 <Image
-                  src={`/Images/img1.png`}
-                  alt={`Gallery image ${item}`}
+                  src={`/Images/sundaylounge/itemlist/${idx + 1}.webp`}
+                  alt={`Gallery image ${idx + 1}`}
                   fill
                   className="object-cover"
                 />
@@ -191,18 +197,18 @@ const SundayLounge = () => {
           
           {/* 두 번째 세트 (무한 스크롤을 위한 복제) */}
           <div className="flex ml-[40px]">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            {[...Array(20)].map((_, idx) => (
               <div
-                key={`clone-${item}`}
+                key={`clone-${idx + 1}`}
                 className={`
                   w-[193px] h-[290px] lg:w-[365px] lg:h-[580px] relative
-                  ${item % 2 === 0 ? 'mt-[60px]' : ''}
-                  ${item !== 1 ? 'ml-[40px]' : ''}
+                  ${(idx + 1) % 2 === 0 ? 'mt-[60px]' : ''}
+                  ${idx !== 0 ? 'ml-[40px]' : ''}
                 `}
               >
                 <Image
-                  src={`/Images/img1.png`}
-                  alt={`Gallery image ${item}`}
+                  src={`/Images/sundaylounge/itemlist/${idx + 1}.webp`}
+                  alt={`Gallery image ${idx + 1}`}
                   fill
                   className="object-cover"
                 />
