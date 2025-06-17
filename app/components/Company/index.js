@@ -1,10 +1,21 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { ReactLenis } from '@studio-freight/react-lenis';
-import Lenis from '@studio-freight/lenis';
-import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import dynamic from 'next/dynamic'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ReactLenis } from '@studio-freight/react-lenis'
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl"
+
+// 지도 컴포넌트를 동적으로 import
+const KakaoMap = dynamic(() => import('./KakaoMap'), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gray-100 animate-pulse" />
+})
+
+const GoogleMap = dynamic(() => import('./GoogleMap'), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gray-100 animate-pulse" />
+})
 
 const getMotionSettings = (windowWidth , index) => {
   if (windowWidth < 640) { // 모바일
@@ -607,6 +618,19 @@ const Company = () => {
   const handleOrgMouseLeave = () => {
     setIsOrgDragging(false);
   };
+
+  // 지도 관련 코드를 별도 컴포넌트로 분리
+  const MapSection = ({ selectedTab }) => {
+    return (
+      <div className="relative w-full mt-[16px] sm:mt-[32px] h-[258px] sm:h-[400px] md:h-[500px] xl:h-[516px] bg-[#f8f8f2]">
+        {selectedTab === 'vietnam' ? (
+          <GoogleMap />
+        ) : (
+          <KakaoMap location={locations[selectedTab]} />
+        )}
+      </div>
+    )
+  }
 
   return (
     <ReactLenis root options={lenisOptions}>
