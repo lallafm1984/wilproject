@@ -1,4 +1,4 @@
-import Main from '../../components/Main/index2'
+import Main from '../../components/Main/index.js'
 import Head from 'next/head'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'

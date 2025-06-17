@@ -1613,7 +1613,7 @@ const Company = () => {
             </div>*/}
 
             {/* 본사 위치 섹션 */}
-            <div className="relative w-full mt-[90px] sm:mt-[200px] mb-[100px] sm:mb-[200px] h-fit bg-[#ffffff] flex flex-col items-center justify-start">
+            <div id="location" className="relative w-full mt-[90px] sm:mt-[200px] mb-[100px] sm:mb-[200px] h-fit bg-[#ffffff] flex flex-col items-center justify-start">
               <motion.p 
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
