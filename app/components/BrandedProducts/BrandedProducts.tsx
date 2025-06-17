@@ -557,8 +557,6 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                     className=""
                     priority
                     onLoadingComplete={() => setImageLoaded(true)}
-                    quality={100}
-                    unoptimized
                   />
                   <div
                     className="pointer-events-none absolute left-0 bottom-0 w-full h-[181px] z-10"
@@ -615,8 +613,6 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                           className=""
                           priority
                           draggable="false"
-                          quality={100}
-                          unoptimized
                         />
                       </div>
                       <h3 className="mt-[21px] w-[267.5px] text-[32px] leading-[40px] tracking-[-1.6px] font-medium text-[#1b1b1b] break-keep whitespace-pre-line">
@@ -675,8 +671,6 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                     layout="fill"
                     objectFit="cover"
                     className="xl:transition-all xl:duration-300 xl:group-hover:blur-sm"
-                    quality={100}
-                    unoptimized
                   />
                   {/* 데스크톱 호버 시 나타나는 텍스트 */}
                   <div className="hidden xl:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
