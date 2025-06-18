@@ -8,6 +8,8 @@ import { ReactLenis } from '@studio-freight/react-lenis';
 import mainBgImage from '../../../public/Images/main_img/title.webp';
 import mainSectionImage from '../../../public/Images/main_img/main_1.webp';
 import mainSectionImage2 from '../../../public/Images/main_img/main_2.webp';
+import brandStoryHeroImg from '../../../public/Images/brandstory/main.webp';
+import sundayLoungeHeroImg from '../../../public/Images/sundaylounge/main.webp';
 
 // Swiper styles
 import 'swiper/css';
@@ -368,6 +370,15 @@ export default function Main() {
     }
   };
 
+  // 프리로드 함수
+  const preloadHeroImages = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    [brandStoryHeroImg, sundayLoungeHeroImg].forEach((imgSrc) => {
+      const img = new window.Image();
+      img.src = typeof imgSrc === 'string' ? imgSrc : imgSrc.src;
+    });
+  }, []);
+
   // 초기 로딩 중에는 텍스트를 숨김
   if (windowWidth === undefined) {
     return null;
@@ -384,7 +395,7 @@ export default function Main() {
             alt="메인 배경"
             fill
             priority
-            quality={100}
+            quality={30}
             className="object-cover"
             sizes="100vw"
             placeholder="blur"
@@ -392,6 +403,7 @@ export default function Main() {
               WebkitFilter: 'blur(9px)',
               filter: 'blur(9px)',
             }}
+            onLoadingComplete={preloadHeroImages}
           />
         
         {/* <div className="absolute w-full h-[2px] bg-gray-500 blur-[5px]"></div>
