@@ -396,7 +396,7 @@ export default function Main() {
             fill
             priority
             quality={30}
-            className="object-cover"
+            className="object-cover object-[70%_30%]"
             sizes="100vw"
             placeholder="blur"
             style={{
@@ -424,7 +424,7 @@ export default function Main() {
             fill
             priority
             quality={100}
-            className="object-cover"
+            className="object-cover object-[70%_30%]"
             sizes="100vw"
             placeholder="blur"
           />
