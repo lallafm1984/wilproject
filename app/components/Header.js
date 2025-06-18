@@ -227,14 +227,14 @@ const Header = () => {
               </ul>
             </nav>
 
-            {/* <div className="flex items-center space-x-1 mr-[10px]">
-              <button className="ml-[20px] mr-[9px]">
+            <div className="flex items-center space-x-1 mr-[10px]">
+              <p className="ml-[20px] mr-[9px]">
                 <img src="/Images/icon_L.png" alt="로그인" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px]" />
-              </button>
-              <button className="bg-[#2F2E2B] font-regular text-white text-[13px] lg:text-[16px] tracking-[-0.47px] w-[140px] lg:w-[177px] h-[40px] lg:h-[50px] rounded-full hover:bg-[#92000A]">
+              </p>
+              {/* <button className="bg-[#2F2E2B] font-regular text-white text-[13px] lg:text-[16px] tracking-[-0.47px] w-[140px] lg:w-[177px] h-[40px] lg:h-[50px] rounded-full hover:bg-[#92000A]">
                 지금 상담신청 하세요!
-              </button>
-            </div> */}
+              </button> */}
+            </div>
           </div>
 
           <div className={`fixed top-0 left-0 w-full h-full bg-[#91000A] transform transition-transform duration-300 z-50 ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
