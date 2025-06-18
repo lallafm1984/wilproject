@@ -29,19 +29,19 @@ const menuItems = [
       { name: '오시는 길', path: '/pages/Company#location' }
     ]
   }
-  ,
-  {
-    title: '창업정보',
-    subMenu: [
-      { name: '가맹점혜택', path: '' },
-      { name: '창업절차', path: '' },
-      { name: '창업비용', path: '' },
-      { name: '창업문의', path: '' },
-      { name: 'F&A', path: '' },
-      { name: '매장찾기', path: '' },
-      { name: '라페어라운지소식', path: '' }
-    ]
-  }
+  // ,
+  // {
+  //   title: '창업정보',
+  //   subMenu: [
+  //     { name: '가맹점혜택', path: '' },
+  //     { name: '창업절차', path: '' },
+  //     { name: '창업비용', path: '' },
+  //     { name: '창업문의', path: '' },
+  //     { name: 'F&A', path: '' },
+  //     { name: '매장찾기', path: '' },
+  //     { name: '라페어라운지소식', path: '' }
+  //   ]
+  // }
 ]
 
 const Header = () => {
@@ -227,14 +227,14 @@ const Header = () => {
               </ul>
             </nav>
 
-            <div className="flex items-center space-x-1 mr-[10px]">
+            {/* <div className="flex items-center space-x-1 mr-[10px]">
               <button className="ml-[20px] mr-[9px]">
                 <img src="/Images/icon_L.png" alt="로그인" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px]" />
               </button>
               <button className="bg-[#2F2E2B] font-regular text-white text-[13px] lg:text-[16px] tracking-[-0.47px] w-[140px] lg:w-[177px] h-[40px] lg:h-[50px] rounded-full hover:bg-[#92000A]">
                 지금 상담신청 하세요!
               </button>
-            </div>
+            </div> */}
           </div>
 
           <div className={`fixed top-0 left-0 w-full h-full bg-[#91000A] transform transition-transform duration-300 z-50 ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
@@ -276,14 +276,14 @@ const Header = () => {
                   </div>
                 </div>
               ))}
-              <div className="border-t-[1px] w-[calc(100vw-58/360*100vw)] mt-[60px] border-[#ffffff]">
+              {/* <div className="border-t-[1px] w-[calc(100vw-58/360*100vw)] mt-[60px] border-[#ffffff]">
                 <div className="flex justify-between mt-[15px]">
                   <img src="/Images/m_menu/icon2.webp" alt="로그인" className="w-[39px] h-[39px]" />
                   <div className="bg-[#2f2e2b] w-[140px] h-[38px] rounded-full flex items-center justify-center">
                     <p className="text-white text-[12px] tracking-[-0.62px]">지금 상담신청 하세요!</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </nav>
           </div>
         </div>
