@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ReactLenis } from '@studio-freight/react-lenis';
+import mainHeroImg from '../../../public/Images/sundaylounge/main.webp';
 
 const SundayLounge = () => {
   const lenisOptions = {
@@ -22,10 +23,13 @@ const SundayLounge = () => {
       {/* 히어로 섹션 */}
       <div className="relative w-[100%] lg:w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] lg:h-[936px] bg-[#979797]">
         <Image
-          src="/Images/sundaylounge/main.webp"
+          src={mainHeroImg}
           alt="Brand Hero"
           fill
           className="object-cover object-[center_30%]"
+          priority
+          quality={100}
+          placeholder="blur"
         />
       </div>
       {/* 브랜드 소개 섹션 */}

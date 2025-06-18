@@ -20,6 +20,10 @@ const BannerSection = ({ id, isVisible, imageUrl, title, description, reverse = 
                 alt={title}
                 fill
                 className="object-cover"
+                priority
+                quality={100}
+                sizes="100vw"
+                placeholder="blur"
               />
             </div>
           </div>
