@@ -725,15 +725,16 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
           {/* 상품 그리드 */}
           <div
-            className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0"
+            className="flex flex-wrap justify-center overflow-x-auto max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0"
+            style={{ minWidth: 0 }}
           >
             {filteredProducts.slice(0, visibleCount).map((product, idx, arr) => (
               <div
                 key={product.id}
-                className="group relative overflow-hidden"
+                className="group relative overflow-hidden flex-shrink-0"
                 ref={idx === arr.length - 1 && visibleCount > 8 ? lastItemRef : undefined}
               >
-                <div className={`w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-[40px] overflow-hidden ${[37,38,43,44].includes(product.id) ? 'border-[1px]' : ''}`}>
+                <div className={`min-w-[120px] w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-[40px] overflow-hidden ${[37,38,43,44].includes(product.id) ? 'border-[1px]' : ''}`}>
                   <Image
                     src={product.image}
                     alt={product.title}
