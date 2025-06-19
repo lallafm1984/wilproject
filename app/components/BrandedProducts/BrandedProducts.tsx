@@ -26,6 +26,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const [categoryStartX, setCategoryStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [categoryScrollLeft, setCategoryScrollLeft] = useState(0);
+  const [isCategoryScrollable, setIsCategoryScrollable] = useState(false);
   const categories = [
     { id: 'underwear', name: '언더웨어' },
     { id: 'pajama', name: '파자마' },
@@ -38,6 +39,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const [showButton, setShowButton] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
   const isExpanded = visibleCount === 12;
+  const [shouldScrollToLast, setShouldScrollToLast] = useState(false);
   
   const navigation = [
     {
@@ -361,6 +363,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
+  const lastItemRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -507,6 +510,60 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
     (product) => product.category === categoryMap[selectedCategory]
   );
 
+  useEffect(() => {
+    const checkScrollable = () => {
+      if (categoryScrollRef.current) {
+        setIsCategoryScrollable(
+          categoryScrollRef.current.scrollWidth > categoryScrollRef.current.clientWidth
+        );
+      }
+    };
+    checkScrollable();
+    window.addEventListener('resize', checkScrollable);
+    return () => window.removeEventListener('resize', checkScrollable);
+  }, [categories, selectedCategory]);
+
+  const handleShowMore = () => {
+    setVisibleCount(12);
+    setShouldScrollToLast(true);
+  };
+
+  useEffect(() => {
+    if (shouldScrollToLast && lastItemRef.current) {
+      const element = lastItemRef.current;
+      // 그리드 컨테이너 기준 중앙에 오도록 스크롤 목표 계산
+      const rect = element.getBoundingClientRect();
+      const absoluteElementTop = rect.top + window.pageYOffset;
+      const absoluteElementLeft = rect.left + window.pageXOffset;
+      // 화면 중앙에 오도록 목표 위치 계산
+      const targetTop = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
+      const targetLeft = absoluteElementLeft - (window.innerWidth / 2) + (rect.width / 2);
+
+      // 1.5초 동안 일정한 속도로(선형) 스크롤하는 함수 (모바일에서도 마지막에 빨라지지 않게 보정)
+      const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
+        const startTime = performance.now();
+        function scrollStep(currentTime: number) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // linear
+          const nextY = startY + (endY - startY) * progress;
+          const nextX = startX + (endX - startX) * progress;
+          window.scrollTo({ top: nextY, left: nextX });
+          if (progress < 1) {
+            requestAnimationFrame(scrollStep);
+          } else {
+            // 마지막 프레임에서 목표 위치로 정확히 이동 (모바일 보정)
+            //window.scrollTo({ top: endY, left: endX });
+          }
+        }
+        requestAnimationFrame(scrollStep);
+      };
+
+      smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
+      setShouldScrollToLast(false);
+    }
+  }, [shouldScrollToLast]);
+
   return (
     <ReactLenis root options={{ 
       lerp: 0.1,
@@ -638,8 +695,9 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           {/* 카테고리 필터 */}
           <div 
             ref={categoryScrollRef}
-            id="product-category" 
-            className="flex overflow-x-auto scrollbar-hide xl:flex-wrap justify-start xl:justify-center gap-[15px] xl:gap-[30px] mt-[91px] xl:mt-[200px] mb-[22px] xl:mb-[60px] px-[30px] xl:px-0 cursor-grab active:cursor-grabbing"
+            id="product-category"
+            className={`flex overflow-x-auto scrollbar-hide xl:flex-wrap gap-[15px] xl:gap-[30px] mt-[91px] xl:mt-[200px] mb-[22px] xl:mb-[60px]  xl:px-0 cursor-grab active:cursor-grabbing
+              ${isCategoryScrollable ? 'justify-start' : 'justify-center'} xl:justify-center`}
             onMouseDown={handleCategoryMouseDown}
             onMouseMove={handleCategoryMouseMove}
             onMouseUp={handleCategoryMouseUp}
@@ -653,7 +711,12 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                     ? 'bg-[#92000a] text-white border border-[#92000a]'
                     : 'bg-white text-[#1b1b1b] border border-[#1b1b1b]'
                 }`}
-                onClick={() => !isCategoryDragging && setSelectedCategory(category.name)}
+                onClick={() => {
+                  if (!isCategoryDragging) {
+                    setSelectedCategory(category.name);
+                    setVisibleCount(8);
+                  }
+                }}
               >
                 {category.name}
               </button>
@@ -661,16 +724,22 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           </div>
 
           {/* 상품 그리드 */}
-          <div className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0">
-            {filteredProducts.slice(0, visibleCount).map((product) => (
-              <div key={product.id} className="group relative overflow-hidden">
-                <div className="w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-3xl overflow-hidden">
+          <div
+            className="flex flex-wrap justify-center max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0"
+          >
+            {filteredProducts.slice(0, visibleCount).map((product, idx, arr) => (
+              <div
+                key={product.id}
+                className="group relative overflow-hidden"
+                ref={idx === arr.length - 1 && visibleCount > 8 ? lastItemRef : undefined}
+              >
+                <div className={`w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-[40px] overflow-hidden ${[37,38,43,44].includes(product.id) ? 'border-[1px]' : ''}`}>
                   <Image
                     src={product.image}
                     alt={product.title}
                     layout="fill"
                     objectFit="cover"
-                    className="xl:transition-all xl:duration-300 xl:group-hover:blur-sm"
+                    className="xl:transition-all xl:duration-300 xl:group-hover:blur-sm "
                   />
                   {/* 데스크톱 호버 시 나타나는 텍스트 */}
                   <div className="hidden xl:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -696,7 +765,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
             <div className="text-center mt-[70px] lg:mt-[100px] mb-[100px] lg:mb-[200px]">
               <button
                 className="bg-[#323232] w-[148px] lg:w-[310px] h-[43px] lg:h-[72px] text-white rounded-full text-[18px] lg:text-[30px] leading-[18px] lg:leading-[36px] tracking-[-0.47px] lg:tracking-[-0.78px]"
-                onClick={() => setVisibleCount(isExpanded ? 8 : 12)}
+                onClick={isExpanded ? () => setVisibleCount(8) : handleShowMore}
               >
                 {isExpanded ? '간단히 보기' : '더보기'}
               </button>

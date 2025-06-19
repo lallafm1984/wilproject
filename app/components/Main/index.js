@@ -389,8 +389,10 @@ export default function Main() {
       {/* <div className="absolute -inset-1 bg-slate-50 rounded-md blur-md  z-30"></div> */}
       <div 
         ref={heroSectionRef}
-        className="relative w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] xl:h-[calc(100vh-132px)] bg-[#2F2E2B] overflow-hidden inline-flex mt-[54px] md:mt-[100px] xl:mt-[132px] backdrop-blur-[20px] z-20">
-           <NextImage
+        className="relative w-full h-[calc(100vh-54px)] md:h-[calc(100vh-100px)] xl:h-[calc(100vh-132px)] overflow-hidden inline-flex mt-[54px] md:mt-[100px] xl:mt-[132px] backdrop-blur-[20px] z-20">
+          
+        <div className="absolute inset-0 -m-4">
+          <NextImage
             src={mainBgImage}
             alt="메인 배경"
             fill
@@ -400,11 +402,12 @@ export default function Main() {
             sizes="100vw"
             placeholder="blur"
             style={{
-              WebkitFilter: 'blur(9px)',
-              filter: 'blur(9px)',
+              WebkitFilter: 'blur(10px)',
+              filter: 'blur(10px)'
             }}
             onLoadingComplete={preloadHeroImages}
           />
+        </div>
         
         {/* <div className="absolute w-full h-[2px] bg-gray-500 blur-[5px]"></div>
         <div className="absolute w-full inset-y-full h-[20px] bg-white blur-[20px]"></div> */}
