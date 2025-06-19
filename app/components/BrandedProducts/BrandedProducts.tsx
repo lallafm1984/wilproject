@@ -524,73 +524,60 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
     return () => window.removeEventListener('resize', checkScrollable);
   }, [categories, selectedCategory]);
 
-  const handleShowMore = () => {
-    setVisibleCount(12);
-    if (window.innerWidth <= 768) {
-      setTimeout(() => {
-        if (lastItemRef.current) {
-          const element = lastItemRef.current;
-          const rect = element.getBoundingClientRect();
-          const absoluteElementTop = rect.top + window.pageYOffset;
-          const absoluteElementLeft = rect.left + window.pageXOffset;
-          const targetTop = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
-          const targetLeft = absoluteElementLeft - (window.innerWidth / 2) + (rect.width / 2);
-          // 1.5초 동안 일정한 속도로(선형) 스크롤하는 함수
-          const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
-            const startTime = performance.now();
-            function scrollStep(currentTime: number) {
-              const elapsed = currentTime - startTime;
-              const progress = Math.min(elapsed / duration, 1);
-              const nextY = startY + (endY - startY) * progress;
-              const nextX = startX + (endX - startX) * progress;
-              window.scrollTo({ top: nextY, left: nextX });
-              if (progress < 1) {
-                requestAnimationFrame(scrollStep);
-              }
-            }
-            requestAnimationFrame(scrollStep);
-          };
-          smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
-        }
-      }, 0);
+  // 아이템 한 개의 높이를 계산하는 함수
+  const calculateItemHeight = () => {
+    if (window.innerWidth >= 1280) { // xl
+      return 503 + 20; // 아이템 높이 + gap
+    } else if (window.innerWidth >= 768) { // md
+      return 280 + 21; // 아이템 높이 + gap
     } else {
-      setShouldScrollToLast(true);
-      setLastItemImageLoaded(false);
+      return 200 + 21 + 46; // 아이템 높이 + gap + 모바일 텍스트 영역(23px * 2)
     }
   };
 
-  useEffect(() => {
-    if (window.innerWidth > 768 && shouldScrollToLast && lastItemImageLoaded && lastItemRef.current) {
-      const element = lastItemRef.current;
-      const rect = element.getBoundingClientRect();
-      const absoluteElementTop = rect.top + window.pageYOffset;
-      const absoluteElementLeft = rect.left + window.pageXOffset;
-      const targetTop = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
-      const targetLeft = absoluteElementLeft - (window.innerWidth / 2) + (rect.width / 2);
-      // PC: 강제 reflow, 한 번 이동, 1프레임 뒤에 애니메이션 시작
-      void element.offsetHeight;
-      window.scrollTo({ top: targetTop, left: targetLeft });
-      requestAnimationFrame(() => {
-        const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
-          const startTime = performance.now();
-          function scrollStep(currentTime: number) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const nextY = startY + (endY - startY) * progress;
-            const nextX = startX + (endX - startX) * progress;
-            window.scrollTo({ top: nextY, left: nextX });
-            if (progress < 1) {
-              requestAnimationFrame(scrollStep);
-            }
-          }
+  // 한 줄에 들어가는 아이템 개수 계산
+  const calculateItemsPerRow = () => {
+    const containerWidth = Math.min(1524, window.innerWidth - 32); // max-w-[1524px] 고려, 좌우 padding 16px * 2
+    const itemWidth = window.innerWidth >= 1280 ? 361 : (window.innerWidth >= 768 ? 200 : 140);
+    const gap = window.innerWidth >= 1280 ? 20 : 21;
+    return Math.floor((containerWidth + gap) / (itemWidth + gap));
+  };
+
+  const handleShowMore = () => {
+    const currentVisibleCount = visibleCount;
+    const newVisibleCount = 12;
+    const addedItems = newVisibleCount - currentVisibleCount;
+    
+    // 추가되는 아이템들이 몇 줄을 차지하는지 계산
+    const itemsPerRow = calculateItemsPerRow();
+    const additionalRows = Math.ceil(addedItems / itemsPerRow);
+    
+    // 추가되는 전체 높이 계산
+    const itemHeight = calculateItemHeight();
+    const additionalHeight = additionalRows * itemHeight;
+    
+    setVisibleCount(newVisibleCount);
+    
+    // 현재 스크롤 위치 + 추가 높이로 부드럽게 스크롤
+    const currentScroll = window.pageYOffset;
+    const targetScroll = currentScroll + additionalHeight;
+    
+    const smoothScrollTo = (startY: number, endY: number, duration: number) => {
+      const startTime = performance.now();
+      function scrollStep(currentTime: number) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const nextY = startY + (endY - startY) * progress;
+        window.scrollTo(0, nextY);
+        if (progress < 1) {
           requestAnimationFrame(scrollStep);
-        };
-        smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
-      });
-      setShouldScrollToLast(false);
-      setLastItemImageLoaded(false);
-    }
-  }, [shouldScrollToLast, lastItemImageLoaded]);
+        }
+      }
+      requestAnimationFrame(scrollStep);
+    };
+
+    smoothScrollTo(currentScroll, targetScroll, 1500);
+  };
 
   return (
     <ReactLenis root options={{ 
