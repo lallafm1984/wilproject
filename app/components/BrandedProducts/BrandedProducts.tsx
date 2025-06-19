@@ -541,27 +541,33 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
       const targetTop = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
       const targetLeft = absoluteElementLeft - (window.innerWidth / 2) + (rect.width / 2);
 
-      // 1.5초 동안 일정한 속도로(선형) 스크롤하는 함수 (모바일에서도 마지막에 빨라지지 않게 보정)
-      const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
-        const startTime = performance.now();
-        function scrollStep(currentTime: number) {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          // linear
-          const nextY = startY + (endY - startY) * progress;
-          const nextX = startX + (endX - startX) * progress;
-          window.scrollTo({ top: nextY, left: nextX });
-          if (progress < 1) {
-            requestAnimationFrame(scrollStep);
-          } else {
-            // 마지막 프레임에서 목표 위치로 정확히 이동 (모바일 보정)
-            //window.scrollTo({ top: endY, left: endX });
+      // 강제 reflow
+      void element.offsetHeight;
+      // 즉시 한 번 이동
+      window.scrollTo({ top: targetTop, left: targetLeft });
+      // 1프레임 뒤에 애니메이션 시작
+      requestAnimationFrame(() => {
+        // 1.5초 동안 일정한 속도로(선형) 스크롤하는 함수 (모바일에서도 마지막에 빨라지지 않게 보정)
+        const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
+          const startTime = performance.now();
+          function scrollStep(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // linear
+            const nextY = startY + (endY - startY) * progress;
+            const nextX = startX + (endX - startX) * progress;
+            window.scrollTo({ top: nextY, left: nextX });
+            if (progress < 1) {
+              requestAnimationFrame(scrollStep);
+            } else {
+              // 마지막 프레임에서 목표 위치로 정확히 이동 (모바일 보정)
+              //window.scrollTo({ top: endY, left: endX });
+            }
           }
-        }
-        requestAnimationFrame(scrollStep);
-      };
-
-      smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
+          requestAnimationFrame(scrollStep);
+        };
+        smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
+      });
       setShouldScrollToLast(false);
       setLastItemImageLoaded(false);
     }
