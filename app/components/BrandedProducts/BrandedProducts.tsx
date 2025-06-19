@@ -526,52 +526,67 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
   const handleShowMore = () => {
     setVisibleCount(12);
-    setShouldScrollToLast(true);
-    setLastItemImageLoaded(false);
+    if (window.innerWidth <= 768) {
+      setTimeout(() => {
+        if (lastItemRef.current) {
+          const element = lastItemRef.current;
+          const rect = element.getBoundingClientRect();
+          const absoluteElementTop = rect.top + window.pageYOffset;
+          const absoluteElementLeft = rect.left + window.pageXOffset;
+          const targetTop = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
+          const targetLeft = absoluteElementLeft - (window.innerWidth / 2) + (rect.width / 2);
+          // 1.5초 동안 일정한 속도로(선형) 스크롤하는 함수
+          const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
+            const startTime = performance.now();
+            function scrollStep(currentTime: number) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const nextY = startY + (endY - startY) * progress;
+              const nextX = startX + (endX - startX) * progress;
+              window.scrollTo({ top: nextY, left: nextX });
+              if (progress < 1) {
+                requestAnimationFrame(scrollStep);
+              }
+            }
+            requestAnimationFrame(scrollStep);
+          };
+          smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
+        }
+      }, 0);
+    } else {
+      setShouldScrollToLast(true);
+      setLastItemImageLoaded(false);
+    }
   };
 
   useEffect(() => {
-    if (shouldScrollToLast && lastItemImageLoaded && lastItemRef.current) {
+    if (window.innerWidth > 768 && shouldScrollToLast && lastItemImageLoaded && lastItemRef.current) {
       const element = lastItemRef.current;
-      // 그리드 컨테이너 기준 중앙에 오도록 스크롤 목표 계산
       const rect = element.getBoundingClientRect();
       const absoluteElementTop = rect.top + window.pageYOffset;
       const absoluteElementLeft = rect.left + window.pageXOffset;
-      // 화면 중앙에 오도록 목표 위치 계산
       const targetTop = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
       const targetLeft = absoluteElementLeft - (window.innerWidth / 2) + (rect.width / 2);
-
-      // 1.5초 동안 일정한 속도로(선형) 스크롤하는 함수 (모바일에서도 마지막에 빨라지지 않게 보정)
-      const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
-        const startTime = performance.now();
-        function scrollStep(currentTime: number) {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          // linear
-          const nextY = startY + (endY - startY) * progress;
-          const nextX = startX + (endX - startX) * progress;
-          window.scrollTo({ top: nextY, left: nextX });
-          if (progress < 1) {
-            requestAnimationFrame(scrollStep);
-          } else {
-            // 마지막 프레임에서 목표 위치로 정확히 이동 (모바일 보정)
-            //window.scrollTo({ top: endY, left: endX });
+      // PC: 강제 reflow, 한 번 이동, 1프레임 뒤에 애니메이션 시작
+      void element.offsetHeight;
+      window.scrollTo({ top: targetTop, left: targetLeft });
+      requestAnimationFrame(() => {
+        const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
+          const startTime = performance.now();
+          function scrollStep(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const nextY = startY + (endY - startY) * progress;
+            const nextX = startX + (endX - startX) * progress;
+            window.scrollTo({ top: nextY, left: nextX });
+            if (progress < 1) {
+              requestAnimationFrame(scrollStep);
+            }
           }
-        }
-        requestAnimationFrame(scrollStep);
-      };
-
-      if (window.innerWidth <= 768) {
-        // 모바일: 바로 애니메이션 시작
+          requestAnimationFrame(scrollStep);
+        };
         smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
-      } else {
-        // PC: 강제 reflow, 한 번 이동, 1프레임 뒤에 애니메이션 시작
-        void element.offsetHeight;
-        window.scrollTo({ top: targetTop, left: targetLeft });
-        requestAnimationFrame(() => {
-          smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
-        });
-      }
+      });
       setShouldScrollToLast(false);
       setLastItemImageLoaded(false);
     }
