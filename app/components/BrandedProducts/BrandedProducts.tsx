@@ -541,33 +541,37 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
       const targetTop = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
       const targetLeft = absoluteElementLeft - (window.innerWidth / 2) + (rect.width / 2);
 
-      // 강제 reflow
-      void element.offsetHeight;
-      // 즉시 한 번 이동
-      window.scrollTo({ top: targetTop, left: targetLeft });
-      // 1프레임 뒤에 애니메이션 시작
-      requestAnimationFrame(() => {
-        // 1.5초 동안 일정한 속도로(선형) 스크롤하는 함수 (모바일에서도 마지막에 빨라지지 않게 보정)
-        const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
-          const startTime = performance.now();
-          function scrollStep(currentTime: number) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // linear
-            const nextY = startY + (endY - startY) * progress;
-            const nextX = startX + (endX - startX) * progress;
-            window.scrollTo({ top: nextY, left: nextX });
-            if (progress < 1) {
-              requestAnimationFrame(scrollStep);
-            } else {
-              // 마지막 프레임에서 목표 위치로 정확히 이동 (모바일 보정)
-              //window.scrollTo({ top: endY, left: endX });
-            }
+      // 1.5초 동안 일정한 속도로(선형) 스크롤하는 함수 (모바일에서도 마지막에 빨라지지 않게 보정)
+      const smoothScrollTo = (startY: number, startX: number, endY: number, endX: number, duration: number) => {
+        const startTime = performance.now();
+        function scrollStep(currentTime: number) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // linear
+          const nextY = startY + (endY - startY) * progress;
+          const nextX = startX + (endX - startX) * progress;
+          window.scrollTo({ top: nextY, left: nextX });
+          if (progress < 1) {
+            requestAnimationFrame(scrollStep);
+          } else {
+            // 마지막 프레임에서 목표 위치로 정확히 이동 (모바일 보정)
+            //window.scrollTo({ top: endY, left: endX });
           }
-          requestAnimationFrame(scrollStep);
-        };
+        }
+        requestAnimationFrame(scrollStep);
+      };
+
+      if (window.innerWidth <= 768) {
+        // 모바일: 바로 애니메이션 시작
         smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
-      });
+      } else {
+        // PC: 강제 reflow, 한 번 이동, 1프레임 뒤에 애니메이션 시작
+        void element.offsetHeight;
+        window.scrollTo({ top: targetTop, left: targetLeft });
+        requestAnimationFrame(() => {
+          smoothScrollTo(window.pageYOffset, window.pageXOffset, targetTop, targetLeft, 1500);
+        });
+      }
       setShouldScrollToLast(false);
       setLastItemImageLoaded(false);
     }
@@ -740,7 +744,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
             {filteredProducts.slice(0, visibleCount).map((product, idx, arr) => (
               <div
                 key={product.id}
-                className="group relative overflow-hidden flex-shrink-0"
+                className="group relative overflow-hidden flex-shrink-0 w-1/2 sm:w-1/2 md:w-1/3 xl:w-1/4"
                 ref={idx === arr.length - 1 && visibleCount > 8 ? lastItemRef : undefined}
               >
                 <div className={`min-w-[120px] w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-[40px] overflow-hidden ${[37,38,43,44].includes(product.id) ? 'border-[1px]' : ''}`}>
