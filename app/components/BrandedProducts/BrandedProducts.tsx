@@ -386,7 +386,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
     if (isClient && initialSection === 'category') {
       const element = document.getElementById('product-category');
       if (element) {
-        const yOffset = -200;
+        const yOffset = window.innerWidth < 768 ? -120 : -200;
         const y =
           element.getBoundingClientRect().top + window.pageYOffset + yOffset;
         window.scrollTo({ top: y, behavior: 'auto' });
