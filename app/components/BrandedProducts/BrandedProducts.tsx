@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiChevronUp } from "react-icons/hi2";
 import { ReactLenis, useLenis } from '@studio-freight/react-lenis';
 import { useRouter, usePathname } from 'next/navigation';
-import { animateScroll } from 'react-scroll';
 
 // 스크롤 함수를 외부로 내보내기
 export let scrollToSection: ((section: 'top' | 'category') => void) | null = null;
@@ -38,8 +37,8 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0].name);
   const [selectedNav, setSelectedNav] = useState('Branded Products');
   const [showButton, setShowButton] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [visibleCount, setVisibleCount] = useState(8);
-  const isExpanded = visibleCount === 12;
   const [shouldScrollToLast, setShouldScrollToLast] = useState(false);
   const [lastItemImageLoaded, setLastItemImageLoaded] = useState(false);
   
@@ -365,7 +364,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
-  const lastItemRef = useRef<HTMLDivElement | null>(null);
+  const productGridRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -380,16 +379,6 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  /*useEffect(() => {
-    const interval = setInterval(() => {
-      const currentIndex = navigation.findIndex(item => item.title === selectedNav);
-      const nextIndex = (currentIndex + 1) % navigation.length;
-      setSelectedNav(navigation[nextIndex].title);
-    }, 7000);
-
-    return () => clearInterval(interval);
-  }, [selectedNav, navigation]);
-*/
   useEffect(() => {
     if (initialSection === 'category' && lenis) {
       const element = document.getElementById('product-category');
@@ -545,26 +534,48 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   };
 
   const handleShowMore = () => {
-    const currentVisibleCount = visibleCount;
-    const newVisibleCount = 12;
-    const addedItems = newVisibleCount - currentVisibleCount;
-    
-    // 추가되는 아이템들이 몇 줄을 차지하는지 계산
-    const itemsPerRow = calculateItemsPerRow();
-    const additionalRows = Math.ceil(addedItems / itemsPerRow);
-    
-    // 추가되는 전체 높이 계산
-    const itemHeight = calculateItemHeight();
-    const additionalHeight = additionalRows * itemHeight;
-    
-    setVisibleCount(newVisibleCount);
-    
-    // react-scroll을 사용하여 부드럽게 스크롤
-    animateScroll.scrollMore(additionalHeight, {
-      duration: 1500,
-      // smooth: 'easeInOutCubic',
-      delay: 100,
-    });
+    if (lenis && productGridRef.current) {
+      // 먼저 isExpanded를 true로 설정하여 모든 아이템을 DOM에 렌더링합니다.
+      setIsExpanded(true);
+
+      // DOM 업데이트가 반영될 시간을 확보하기 위해 setTimeout을 사용합니다.
+      setTimeout(() => {
+        if (!productGridRef.current) return;
+
+        const firstNewItem = productGridRef.current.children[8] as HTMLElement;
+        const lastNewItem = productGridRef.current.children[filteredProducts.length - 1] as HTMLElement;
+
+        if (firstNewItem && lastNewItem) {
+          const scrollTop = window.pageYOffset;
+          const firstNewItemTop = firstNewItem.getBoundingClientRect().top + scrollTop;
+          const lastNewItemBottom = lastNewItem.getBoundingClientRect().bottom + scrollTop;
+
+          // 새로 나타난 아이템 블록의 중앙 위치를 계산합니다.
+          const centerOfNewItems = firstNewItemTop + (lastNewItemBottom - firstNewItemTop) / 2;
+          
+          // 아이템 블록의 중앙이 뷰포트 중앙에 오도록 목표 스크롤 위치를 계산합니다.
+          const targetScroll = centerOfNewItems - (window.innerHeight / 2);
+
+          lenis.scrollTo(targetScroll, {
+            duration: 1.5,
+            easing: (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+          });
+        }
+      }, 100);
+    }
+  };
+
+  const handleCollapse = () => {
+    if (lenis) {
+      lenis.scrollTo('#product-category', {
+        offset: -120,
+        duration: 1.5,
+        easing: (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+      });
+      setTimeout(() => {
+        setIsExpanded(false);
+      }, 200);
+    }
   };
 
   return (
@@ -717,7 +728,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                 onClick={() => {
                   if (!isCategoryDragging) {
                     setSelectedCategory(category.name);
-                    setVisibleCount(8);
+                    setIsExpanded(false);
                   }
                 }}
               >
@@ -728,14 +739,14 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
           {/* 상품 그리드 */}
           <div
+            ref={productGridRef}
             className="flex flex-wrap justify-center overflow-x-auto max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0"
             style={{ minWidth: 0 }}
           >
-            {filteredProducts.slice(0, visibleCount).map((product, idx, arr) => (
+            {filteredProducts.map((product, idx) => (
               <div
                 key={product.id}
-                className="group relative overflow-hidden flex-shrink-0"
-                ref={idx === arr.length - 1 && visibleCount > 8 ? lastItemRef : undefined}
+                className={`group relative overflow-hidden flex-shrink-0 ${idx >= 8 && !isExpanded ? 'hidden' : ''}`}
               >
                 <div className={`min-w-[120px] w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-[40px] overflow-hidden ${[37,38,43,44].includes(product.id) ? 'border-[1px]' : ''}`}>
                   <Image
@@ -744,7 +755,6 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                     layout="fill"
                     objectFit="cover"
                     className="xl:transition-all xl:duration-300 xl:group-hover:blur-sm "
-                    onLoad={idx === arr.length - 1 && visibleCount > 8 ? () => setLastItemImageLoaded(true) : undefined}
                   />
                   {/* 데스크톱 호버 시 나타나는 텍스트 */}
                   <div className="hidden xl:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -770,7 +780,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
             <div className="text-center mt-[70px] lg:mt-[100px] mb-[100px] lg:mb-[200px]">
               <button
                 className="bg-[#323232] w-[148px] lg:w-[310px] h-[43px] lg:h-[72px] text-white rounded-full text-[18px] lg:text-[30px] leading-[18px] lg:leading-[36px] tracking-[-0.47px] lg:tracking-[-0.78px]"
-                onClick={isExpanded ? () => setVisibleCount(8) : handleShowMore}
+                onClick={isExpanded ? handleCollapse : handleShowMore}
               >
                 {isExpanded ? '간단히 보기' : '더보기'}
               </button>
