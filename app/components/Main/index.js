@@ -27,6 +27,7 @@ export default function Main() {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [maxScrollCount, setMaxScrollCount] = useState(10);
+  const [isClient, setIsClient] = useState(false);
 
   // 모든 ref 선언
   const heroSectionRef = useRef(null);
@@ -301,7 +302,10 @@ export default function Main() {
     return () => clearTimeout(timer);
   }, []);
 
- 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const calculateScale = progress => {
     const p = progress / 100;
     return 0.4+ (0.6 * p);
@@ -380,7 +384,7 @@ export default function Main() {
   }, []);
 
   // 초기 로딩 중에는 텍스트를 숨김
-  if (windowWidth === undefined) {
+  if (!isClient) {
     return null;
   }
 

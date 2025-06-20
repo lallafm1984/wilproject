@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const menuItems = [
@@ -45,6 +46,7 @@ const menuItems = [
 ]
 
 const Header = () => {
+  const router = useRouter()
   const [activeMenu, setActiveMenu] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeMobileMenu, setActiveMobileMenu] = useState(null)
@@ -65,22 +67,22 @@ const Header = () => {
 
   const handleSmoothScroll = (e, path) => {
     if (!path) return;
+    e.preventDefault();
 
     if (path.includes('#')) {
-      e.preventDefault();
       const [pagePath, sectionId] = path.split('#');
       
       if (window.location.pathname === pagePath) {
         const element = document.getElementById(sectionId);
         if (element) {
-          element.scrollIntoView();
+          element.scrollIntoView({ behavior: 'smooth' });
         }
       } else {
-        window.location.href = pagePath;
+        router.push(pagePath);
         sessionStorage.setItem('scrollToSection', sectionId);
       }
     } else {
-      window.location.href = path;
+      router.push(path);
     }
   };
 
@@ -130,11 +132,11 @@ const Header = () => {
               });
             }
           } else {
-            window.location.href = pagePath;
+            router.push(pagePath);
             sessionStorage.setItem('scrollToSection', sectionId);
           }
         } else {
-          window.location.href = path;
+          router.push(path);
         }
       }
     }, 400);

@@ -17,6 +17,7 @@ interface BrandedProductsProps {
 const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const router = useRouter();
   const pathname = usePathname();
+  const [isClient, setIsClient] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isCategoryDragging, setIsCategoryDragging] = useState(false);
@@ -364,6 +365,9 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const categoryScrollRef = useRef<HTMLDivElement>(null);
   const productGridParentRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -379,7 +383,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   }, []);
 
   useEffect(() => {
-    if (initialSection === 'category') {
+    if (isClient && initialSection === 'category') {
       const element = document.getElementById('product-category');
       if (element) {
         const yOffset = -200;
@@ -388,7 +392,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
         window.scrollTo({ top: y, behavior: 'auto' });
       }
     }
-  }, [initialSection]);
+  }, [initialSection, isClient]);
 
   useEffect(() => {
     setImageLoaded(false);
@@ -542,7 +546,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const getRowHeight = () => {
     if (typeof window === 'undefined') return 523;
     if (window.innerWidth >= 1280) return 503 + 20;
-    if (window.innerWidth >= 768) return 280 + 21;
+    if (window.innerWidth >= 768) return 280 + 12 + 46 + 11 + 21;
     return 200 + 12 + 11 + 46 + 21;
   };
 
@@ -563,8 +567,9 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
         const gridTop = productGridParentRef.current?.getBoundingClientRect().top ?? 0;
         const targetElement = document.querySelector(`[data-index="${firstNewRowIndex}"]`);
         if (targetElement) {
+            const mobileOffset = window.innerWidth < 768 ? 100 : 0;
             const targetTop = targetElement.getBoundingClientRect().top;
-            const targetScroll = targetTop + window.pageYOffset - (window.innerHeight / 2) + (getRowHeight() / 2);
+            const targetScroll = targetTop + window.pageYOffset - (window.innerHeight / 2) + (getRowHeight() / 2) + mobileOffset;
 
             window.scrollTo({
                 top: targetScroll,
@@ -577,8 +582,9 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
   const handleCollapse = () => {
     const categoryElement = document.getElementById('product-category');
     if (categoryElement) {
+      const offset = window.innerWidth >= 1280 ? 170 : 120;
       const targetScroll =
-        categoryElement.getBoundingClientRect().top + window.pageYOffset - 120;
+        categoryElement.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({
         top: targetScroll,
         behavior: 'smooth',
@@ -590,6 +596,10 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
       setIsExpanded(false);
     }
   };
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="w-full relative">
