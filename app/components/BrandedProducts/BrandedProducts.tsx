@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter, usePathname } from 'next/navigation';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import { HiChevronUp } from 'react-icons/hi2';
 
 
 // 스크롤 함수를 외부로 내보내기
@@ -520,8 +521,8 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
   const getNumColumns = () => {
     if (typeof window === 'undefined') return 4;
-    if (window.innerWidth >= 1280) return 4;
-    if (window.innerWidth >= 768) return 3;
+    if (window.innerWidth >= 1024) return 4;
+    if (window.innerWidth >= 576) return 3;
     return 2;
   };
 
@@ -545,9 +546,11 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
   const getRowHeight = () => {
     if (typeof window === 'undefined') return 523;
-    if (window.innerWidth >= 1280) return 503 + 20;
-    if (window.innerWidth >= 768) return 280 + 12 + 46 + 11 + 21;
-    return 200 + 12 + 11 + 46 + 21;
+    if (window.innerWidth >= 1280) return 503 + 20; // xl
+    if (window.innerWidth >= 1024) return 320 + 46 + 21; // lg
+    if (window.innerWidth >= 768) return 280 + 46 + 21; // md
+    if (window.innerWidth >= 576) return 220 + 46 + 21; // xs
+    return 200 + 46 + 21; // mobile
   };
 
   const rowVirtualizer = useVirtualizer({
@@ -577,24 +580,6 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
             });
         }
     }, 0);
-  };
-
-  const handleCollapse = () => {
-    const categoryElement = document.getElementById('product-category');
-    if (categoryElement) {
-      const offset = window.innerWidth >= 1280 ? 170 : 120;
-      const targetScroll =
-        categoryElement.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth',
-      });
-      setTimeout(() => {
-        setIsExpanded(false);
-      }, 500);
-    } else {
-      setIsExpanded(false);
-    }
   };
 
   if (!isClient) {
@@ -784,14 +769,14 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
-                <div className="flex flex-wrap justify-center overflow-x-auto max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0">
+                <div className="grid grid-cols-2 xs:grid-cols-3 lg:grid-cols-4 max-w-[1524px] mx-auto gap-[21px] xl:gap-[20px] px-4 xl:px-0 justify-items-center">
                     {row.map(product => (
                         <div
                         key={product.id}
-                        className="group relative overflow-hidden flex-shrink-0"
+                        className="group relative overflow-hidden w-[140px] xs:w-[150px] md:w-[200px] lg:w-[240px] xl:w-[361px]"
                         >
                         <div
-                            className={`min-w-[120px] w-[140px] h-[200px] md:w-[200px] md:h-[280px] xl:w-[361px] xl:h-[503px] relative rounded-2xl xl:rounded-[40px] overflow-hidden ${
+                            className={`w-full h-[200px] xs:h-[220px] md:h-[280px] lg:h-[320px] xl:h-[503px] relative rounded-2xl xl:rounded-[40px] overflow-hidden ${
                             [37, 38, 43, 44].includes(product.id) ? 'border-[1px]' : ''
                             }`}
                         >
@@ -813,7 +798,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                         </div>
                         {/* 모바일 텍스트 */}
                         <div className="block xl:hidden mt-[12px] mb-[11px]">
-                            <p className="text-[15px] leading-[23px] tracking-[-0.39px] text-[#1b1b1b] break-keep whitespace-pre-line">
+                            <p className="w-full text-[15px] leading-[23px] tracking-[-0.39px] text-[#1b1b1b] break-keep whitespace-pre-line">
                             {product.title}
                             </p>
                         </div>
@@ -827,16 +812,40 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
 
 
         {/* 더보기 버튼 */}
-        {filteredProducts.length > 8 && (
-          <div className="text-center mt-[70px] lg:mt-[100px] mb-[100px] lg:mb-[200px]">
-            <button
-              className="bg-[#323232] w-[148px] lg:w-[310px] h-[43px] lg:h-[72px] text-white rounded-full text-[18px] lg:text-[30px] leading-[18px] lg:leading-[36px] tracking-[-0.47px] lg:tracking-[-0.78px]"
-              onClick={isExpanded ? handleCollapse : handleShowMore}
-            >
-              {isExpanded ? '간단히 보기' : '더보기'}
-            </button>
-          </div>
-        )}
+        <div className="mb-[100px] lg:mb-[200px]">
+          {!isExpanded && filteredProducts.length > 8 && (
+            <div className="text-center mt-[70px] lg:mt-[100px]">
+              <button
+                className="bg-[#323232] w-[148px] lg:w-[310px] h-[43px] lg:h-[72px] text-white rounded-full text-[18px] lg:text-[30px] leading-[18px] lg:leading-[36px] tracking-[-0.47px] lg:tracking-[-0.78px]"
+                onClick={handleShowMore}
+              >
+                {'더보기'}
+              </button>
+            </div>
+          )}
+        </div>
+
+         {/* 앱쇼핑몰 바로가기 버튼 */}
+         <div className={`fixed bottom-[40px] lg:bottom-[60px] right-[17px] lg:right-[78px] z-50 flex flex-col items-center transition-opacity duration-300 ${showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}> 
+          <button 
+            onClick={scrollToTop}
+            className="w-[50px] h-[50px] lg:w-[86px] lg:h-[86px] bg-white rounded-full shadow-[0_2px_12px_0_rgba(0,0,0,0.08)] mb-[10px] lg:mb-[14px] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors duration-300"
+          >
+            <div className="w-[24px] lg:w-[50px] h-[20px] lg:h-[15px] flex items-center justify-center">
+              <HiChevronUp size={40} className="lg:hidden" strokeWidth={0.2} />
+              <HiChevronUp size={50} className="hidden lg:block" strokeWidth={0.2} />
+            </div>
+          </button>
+          <a
+            href="https://laffair.kr/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-[50px] h-[50px] lg:w-[86px] lg:h-[86px] bg-[#92000A] rounded-full text-white text-center flex flex-col items-center justify-center"
+          >
+            <span className="text-[11px] lg:text-[16px] leading-[20px] lg:leading-[24px] font-medium whitespace-pre-wrap">앱쇼핑몰{'\n'}</span><span className="hidden lg:block">바로가기</span>
+          </a>
+        </div>
+
       </div>
     </div>
   );
