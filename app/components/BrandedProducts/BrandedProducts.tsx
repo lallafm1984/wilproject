@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiChevronUp } from "react-icons/hi2";
 import { ReactLenis, useLenis } from '@studio-freight/react-lenis';
 import { useRouter, usePathname } from 'next/navigation';
+import { animateScroll } from 'react-scroll';
 
 // 스크롤 함수를 외부로 내보내기
 export let scrollToSection: ((section: 'top' | 'category') => void) | null = null;
@@ -558,25 +559,12 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
     
     setVisibleCount(newVisibleCount);
     
-    // 현재 스크롤 위치 + 추가 높이로 부드럽게 스크롤
-    const currentScroll = window.pageYOffset;
-    const targetScroll = currentScroll + additionalHeight;
-    
-    const smoothScrollTo = (startY: number, endY: number, duration: number) => {
-      const startTime = performance.now();
-      function scrollStep(currentTime: number) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const nextY = startY + (endY - startY) * progress;
-        window.scrollTo(0, nextY);
-        if (progress < 1) {
-          requestAnimationFrame(scrollStep);
-        }
-      }
-      requestAnimationFrame(scrollStep);
-    };
-
-    smoothScrollTo(currentScroll, targetScroll, 1500);
+    // react-scroll을 사용하여 부드럽게 스크롤
+    animateScroll.scrollMore(additionalHeight, {
+      duration: 1500,
+      // smooth: 'easeInOutCubic',
+      delay: 100,
+    });
   };
 
   return (
