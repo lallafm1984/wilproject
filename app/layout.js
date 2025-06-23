@@ -10,7 +10,7 @@ const poppins = Poppins({
 })
 
 export const metadata = {
-  metadataBase: new URL('https://laffair.com'),
+  metadataBase: new URL('https://laffairlounge.com'),
   title: {
     default: "라페어(L'affair) | 프리미엄 언더웨어 & 라운지웨어 쇼핑몰",
     template: '%s | 라페어',
@@ -22,7 +22,7 @@ export const metadata = {
   openGraph: {
     title: "라페어(L'affair) | 프리미엄 언더웨어 & 라운지웨어",
     description: '프리미엄 언더웨어 브랜드 라페어 공식 쇼핑몰. 전국 무인매장 운영.',
-    url: 'https://laffair.kr',
+    url: 'https://laffairlounge.com',
     siteName: "라페어(L'affair)",
     images: [
       {
