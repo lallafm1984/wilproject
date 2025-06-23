@@ -12,10 +12,10 @@ const poppins = Poppins({
 export const metadata = {
   metadataBase: new URL('https://laffairlounge.com'),
   title: {
-    default: "라페어(L'affair) | 프리미엄 언더웨어 & 라운지웨어 쇼핑몰",
+    default: "라페어(L'affair) | 언더웨어 & 라운지웨어 쇼핑몰",
     template: '%s | 라페어',
   },
-  description: '프리미엄 언더웨어 브랜드 라페어 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요. 전국 라페어 무인매장에서도 24시간 구매 가능합니다.',
+  description: '라페어 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요. 전국 라페어 무인매장에서도 24시간 구매 가능합니다.',
   keywords: ['라페어', '언더웨어', '속옷', '라운지웨어', '파자마', '홈웨어', '쇼핑몰', '무인매장', '프리미엄 언더웨어', 'W.I.L', '더블유아이엘', '선데이라운지', '라이프웨어', '패션'],
   creator: '더블유아이엘(W.I.L)',
   publisher: '더블유아이엘(W.I.L)',
