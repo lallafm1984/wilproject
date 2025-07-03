@@ -42,7 +42,7 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row gap-[22px] md:gap-[30px] lg:gap-[40px] xl:gap-[60px] 2xl:gap-[85px] w-fit justify-center md:justify-start">
               {/* 상호 및 대표이사 정보 */}
               <div className="flex flex-col text-[12px] md:text-[14px] lg:text-[18px] font-extralight text-left md:text-left md:mb-0 tracking-[-0.53px] md:tracking-[-0.4px] leading-[1.5] md:leading-[2]  flex-shrink-0">
-                <p className="whitespace-nowrap">상호 : 주식회사 라페어라운지</p>
+                <p className="whitespace-nowrap">상호 : 라페어라운지</p>
                 <p>대표이사 : 조경화</p>
               </div>
 
@@ -51,7 +51,7 @@ const Footer = () => {
                 <p>사업자등록번호 : 209-81-59539</p>
                 <p className="whitespace-nowrap">통신판매업신고번호 : 2019-서울금천-1952</p>
                 <div className="sm:mt-2 md:mt-[3px] lg:mt-[4px] xl:mt-[5px] tracking-[-0.4px]">
-                  <p>이메일 : HELLO@LAFFAIR.KR</p>
+                  <p>이메일 : hello@laffair.kr</p>
                 </div>
               </div>
 
