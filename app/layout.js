@@ -12,15 +12,14 @@ const poppins = Poppins({
 export const metadata = {
   metadataBase: new URL('https://laffairlounge.com'),
   title: {
-    default: "라페어라운지 | 언더웨어 & 라운지웨어 쇼핑몰",
-    template: '%s | 라페어라운지',
+    default: "라페어라운지"
   },
   description: '라페어 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요. 전국 라페어 무인매장에서도 24시간 구매 가능합니다.',
   keywords: ['라페어라운지', '라페어', '언더웨어', '속옷', '라운지웨어', '파자마', '홈웨어', '쇼핑몰', '무인매장', '프리미엄 언더웨어', 'W.I.L', '더블유아이엘', '선데이라운지', '라이프웨어', '패션'],
   creator: '더블유아이엘(W.I.L)',
   publisher: '더블유아이엘(W.I.L)',
   openGraph: {
-    title: "라페어라운지 | 프리미엄 언더웨어 & 라운지웨어",
+    title: "라페어라운지",
     description: '프리미엄 언더웨어 브랜드 라페어 공식 쇼핑몰. 전국 무인매장 운영.',
     url: 'https://laffairlounge.com',
     siteName: "라페어라운지",
@@ -37,7 +36,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "라페어라운지 | 프리미엄 언더웨어 & 라운지웨어",
+    title: "라페어라운지",
     description: '프리미엄 언더웨어 브랜드 라페어 공식 쇼핑몰. 전국 무인매장 운영.',
     images: ['/Images/main_img/main_1.webp'],
   },
@@ -64,6 +63,29 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko" className={poppins.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "라페어라운지",
+              "url": "https://laffairlounge.com",
+              "logo": "https://laffairlounge.com/Images/logo.png",
+              "image": [
+                "https://laffairlounge.com/Images/main_img/title.webp"
+              ], 
+              "description": "라페어 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요. 전국 라페어 무인매장에서도 24시간 구매 가능합니다.",
+              "sameAs": [
+                "https://www.youtube.com/channel/UCGkepkUGvItbvlqd95gxO6w", // SNS 링크들
+                "https://www.instagram.com/laffair_official/",
+                "https://www.facebook.com/laffairKOREA"
+              ]
+            })
+          }}
+        />
+      </head>
       <body>{children}
         <Analytics />
       </body>
