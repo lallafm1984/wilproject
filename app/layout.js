@@ -64,17 +64,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className={poppins.variable}>
       <head>
-        <title>라페어라운지 | 프리미엄 언더웨어, 파자마, 라운지웨어</title>
+        <title>라페어라운지</title>
         <meta name="description" content="라페어 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요. 전국 라페어 무인매장에서도 24시간 구매 가능합니다." />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="라페어라운지 | 프리미엄 언더웨어, 파자마, 라운지웨어" />
+        <meta property="og:title" content="라페어라운지" />
         <meta property="og:description" content="라페어 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요." />
         <meta property="og:image" content="https://laffairlounge.com/Images/main_img/title.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://laffairlounge.com" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="라페어라운지 | 프리미엄 언더웨어, 파자마, 라운지웨어" />
+        <meta name="twitter:title" content="라페어라운지" />
         <meta name="twitter:description" content="라페어 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요." />
         <meta name="twitter:image" content="https://laffairlounge.com/Images/main_img/title.webp" />
         <meta name="twitter:domain" content="laffairlounge.com" />
