@@ -85,6 +85,9 @@ export default function RootLayout({ children }) {
             })
           }}
         />
+        <link rel="icon" href="/Images/favicon/Favico_32x32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/Images/favicon/Favico_192x192.png" sizes="192x192" type="image/png" />
+        <link rel="apple-touch-icon" href="/Images/favicon/Favico_180x180.png" />
       </head>
       <body>{children}
         <Analytics />
