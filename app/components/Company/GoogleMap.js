@@ -7,23 +7,20 @@ export default function GoogleMap() {
   const markerRef = useRef(null)
 
   useEffect(() => {
-    const loadGoogleMap = async () => {
-      if (!window.google?.maps) {
-        const script = document.createElement('script')
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
-        await new Promise((resolve) => {
-          script.onload = resolve
-          document.head.appendChild(script)
-        })
-      }
+    let retryCount = 0
+    const maxRetries = 10
+    const retryDelay = 500 // ms
 
-      const coords = { lat: 10.8231, lng: 106.6297 } // Vietnam office coordinates
-      
+    const coords = { lat: 10.8231, lng: 106.6297 } // Vietnam office coordinates
+
+    function initMap() {
+      if (!window.google?.maps) return
+
       const map = new window.google.maps.Map(mapRef.current, {
         center: coords,
         zoom: 15
       })
-      
+
       if (markerRef.current) {
         markerRef.current.setMap(null)
       }
@@ -34,7 +31,16 @@ export default function GoogleMap() {
       })
     }
 
-    loadGoogleMap()
+    function tryInitMap() {
+      if (typeof window !== 'undefined' && window.google?.maps) {
+        initMap()
+      } else if (retryCount < maxRetries) {
+        retryCount++
+        setTimeout(tryInitMap, retryDelay)
+      }
+    }
+
+    tryInitMap()
 
     return () => {
       if (markerRef.current) {

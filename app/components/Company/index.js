@@ -294,11 +294,11 @@ const Company = () => {
       }
     };
 
-    // 구글맵 초기화 함수
+    // Google Maps 스크립트 동적 삽입 코드 완전히 제거
+    // window.google?.maps가 있을 때만 지도 초기화
     const initializeGoogleMap = () => {
       const container = document.getElementById('google-map-container');
       if (!container) return;
-
       const { coordinates } = locations.vietnam;
       const map = new window.google.maps.Map(container, {
         center: { lat: coordinates.lat, lng: coordinates.lng },
@@ -306,12 +306,10 @@ const Company = () => {
         disableDefaultUI: true,
         gestureHandling: 'none'
       });
-
       new window.google.maps.Marker({
         position: { lat: coordinates.lat, lng: coordinates.lng },
         map: map
       });
-
       setMaps(prev => ({ ...prev, googleMap: map }));
     };
 
@@ -336,28 +334,22 @@ const Company = () => {
         initializeKakaoMaps();
       }
 
-      // 구글맵 로드
-      if (!window.google?.maps) {
-        const googleApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-        if (!googleApiKey) {
-          console.error('Google Maps API key is not defined');
-          return;
+      // Google Maps API polling 로직
+      let retryCount = 0;
+      const maxRetries = 10;
+      const retryDelay = 300; // ms
+      function tryInitializeGoogleMap() {
+        if (window.google?.maps) {
+          initializeGoogleMap();
+        } else if (retryCount < maxRetries) {
+          retryCount++;
+          setTimeout(tryInitializeGoogleMap, retryDelay);
+        } else {
+          // 필요시 로딩 실패 안내
+          console.warn('Google Maps API 로드 실패');
         }
-
-        googleMapScript = document.createElement('script');
-        googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}`;
-        googleMapScript.async = true;
-        document.head.appendChild(googleMapScript);
-
-        await new Promise(resolve => {
-          googleMapScript.onload = () => {
-            initializeGoogleMap();
-            resolve();
-          };
-        });
-      } else {
-        initializeGoogleMap();
       }
+      tryInitializeGoogleMap();
     };
 
     loadMaps();
@@ -632,6 +624,21 @@ const Company = () => {
     )
   }
 
+  // selectedTab이 'vietnam'이 될 때마다 구글맵 초기화 시도
+  useEffect(() => {
+    if (
+      typeof window !== 'undefined' &&
+      selectedTab === 'vietnam' &&
+      !maps.googleMap &&
+      window.google?.maps
+    ) {
+      const container = document.getElementById('google-map-container');
+      if (container) {
+        initializeGoogleMap();
+      }
+    }
+  }, [selectedTab, maps.googleMap]);
+
   return (
     <ReactLenis root options={lenisOptions}>
       <div className="mx-auto z-1 mt-[54px] md:mt-[100px] xl:mt-[132px] bg-white min-h-screen">
@@ -723,7 +730,7 @@ const Company = () => {
                     className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[fit]'
                   >
                     <div className="w-[214px] max-md:ml-[30px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
-                      <img src="/Images/company/icon/icon_1.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
+                      <img src="/Images/company/icon/icon_1.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto" alt="라페어라운지 아이콘1"/>
                     </div>
                     <div className="w-[214px]  max-md:ml-[30px]  md:w-[320px] lg:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                       <p className="pt-[19px] md:pt-[28px] xl:pt-[32px] text-[15px] md:text-[26px] xl:text-[30px] h-auto md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
@@ -742,7 +749,7 @@ const Company = () => {
                     className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[fit]'
                   >
                     <div className="w-[214px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
-                      <img src="/Images/company/icon/icon_2.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
+                      <img src="/Images/company/icon/icon_2.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto" alt="라페어라운지 아이콘2"/>
                     </div>
                     <div className="w-[214px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                       <p className="pt-[19px] md:pt-[28px] xl:pt-[32px] text-[15px] md:text-[26px] xl:text-[30px] h-auto md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
@@ -761,7 +768,7 @@ const Company = () => {
                     className='w-full md:w-[320px] xl:w-[488px] h-auto md:h-[fit]'
                   >
                     <div className="w-[214px] max-md:mr-[30px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[162px] md:h-[250px] xl:h-[324px] bg-[#92000a] flex justify-center items-center">
-                      <img src="/Images/company/icon/icon_3.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto"/>
+                      <img src="/Images/company/icon/icon_3.webp" className="w-[90px] sm:w-auto h-[90px] md:h-[150px] xl:h-auto" alt="라페어라운지 아이콘3"/>
                     </div>
                     <div className="w-[214px] md:w-[320px] lg:w-[320px] xl:w-[488px] h-[82px] md:h-[140px] xl:h-[158px] bg-[#f8f8f2]">
                       <p className="pt-[19px] md:pt-[28px] xl:pt-[32px] text-[15px] md:text-[26px] xl:text-[30px] h-auto md:h-[55px] xl:h-[75px] font-poppins font-bold text-center text-[#1b1b1b]">
@@ -1474,13 +1481,13 @@ const Company = () => {
                     className="flex items-center justify-center h-[40px] md:h-[56px] xl:h-[73px] shrink-0"
                   >
                     <div className="flex items-center gap-[40px] md:gap-[70px] xl:gap-[100px] pr-[40px] md:pr-[70px] xl:pr-[100px]">
-                      <img src="/Images/company/etc/m.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/29-cm.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/w.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/ssg.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/h.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/s.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/ss.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
+                      <img src="/Images/company/etc/m.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 m 로고"/>
+                      <img src="/Images/company/etc/29-cm.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 29CM 로고"/>
+                      <img src="/Images/company/etc/w.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 w 로고"/>
+                      <img src="/Images/company/etc/ssg.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 SSG 로고"/>
+                      <img src="/Images/company/etc/h.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 h 로고"/>
+                      <img src="/Images/company/etc/s.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 s 로고"/>
+                      <img src="/Images/company/etc/ss.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 ss 로고"/>
                     </div>
                   </motion.div>
                   <motion.div 
@@ -1495,13 +1502,13 @@ const Company = () => {
                     className="flex items-center justify-center h-[40px] md:h-[56px] xl:h-[73px] shrink-0"
                   >
                     <div className="flex items-center gap-[40px] md:gap-[70px] xl:gap-[100px] pr-[40px] md:pr-[70px] xl:pr-[100px]">
-                      <img src="/Images/company/etc/m.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/29-cm.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/w.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/ssg.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/h.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/s.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/ss.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto"/>
+                      <img src="/Images/company/etc/m.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 m 로고"/>
+                      <img src="/Images/company/etc/29-cm.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 29CM 로고"/>
+                      <img src="/Images/company/etc/w.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 w 로고"/>
+                      <img src="/Images/company/etc/ssg.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 SSG 로고"/>
+                      <img src="/Images/company/etc/h.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 h 로고"/>
+                      <img src="/Images/company/etc/s.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 s 로고"/>
+                      <img src="/Images/company/etc/ss.webp" className="h-[16px] sm:h-[24px] md:h-[28px] xl:h-auto w-auto" alt="파트너사 ss 로고"/>
                     </div>
                   </motion.div>
                 </div>
@@ -1520,13 +1527,13 @@ const Company = () => {
                     className="flex items-center justify-center h-[50px] md:h-[70px] xl:h-[90px] shrink-0"
                   >
                     <div className="flex items-center justify-center gap-[40px] md:gap-[70px] xl:gap-[100px] pr-[40px] md:pr-[70px] xl:pr-[100px]">
-                      <img src="/Images/company/etc/sk.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/l.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/ns.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/kt.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/gs.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/hs.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/hh.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
+                      <img src="/Images/company/etc/sk.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 SK 로고"/>
+                      <img src="/Images/company/etc/l.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 L 로고"/>
+                      <img src="/Images/company/etc/ns.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 NS 로고"/>
+                      <img src="/Images/company/etc/kt.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 KT 로고"/>
+                      <img src="/Images/company/etc/gs.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 GS 로고"/>
+                      <img src="/Images/company/etc/hs.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 HS 로고"/>
+                      <img src="/Images/company/etc/hh.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 HH 로고"/>
                     </div>
                   </motion.div>
                   <motion.div 
@@ -1541,13 +1548,13 @@ const Company = () => {
                     className="flex items-center justify-center h-[50px] md:h-[70px] xl:h-[90px] shrink-0"
                   >
                     <div className="flex items-center justify-center gap-[40px] md:gap-[70px] xl:gap-[100px] pr-[40px] md:pr-[70px] xl:pr-[100px]">
-                      <img src="/Images/company/etc/sk.webp" className="h-[16px] sm:h-[24px]  md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/l.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/ns.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/kt.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/gs.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/hs.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
-                      <img src="/Images/company/etc/hh.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto"/>
+                      <img src="/Images/company/etc/sk.webp" className="h-[16px] sm:h-[24px]  md:h-[35px] xl:h-auto w-auto" alt="파트너사 SK 로고"/>
+                      <img src="/Images/company/etc/l.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 L 로고"/>
+                      <img src="/Images/company/etc/ns.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 NS 로고"/>
+                      <img src="/Images/company/etc/kt.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 KT 로고"/>
+                      <img src="/Images/company/etc/gs.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 GS 로고"/>
+                      <img src="/Images/company/etc/hs.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 HS 로고"/>
+                      <img src="/Images/company/etc/hh.webp" className="h-[16px] sm:h-[24px] md:h-[35px] xl:h-auto w-auto" alt="파트너사 HH 로고"/>
                     </div>
                   </motion.div>
                 </div>

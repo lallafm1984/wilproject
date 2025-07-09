@@ -82,6 +82,11 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/Images/favicon/Favico_192x192.png" sizes="192x192" type="image/png" />
         <link rel="apple-touch-icon" href="/Images/favicon/Favico_180x180.png" />
         <script
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`}
+          async
+          defer
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

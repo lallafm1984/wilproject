@@ -24,6 +24,7 @@ const HeroSection = () => {
         >
           <img 
             src={slide.image}
+            alt={slide.alt || "라페어라운지 메인 슬라이드"}
             className="w-full h-full object-cover transform scale-110 transition-transform duration-[10000ms] ease-out"
             style={{
               transform: currentSlide === index ? 'scale(1)' : 'scale(1.1)'

@@ -1,9 +1,32 @@
-'use client'
-
 import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import SundayLounge from '../../components/SundayLounge';
+
+export const metadata = {
+  title: "라페어라운지",
+  description: "라페어라운지 선데이라운지 제품을 만나보세요. 라페어라운지에서만 경험할 수 있는 특별한 라페어라운지 라운지웨어.",
+  openGraph: {
+    title: "라페어라운지",
+    description: "라페어라운지 선데이라운지 제품을 만나보세요. 라페어라운지에서만 경험할 수 있는 특별한 라페어라운지 라운지웨어.",
+    url: "https://laffairlounge.com/SundayLounge",
+    images: [
+      {
+        url: "https://laffairlounge.com/Images/main_img/title.webp",
+        width: 1200,
+        height: 630,
+        alt: "라페어라운지 대표 이미지"
+      }
+    ],
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "라페어라운지",
+    description: "라페어라운지 선데이라운지 제품을 만나보세요. 라페어라운지에서만 경험할 수 있는 특별한 라페어라운지 라운지웨어.",
+    images: ["https://laffairlounge.com/Images/main_img/title.webp"]
+  }
+}
 
 const SundayLoungePage = () => {
   return (
