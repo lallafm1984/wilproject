@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCreative, Navigation, Pagination } from 'swiper/modules';
 import { default as NextImage } from 'next/image';
 import { ReactLenis } from '@studio-freight/react-lenis';
-import mainBgImage from '../../../public/Images/main_img/title.webp';
+import mainBgImage from '../../../public/Images/main_img/main.webp';
 import mainSectionImage from '../../../public/Images/main_img/main_1.webp';
 import mainSectionImage2 from '../../../public/Images/main_img/main_2.webp';
 import brandStoryHeroImg from '../../../public/Images/brandstory/main.webp';

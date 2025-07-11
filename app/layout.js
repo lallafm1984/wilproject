@@ -69,14 +69,14 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="라페어라운지" />
         <meta property="og:description" content="라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요." />
-        <meta property="og:image" content="https://www.laffairlounge.com/Images/main_img/title.webp" />
+        <meta property="og:image" content="https://www.laffairlounge.com/Images/main_img/main.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://www.laffairlounge.com/" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="라페어라운지" />
         <meta name="twitter:description" content="라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요." />
-        <meta name="twitter:image" content="https://www.laffairlounge.com/Images/main_img/title.webp" />
+        <meta name="twitter:image" content="https://www.laffairlounge.com/Images/main_img/main.webp" />
         <meta name="twitter:domain" content="https://www.laffairlounge.com/" />
         <link rel="icon" href="/Images/favicon/Favico_32x32.png" sizes="32x32" type="image/png" />
         <link rel="icon" href="/Images/favicon/Favico_192x192.png" sizes="192x192" type="image/png" />
@@ -96,7 +96,7 @@ export default function RootLayout({ children }) {
               "url": "https://www.laffairlounge.com",
               "logo": "https://www.laffairlounge.com/Images/logo.png",
               "image": [
-                "https://www.laffairlounge.com/Images/main_img/title.webp"
+                "https://www.laffairlounge.com/Images/main_img/main.webp"
               ],
               "description": "라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요.",
               "sameAs": [
