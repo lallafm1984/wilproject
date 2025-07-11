@@ -64,7 +64,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className={poppins.variable}>
       <head>
-        <title>라페어라운지</title>
         <meta name="description" content="라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요. 전국 라페어라운지 무인매장에서도 24시간 구매 가능합니다." />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="라페어라운지" />
