@@ -9,10 +9,10 @@ export const metadata = {
   openGraph: {
     title: "라페어라운지",
     description: "라페어라운지 브랜드 상품 페이지입니다. 라페어라운지에서 다양한 라페어라운지 브랜드 상품을 확인하세요.",
-    url: "https://laffairlounge.com/branded-products",
+    url: "https://www.laffairlounge.com/branded-products",
     images: [
       {
-        url: "https://laffairlounge.com/Images/main_img/title.webp",
+        url: "https://www.laffairlounge.com/Images/main_img/title.webp",
         width: 1200,
         height: 630,
         alt: "라페어라운지 대표 이미지"
@@ -24,7 +24,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "라페어라운지",
     description: "라페어라운지 브랜드 상품 페이지입니다. 라페어라운지에서 다양한 라페어라운지 브랜드 상품을 확인하세요.",
-    images: ["https://laffairlounge.com/Images/main_img/title.webp"]
+    images: ["https://www.laffairlounge.com/Images/main_img/title.webp"]
   }
 }
 
