@@ -46,7 +46,7 @@ export const metadata = {
   },
   verification: {
     google: '16gUgN4y1RZzlNIRypybiDeL8MlHelKVPtM6w_miryk',
-    naver: '796d4d3dae6fe3405e3131fce4ce8185e292eb75',
+    naver: '0269004be25ab2e44da037cae7ec6b16be4a377c',
   },
   icons: {
     icon: [
