@@ -14,7 +14,7 @@ export const metadata = {
   title: {
     default: "라페어라운지"
   },
-  description: '라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요. 전국 라페어라운지 무인매장에서도 24시간 구매 가능합니다.',
+  description: '라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요.',
   keywords: ['라페어라운지', '라페어', 'laffair', 'laffairlounge', '언더웨어', '속옷', '라운지웨어', '파자마', '홈웨어', '쇼핑몰', '무인매장', '프리미엄 언더웨어', 'WIL', '더블유아이엘', '선데이라운지', '라이프웨어', '패션'],
   creator: '더블유아이엘(W.I.L)',
   publisher: '더블유아이엘(W.I.L)',
@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko" className={poppins.variable}>
       <head>
-        <meta name="description" content="라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요. 전국 라페어라운지 무인매장에서도 24시간 구매 가능합니다." />
+        <meta name="description" content="라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요." />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="라페어라운지" />
         <meta property="og:description" content="라페어라운지 공식 쇼핑몰. 편안하면서도 스타일리시한 속옷, 파자마, 라운지웨어를 만나보세요." />
