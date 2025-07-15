@@ -592,7 +592,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
         {/* 상단 이미지 섹션 */}
         <div
           id="lafair-lounge"
-          className="relative flex flex-col-reverse xl:flex-row justify-between bg-[#f8f8f2] w-full  xl:px-[calc((100%-1504px)/2)] max-w-[1920px] mx-auto"
+          className="relative flex flex-col-reverse xl:flex-row justify-between bg-[#f8f8f2] w-full  xl:px-[calc((100%-1504px)/2)]"
         >
           {/* 좌측 네비게이션 */}
           <div className="hidden xl:block pl-6 mb-10 xl:mb-0  xl:mt-[336px]">
