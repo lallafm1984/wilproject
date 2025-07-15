@@ -595,12 +595,12 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
           className="relative flex flex-col-reverse xl:flex-row justify-between bg-[#f8f8f2] w-full  xl:px-[calc((100%-1504px)/2)] max-w-[1920px] mx-auto"
         >
           {/* 좌측 네비게이션 */}
-          <div className="hidden xl:block px-6 mb-10 xl:mb-0  xl:mt-[336px]">
+          <div className="hidden xl:block pl-6 mb-10 xl:mb-0  xl:mt-[336px]">
             <ul className="space-y-4">
               {navigation.map((item) => (
                 <li
                   key={item.title}
-                  className={`font-poppins font-medium text-[20px] lg:text-[30px] leading-[24px] lg:leading-[58px] cursor-pointer transition-colors duration-300  ${
+                  className={`font-poppins font-medium text-[20px] lg:text-[30px] leading-[24px] lg:leading-[58px] cursor-pointer transition-colors duration-300   ${
                     selectedNav === item.title
                       ? 'text-[#92000a]'
                       : 'text-[#323232] hover:text-[#92000a]'
@@ -608,7 +608,7 @@ const BrandedProducts = ({ initialSection = 'top' }: BrandedProductsProps) => {
                   onMouseOver={() => setSelectedNav(item.title)}
                   onClick={() => setSelectedNav(item.title)}
                 >
-                  <span className="break-words">{item.title}</span>
+                  <span className="break-all">{item.title}</span>
                 </li>
               ))}
             </ul>

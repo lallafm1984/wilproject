@@ -25,25 +25,34 @@ const menuItems = [
     title: '더블유아이엘',
     subMenu: [
       { name: 'CEO 인사말', path: '/pages/Company#about' },
-      { name: '핵심 가치', path: '/pages/Company#core-value' },
-      { name: '조직도', path: '/pages/Company#organization' },
+      { name: '더블유아이엘', path: '/pages/Company#core-value' },
+      { name: '연혁', path: '/pages/Company#organization' },
       { name: '오시는 길', path: '/pages/Company#location' }
     ]
   }
-  // ,
+  //  ,
   // {
-  //   title: '창업정보',
+  //   title: '무인매장',
   //   subMenu: [
-  //     { name: '가맹점혜택', path: '' },
-  //     { name: '창업절차', path: '' },
-  //     { name: '창업비용', path: '' },
-  //     { name: '창업문의', path: '' },
-  //     { name: 'F&A', path: '' },
-  //     { name: '매장찾기', path: '' },
-  //     { name: '라페어라운지소식', path: '' }
+  //     // { name: '가맹점혜택', path: '' },
+  //     // { name: '창업절차', path: '' },
+  //     // { name: '창업비용', path: '' },
+  //     // { name: '창업문의', path: '' },
+  //     // { name: 'F&A', path: '' },
+  //     { name: '매장찾기', path: '/pages/MuinStore' },
+  //     // { name: '라페어라운지소식', path: '' }
   //   ]
   // }
 ]
+
+// 섹션별 스크롤 offset 매핑
+const SCROLL_OFFSETS = {
+  about: 0,
+  'core-value': 0,
+  organization: 150,
+  location: 150,
+  // 필요에 따라 추가
+};
 
 const Header = () => {
   const router = useRouter()
@@ -71,11 +80,15 @@ const Header = () => {
 
     if (path.includes('#')) {
       const [pagePath, sectionId] = path.split('#');
-      
+      const offset = SCROLL_OFFSETS[sectionId] ?? 80; // 기본값 80
+
       if (window.location.pathname === pagePath) {
         const element = document.getElementById(sectionId);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          const rect = element.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const top = rect.top + scrollTop - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
         }
       } else {
         router.push(pagePath);
@@ -204,7 +217,7 @@ const Header = () => {
                       <span className="h-[21px] tracking-[-0.47px]">{item.title}</span>
                     </Link>
                     
-                    <div className={`absolute left-1/2 -translate-x-1/2 mt-7 bg-white shadow-lg rounded-2xl overflow-hidden ${idx === 3 ? 'w-[148px]' : 'w-[116px]'} pt-[24px] pb-[24px]
+                    <div className={`absolute left-1/2 -translate-x-1/2 mt-7 bg-white shadow-lg rounded-2xl overflow-hidden ${idx === 3 ? 'w-[148px]' : 'w-[116px]'} pt-[26px] pb-[22px]
                       ${activeMenu === idx ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                       onMouseLeave={() => setActiveMenu(null)}
                     >
@@ -214,9 +227,12 @@ const Header = () => {
                             <Link 
                               href={subItem.path} 
                               onClick={(e) => handleSmoothScroll(e, subItem.path)}
-                              className="block px-4 py-0.25 tracking-[-0.36px] text-left pl-[23px]"
+                              className={
+                                "block px-4  tracking-[-0.36px] text-left pl-[18px]" +
+                                (subIdx !== item.subMenu.length - 1 ? " pb-[10px]" : "")
+                              }
                             >
-                              <span className="font-regular text-[14px] h-[23px] tracking-[-0.36px] hover:font-medium hover:text-[#92000A]">
+                              <span className="font-regular text-[16px] h-[14px] tracking-[-0.36px] hover:font-medium hover:text-[#92000A]">
                                 {subItem.name}
                               </span>
                             </Link>

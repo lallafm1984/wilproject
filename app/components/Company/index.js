@@ -600,7 +600,19 @@ const Company = () => {
     e.preventDefault();
     const x = e.pageX - containerRef_Org.current.offsetLeft;
     const walk = (x - orgStartX) * 2; // 스크롤 속도 조절
-    containerRef_Org.current.scrollLeft = orgScrollLeft - walk;
+    let nextScrollLeft = orgScrollLeft - walk;
+
+    const container = containerRef_Org.current;
+    const totalScroll = container.scrollWidth - container.clientWidth;
+    let minScroll = 0, maxScroll = totalScroll;
+    if (windowWidth <= 400) {
+      minScroll = totalScroll * 0.3;
+      maxScroll = totalScroll * 0.7;
+    }
+    if (nextScrollLeft < minScroll) nextScrollLeft = minScroll;
+    if (nextScrollLeft > maxScroll) nextScrollLeft = maxScroll;
+
+    container.scrollLeft = nextScrollLeft;
   };
 
   const handleOrgMouseUp = () => {
@@ -609,6 +621,56 @@ const Company = () => {
 
   const handleOrgMouseLeave = () => {
     setIsOrgDragging(false);
+  };
+
+  // 조직도 터치 드래그 이벤트 핸들러들
+  const handleOrgTouchStart = (e) => {
+    setIsOrgDragging(true);
+    setOrgStartX(e.touches[0].clientX - containerRef_Org.current.offsetLeft);
+    setOrgScrollLeft(containerRef_Org.current.scrollLeft);
+  };
+
+  const handleOrgTouchMove = (e) => {
+    if (!isOrgDragging) return;
+    const x = e.touches[0].clientX - containerRef_Org.current.offsetLeft;
+    const walk = (x - orgStartX) * 2;
+    let nextScrollLeft = orgScrollLeft - walk;
+
+    const container = containerRef_Org.current;
+    const totalScroll = container.scrollWidth - container.clientWidth;
+    let minScroll = 0, maxScroll = totalScroll;
+    if (windowWidth <= 640) {
+      minScroll = totalScroll * 0.3;
+      maxScroll = totalScroll * 0.7;
+    }
+    if (nextScrollLeft < minScroll) nextScrollLeft = minScroll;
+    if (nextScrollLeft > maxScroll) nextScrollLeft = maxScroll;
+
+    container.scrollLeft = nextScrollLeft;
+  };
+
+  // 조직도 스크롤 제한 함수
+  const clampOrgScroll = () => {
+    const container = containerRef_Org.current;
+    if (!container) return;
+    const totalScroll = container.scrollWidth - container.clientWidth;
+    let minScroll = 0, maxScroll = totalScroll;
+    if (windowWidth <= 640) {
+      minScroll = totalScroll * 0.3;
+      maxScroll = totalScroll * 0.7;
+    }
+    if (container.scrollLeft < minScroll) container.scrollLeft = minScroll;
+    if (container.scrollLeft > maxScroll) container.scrollLeft = maxScroll;
+  };
+
+  // onTouchEnd, onScroll에서 호출
+  const handleOrgTouchEnd = () => {
+    setIsOrgDragging(false);
+    clampOrgScroll();
+  };
+
+  const handleOrgScroll = () => {
+    clampOrgScroll();
   };
 
   // 지도 관련 코드를 별도 컴포넌트로 분리
@@ -783,7 +845,7 @@ const Company = () => {
               </div>
               
               {/* 조직도 */}
-              <div id="organization" className="relative w-full max-w-[1920px] mx-auto pt-[90px] md:pt-[150px] lg:pt-[180px] xl:pt-[200px] bg-white">
+              <div className="relative w-full max-w-[1920px] mx-auto pt-[90px] md:pt-[150px] lg:pt-[180px] xl:pt-[200px] bg-white">
                 <div className="relative w-full">
                   <motion.p 
                     initial={{ opacity: 0, y: 50 }}
@@ -809,10 +871,14 @@ const Company = () => {
                     onMouseMove={handleOrgMouseMove}
                     onMouseUp={handleOrgMouseUp}
                     onMouseLeave={handleOrgMouseLeave}
-                    className="relative mt-[20px]  md:aspect-[1920/1280] overflow-y-hidden overflow-x-auto justify-items-center cursor-grab active:cursor-grabbing"
+                    onTouchStart={handleOrgTouchStart}
+                    onTouchMove={handleOrgTouchMove}
+                    onTouchEnd={handleOrgTouchEnd}
+                    onScroll={handleOrgScroll}
+                    className="relative mt-[20px]  md:aspect-[1920/1280] overflow-y-hidden md:overflow-x-auto justify-items-center cursor-grab active:cursor-grabbing"
                     style={{
                       userSelect: 'none',
-                      scrollBehavior: isOrgDragging ? 'auto' : 'smooth'
+                      scrollBehavior: isOrgDragging ? 'auto' : 'auto'
                     }}
                   >
                     {/* 조직도 컨테이너 */}
@@ -822,7 +888,7 @@ const Company = () => {
                         {/* 배경 이미지 추가 */}
                         <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2   h-auto">
                           <img 
-                            src="/Images/company/grid_bg.webp" 
+                            src="/Images/company/gridd_bg.webp" 
                             alt="grid background" 
                             className="w-full h-full object-contain"
                           />
@@ -1029,7 +1095,7 @@ const Company = () => {
                 </div>
                 {/* 조직도 컨테이너 끝 */}
                 {/* 히스토리 */}
-                <div className="relative w-full h-fit mt-[20px] md:mt-[100px] xl:mt-[200px] flex flex-col sm:flex-row items-start justify-evenly bg-white overflow-visible">
+                <div id="organization" className="relative w-full h-fit mt-[20px] md:mt-[100px] xl:mt-[200px] flex flex-col sm:flex-row items-start justify-evenly bg-white overflow-visible">
                   {/* 히스토리 타이틀 */}
                   <div className="sm:right-[64%] top-[50px] pt-[30px] w-full sm:w-fit md:top-[250px] xl:top-[300px] h-fit z-10 sticky-title px-5 md:px-8 xl:px-[0px] bg-white max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center flex-shrink-0">
                     {/* ... 타이틀 컨텐츠 ... */}

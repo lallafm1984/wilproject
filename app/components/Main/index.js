@@ -327,15 +327,23 @@ export default function Main() {
 
   // 해상도별 슬라이드 변형 설정
   const getCreativeEffectSettings = (windowWidth) => {
+    // 페이드 함수: 중앙 5개는 1, 그 외는 점점 0
+    const fadeOpacity = (progress) => {
+      if (progress > -2.5 && progress < 2.5) return 1;
+      return Math.max(0, 1 - (Math.abs(progress) - 2.5) * 0.7);
+    };
+
     if (windowWidth < 640) { // 모바일
       return {
         prev: {
           translate: ['-47%', '3.5%', 0],
           rotate: [0, 0, -3.2],
+          opacity: fadeOpacity,
         },
         next: {
           translate: ['47%', '3.5%', 0],
           rotate: [0, 0, 3.2],
+          opacity: fadeOpacity,
         }
       };
     } else if (windowWidth < 768) { // 태블릿
@@ -343,10 +351,12 @@ export default function Main() {
         prev: {
           translate: ['-45%', '4%', 0],
           rotate: [0, 0, -4],
+          opacity: fadeOpacity,
         },
         next: {
           translate: ['45%', '4%', 0],
           rotate: [0, 0, 4],
+          opacity: fadeOpacity,
         }
       };
     } else if (windowWidth < 1024) { // 태블릿
@@ -354,10 +364,12 @@ export default function Main() {
         prev: {
           translate: ['-65%', '4%', 0],
           rotate: [0, 0, -4],
+          opacity: fadeOpacity,
         },
         next: {
           translate: ['65%', '4%', 0],
           rotate: [0, 0, 4],
+          opacity: fadeOpacity,
         }
       };
     } else { // 데스크톱
@@ -365,10 +377,12 @@ export default function Main() {
         prev: {
           translate: ['-50%', '7%', 0],
           rotate: [0, 0, -5],
+          opacity: fadeOpacity,
         },
         next: {
           translate: ['50%', '7%', 0],
           rotate: [0, 5, 5],
+          opacity: fadeOpacity,
         }
       };
     }
@@ -599,7 +613,7 @@ export default function Main() {
       </motion.div>
       </div>
       <div className="w-full bg-[#F8F8F2]">
-        <div className="w-full max-w-[1920px] sm:h-[1402px] h-[830px] relative mx-auto px-4 xl:px-0 ">
+        <div className="w-full  sm:h-[1402px] h-[830px] relative mx-auto px-4 xl:px-0 ">
           <div className="w-full h-[800px] text-center absolute left-1/2 -translate-x-1/2  top-[90px] sm:top-[199.5px]">
             <p className="text-[32px] sm:text-4xl xl:text-[56px] font-medium text-[#1b1b1b] mb-8 tracking-[-2.8px]">
               일상을 더욱<br className="sm:hidden"/> 특별하게<span className="sm:hidden">만들어 줄<br/>다양한 상품을 만나보세요</span>
@@ -609,9 +623,9 @@ export default function Main() {
             </p>
             
             {/* 이미지 슬라이드 영역 */}
-            <div className="relative w-full h-[770px] sm:h-[900px] mx-auto overflow-visible select-none ">
-              <div className="absolute w-full h-full flex items-center justify-center">
-                <div className="absolute w-full h-[800px] flex items-center justify-center">
+            <div className="relative w-full h-[770px] sm:h-[900px] mx-auto overflow-visible select-none">
+              <div className="absolute w-full h-full flex items-center justify-center overflow-visible">
+                <div className="absolute w-full h-[800px] flex items-center justify-center overflow-x-visible overflow-y-hidden ">
                   {/* 이전 버튼 */}
                   <button 
                     className="absolute top-[12%] sm:top-[30%] left-[calc(50%-110px)] sm:left-[calc(50%-140px)] md:left-[calc(50%-160px)] lg:left-[calc(50%-170px)] xl:left-[calc(50%-200px)] 2xl:left-[calc(50%-250px)] z-10 w-12 h-12 flex items-center justify-center  cursor-pointer"
@@ -626,9 +640,9 @@ export default function Main() {
                       xmlns="http://www.w3.org/2000/svg" 
                       fill="none" 
                       viewBox="0 0 24 24" 
-                      strokeWidth={2} 
+                      strokeWidth={1} 
                       stroke="currentColor" 
-                      className="w-6 h-6 text-gray-700"
+                      className="w-13.6 h-29.2 text-[#707070}"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                     </svg>
@@ -656,8 +670,8 @@ export default function Main() {
                       nextEl: '.swiper-button-next',
                       prevEl: '.swiper-button-prev',
                     }}
-                    spaceBetween={0}
-                    slidesPerView={1}
+                    spaceBetween={-100}
+                    slidesPerView={5}
                     centeredSlides={true}
                     loop={true}
                     effect="creative"
@@ -671,8 +685,11 @@ export default function Main() {
                     }}
                     style={{
                       width: '100%',
+                      maxWidth: '1920px',
+                      margin: '0 auto',
                       height: '1000px',  // Swiper 높이도 800px로 변경
-                      padding: '0px'
+                      padding: '0px',
+                      overflow: 'visible',
                     }}
                     breakpoints={{
                       // 480px 이상일 때
@@ -685,32 +702,41 @@ export default function Main() {
                       },
                       // 1024px 이상일 때
                       1024: {
-                        slidesPerView: 4,
+                        slidesPerView: 5,
                       }
                     }}
  
                     onSlideChange={(swiper) => {
                       setActiveIndex(swiper.realIndex); // realIndex를 사용하여 실제 활성 슬라이드 인덱스 추적
                     }}
+                    onProgress={(swiper) => {
+                      swiper.slides.forEach((slide, i) => {
+                        const slideProgress = slide.progress;
+                        // 중앙 5개(-2~2)는 1, 그 외는 점점 0
+                        let opacity = 1;
+                        if (slideProgress <= -2.5 || slideProgress >= 2.5) {
+                          opacity = Math.max(0, 1 - (Math.abs(slideProgress) - 1.5) * 0.7);
+                        }
+                        slide.style.opacity = opacity;
+                      });
+                    }}
                   >
                     {slides.map((slide, index) => (
-                      <SwiperSlide 
+                      <SwiperSlide
                         key={slide.id}
                         style={{
-                          width: 'auto',
+                          width: '295px',
                           height: windowWidth < 640 ? '500px' : '750px',
                           transition: 'all 800ms ease',
-                          position: 'relative'
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center'
                         }}
                       >
-                        <div 
+                        <div
                           style={{
                             width: '100%',
-                            maxWidth: '295px',
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -730,11 +756,11 @@ export default function Main() {
                               transition-all duration-300
                             "
                           />
-                          <p 
-                            className="text-center text-[12px] sm:text-[16px] xl:text-[20px] transition-opacity tracking-[-0.29px] duration-300"
+                          <p
+                            className="text-center text-[12px] sm:text-[16px] xl:text-[20px] transition-opacity tracking-[-0.29px] duration-100"
                             style={{
                               opacity: activeIndex === index ? 1 : 0,
-                              transition: 'opacity 0.3s ease',
+                              transition: 'opacity 0.15s ease',
                               width: '100%',
                               color: '#6a6a6a',
                               fontWeight: activeIndex === index ? '500' : '400'
@@ -761,9 +787,9 @@ export default function Main() {
                       xmlns="http://www.w3.org/2000/svg" 
                       fill="none" 
                       viewBox="0 0 24 24" 
-                      strokeWidth={2} 
+                      strokeWidth={1} 
                       stroke="currentColor" 
-                      className="w-6 h-6 text-gray-700"
+                      className="w-13.6 h-29.2 text-[#707070}"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>
