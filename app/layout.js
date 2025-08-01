@@ -112,8 +112,8 @@ export default function RootLayout({ children }) {
         <Analytics />
         <AdPopup 
           imageUrl="/Images/main_img/item3.webp"
-          playStoreUrl="https://play.google.com/store/apps/details?id=com.laffair.app"
-          appStoreUrl="https://apps.apple.com/app/laffair/id123456789"
+          playStoreUrl="https://play.google.com/store/apps/details?id=com.tobesmart.laffair"
+          appStoreUrl="https://apps.apple.com/us/app/%EB%9D%BC%ED%8E%98%EC%96%B4/id6744727173"
           title="라페어라운지 앱"
           description="더 편리한 쇼핑을 위해 앱을 다운로드하세요!"
           showCloseButton={true}

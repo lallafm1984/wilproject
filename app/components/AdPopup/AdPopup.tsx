@@ -61,15 +61,31 @@ export default function AdPopup({
     localStorage.setItem('adPopupClosed', 'true');
   };
 
-  const handlePlayStoreClick = () => {
+  const handlePlayStoreClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (playStoreUrl) {
-      window.open(playStoreUrl, '_blank', 'noopener,noreferrer');
+      const link = document.createElement('a');
+      link.href = playStoreUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
-  const handleAppStoreClick = () => {
+  const handleAppStoreClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (appStoreUrl) {
-      window.open(appStoreUrl, '_blank', 'noopener,noreferrer');
+      const link = document.createElement('a');
+      link.href = appStoreUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -143,10 +159,7 @@ export default function AdPopup({
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handlePlayStoreClick();
-                  }}
+                  onClick={handlePlayStoreClick}
                   className={`bg-white text-black ${isMobile ? 'px-2 py-1' : 'px-3 py-2'} rounded-lg font-semibold ${isMobile ? 'text-xs' : 'text-xs'} hover:bg-gray-100 transition-colors flex items-center justify-center gap-1`}
                 >
                   <svg width={isMobile ? "12" : "16"} height={isMobile ? "12" : "16"} viewBox="0 0 24 24" fill="currentColor">
@@ -159,10 +172,7 @@ export default function AdPopup({
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAppStoreClick();
-                  }}
+                  onClick={handleAppStoreClick}
                   className={`bg-white text-black ${isMobile ? 'px-2 py-1' : 'px-3 py-2'} rounded-lg font-semibold ${isMobile ? 'text-xs' : 'text-xs'} hover:bg-gray-100 transition-colors flex items-center justify-center gap-1`}
                 >
                   <svg width={isMobile ? "12" : "16"} height={isMobile ? "12" : "16"} viewBox="0 0 24 24" fill="currentColor">
