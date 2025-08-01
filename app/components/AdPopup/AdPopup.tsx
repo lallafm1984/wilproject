@@ -82,7 +82,7 @@ export default function AdPopup({
         animate={{ opacity: 1, scale: 1, x: 0 }}
         exit={{ opacity: 0, scale: 0.8, x: 100 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6"
+        className="fixed bottom-2 right-2 z-50 sm:bottom-6 sm:right-6"
         style={{ zIndex: 9999 }}
       >
         <motion.div
@@ -90,12 +90,12 @@ export default function AdPopup({
           whileTap={{ scale: 0.95 }}
                   className="relative bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden cursor-pointer"
         style={{
-          width: '280px',
-          height: isMobile ? '160px' : '320px',
+          width: isMobile ? '140px' : '280px',
+          height: isMobile ? '160px' : '180px',
           maxWidth: 'calc(100vw - 2rem)',
           maxHeight: 'calc(100vh - 2rem)',
-          minWidth: '250px',
-          minHeight: isMobile ? '140px' : '280px'
+          minWidth: isMobile ? '180px' : '280px',
+          minHeight: isMobile ? '140px' : '180px'
         }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -120,13 +120,20 @@ export default function AdPopup({
             <div className="absolute inset-0 bg-black bg-opacity-40" />
             
             {/* 콘텐츠 */}
-            <div className="absolute inset-0 flex flex-col justify-between p-4 text-white">
+            <div className="absolute inset-0 flex flex-col justify-between p-2 text-white">
               <div className="flex-1 flex flex-col justify-center">
                 <h3 className={`${isMobile ? 'text-lg' : 'text-xl'} font-bold mb-2 text-center`}>
                   {title}
                 </h3>
                 <p className={`${isMobile ? 'text-xs' : 'text-sm'} text-center opacity-90`}>
-                  {description}
+                  {isMobile ? (
+                    <>
+                      더 편리한 쇼핑을 위해<br />
+                      앱을 다운로드하세요!
+                    </>
+                  ) : (
+                    description
+                  )}
                 </p>
               </div>
               
@@ -183,7 +190,7 @@ export default function AdPopup({
                   handleClose();
                 }
               }}
-              className="absolute top-2 right-2 w-8 h-8 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full flex items-center justify-center text-white transition-all duration-200"
+              className="absolute top-1 right-1 w-6 h-6 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full flex items-center justify-center text-white transition-all duration-200"
               tabIndex={0}
               role="button"
               aria-label="광고 팝업 닫기"
