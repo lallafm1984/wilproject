@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Poppins } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
+import AdPopup from './components/AdPopup/AdPopup';
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
@@ -109,6 +110,15 @@ export default function RootLayout({ children }) {
       </head>
       <body>{children}
         <Analytics />
+        <AdPopup 
+          imageUrl="/Images/main_img/item3.webp"
+          playStoreUrl="https://play.google.com/store/apps/details?id=com.laffair.app"
+          appStoreUrl="https://apps.apple.com/app/laffair/id123456789"
+          title="라페어라운지 앱"
+          description="더 편리한 쇼핑을 위해 앱을 다운로드하세요!"
+          showCloseButton={true}
+          autoHide={false}
+        />
       </body>
     </html>
   )

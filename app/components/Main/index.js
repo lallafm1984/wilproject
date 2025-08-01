@@ -11,6 +11,7 @@ import mainSectionImage2 from '../../../public/Images/main_img/main_2.webp';
 import brandStoryHeroImg from '../../../public/Images/brandstory/main.webp';
 import sundayLoungeHeroImg from '../../../public/Images/sundaylounge/main.webp';
 
+
 // Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
