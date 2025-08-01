@@ -888,7 +888,7 @@ const Company = () => {
                         {/* 배경 이미지 추가 */}
                         <div className="absolute top-[40%] left-1/2 transform -translate-x-1/2 -translate-y-1/2   h-auto">
                           <img 
-                            src="/Images/company/gridd_bg.webp" 
+                            src="/Images/company/grid_bg.webp" 
                             alt="grid background" 
                             className="w-full h-full object-contain"
                           />
