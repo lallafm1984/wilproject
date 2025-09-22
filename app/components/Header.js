@@ -30,20 +30,20 @@ const menuItems = [
       { name: '오시는 길', path: '/pages/Company#location' }
     ]
   }
-  //  ,
-  // {
-  //   title: '무인매장',
-  //   subMenu: [
-  //       { name: '직영점', path: '/pages/MuinStore' },
-  //     // { name: '가맹점혜택', path: '' },
-  //     // { name: '창업절차', path: '' },
-  //     // { name: '창업비용', path: '' },
-  //     // { name: '창업문의', path: '' },
-  //     // { name: 'F&A', path: '' },
-  //     //{ name: '매장찾기', path: '/pages/MuinStore' },
-  //     // { name: '라페어라운지소식', path: '' }
-  //   ]
-  // }
+   ,
+  {
+    title: '무인매장',
+    subMenu: [
+        { name: '매장찾기', path: '/pages/Standalone' },
+      // { name: '가맹점혜택', path: '' },
+      // { name: '창업절차', path: '' },
+      // { name: '창업비용', path: '' },
+      // { name: '창업문의', path: '' },
+      // { name: 'F&A', path: '' },
+      //{ name: '매장찾기', path: '/pages/MuinStore' },
+      // { name: '라페어라운지소식', path: '' }
+    ]
+  }
 ]
 
 // 섹션별 스크롤 offset 매핑
