@@ -14,7 +14,7 @@ const STORES = {
       imageSrc: '/Images/muin/nonhyeon/nonhyeon.webp',
       subtitle: '누구의 시선도, 재촉도 없는 공간이 필요할 때.',
       description:
-        '당신이 원할 때 언제든 열려있는 논현역점에서,<br/> 방해받지 않는 온전한 휴식을 선물합니다.',
+        '당신이 원할 때 언제든 열려있는 논현역점에서,<br/> 방해받지 않는 편안한 쇼핑을 즐겨보세요.',
     },
     gallery: [
       { id: 1, src: '/Images/muin/nonhyeon/nonhyeon_1.webp', alt: '논현역점 매장 전경 1' },
@@ -51,7 +51,7 @@ const STORES = {
       imageSrc: '/Images/muin/sinnonhyeon/sinnonhyeon.webp',
       subtitle: '도심 속에서 누리는 온전한 쉼, 신논현역점에서.',
       description:
-        '바쁜 하루 속, 나만의 시간을 경험해보세요.<br/> 언제든 편하게 들러 쉬어갈 수 있는 신논현역점 입니다.',
+        '바쁜 하루 속, 나만의 시간을 경험해보세요.<br/> 언제든 편하게 들러 쇼핑 할 수 있는 신논현역점 입니다.',
     },
     gallery: [
       { id: 1, src: '/Images/muin/sinnonhyeon/sinnonhyeon_1.webp', alt: '신논현역점 매장 전경 1' },
