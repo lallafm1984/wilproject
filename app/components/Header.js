@@ -35,6 +35,7 @@ const menuItems = [
     title: '무인매장',
     subMenu: [
         { name: '매장찾기', path: '/pages/Standalone' },
+        { name: 'Q&A', path: '/pages/QnA' },
       // { name: '가맹점혜택', path: '' },
       // { name: '창업절차', path: '' },
       // { name: '창업비용', path: '' },
@@ -62,6 +63,33 @@ const Header = () => {
   const [activeMobileMenu, setActiveMobileMenu] = useState(null)
   const [clickedItemIndex, setClickedItemIndex] = useState(null)
 
+  const [currentUser, setCurrentUser] = useState(null)
+  const [isLoginOpen, setIsLoginOpen] = useState(false)
+  const [loginUserid, setLoginUserid] = useState('')
+  const [loginPassword, setLoginPassword] = useState('')
+  const [loginLoading, setLoginLoading] = useState(false)
+  const [loginError, setLoginError] = useState(null)
+
+  const notifyAuthChanged = () => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('auth-changed'))
+    }
+  }
+
+  const loadSession = async () => {
+    try {
+      const res = await fetch('/api/auth/session', { method: 'GET' })
+      const data = await res.json().catch(() => null)
+      if (data && data.user) {
+        setCurrentUser(data.user)
+      } else {
+        setCurrentUser(null)
+      }
+    } catch {
+      setCurrentUser(null)
+    }
+  }
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest('header')) {
@@ -74,6 +102,38 @@ const Header = () => {
       document.removeEventListener('mouseover', handleClickOutside);
     };
   }, []);
+
+  const getDisplayName = () => {
+    if (!currentUser) return ''
+    if (currentUser.name) return currentUser.name
+    if (currentUser.loginId) {
+      const id = String(currentUser.loginId)
+      return id.slice(-4)
+    }
+    return ''
+  }
+
+  // 헤더 최초 진입 시 로그인 세션 확인
+  useEffect(() => {
+    loadSession()
+  }, [])
+
+  // 다른 컴포넌트에서 로그인/로그아웃 했을 때 세션 동기화
+  useEffect(() => {
+    const handler = () => {
+      loadSession()
+    }
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('auth-changed', handler)
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('auth-changed', handler)
+      }
+    }
+  }, [])
 
   const handleSmoothScroll = (e, path) => {
     if (!path) return;
@@ -246,21 +306,76 @@ const Header = () => {
               </ul>
             </nav>
 
-            <div className="flex items-center space-x-1 mr-[10px]">
-              <p className="ml-[20px] mr-[9px]">
-                <img src="/Images/icon_L.png" alt="로그인" className="w-[40px] h-[40px] lg:w-[50px] lg:h-[50px]" />
+            <div className="flex items-center space-x-2 mr-[18px]">
+              <p className="ml-[4px] mr-[6px]">
+                <img src="/Images/icon_L.png" alt="로그인" className="w-[32px] h-[32px] lg:w-[40px] lg:h-[40px]" />
               </p>
-              {/* <button className="bg-[#2F2E2B] font-regular text-white text-[13px] lg:text-[16px] tracking-[-0.47px] w-[140px] lg:w-[177px] h-[40px] lg:h-[50px] rounded-full hover:bg-[#92000A]">
-                지금 상담신청 하세요!
-              </button> */}
+              {currentUser ? (
+                <div className="flex items-center space-x-2">
+                  <span className="text-[12px] text-[#2F2E2B]">
+                    {getDisplayName()}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        await fetch('/api/auth/logout', { method: 'POST' })
+                      } finally {
+                        setCurrentUser(null)
+                        notifyAuthChanged()
+                      }
+                    }}
+                    className="rounded-full border border-[#2F2E2B] px-3 py-1 text-[11px] font-medium text-[#2F2E2B] hover:bg-[#2F2E2B] hover:text-white"
+                  >
+                    로그아웃
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIsLoginOpen(true)}
+                  className="rounded-full border border-[#2F2E2B] px-4 py-1.5 text-[12px] font-medium text-[#2F2E2B] hover:bg-[#2F2E2B] hover:text-white"
+                >
+                  로그인
+                </button>
+              )}
             </div>
           </div>
 
           <div className={`fixed top-0 left-0 w-full h-full bg-[#91000A] transform transition-transform duration-300 z-50 ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-            <div className="absolute right-[calc(29/360*100vw)] top-[30px]">
+            <div className="absolute right-[calc(29/360*100vw)] top-[30px] flex items-center gap-3">
               <button onClick={() => setIsMobileMenuOpen(false)} className="text-white">
                 <img src="/Images/m_menu/icon.webp" alt="닫기" className="w-[38px] h-[38px]" />
               </button>
+              {currentUser ? (
+                <>
+                  <span className="text-xs text-white">
+                    {getDisplayName()}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        await fetch('/api/auth/logout', { method: 'POST' })
+                      } finally {
+                        setCurrentUser(null)
+                        notifyAuthChanged()
+                      }
+                    }}
+                    className="rounded-full border border-white px-3 py-1 text-[11px] text-white hover:bg-white hover:text-[#91000A]"
+                  >
+                    로그아웃
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIsLoginOpen(true)}
+                  className="rounded-full border border-white px-3 py-1 text-[11px] text-white hover:bg-white hover:text-[#91000A]"
+                >
+                  로그인
+                </button>
+              )}
             </div>
 
             <nav className="absolute left-[calc(29/360*100vw)] w-full top-[93px] flex flex-col align-top gap-[18px]">
@@ -307,6 +422,94 @@ const Header = () => {
           </div>
         </div>
       </div>
+      {/* 공통 로그인 모달 */}
+      {isLoginOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50">
+          <div className="w-full max-w-sm rounded-md bg-white p-5 shadow-xl">
+            <h2 className="mb-4 text-lg font-semibold">로그인</h2>
+            {loginError && (
+              <div className="mb-3 rounded border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700">
+                {loginError}
+              </div>
+            )}
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault()
+                setLoginError(null)
+                setLoginLoading(true)
+                try {
+                  const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      userid: loginUserid,
+                      password: loginPassword,
+                    }),
+                  })
+                  const data = await res.json().catch(() => null)
+                  if (!res.ok) {
+                    throw new Error(data?.message || '로그인에 실패했습니다.')
+                  }
+                  if (data && data.user) {
+                    setCurrentUser(data.user)
+                    notifyAuthChanged()
+                  }
+                  setIsLoginOpen(false)
+                  setLoginUserid('')
+                  setLoginPassword('')
+                } catch (err) {
+                  setLoginError(err instanceof Error ? err.message : String(err))
+                } finally {
+                  setLoginLoading(false)
+                }
+              }}
+              className="space-y-4"
+            >
+              <div>
+                <label className="mb-1 block text-xs font-medium text-gray-700">
+                   아이디
+                </label>
+                <input
+                  type="text"
+                  value={loginUserid}
+                  onChange={(e) => setLoginUserid(e.target.value)}
+                  className="w-full rounded border border-gray-300 px-3 py-2 text-sm outline-none focus:border-black"
+                  placeholder=""
+                  required
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-xs font-medium text-gray-700">
+                  비밀번호
+                </label>
+                <input
+                  type="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  className="w-full rounded border border-gray-300 px-3 py-2 text-sm outline-none focus:border-black"
+                  required
+                />
+              </div>
+              <div className="mt-4 flex justify-end gap-2 text-sm">
+                <button
+                  type="button"
+                  onClick={() => setIsLoginOpen(false)}
+                  className="rounded border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-50"
+                >
+                  취소
+                </button>
+                <button
+                  type="submit"
+                  disabled={loginLoading}
+                  className="rounded bg-black px-4 py-2 text-white hover:bg-gray-800 disabled:opacity-60"
+                >
+                  {loginLoading ? '로그인 중...' : '로그인'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

@@ -2,6 +2,7 @@ import "./globals.css";
 import { Poppins } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
 import AdPopup from './components/AdPopup/AdPopup';
+import AppDownloadPopup from './components/AdPopup/AppDownloadPopup';
 
 const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
@@ -108,9 +109,14 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body>{children}
+      <body>
+        {children}
         <Analytics />
-        <AdPopup 
+        {/* 중앙 회원가입 프로모션 팝업 */}
+        <AdPopup showCloseButton={true} autoHide={false} />
+
+        {/* 우측 하단 앱 다운로드 팝업 */}
+        <AppDownloadPopup
           imageUrl="/Images/main_img/item3.webp"
           playStoreUrl="https://play.google.com/store/apps/details?id=com.tobesmart.laffair"
           appStoreUrl="https://apps.apple.com/us/app/%EB%9D%BC%ED%8E%98%EC%96%B4/id6744727173"
