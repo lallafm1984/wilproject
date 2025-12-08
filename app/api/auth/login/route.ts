@@ -130,6 +130,13 @@ export async function POST(request: Request) {
 
 		const upstreamText = await upstreamRes.text()
 
+		// 외부 로그인 서버 디버깅용 로그 (Vercel Logs 에서 확인 가능)
+		console.log('SMART LOGIN upstream response', {
+			status: upstreamRes.status,
+			ok: upstreamRes.ok,
+			bodyPreview: upstreamText.slice(0, 300),
+		})
+
 		let upstreamJson: unknown = null
 		try {
 			upstreamJson = JSON.parse(upstreamText)
@@ -165,6 +172,12 @@ export async function POST(request: Request) {
 		}
 
 		if (decrypted.result_yne !== 'Y') {
+			// 디버깅을 위해 외부 로그인 서버에서 내려준 메시지도 로그로 남깁니다.
+			console.warn('SMART LOGIN failed', {
+				result_yne: decrypted.result_yne,
+				result_msg: decrypted.result_msg,
+			})
+
 			// 외부 서버에서 실패 사유를 내려주더라도 사용자에게는 통일된 실패 문구를 보여줍니다.
 			return NextResponse.json({ message: LOGIN_FAILURE_MESSAGE }, { status: 401 })
 		}

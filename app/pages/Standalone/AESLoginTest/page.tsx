@@ -73,10 +73,17 @@ export default function AESLoginTestPage() {
 		setError(null)
 		setResult(null)
 		try {
+			const formBody = new URLSearchParams({
+				userid,
+				password,
+				key,
+				iv,
+			}).toString()
+
 			const res = await fetch('/api/smart/login', {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ userid, password, key, iv }),
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+				body: formBody,
 			})
 			const data: ProxyResult = await res.json()
 			if (!res.ok) {
