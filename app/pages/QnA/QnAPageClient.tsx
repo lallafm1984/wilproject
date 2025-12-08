@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import { supabaseBrowserClient } from '../../lib/supabaseBrowserClient'
+import { uploadQaAttachment } from '../../lib/supabaseBrowserClient'
 
 interface QAPost {
 	id: number
@@ -227,21 +227,9 @@ export default function QnAPageClient() {
 					const ext = file.name.split('.').pop() ?? 'jpg'
 					const filePath = `qna/${Date.now()}_${Math.random().toString(36).slice(2, 10)}.${ext}`
 
-					const { data, error } = await supabaseBrowserClient.storage
-						.from('qa-attachments')
-						.upload(filePath, file)
-
-					if (error || !data) {
-						throw error ?? new Error('이미지 업로드 중 오류가 발생했습니다.')
-					}
-
-					const { data: publicUrlData } = await supabaseBrowserClient.storage
-						.from('qa-attachments')
-						.getPublicUrl(filePath)
-
-					if (publicUrlData?.publicUrl) {
-						uploaded.push(publicUrlData.publicUrl)
-					}
+					// Supabase Storage 업로드 및 공개 URL 생성은 공용 헬퍼를 통해 처리
+					const publicUrl = await uploadQaAttachment(filePath, file)
+					uploaded.push(publicUrl)
 				}
 
 				if (uploaded.length > 0 || imageUrls.length > 0) {
