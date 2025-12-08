@@ -40,7 +40,20 @@ export async function POST(request: Request) {
 		const userid = input.userid?.trim()
 		const password = input.password?.trim()
 
+		// 서버에서 어떤 값이 넘어왔는지 확인하기 위한 기본 로그 (비밀번호 값 자체는 남기지 않음)
+		console.log('POST /api/auth/login incoming', {
+			contentType: request.headers.get('content-type') ?? null,
+			useridPresent: !!userid,
+			passwordPresent: !!password,
+		})
+
 		if (!userid || !password) {
+			// 어떤 필드가 비어 있었는지 서버 로그로 남깁니다.
+			console.warn('POST /api/auth/login missing credentials', {
+				useridPresent: !!userid,
+				passwordPresent: !!password,
+			})
+
 			// 프론트에서 모든 로그인 실패 시 동일한 문구를 보여줄 수 있도록 통일
 			return NextResponse.json({ message: LOGIN_FAILURE_MESSAGE }, { status: 400 })
 		}
@@ -50,6 +63,8 @@ export async function POST(request: Request) {
 		const adminPassword = process.env.ADMIN_LOGIN_PASSWORD
 
 		if (adminLoginId && adminPassword && userid === adminLoginId && password === adminPassword) {
+			console.log('POST /api/auth/login admin login attempt', { userid })
+
 			const supabase = getSupabaseServerClient()
 
 			const upsertPayload: Partial<MemberRow> = {
@@ -120,6 +135,12 @@ export async function POST(request: Request) {
 
 		const upstreamRequestBody = new URLSearchParams({ data: encryptedBase64 }).toString()
 
+		console.log('SMART LOGIN upstream request', {
+			url: LOGIN_ENDPOINT,
+			userid,
+			timeStamp: payload.timeStamp,
+		})
+
 		const upstreamRes = await fetch(LOGIN_ENDPOINT, {
 			method: 'POST',
 			headers: {
@@ -163,6 +184,12 @@ export async function POST(request: Request) {
 		try {
 			const decryptedText = aesDecryptFromBase64(dataField)
 			decrypted = JSON.parse(decryptedText) as ExternalLoginResponse
+
+			console.log('SMART LOGIN decrypted response summary', {
+				result_yne: decrypted.result_yne,
+				result_msg: decrypted.result_msg,
+				userUid: decrypted.userUid,
+			})
 		} catch (error) {
 			console.error('Failed to decrypt or parse external login response', error)
 			return NextResponse.json(
@@ -173,9 +200,10 @@ export async function POST(request: Request) {
 
 		if (decrypted.result_yne !== 'Y') {
 			// 디버깅을 위해 외부 로그인 서버에서 내려준 메시지도 로그로 남깁니다.
-			console.warn('SMART LOGIN failed', {
+			console.warn('SMART LOGIN failed, returning 401', {
 				result_yne: decrypted.result_yne,
 				result_msg: decrypted.result_msg,
+				userid,
 			})
 
 			// 외부 서버에서 실패 사유를 내려주더라도 사용자에게는 통일된 실패 문구를 보여줍니다.
