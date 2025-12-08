@@ -153,7 +153,13 @@ const Header = () => {
         }
       } else {
         router.push(pagePath);
-        sessionStorage.setItem('scrollToSection', sectionId);
+        try {
+          if (typeof window !== 'undefined' && 'sessionStorage' in window) {
+            window.sessionStorage.setItem('scrollToSection', sectionId);
+          }
+        } catch {
+          // 세션 스토리지 접근이 불가능한 환경에서는 무시
+        }
       }
     } else {
       router.push(path);
@@ -161,22 +167,34 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const sectionId = sessionStorage.getItem('scrollToSection');
-    if (sectionId) {
-      setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const headerHeight = 0;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+    try {
+      if (typeof window === 'undefined' || !('sessionStorage' in window)) {
+        return;
+      }
 
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-        }
-        sessionStorage.removeItem('scrollToSection');
-      }, 0);
+      const sectionId = window.sessionStorage.getItem('scrollToSection');
+      if (sectionId) {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const headerHeight = 0;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+          }
+          try {
+            window.sessionStorage.removeItem('scrollToSection');
+          } catch {
+            // ignore
+          }
+        }, 0);
+      }
+    } catch {
+      // 세션 스토리지 접근이 불가능한 환경에서는 무시
     }
   }, []);
 
@@ -207,7 +225,13 @@ const Header = () => {
             }
           } else {
             router.push(pagePath);
-            sessionStorage.setItem('scrollToSection', sectionId);
+            try {
+              if (typeof window !== 'undefined' && 'sessionStorage' in window) {
+                window.sessionStorage.setItem('scrollToSection', sectionId);
+              }
+            } catch {
+              // 세션 스토리지 접근이 불가능한 환경에서는 무시
+            }
           }
         } else {
           router.push(path);
