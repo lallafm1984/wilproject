@@ -35,7 +35,6 @@ const menuItems = [
     title: '무인매장',
     subMenu: [
         { name: '매장찾기', path: '/pages/Standalone' },
-        { name: 'Q&A', path: '/pages/QnA' },
       // { name: '가맹점혜택', path: '' },
       // { name: '창업절차', path: '' },
       // { name: '창업비용', path: '' },
@@ -153,13 +152,7 @@ const Header = () => {
         }
       } else {
         router.push(pagePath);
-        try {
-          if (typeof window !== 'undefined' && 'sessionStorage' in window) {
-            window.sessionStorage.setItem('scrollToSection', sectionId);
-          }
-        } catch {
-          // 세션 스토리지 접근이 불가능한 환경에서는 무시
-        }
+        sessionStorage.setItem('scrollToSection', sectionId);
       }
     } else {
       router.push(path);
@@ -167,34 +160,22 @@ const Header = () => {
   };
 
   useEffect(() => {
-    try {
-      if (typeof window === 'undefined' || !('sessionStorage' in window)) {
-        return;
-      }
+    const sectionId = sessionStorage.getItem('scrollToSection');
+    if (sectionId) {
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const headerHeight = 0;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
-      const sectionId = window.sessionStorage.getItem('scrollToSection');
-      if (sectionId) {
-        setTimeout(() => {
-          const element = document.getElementById(sectionId);
-          if (element) {
-            const headerHeight = 0;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: "smooth"
-            });
-          }
-          try {
-            window.sessionStorage.removeItem('scrollToSection');
-          } catch {
-            // ignore
-          }
-        }, 0);
-      }
-    } catch {
-      // 세션 스토리지 접근이 불가능한 환경에서는 무시
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+        sessionStorage.removeItem('scrollToSection');
+      }, 0);
     }
   }, []);
 
@@ -225,13 +206,7 @@ const Header = () => {
             }
           } else {
             router.push(pagePath);
-            try {
-              if (typeof window !== 'undefined' && 'sessionStorage' in window) {
-                window.sessionStorage.setItem('scrollToSection', sectionId);
-              }
-            } catch {
-              // 세션 스토리지 접근이 불가능한 환경에서는 무시
-            }
+            sessionStorage.setItem('scrollToSection', sectionId);
           }
         } else {
           router.push(path);

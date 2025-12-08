@@ -65,13 +65,31 @@ export function aesDecryptFromBase64(base64CipherText: string, opts?: { key?: st
 }
 
 export function formatTimestamp(date: Date = new Date()): string {
+	// 서버 런타임의 로컬 타임존(예: Vercel = UTC)에 영향을 받지 않고
+	// 항상 한국 시간(Asia/Seoul, UTC+9)을 기준으로 타임스탬프를 생성한다.
 	const pad = (n: number) => n.toString().padStart(2, '0')
-	const yyyy = date.getFullYear().toString()
-	const MM = pad(date.getMonth() + 1)
-	const dd = pad(date.getDate())
-	const HH = pad(date.getHours())
-	const mm = pad(date.getMinutes())
-	const ss = pad(date.getSeconds())
+
+	const formatter = new Intl.DateTimeFormat('ko-KR', {
+		timeZone: 'Asia/Seoul',
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit',
+		hour12: false,
+	})
+
+	const parts = formatter.formatToParts(date)
+	const get = (type: string) => parts.find((p) => p.type === type)?.value ?? '00'
+
+	const yyyy = get('year')
+	const MM = get('month')
+	const dd = get('day')
+	const HH = get('hour')
+	const mm = get('minute')
+	const ss = get('second')
+
 	return `${yyyy}${MM}${dd}${HH}${mm}${ss}`
 }
 
