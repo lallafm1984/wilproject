@@ -230,10 +230,14 @@ export async function POST(request: Request) {
 			last_login_at: new Date().toISOString(),
 		}
 
+		// 로그인 아이디는 고정이지만 외부 시스템의 userUid 는 재가입 시 변경될 수 있으므로
+		// 충돌 기준을 user_uid 가 아니라 login_id 로 둔다.
+		// 이렇게 하면 동일 login_id 로 이미 존재하는 레코드가 있을 때,
+		// 새 user_uid 를 포함한 나머지 필드들이 해당 레코드에 업데이트된다.
 		const { data: member, error: upsertError } = await supabase
 			.from('members')
 			.upsert(upsertPayload, {
-				onConflict: 'user_uid',
+				onConflict: 'login_id',
 			})
 			.select()
 			.single()

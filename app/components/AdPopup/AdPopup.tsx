@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -22,6 +23,7 @@ export default function AdPopup({
   autoHide = false,
   autoHideDelay = 8000,
 }: AdPopupProps) {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState<boolean>(true);
 
   // 오늘 하루 보지 않기 처리
@@ -68,6 +70,11 @@ export default function AdPopup({
     setIsVisible(false);
   };
 
+  const handleNavigateToAppDownload = () => {
+    setIsVisible(false);
+    router.push("/pages/AppDownload");
+  };
+
   return (
     <AnimatePresence>
       {isVisible && (
@@ -102,13 +109,18 @@ export default function AdPopup({
             )}
 
             {/* 이미지 전체 영역 */}
-            <div className="w-full">
+            <button
+              type="button"
+              onClick={handleNavigateToAppDownload}
+              className="w-full cursor-pointer"
+              aria-label="앱 다운로드 페이지로 이동"
+            >
               <img
                 src="/Images/wPopup_1.png"
                 alt="회원가입 포인트 선물"
                 className="block h-full w-full max-h-[80vh] object-contain"
               />
-            </div>
+            </button>
 
             {/* 오늘 하루 보지 않기 */}
             <div className="flex w-full justify-center bg-black/90 pb-3 pt-3">

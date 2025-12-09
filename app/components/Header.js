@@ -35,6 +35,7 @@ const menuItems = [
     title: '무인매장',
     subMenu: [
         { name: '매장찾기', path: '/pages/Standalone' },
+        { name: '앱 다운로드', path: '/pages/AppDownload' },
         { name: 'Q&A', path: '/pages/QnA' },  
       // { name: '가맹점혜택', path: '' },
       // { name: '창업절차', path: '' },

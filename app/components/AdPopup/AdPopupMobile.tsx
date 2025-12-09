@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
 /**
@@ -12,6 +13,12 @@ import { motion } from "framer-motion";
  * - `public/Images/popupbg-1.png` 이미지를 백그라운드로 사용
  */
 export default function AdPopupMobile() {
+  const router = useRouter();
+
+  const handleNavigateToAppDownload = () => {
+    router.push("/pages/AppDownload");
+  };
+
   return (
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/55"
@@ -28,7 +35,12 @@ export default function AdPopupMobile() {
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to-top,rgba(0,0,0,0.75)_0%,rgba(0,0,0,0.35)_45%,rgba(0,0,0,0.1)_75%,transparent_100%)]" />
 
         {/* 텍스트 영역: 상단 타이틀 + 하단 보조 문구 분리, 중앙 정렬 */}
-        <div className="relative z-10 flex h-full w-full flex-col items-center justify-between px-5 py-6">
+        <button
+          type="button"
+          onClick={handleNavigateToAppDownload}
+          className="relative z-10 flex h-full w-full flex-col items-center justify-between px-5 py-6"
+          aria-label="앱 다운로드 페이지로 이동"
+        >
           {/* 상단 타이틀 */}
           <div className="mt-20 text-center">
             <h2
@@ -56,7 +68,7 @@ export default function AdPopupMobile() {
           >
             (3만원 이상 결제 시 사용 가능 · 5% 적립 혜택)
           </p>
-        </div>
+        </button>
       </motion.div>
     </div>
   );
