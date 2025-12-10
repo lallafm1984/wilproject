@@ -83,35 +83,49 @@ export default function AppDownloadPage() {
     <div className="min-h-screen bg-neutral-light">
       <Header />
 
-      <main className="pt-[54px] md:pt-[100px] lg:pt-[132px] bg-neutral-light">
-        {/* 상단: 앱 다운로드 CTA 영역 */}
-        <section className="w-full bg-gradient-to-b from-[#92000a] via-[#92000a] to-[#b84548] text-white">
-          <div className="mx-auto flex max-w-5xl flex-col items-center gap-10 px-6 py-16 md:flex-row md:items-start md:justify-center md:py-20">
-            <div className="max-w-xl space-y-6 text-center md:text-center">
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-[#fbeaec]">
+      <main className="bg-neutral-light pt-[54px] md:pt-[100px] lg:pt-[132px]">
+        {/* 상단: 앱 다운로드 히어로 (frontend-design 적용) */}
+        <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#92000a] via-[#92000a] to-[#c05a5c] text-white">
+          {/* 은은한 그라디언트 오버레이 & 빛 번짐 */}
+          <div className="pointer-events-none absolute inset-0 opacity-40 mix-blend-soft-light">
+            <div className="absolute -left-32 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.28),_transparent_70%)] blur-3xl" />
+            <div className="absolute -bottom-32 -right-10 h-80 w-80 rounded-full bg-[radial-gradient(circle_at_center,_rgba(255,204,186,0.4),_transparent_70%)] blur-3xl" />
+          </div>
+
+          <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-12 px-6 py-16 md:flex-row md:items-center md:justify-between md:gap-10 md:py-20">
+            {/* 좌측: 카피 + CTA + 기능 하이라이트 */}
+            <div className="max-w-xl space-y-6 text-center md:text-left">
+              <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-[11px] font-medium tracking-[0.25em] text-[#fbeaec]">
+                <span className="inline-block h-1 w-1 rounded-full bg-[#fbeaec]" />
                 APP DOWNLOAD
               </p>
-              <h1 className="text-3xl font-semibold leading-10 md:leading-snug tracking-[0.08em]  md:text-4xl">
+
+              <h1 className="text-3xl font-semibold tracking-[0.08em] leading-[1.3] md:text-[34px] md:leading-[1.35]">
                 라페어라운지 앱으로
                 <br />
                 더욱 편리한 쇼핑과
                 <br className="hidden md:block" />
-                 멤버십 혜택을 
-              
-                  만나보세요.
+                <span className="relative inline-block">
+                  멤버십 혜택을
+                  <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r from-[#ffd3c7] to-transparent opacity-70" />
+                </span>{' '}
+                만나보세요.
               </h1>
-              <p className="mt-3 text-sm leading-relaxed text-[#fbeaec] md:text-base">
-                앱으로 상품을 편하게 구매하고, 추가로 포인트 적립 혜택! <br />
-                매장 방문 시에는 빠르고 간편한 로그인 기능으로 편리하게 이용해 보세요.
+
+              <p className="mt-3 text-sm leading-relaxed text-[#fbeaec]/90 md:text-[15px]">
+                앱으로 상품을 편하게 구매하고, 추가 포인트 적립 혜택까지.
+                <br className="hidden md:block" />
+                매장 방문 시에는 QR로 빠르게 로그인하고, 라운지의 소식을 가장 먼저 받아보세요.
               </p>
 
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:gap-10 md:justify-center">
+              {/* 스토어 CTA 버튼 */}
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:justify-start md:gap-5">
                 <a
                   href="https://play.google.com/store/apps/details?id=com.tobesmart.laffair"
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label="Google Play에서 다운로드"
-                  className="inline-flex items-center transition hover:-translate-y-0.5 hover:opacity-90"
+                  className="group inline-flex items-center rounded-xl bg-black/15 px-[6px] py-[6px] shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-black/25 hover:shadow-[0_16px_40px_rgba(0,0,0,0.55)]"
                 >
                   <Image
                     src="/Images/mobileGuide/google.webp"
@@ -126,7 +140,7 @@ export default function AppDownloadPage() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label="App Store에서 다운로드"
-                  className="inline-flex items-center transition hover:-translate-y-0.5 hover:opacity-90"
+                  className="group inline-flex items-center rounded-xl bg-black/15 px-[6px] py-[6px] shadow-[0_10px_30px_rgba(0,0,0,0.45)] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-black/25 hover:shadow-[0_16px_40px_rgba(0,0,0,0.55)]"
                 >
                   <Image
                     src="/Images/mobileGuide/appstore.webp"
@@ -138,20 +152,92 @@ export default function AppDownloadPage() {
                 </a>
               </div>
 
-               
+              {/* 앱 주요 기능 하이라이트 */}
+              <ul className="mt-8 grid w-full gap-4 text-left text-[12px] text-[#fbeaec]/90 md:grid-cols-2 md:text-[13px]">
+                <li className="flex items-start gap-3">
+                  <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-[11px] font-semibold">
+                    01
+                  </span>
+                  <div>
+                    <p className="font-semibold">매장 · 온라인 통합 멤버십</p>
+                    <p className="mt-1 leading-relaxed">
+                      오프라인 매장과 온라인 쇼핑몰을 하나의 계정으로 관리하고, 적립한 포인트를 함께 사용할 수 있어요.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-[11px] font-semibold">
+                    02
+                  </span>
+                  <div>
+                    <p className="font-semibold">맞춤 추천 & 이벤트 알림</p>
+                    <p className="mt-1 leading-relaxed">
+                      취향과 사이즈 정보를 기반으로 한 추천 상품과, 라운지 소식을 푸시 알림으로 받아보세요.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-[11px] font-semibold">
+                    03
+                  </span>
+                  <div>
+                    <p className="font-semibold">간편한 QR 로그인</p>
+                    <p className="mt-1 leading-relaxed">
+                      키오스크에서 앱의 QR 코드만 스캔하면, 별도의 정보 입력 없이 바로 로그인할 수 있습니다.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-[11px] font-semibold">
+                    04
+                  </span>
+                  <div>
+                    <p className="font-semibold">언제 어디서든 쇼핑</p>
+                    <p className="mt-1 leading-relaxed">
+                      매장 방문 전에는 미리 상품을 둘러보고, 방문 후에는 마음에 든 상품을 다시 확인해 보세요.
+                    </p>
+                  </div>
+                </li>
+              </ul>
             </div>
 
-           
+            {/* 우측: 앱 화면 미리보기 카드 */}
+            <div className="relative mt-4 flex w-full justify-center md:mt-0 md:w-auto">
+              <div className="relative h-[360px] w-[200px] rotate-[1.5deg] overflow-hidden rounded-[32px] border border-white/25 bg-gradient-to-b from-white/20 to-white/5 p-2 shadow-[0_22px_60px_rgba(0,0,0,0.6)] backdrop-blur-sm">
+                <div className="relative h-full w-full overflow-hidden rounded-[26px] bg-neutral-light">
+                  <Image
+                    src="/Images/mobileGuide/m10.png"
+                    alt="라페어라운지 앱 메인 화면 예시"
+                    fill
+                    sizes="200px"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="pointer-events-none absolute -right-6 top-10 hidden h-[280px] w-[160px] -rotate-[6deg] overflow-hidden rounded-[26px] border border-white/15 bg-white/5 shadow-[0_18px_45px_rgba(0,0,0,0.55)] md:block">
+                <Image
+                  src="/Images/mobileGuide/m9.png"
+                  alt="회원가입 과정 화면 예시"
+                  fill
+                  sizes="160px"
+                  className="object-cover opacity-90"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
         
 
-        {/* 하단: 모바일 회원가입 & 이용 가이드 (mobileGuide 이미지 활용) */}
+        {/* 하단: 모바일 회원가입 & 이용 가이드 (frontend-design 톤으로 재구성) */}
         <section className="bg-neutral-light">
-          <div className="mx-auto max-w-5xl px-6 pb-20 pt-10 md:pb-24 md:pt-12">
-            <div className="mb-8 text-center">
-              <h2 className="text-2xl font-semibold tracking-[-0.03em] text-neutral-dark md:text-3xl">
+          <div className="mx-auto max-w-5xl px-6 pb-20 pt-12 md:pb-28">
+            <div className="mb-10 text-center">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
+                APP ONBOARDING
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-neutral-900 md:text-3xl">
                 앱 회원가입 & 이용 가이드
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-neutral-600 md:text-base">
@@ -161,94 +247,132 @@ export default function AppDownloadPage() {
               </p>
             </div>
 
-            <div className="space-y-8">
-              {mobileGuideSteps.map((step, index) => (
-                <div
-                  key={step.title}
-                  className="flex flex-col items-center gap-6 rounded-2xl bg-white p-4 shadow-sm md:flex-row md:gap-8 md:p-4"
-                >
-                  <div className="relative h-[260px] w-full max-w-[220px] overflow-hidden rounded-2xl bg-neutral-light md:h-[360px] md:max-w-[240px]">
-                    <Image
-                      src={step.image}
-                      alt={step.title}
-                      fill
-                      sizes="(min-width: 768px) 240px, 220px"
-                      className="object-contain"
-                    />
-                  </div>
+            <div className="space-y-8 md:space-y-10">
+              {mobileGuideSteps.map((step, index) => {
+                const isReversed = index % 2 === 1;
 
-                  <div className="flex-1 text-left">
-                    <p className="text-xl font-semibold uppercase tracking-[0.25em] text-primary-lighter">
-                      STEP {index + 1}
-                    </p>
-                    <h3 className="mt-1 text-lg font-semibold tracking-[-0.02em] text-neutral-dark">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-neutral-700 md:text-base">
-                      {step.description}
-                    </p>
+                return (
+                  <div
+                    key={step.title}
+                    className={`group relative flex flex-col items-center gap-6 overflow-hidden rounded-3xl bg-white/80 p-4 shadow-[0_18px_40px_rgba(15,23,42,0.08)] ring-1 ring-neutral-200/70 backdrop-blur-sm md:gap-10 md:p-6 ${
+                      isReversed ? 'md:flex-row-reverse' : 'md:flex-row'
+                    }`}
+                  >
+                    {/* 라이트 그래디언트 장식 */}
+                    <div className="pointer-events-none absolute -left-24 top-[-80px] h-40 w-40 rounded-full bg-[radial-gradient(circle_at_center,_rgba(249,115,129,0.16),_transparent_70%)] blur-2xl" />
+                    <div className="pointer-events-none absolute -bottom-24 right-[-40px] h-44 w-44 rounded-full bg-[radial-gradient(circle_at_center,_rgba(148,163,184,0.18),_transparent_70%)] blur-2xl" />
+
+                    {/* 앱 스크린 이미지 */}
+                    <div className="relative z-[1] h-[260px] w-full max-w-[220px] overflow-hidden rounded-[26px] border border-neutral-200/70 bg-neutral-50/90 p-2 shadow-[0_16px_40px_rgba(15,23,42,0.12)] md:h-[340px] md:max-w-[240px]">
+                      <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-neutral-100">
+                        <Image
+                          src={step.image}
+                          alt={step.title}
+                          fill
+                          sizes="(min-width: 768px) 240px, 220px"
+                          className="object-contain"
+                        />
+                      </div>
+                    </div>
+
+                    {/* 설명 텍스트 */}
+                    <div className="relative z-[1] flex-1 text-left">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-3 py-1 text-[11px] font-medium tracking-[0.2em] text-neutral-500">
+                        <span className="h-1 w-1 rounded-full bg-neutral-500" />
+                        STEP {index + 1}
+                      </div>
+                      <h3 className="mt-3 text-lg font-semibold tracking-[-0.02em] text-neutral-900 md:text-[19px]">
+                        {step.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-neutral-700 md:text-[15px]">
+                        {step.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            <p className="mt-10 text-center text-xs text-neutral-500">
+            <p className="mt-10 text-center text-xs text-neutral-500 md:text-[13px]">
               가입 및 이용 중 어려움이 있다면, 라페어라운지 고객센터 또는 매장
               직원에게 언제든지 문의해주세요.
             </p>
           </div>
         </section>
 
-        {/* QR 로그인 이용 가이드 (step7, step8) */}
+        {/* QR 로그인 이용 가이드 (frontend-design 톤으로 재구성) */}
         <section className="bg-white">
-          <div className="mx-auto max-w-5xl px-6 pb-20 pt-10 md:pb-24 md:pt-12">
-            <div className="mb-8 text-center">
-              <h2 className="text-2xl font-semibold tracking-[-0.03em] text-neutral-dark md:text-3xl">
-                오프라인 매장 QR 로그인  
+          <div className="mx-auto max-w-5xl px-6 pb-20 pt-12 md:pb-28">
+            <div className="mb-10 text-center">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
+                IN-STORE EXPERIENCE
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-neutral-900 md:text-3xl">
+                오프라인 매장 QR 로그인
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-neutral-600 md:text-base">
-                쇼핑몰에서 발급된 QR 코드를 활용해 키오스크에서 빠르고 간편하게 로그인할 수 있어요.
+                쇼핑몰에서 발급된 QR 코드를 활용해 키오스크에서
+                <br className="hidden md:block" />
+                빠르고 간편하게 로그인할 수 있어요.
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2">
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative w-full max-w-[260px] overflow-hidden rounded-2xl bg-neutral-light">
-                  <div className="relative aspect-[9/18] w-full">
+            <div className="grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.5fr)] md:items-center">
+              {/* 좌측: 키오스크/앱 화면 시각적 안내 */}
+              <div className="relative flex justify-center gap-6">
+                {/* 메인 QR 아이콘 위치 안내 화면 */}
+                <div className="relative h-[320px] w-[180px] -rotate-[2deg] overflow-hidden rounded-[28px] border border-neutral-200/80 bg-gradient-to-b from-neutral-50 to-neutral-100 p-2 shadow-[0_18px_50px_rgba(15,23,42,0.2)] md:h-[360px] md:w-[190px]">
+                  <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-neutral-100">
                     <Image
                       src="/Images/mobileGuide/step7.webp"
                       alt="쇼핑몰 메인 화면 QR 아이콘 위치 안내"
                       fill
-                      sizes="(min-width: 768px) 260px, 220px"
+                      sizes="(min-width: 768px) 190px, 180px"
                       className="object-contain"
                     />
                   </div>
                 </div>
-              </div>
 
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative w-full max-w-[260px] overflow-hidden rounded-2xl bg-neutral-light">
-                  <div className="relative aspect-[9/18] w-full">
+                {/* 보조: 키오스크 스캔 화면 */}
+                <div className="relative hidden h-[260px] w-[150px] rotate-[6deg] overflow-hidden rounded-[26px] border border-neutral-200/70 bg-gradient-to-b from-white to-neutral-100 p-2 shadow-[0_16px_40px_rgba(15,23,42,0.18)] md:block">
+                  <div className="relative h-full w-full overflow-hidden rounded-[20px] bg-neutral-50">
                     <Image
                       src="/Images/mobileGuide/step8.webp"
                       alt="키오스크 스캔용 QR 로그인 화면 안내"
                       fill
-                      sizes="(min-width: 768px) 260px, 220px"
+                      sizes="150px"
                       className="object-contain"
                     />
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-8 rounded-2xl bg-neutral-light px-5 py-6 text-sm leading-relaxed text-neutral-700 md:text-base">
-              <p className="font-semibold text-neutral-dark">QR 코드 아이콘 안내</p>
-              <p className="mt-2">
-                쇼핑몰 메인 화면 우측 상단에 있는 QR 아이콘입니다. 
-                <br />
-                이 버튼을 누르면 키오스크 스캔용 QR 로그인
-                화면이 나타나 오프라인 매장에서 간편하게 로그인할 수 있습니다.
-              </p>
+              {/* 우측: 텍스트 설명 카드 */}
+              <div className="relative overflow-hidden rounded-3xl bg-neutral-50 px-5 py-6 text-sm leading-relaxed text-neutral-700 shadow-[0_16px_40px_rgba(15,23,42,0.08)] ring-1 ring-neutral-200/80 md:px-7 md:py-7 md:text-[15px]">
+                <div className="pointer-events-none absolute -right-24 -top-16 h-40 w-40 rounded-full bg-[radial-gradient(circle_at_center,_rgba(148,163,184,0.24),_transparent_70%)] blur-2xl" />
+                <p className="relative z-[1] text-xs font-semibold uppercase tracking-[0.22em] text-neutral-500">
+                  HOW TO USE
+                </p>
+                <p className="relative z-[1] mt-2 text-base font-semibold text-neutral-900 md:text-lg">
+                  QR 코드 한 번으로, 매장에서 바로 로그인
+                </p>
+                <div className="relative z-[1] mt-3 space-y-2">
+                  <p>
+                    1. 쇼핑몰 메인 화면 우측 상단에 있는{' '}
+                    <span className="font-semibold text-neutral-900">QR 아이콘</span>을 눌러주세요.
+                  </p>
+                  <p>
+                    2. 화면에 나타난 QR 코드를 오프라인 매장 키오스크에 가져다 대면, 별도의 정보 입력 없이 바로 로그인됩니다.
+                  </p>
+                  <p>
+                    3. 로그인 후에는 적립/사용 내역 조회, 멤버십 혜택 적용 등 매장 서비스를 더욱 빠르게 이용하실 수 있어요.
+                  </p>
+                </div>
+
+                <p className="relative z-[1] mt-4 text-xs text-neutral-500 md:text-[12px]">
+                  매장 내 키오스크 사용이 익숙하지 않다면, 직원에게 QR 로그인 방법을 요청해 주세요.
+                </p>
+              </div>
             </div>
           </div>
         </section>
