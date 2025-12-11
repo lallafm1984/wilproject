@@ -69,6 +69,8 @@ const Header = () => {
   const [activeMobileMenu, setActiveMobileMenu] = useState(null)
   const [clickedItemIndex, setClickedItemIndex] = useState(null)
 
+  const [isMobile, setIsMobile] = useState(false)
+
   const [currentUser, setCurrentUser] = useState(null)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const [loginUserid, setLoginUserid] = useState('')
@@ -95,6 +97,22 @@ const Header = () => {
       setCurrentUser(null)
     }
   }
+
+  // 화면 너비에 따라 모바일 여부 판별
+  useEffect(() => {
+    const updateIsMobile = () => {
+      if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth < 768)
+      }
+    }
+
+    updateIsMobile()
+    window.addEventListener('resize', updateIsMobile)
+
+    return () => {
+      window.removeEventListener('resize', updateIsMobile)
+    }
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -248,7 +266,7 @@ const Header = () => {
       {/* 헤더 눈 내리는 연출 (react-snowfall) */}
       <Snowfall
         color="#ffffff"
-        snowflakeCount={80}
+        snowflakeCount={isMobile ? 30 : 80}
         speed={[0.2, 0.7]}
         style={{
           position: 'absolute',
