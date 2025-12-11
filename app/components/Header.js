@@ -5,6 +5,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import dynamic from 'next/dynamic'
+
+const Snowfall = dynamic(() => import('react-snowfall'), {
+  ssr: false,
+})
 
 const menuItems = [
   {
@@ -35,7 +40,7 @@ const menuItems = [
     title: '무인매장',
     subMenu: [
         { name: '매장찾기', path: '/pages/Standalone' },
-        { name: '앱 다운로드', path: '/pages/AppDownload' },
+        { name: '앱 사용 가이드', path: '/pages/AppDownload' },
         { name: 'Q&A', path: '/pages/QnA' },  
       // { name: '가맹점혜택', path: '' },
       // { name: '창업절차', path: '' },
@@ -237,10 +242,26 @@ const Header = () => {
   }, [isMobileMenuOpen]);
 
   return (
-    <header className="fixed w-full max-w-full top-0 z-50 bg-[#91000A]"
+  <header className="fixed top-0 z-50 w-full max-w-full bg-[#91000A]"
       onMouseLeave={() => setActiveMenu(null)}
     >
-      <div className="w-full flex justify-center">
+      {/* 헤더 눈 내리는 연출 (react-snowfall) */}
+      <Snowfall
+        color="#ffffff"
+        snowflakeCount={80}
+        speed={[0.2, 0.7]}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+          zIndex: 60,
+        }}
+      />
+
+      <div className="relative flex w-full justify-center">
         <div className="w-full max-w-[1920px] h-[54px] md:h-[100px] lg:h-[132px] flex items-center justify-between lg:justify-evenly">
           <Link 
             href="/" 
@@ -279,7 +300,7 @@ const Header = () => {
                       <span className="h-[21px] tracking-[-0.47px]">{item.title}</span>
                     </Link>
                     
-                    <div className={`absolute left-1/2 -translate-x-1/2 mt-7 bg-white shadow-lg rounded-2xl overflow-hidden ${idx === 3 ? 'w-[116px]' : 'w-[116px]'} pt-[26px] pb-[22px]
+                    <div className={`absolute left-1/2 -translate-x-1/2 mt-7 bg-white shadow-lg rounded-2xl overflow-hidden ${idx === 3 ? 'w-[125px]' : 'w-[116px]'} pt-[26px] pb-[22px]
                       ${activeMenu === idx ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                       onMouseLeave={() => setActiveMenu(null)}
                     >
