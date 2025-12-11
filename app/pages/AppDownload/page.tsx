@@ -112,7 +112,7 @@ export default function AppDownloadPage() {
               <p className="mt-3 text-base leading-relaxed text-[#fbeaec]/90 md:text-[17px]">
                 앱으로 상품을 편하게 구매하고, 추가 포인트 적립 혜택까지.
                 <br className="hidden md:block" />
-                매장 방문 시에는 QR로 빠르게 로그인하고, 라운지의 소식을 가장 먼저 받아보세요.
+                매장 방문 시에는 QR로 빠르게 로그인하고, 라페어의 소식을 가장 먼저 받아보세요.
               </p>
 
               {/* 스토어 CTA 버튼 */}
@@ -169,7 +169,7 @@ export default function AppDownloadPage() {
                   <div>
                     <p className="font-semibold text-[#f0d435]">맞춤 추천 & 이벤트 알림</p>
                     <p className="mt-1 leading-relaxed text-[18px]">
-                      취향과 사이즈 정보를 기반으로 한 추천 상품과, 라운지 소식을 푸시 알림으로 받아보세요.
+                      취향과 사이즈 정보를 기반으로 한 추천 상품과, 라페어 소식을 푸시 알림으로 받아보세요.
                     </p>
                   </div>
                 </li>
@@ -365,7 +365,7 @@ export default function AppDownloadPage() {
                 오프라인 매장 QR 로그인
               </h2>
               <p className="mt-3 text-base leading-relaxed text-neutral-600 md:text-[22px]">
-                쇼핑몰에서 발급된 QR 코드를 활용해 키오스크에서
+                앱에서 발급된 QR 코드를 활용해 키오스크에서
                 <br className="hidden md:block" />
                 빠르고 간편하게 로그인할 수 있어요.
               </p>
@@ -412,7 +412,7 @@ export default function AppDownloadPage() {
                 </p>
                 <div className="relative z-[1] mt-3 space-y-3">
                   <div className="rounded-2xl bg-white/95 px-4 py-3 text-[15px] leading-relaxed text-neutral-800 shadow-[0_10px_25px_rgba(15,23,42,0.18)] ring-1 ring-neutral-200/80 md:text-[20px]">
-                    ① 쇼핑몰 메인 화면 우측 상단에 있는{' '}
+                    ① 앱을 메인 화면 우측 상단에 있는{' '}
                     <span className="font-semibold text-neutral-900">QR 아이콘</span>을 눌러주세요.
                   </div>
                   <div className="rounded-2xl bg-white/95 px-4 py-3 text-[15px] leading-relaxed text-neutral-800 shadow-[0_10px_25px_rgba(15,23,42,0.18)] ring-1 ring-neutral-200/80 md:text-[20px]">
