@@ -116,7 +116,7 @@ export default function RootLayout({ children }) {
         <AdPopup showCloseButton={true} autoHide={false} />
 
         {/* 우측 하단 앱 다운로드 팝업 */}
-        <AppDownloadPopup
+        {/* <AppDownloadPopup
           imageUrl="/Images/main_img/item3.webp"
           playStoreUrl="https://play.google.com/store/apps/details?id=com.tobesmart.laffair"
           appStoreUrl="https://apps.apple.com/us/app/%EB%9D%BC%ED%8E%98%EC%96%B4/id6744727173"
@@ -124,7 +124,7 @@ export default function RootLayout({ children }) {
           description="더 편리한 쇼핑을 위해 앱을 다운로드하세요!"
           showCloseButton={true}
           autoHide={false}
-        />
+        /> */}
       </body>
     </html>
   )

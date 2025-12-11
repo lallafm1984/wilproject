@@ -217,7 +217,7 @@ export default function AppDownloadPage() {
 
               <div className="pointer-events-none absolute -right-6 top-10 hidden h-[280px] w-[160px] -rotate-[6deg] overflow-hidden rounded-[26px] border border-white/15 bg-white/5 shadow-[0_18px_45px_rgba(0,0,0,0.55)] md:block">
                 <Image
-                  src="/Images/mobileGuide/m9.png"
+                  src="/Images/mobileGuide/step_title.webp"
                   alt="회원가입 과정 화면 예시"
                   fill
                   sizes="160px"
@@ -293,10 +293,7 @@ export default function AppDownloadPage() {
               })}
             </div>
 
-            <p className="mt-10 text-center text-xs text-neutral-500 md:text-[13px]">
-              가입 및 이용 중 어려움이 있다면, 라페어라운지 고객센터 또는 매장
-              직원에게 언제든지 문의해주세요.
-            </p>
+            
           </div>
         </section>
 
@@ -369,9 +366,7 @@ export default function AppDownloadPage() {
                   </p>
                 </div>
 
-                <p className="relative z-[1] mt-4 text-xs text-neutral-500 md:text-[12px]">
-                  매장 내 키오스크 사용이 익숙하지 않다면, 직원에게 QR 로그인 방법을 요청해 주세요.
-                </p>
+                 
               </div>
             </div>
           </div>
