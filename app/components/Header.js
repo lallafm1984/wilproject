@@ -40,6 +40,7 @@ const menuItems = [
     title: '무인매장',
     subMenu: [
         { name: '매장찾기', path: '/pages/Standalone' },
+        { name: '키오스크 가이드', path: '/pages/KioskGuide' },
         { name: '앱 사용 가이드', path: '/pages/AppDownload' },
         { name: 'Q&A', path: '/pages/QnA' },  
       // { name: '가맹점혜택', path: '' },
@@ -318,7 +319,7 @@ const Header = () => {
                       <span className="h-[21px] tracking-[-0.47px]">{item.title}</span>
                     </Link>
                     
-                    <div className={`absolute left-1/2 -translate-x-1/2 mt-7 bg-white shadow-lg rounded-2xl overflow-hidden ${idx === 3 ? 'w-[125px]' : 'w-[116px]'} pt-[26px] pb-[22px]
+                    <div className={`absolute left-1/2 -translate-x-1/2 mt-7 bg-white shadow-lg rounded-2xl overflow-hidden ${idx === 3 ? 'w-[135px]' : 'w-[116px]'} pt-[26px] pb-[22px]
                       ${activeMenu === idx ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                       onMouseLeave={() => setActiveMenu(null)}
                     >
