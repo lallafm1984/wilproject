@@ -16,6 +16,7 @@ interface QAPostRow {
 	created_at: string
 	updated_at: string | null
 	is_deleted: boolean | null
+	is_notice: boolean | null
 }
 
 interface RouteParams {
@@ -27,14 +28,6 @@ interface RouteParams {
 export async function GET(_request: Request, context: RouteParams) {
 	try {
 		const supabase = getSupabaseServerClient()
-		const member = await getCurrentMemberFromCookie()
-
-		if (!member) {
-			return NextResponse.json(
-				{ message: '로그인 후에만 게시글을 조회할 수 있습니다.' },
-				{ status: 401 },
-			)
-		}
 
 		const id = Number((await context.params).id)
 
@@ -63,12 +56,22 @@ export async function GET(_request: Request, context: RouteParams) {
 			return NextResponse.json({ message: '해당 게시글을 찾을 수 없습니다.' }, { status: 404 })
 		}
 
-		// 관리자가 아니면 본인 글만 조회 가능
-		if (!member.is_admin && row.author_user_uid && row.author_user_uid !== member.user_uid) {
+		// 공지글은 로그인 없이 누구나 조회 가능
+		if (row.is_notice) {
+			return NextResponse.json({ item: row }, { status: 200 })
+		}
+
+		// 공지가 아닌 글은 기존 정책 유지: 로그인 필요 + (관리자 제외) 본인 글만 조회 가능
+		const member = await getCurrentMemberFromCookie()
+		if (!member) {
 			return NextResponse.json(
-				{ message: '본인이 작성한 게시글만 조회할 수 있습니다.' },
-				{ status: 403 },
+				{ message: '로그인 후에만 게시글을 조회할 수 있습니다.' },
+				{ status: 401 },
 			)
+		}
+
+		if (!member.is_admin && row.author_user_uid && row.author_user_uid !== member.user_uid) {
+			return NextResponse.json({ message: '본인이 작성한 게시글만 조회할 수 있습니다.' }, { status: 403 })
 		}
 
 		return NextResponse.json({ item: row }, { status: 200 })
@@ -106,6 +109,7 @@ export async function PATCH(request: Request, context: RouteParams) {
 			authorName?: string
 			answerContent?: string
 			imageUrls?: string[]
+			isNotice?: boolean
 		} | null
 
 		if (!body) {
@@ -125,6 +129,9 @@ export async function PATCH(request: Request, context: RouteParams) {
 		}
 		if (Array.isArray(body.imageUrls)) {
 			updatePayload.image_urls = body.imageUrls
+		}
+		if (typeof body.isNotice === 'boolean' && member.is_admin) {
+			updatePayload.is_notice = body.isNotice
 		}
 		if (typeof body.answerContent === 'string' && member.is_admin) {
 			updatePayload.answer_content = body.answerContent

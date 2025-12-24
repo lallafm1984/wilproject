@@ -16,6 +16,7 @@ interface QAPostRow {
 	created_at: string
 	updated_at: string | null
 	is_deleted: boolean | null
+	is_notice: boolean | null
 }
 
 function getMaskedLoginId(loginId: string | null | undefined): string | null {
@@ -33,6 +34,7 @@ function getMaskedLoginId(loginId: string | null | undefined): string | null {
 // - content: text, not null
 // - author_name: text, null 가능
 // - is_deleted: boolean, not null, default false
+// - is_notice: boolean, not null, default false  (공지 고정용)
 // - created_at: timestamptz, not null, default now()
 // - updated_at: timestamptz, null (trigger 로 관리하거나 애플리케이션에서 업데이트)
 
@@ -54,6 +56,7 @@ export async function GET(request: Request) {
 			.from('qa_posts')
 			.select('*', { count: 'exact' })
 			.eq('is_deleted', false)
+			.order('is_notice', { ascending: false })
 			.order('created_at', { ascending: false })
 			.range(from, to)
 
@@ -106,6 +109,7 @@ export async function POST(request: Request) {
 			content?: string
 			authorName?: string
 			imageUrls?: string[]
+			isNotice?: boolean
 		} | null
 
 		if (!body || !body.title || !body.content) {
@@ -115,7 +119,7 @@ export async function POST(request: Request) {
 			)
 		}
 
-		const { title, content, authorName, imageUrls } = body
+		const { title, content, authorName, imageUrls, isNotice } = body
 
 		// 작성자 표시 이름: 1) 요청에서 명시된 authorName, 2) 회원 닉네임(user_name),
 		// 3) 닉네임이 없으면 로그인 아이디 뒤 4자리만 사용
@@ -133,6 +137,8 @@ export async function POST(request: Request) {
 				author_name: fallbackAuthorName,
 				author_user_uid: member.user_uid,
 				image_urls: Array.isArray(imageUrls) && imageUrls.length > 0 ? imageUrls : null,
+				// 공지는 관리자만 설정 가능
+				is_notice: member.is_admin ? Boolean(isNotice) : false,
 			})
 			.select()
 			.single()

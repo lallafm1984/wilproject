@@ -15,6 +15,7 @@ interface QAPost {
 	answered_at: string | null
 	created_at: string
 	updated_at: string | null
+	is_notice: boolean | null
 }
 
 interface QAPaginatedResponse {
@@ -39,12 +40,14 @@ export default function QnAPageClient() {
 		userUid: string
 		loginId: string
 		name: string | null
+		isAdmin: boolean
 	} | null>(null)
 
 	const [isFormOpen, setIsFormOpen] = useState(false)
 	const [editingPost, setEditingPost] = useState<QAPost | null>(null)
 	const [formTitle, setFormTitle] = useState('')
 	const [formContent, setFormContent] = useState('')
+	const [formIsNotice, setFormIsNotice] = useState(false)
 	const [formSubmitting, setFormSubmitting] = useState(false)
 
 	const [imageUrls, setImageUrls] = useState<string[]>([]) // 서버에 저장된 이미지 URL (수정 시 유지용)
@@ -130,6 +133,7 @@ export default function QnAPageClient() {
 		setEditingPost(null)
 		setFormTitle('')
 		setFormContent('')
+		setFormIsNotice(false)
 		setImageUrls([])
 		setPreviewUrls([])
 		setPendingFiles([])
@@ -149,6 +153,7 @@ export default function QnAPageClient() {
 		setEditingPost(post)
 		setFormTitle(post.title)
 		setFormContent(post.content)
+		setFormIsNotice(Boolean(post.is_notice))
 		setImageUrls(post.image_urls ?? []) // 기존 서버 이미지 유지
 		setPreviewUrls([])
 		setPendingFiles([])
@@ -158,6 +163,7 @@ export default function QnAPageClient() {
 	function closeForm() {
 		setIsFormOpen(false)
 		setEditingPost(null)
+		setFormIsNotice(false)
 		setImageUrls([])
 		previewUrls.forEach((url) => URL.revokeObjectURL(url))
 		setPreviewUrls([])
@@ -243,6 +249,7 @@ export default function QnAPageClient() {
 				title: formTitle.trim(),
 				content: formContent.trim(),
 				imageUrls: finalImageUrls,
+				...(currentUser?.isAdmin ? { isNotice: formIsNotice } : {}),
 			}
 
 			let res: Response
@@ -382,7 +389,7 @@ export default function QnAPageClient() {
 							{posts.length === 0 && !loading && (
 								<tr>
 									<td
-										colSpan={4}
+										colSpan={5}
 										className="px-3 py-6 text-center text-sm text-gray-500"
 									>
 										등록된 게시글이 없습니다. 첫 번째 질문을 남겨보세요.
@@ -406,7 +413,14 @@ export default function QnAPageClient() {
 										)}
 									</td>
 									<td className="truncate px-3 py-2 text-sm text-gray-900">
-										<span className="truncate">{post.title}</span>
+										<div className="flex min-w-0 items-center gap-2">
+											{post.is_notice && (
+												<span className="shrink-0 rounded-full bg-red-900 px-2 py-0.5 text-[11px] font-semibold text-white">
+													공지
+												</span>
+											)}
+											<span className="truncate">{post.title}</span>
+										</div>
 									</td>
 									<td className="px-3 py-2 text-sm text-gray-700">
 										{post.author_name || '익명'}
@@ -455,6 +469,20 @@ export default function QnAPageClient() {
 								{editingPost ? '게시글 수정' : '새 게시글 작성'}
 							</h2>
 							<form onSubmit={handleSubmitForm} className="space-y-4">
+								{currentUser?.isAdmin && (
+									<div className="flex items-center gap-2">
+										<input
+											id="qna-notice"
+											type="checkbox"
+											checked={formIsNotice}
+											onChange={(e) => setFormIsNotice(e.target.checked)}
+											className="h-4 w-4 accent-black"
+										/>
+										<label htmlFor="qna-notice" className="text-sm font-medium text-gray-800">
+											공지로 등록(상단 고정)
+										</label>
+									</div>
+								)}
 								<div>
 									<label className="mb-1 block text-xs font-medium text-gray-700">
 										제목

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Footer from '../../../components/Footer'
@@ -18,6 +18,7 @@ interface QAPost {
 	answered_at: string | null
 	created_at: string
 	updated_at: string | null
+	is_notice?: boolean | null
 }
 
 type DetailApiResponse = {
@@ -36,6 +37,36 @@ interface QnADetailPageClientProps {
 	id: string
 }
 
+function renderTextWithLinks(text: string): React.ReactNode {
+	// 단순 URL 감지(공백/개행 기준) - HTML을 주입하지 않고 React 노드로만 렌더링
+	const urlRegex = /(https?:\/\/[^\s<]+)|(www\.[^\s<]+)/gi
+	const parts = text.split(urlRegex)
+
+	return parts
+		.filter((part) => part !== undefined && part !== '')
+		.map((part, index) => {
+			const raw = String(part)
+			const isUrl = /^(https?:\/\/[^\s<]+|www\.[^\s<]+)$/i.test(raw)
+			if (!isUrl) {
+				return <Fragment key={`t-${index}`}>{raw}</Fragment>
+			}
+
+			const href = raw.startsWith('http') ? raw : `https://${raw}`
+			return (
+				<a
+					// eslint-disable-next-line react/no-array-index-key
+					key={`u-${index}`}
+					href={href}
+					target="_blank"
+					rel="noreferrer noopener"
+					className="break-all text-blue-600 underline underline-offset-2 hover:text-blue-800"
+				>
+					{raw}
+				</a>
+			)
+		})
+}
+
 export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 	const router = useRouter()
 	const [post, setPost] = useState<QAPost | null>(null)
@@ -48,6 +79,7 @@ export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 	const [isEditOpen, setIsEditOpen] = useState(false)
 	const [editTitle, setEditTitle] = useState('')
 	const [editContent, setEditContent] = useState('')
+	const [editIsNotice, setEditIsNotice] = useState(false)
 	const [editSubmitting, setEditSubmitting] = useState(false)
 	const [editError, setEditError] = useState<string | null>(null)
 	const [editImageUrls, setEditImageUrls] = useState<string[]>([])
@@ -117,15 +149,15 @@ export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 	const canEditOrDelete =
 		!!currentUser &&
 		!!post &&
-		// 일반 사용자만 자신이 작성한 글을 수정/삭제 가능
-		!currentUser.isAdmin &&
-		post.author_user_uid &&
-		currentUser.userUid === post.author_user_uid
+		// 관리자는 모든 글 수정/삭제 가능, 일반 사용자는 본인 글만 가능
+		(currentUser.isAdmin ||
+			(!!post.author_user_uid && currentUser.userUid === post.author_user_uid))
 
 	function handleCloseEditModal() {
 		setIsEditOpen(false)
 		setEditError(null)
 		setEditSubmitting(false)
+		setEditIsNotice(false)
 		editPreviewUrls.forEach((url) => URL.revokeObjectURL(url))
 		setEditPreviewUrls([])
 		setEditPendingFiles([])
@@ -210,6 +242,7 @@ export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 												if (!post) return
 												setEditTitle(post.title)
 												setEditContent(post.content)
+												setEditIsNotice(Boolean(post.is_notice))
 											setEditImageUrls(post.image_urls ?? [])
 											setEditPreviewUrls([])
 											setEditPendingFiles([])
@@ -251,7 +284,7 @@ export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 						</header>
 						<div className="px-4 py-5 space-y-4">
 							<div className="whitespace-pre-wrap text-sm text-gray-800">
-								{post.content}
+								{renderTextWithLinks(post.content)}
 							</div>
 							{post.image_urls && post.image_urls.length > 0 && (
 								<div className="mt-3 flex flex-wrap gap-3">
@@ -289,7 +322,9 @@ export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 												</>
 											)}
 										</div>
-										<div className="whitespace-pre-wrap">{post.answer_content}</div>
+										<div className="whitespace-pre-wrap">
+											{renderTextWithLinks(post.answer_content)}
+										</div>
 									</div>
 								)}
 
@@ -403,6 +438,7 @@ export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 											title: editTitle.trim(),
 											content: editContent.trim(),
 											imageUrls: finalImageUrls,
+											...(currentUser?.isAdmin ? { isNotice: editIsNotice } : {}),
 										}),
 									})
 									const data = (await res.json().catch(() => null)) as DetailApiResponse | null
@@ -421,6 +457,23 @@ export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 							}}
 							className="space-y-4"
 						>
+							{currentUser?.isAdmin && (
+								<div className="flex items-center gap-2">
+									<input
+										id="qna-detail-notice"
+										type="checkbox"
+										checked={editIsNotice}
+										onChange={(ev) => setEditIsNotice(ev.target.checked)}
+										className="h-4 w-4 accent-black"
+									/>
+									<label
+										htmlFor="qna-detail-notice"
+										className="text-sm font-medium text-gray-800"
+									>
+										공지로 등록(상단 고정)
+									</label>
+								</div>
+							)}
 							<div>
 								<label className="mb-1 block text-xs font-medium text-gray-700">제목</label>
 								<input
