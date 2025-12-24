@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import { uploadQaAttachment } from '../../../lib/supabaseBrowserClient'
 
@@ -169,7 +168,6 @@ export default function QnADetailPageClient({ id }: QnADetailPageClientProps) {
 
 	return (
 		<div className="min-h-screen bg-white">
-			<Header />
 			<main className="mx-auto max-w-3xl px-4 pt-[220px] pb-20">
 				{/* <h1 className="mb-6 text-2xl font-semibold">Q/A 게시글 상세</h1> */}
 

@@ -72,7 +72,11 @@ const Header = () => {
 
   const [isMobile, setIsMobile] = useState(false)
 
-  const [currentUser, setCurrentUser] = useState(null)
+  // NOTE: 페이지 이동 시 Header 가 리마운트되면 세션을 다시 조회하는 동안
+  // 기존 구현은 `null`(비로그인)로 먼저 렌더되어 "로그인" 버튼이 잠깐 보이는 깜빡임이 발생할 수 있음.
+  // 그래서 `undefined`(미확정) 상태를 별도로 두고, 세션 조회가 끝난 뒤에만 로그인/로그아웃 UI를 렌더한다.
+  const [currentUser, setCurrentUser] = useState(undefined)
+  const [isSessionLoading, setIsSessionLoading] = useState(true)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const [loginUserid, setLoginUserid] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
@@ -85,17 +89,23 @@ const Header = () => {
     }
   }
 
-  const loadSession = async () => {
+  const loadSession = async (signal) => {
     try {
-      const res = await fetch('/api/auth/session', { method: 'GET' })
+      setIsSessionLoading(true)
+      const res = await fetch('/api/auth/session', { method: 'GET', signal })
       const data = await res.json().catch(() => null)
       if (data && data.user) {
         setCurrentUser(data.user)
       } else {
         setCurrentUser(null)
       }
-    } catch {
-      setCurrentUser(null)
+    } catch (err) {
+      // AbortError 는 페이지 이동/언마운트에서 자연스럽게 발생할 수 있으므로 무시
+      if (err?.name === 'AbortError') return
+      // 네트워크 오류 등: 기존 값이 있으면 유지(불필요한 '로그인' 노출 방지), 없으면 비로그인 처리
+      setCurrentUser((prev) => (typeof prev === 'undefined' ? null : prev))
+    } finally {
+      setIsSessionLoading(false)
     }
   }
 
@@ -140,13 +150,16 @@ const Header = () => {
 
   // 헤더 최초 진입 시 로그인 세션 확인
   useEffect(() => {
-    loadSession()
+    const controller = new AbortController()
+    loadSession(controller.signal)
+    return () => controller.abort()
   }, [])
 
   // 다른 컴포넌트에서 로그인/로그아웃 했을 때 세션 동기화
   useEffect(() => {
     const handler = () => {
-      loadSession()
+      const controller = new AbortController()
+      loadSession(controller.signal)
     }
 
     if (typeof window !== 'undefined') {
@@ -351,7 +364,10 @@ const Header = () => {
               <p className="ml-[4px] mr-[6px]">
                 <img src="/Images/icon_L.png" alt="로그인" className="w-[32px] h-[32px] lg:w-[40px] lg:h-[40px]" />
               </p>
-              {currentUser ? (
+              {isSessionLoading || typeof currentUser === 'undefined' ? (
+                // 세션 미확정 상태에서는 '로그인' 버튼을 렌더하지 않아 깜빡임을 방지
+                <div className="h-[28px] w-[74px]" aria-hidden="true" />
+              ) : currentUser ? (
                 <div className="flex items-center space-x-2">
                   <span className="text-[12px] text-[#2F2E2B]">
                     {getDisplayName()}
@@ -388,7 +404,9 @@ const Header = () => {
               <button onClick={() => setIsMobileMenuOpen(false)} className="text-white">
                 <img src="/Images/m_menu/icon.webp" alt="닫기" className="w-[38px] h-[38px]" />
               </button>
-              {currentUser ? (
+              {isSessionLoading || typeof currentUser === 'undefined' ? (
+                <div className="h-[26px] w-[60px]" aria-hidden="true" />
+              ) : currentUser ? (
                 <>
                   <span className="text-xs text-white">
                     {getDisplayName()}
@@ -495,6 +513,7 @@ const Header = () => {
                     setCurrentUser(data.user)
                     notifyAuthChanged()
                   }
+                  setIsSessionLoading(false)
                   setIsLoginOpen(false)
                   setLoginUserid('')
                   setLoginPassword('')

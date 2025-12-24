@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import BrandedProductsContent from './BrandedProductsContent'
 
@@ -31,7 +30,6 @@ export const metadata = {
 export default function BrandedProductsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
       <main className="flex-grow pt-[54px] md:pt-[100px] lg:pt-[132px] ">
         <Suspense fallback={<div>Loading...</div>}>
           <BrandedProductsContent />

@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Poppins } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
+import Header from './components/Header'
 import AdPopup from './components/AdPopup/AdPopup';
 import AppDownloadPopup from './components/AdPopup/AppDownloadPopup';
 
@@ -110,6 +111,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
+        <Header />
         {children}
         <Analytics />
         {/* 중앙 회원가입 프로모션 팝업 */}

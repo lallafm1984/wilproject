@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import { uploadQaAttachment } from '../../lib/supabaseBrowserClient'
 
@@ -335,7 +334,6 @@ export default function QnAPageClient() {
 
 	return (
 		<div className="min-h-screen bg-white">
-			<Header />
 			{/* 고정 헤더(높이 약 132px)와 고정 푸터(높이 약 320px)를 고려한 패딩 */}
 			<main className="mx-auto max-w-5xl px-4 pt-[140px] pb-[180px]">
 				<h1 className="mt-10 mb-6 text-2xl font-semibold">Q/A 게시판</h1>

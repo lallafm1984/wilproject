@@ -1,4 +1,3 @@
-import Header from '../../components/Header.js'
 import Footer from '../../components/Footer.js'
 import Location from '../../components/Location/index.js'
 
@@ -30,7 +29,6 @@ export const metadata = {
 export default function StoreLocatorPage() {
   return (
     <div className='min-h-screen'>
-      <Header />
       <Location />
       <Footer />
     </div>

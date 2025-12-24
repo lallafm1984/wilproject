@@ -1,4 +1,3 @@
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Image from 'next/image';
 
@@ -141,8 +140,6 @@ const kioskGuideSteps = [
 export default function KioskGuidePage() {
   return (
     <div className="min-h-screen bg-neutral-light">
-      <Header />
-
       <main className="bg-neutral-light pt-[54px] md:pt-[100px] lg:pt-[132px]">
         {/* 상단: 키오스크 가이드 히어로 (AppDownload와 동일 톤) */}
         <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#111827] via-[#111827] to-[#374151] text-white">

@@ -1,5 +1,4 @@
 import Main from '../../components/Main/index.js'
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 export const metadata = {
@@ -30,7 +29,6 @@ export const metadata = {
 export default function Home() {
   return (
     <div className='min-h-screen'>
-      <Header />
       <Main />
       <Footer />
     </div>

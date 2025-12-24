@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../components/Header'
 import Company from '../../components/Company/index';
 import Footer from '../../components/Footer';
 
@@ -31,8 +30,6 @@ export const metadata = {
 const CompanyPage = () => {
   return (
     <div className='min-h-screen'>
-      <Header />
-      
       <Company />
       
       <Footer />

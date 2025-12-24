@@ -1,4 +1,3 @@
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Image from 'next/image';
 
@@ -81,8 +80,6 @@ const mobileGuideSteps = [
 export default function AppDownloadPage() {
   return (
     <div className="min-h-screen bg-neutral-light">
-      <Header />
-
       <main className="bg-neutral-light pt-[54px] md:pt-[100px] lg:pt-[132px]">
         {/* 상단: 앱 다운로드 히어로 (frontend-design 적용) */}
         <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#92000a] via-[#92000a] to-[#c05a5c] text-white">

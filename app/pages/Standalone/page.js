@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Header from '../../components/Header.js'
 import Footer from '../../components/Footer.js'
 
  
@@ -297,7 +296,6 @@ export default function StandalonePage() {
   const store = STORES[selectedStoreId]
   return (
     <div className='min-h-screen bg-white'>
-      <Header />
       <main className="pt-[54px] md:pt-[100px] lg:pt-[132px]">
         <section id="home">
           <HeroSection store={store} selectedStoreId={selectedStoreId} onSelect={setSelectedStoreId} />
